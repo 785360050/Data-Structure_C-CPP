@@ -105,6 +105,7 @@ void TestLinkQueue()
 	LinkQueue_Destroy(q);
 }
 
+void TestBinaryTree();
 
 void main()
 {
@@ -114,7 +115,7 @@ void main()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-
+	TestBinaryTree();
 
 	
 	
