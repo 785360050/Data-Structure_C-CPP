@@ -22,8 +22,8 @@ It's a normalized coding style project that might be mied by c++ grammer in C pr
 Files in Github 
 |File/Folder name | describtion||
 |:-:|:-:|:-:|
-|C| place where store C codes |
-|C++|place where store C++ codes |
+|C| place where store C codes |Data Struct/C |
+|C++|place where store C++ codes |Data Struct/C++|
 |API| place where store .h files |Annotations help you call functions|
 |Definition|place where store C codes |Specific codes how function runs
 |Data Struct.sln| File Starts all codes(**Enterance**) |
