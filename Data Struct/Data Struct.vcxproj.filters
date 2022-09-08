@@ -33,9 +33,6 @@
     <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="C++\Definition\Liner_Lists.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="C\Definition\Tree_Binary.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Liner_Stack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\API\Liner_Lists.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Tree_Binary.h">
