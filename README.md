@@ -33,14 +33,14 @@ Files in Github
 >    example:
 >>    void C_Test()
 >>>	{
->>>		//TestSeqList();//完毕
->>>		TestLinkList();//完毕
->		//TestSeqStack();//完毕
->		//TestLinkStack();//完毕
->		//TestSeqQueue();//完毕
->		//TestLinkQueue();//完毕
->		//TestBinaryTree();//完毕
->	}
+>>>		//TestSeqList();//完毕  
+>>>		TestLinkList();//完毕  
+>		//TestSeqStack();//完毕  
+>		//TestLinkStack();//完毕  
+>		//TestSeqQueue();//完毕  
+>		//TestLinkQueue();//完毕  
+>		//TestBinaryTree();//完毕  
+>	}  
 >   - Select the Data structure function by remove "//"
 
 ## Attention!
