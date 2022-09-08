@@ -1,19 +1,4 @@
 ﻿  main.cpp
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(113,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int *”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(113,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int *" 的参数 1 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(113,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 2 拥有了类型“int **”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(113,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int **" 的参数 2 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(117,1): warning C4326: “main”的返回类型应为“int”而非“void”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int *”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int *" 的参数 1 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 2 拥有了类型“int *”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int *" 的参数 2 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 3 拥有了类型“int *”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(129,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int *" 的参数 3 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int **”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int **" 的参数 1 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 2 拥有了类型“int **”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int **" 的参数 2 冲突
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 3 拥有了类型“int **”
-C:\Users\len\Desktop\Data Struct\Data Struct\main.cpp(133,9): warning C4313: "printf": 格式字符串中的 "%d" 与类型为 "int **" 的参数 3 冲突
-  Data Struct.vcxproj -> C:\Users\len\Desktop\Data Struct\x64\Debug\Data Struct.exe
+D:\GitHub\Data_Struct\Data Struct\main.cpp(111,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  LINK : 没有找到 D:\GitHub\Data_Struct\x64\Debug\Data Struct.exe 或上一个增量链接没有生成它；正在执行完全链接
+  Data Struct.vcxproj -> D:\GitHub\Data_Struct\x64\Debug\Data Struct.exe
