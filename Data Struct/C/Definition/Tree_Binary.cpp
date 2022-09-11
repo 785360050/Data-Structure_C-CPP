@@ -4,7 +4,7 @@
 #include "../API/Tree_Binary.h"
 
 
-
+//复制顺序队列 maxsize=20
 struct TQueue
 {
 	TNode* data[20];
@@ -85,6 +85,67 @@ TNode* TQueue_Pop(TQueue* TQueue)
 	return t;
 }
 
+//复制顺序栈	maxsize=20
+
+//递增满栈(top=0栈空)
+
+
+struct TStack
+{
+	TNode* data[20];
+	int top;
+};
+typedef struct TStack TStack;
+
+
+TStack* TStack_Init()
+{
+	TStack* s = new TStack;
+	memset(s->data, 0, sizeof(s->data));
+	s->top = 0;
+	return s;
+}
+
+void TStack_Destroy(TStack* stack)
+{
+	delete stack;
+}
+
+void TStack_Push(TStack* stack, TNode* node)
+{
+	try
+	{
+		if (stack->top >= 20)
+		{
+			throw "overflow";
+		}
+	}
+	catch (...)
+	{
+		std::cout << "Stack is Full" << std::endl;
+		exit(0);
+	}
+	stack->data[stack->top] = node;
+	stack->top++;
+}
+
+TNode* TStack_Pop(TStack* stack)
+{
+	try
+	{
+		if (stack->top < 0)
+		{
+			throw 1;
+		}
+	}
+	catch (...)
+	{
+		std::cout << "Stack is Empty" << std::endl;
+		exit(0);
+	}
+	stack->top--;
+	return stack->data[stack->top];
+}
 
 
 
@@ -94,9 +155,7 @@ TNode* TQueue_Pop(TQueue* TQueue)
 
 
 
-
-
-
+//二叉树函数
 
 BTree* BinaryTree_Init_Root(TNode* root)
 {
@@ -186,10 +245,94 @@ void BinaryTree_Traversal_Postorder(TNode* node)
 }
 
 
+void BinaryTree_Traversal_Preorder_NoneRecursion(TNode* node)
+{
+	/// <summary>
+	/// 利用顺序栈实现递归特性，递归在栈上分配空间，非递归的栈在堆上分配空间
+	/// DLR
+	/// 从树根入栈开始循环
+	/// 每次出栈并访问节点，将RL入栈(为保证出栈先L再R，所以入栈先R再L)
+	/// 栈空为止
+	/// 销毁顺序栈
+	/// </summary>
+	/// <param name="node"></param>
+	TNode* visit;
+	if (node)
+	{
+		TStack* stack = TStack_Init();
+		TStack_Push(stack, node);
+		while (stack->top>0)
+		{
+			visit = TStack_Pop(stack);
+			BinaryTree_Visit(visit);
+			if (visit->right)
+				TStack_Push(stack, visit->right);
+			if (visit->left)
+				TStack_Push(stack, visit->left);
+		}
+		TStack_Destroy(stack);
+	}
+}
 
+void BinaryTree_Traversal_Inorder_NoneRecursion(TNode* node)
+{
+	/// <summary>
+	/// 利用顺序栈实现递归特性，递归在栈上分配空间，非递归的栈在堆上分配空间
+	/// LDR
+	/// 树根入队 开始循环
+	/// 每次移动至L并入栈，直到L为空时出栈并访问(出双亲节点)，再移动到R并入栈(双亲的R)
+	/// </summary>
+	/// <param name="node"></param>
+	if (node)
+	{
+		TNode* n = node;
+		TStack* stack = TStack_Init();
+		while (stack->top > 0 || n)
+		{
+			if (n)
+			{
+				TStack_Push(stack, n);
+				n = n->left;
+			}
+			else
+			{
+				TNode* v = TStack_Pop(stack);
+				BinaryTree_Visit(v);
+				n = v->right;
+			}
+		}
+		TStack_Destroy(stack);
+	}
+}
 
-
-
+void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node)
+{
+	/// <summary>
+	/// 利用两个栈实现递归特性，s1记录每个子树的头节点，s2记录头节点的左右孩子
+	/// 树根节点先入栈s1
+	/// 每次从s1出栈并压入s2栈,同时压入s1该节点的先L后R节点(为保证s2出栈先L后R再D，s1应该先L后R压入)
+	/// 直到s1为空时，所有双亲节点(即所有节点)都压入s2
+	/// 此时s2出栈时已经保证先L后R再D，依次出栈并访问
+	/// </summary>
+	/// <param name="node"></param>
+	TStack* s1 = TStack_Init();
+	TStack* s2 = TStack_Init();
+	TNode* n;
+	TStack_Push(s1, node);
+	while (s1->top>0)
+	{
+		n = TStack_Pop(s1);
+		TStack_Push(s2, n);
+		if (n->left)
+			TStack_Push(s1, n->left);
+		if (n->right)
+			TStack_Push(s1, n->right);
+	}
+	while (s2->top > 0)
+		BinaryTree_Visit(TStack_Pop(s2));
+	TStack_Destroy(s1);
+	TStack_Destroy(s2);
+}
 
 
 
