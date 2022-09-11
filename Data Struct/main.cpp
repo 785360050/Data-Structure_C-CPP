@@ -135,7 +135,15 @@ void TestBinaryTree()
 	BinaryTree_Insert(Tree, g, left, h);
 	BinaryTree_Insert(Tree, g, right, k);
 
-	
+	std::cout << "非递归：";
+	std::cout << std::endl << "DLR：";
+	BinaryTree_Traversal_Preorder_NoneRecursion(Tree->root);
+	std::cout << std::endl << "LDR：";
+	BinaryTree_Traversal_Inorder_NoneRecursion(Tree->root);
+	std::cout << std::endl << "LRD：";
+	BinaryTree_Traversal_Postorder_NoneRecursion(Tree->root);
+
+	std::cout << std::endl << std::endl << "递归：";
 	std::cout << std::endl << "DLR：";
 	BinaryTree_Traversal_Preorder(Tree->root);
 	std::cout << std::endl << "LDR：";

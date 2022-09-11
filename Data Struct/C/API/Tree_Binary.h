@@ -33,10 +33,13 @@ void BinaryTree_Visit(TNode* node);
 void BinaryTree_Traversal_Level(BTree* tree);
 //DLR
 void BinaryTree_Traversal_Preorder(TNode* node);
+void BinaryTree_Traversal_Preorder_NoneRecursion(TNode* node);
 //LDR
 void BinaryTree_Traversal_Inorder(TNode* node);
+void BinaryTree_Traversal_Inorder_NoneRecursion(TNode* node);
 //LRD
 void BinaryTree_Traversal_Postorder(TNode* node);
+void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node);
 
 
 
