@@ -21,10 +21,10 @@
     <ClCompile Include="C\Definition\Liner_List_Link.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Queue.cpp">
+    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp">
+    <ClCompile Include="C\Definition\Liner_Queue.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="C\Definition\Liner_Stack_Link.cpp">
@@ -38,10 +38,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C\API\Liner_List_Sequential.h">
+    <ClInclude Include="C\API\Liner_List_Link.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C\API\Liner_List_Link.h">
+    <ClInclude Include="C\API\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Liner_Queue.h">

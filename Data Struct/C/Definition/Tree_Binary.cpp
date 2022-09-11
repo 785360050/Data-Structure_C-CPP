@@ -336,3 +336,39 @@ void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node)
 
 
 
+/*线索二叉树
+ThreadNode* BinaryTree_CreateNode_Thread(std::string name)
+{
+	ThreadNode* tnode = new ThreadNode;
+	tnode->data = 0;
+	tnode->Thread_Left = tnode->Thread_Right = false;
+	tnode->name = name;
+	return tnode;
+}
+//BinaryTree_Destory
+
+void BinaryTree_Insert_Thread(BTree* tree, ThreadNode* parent, Direction pos, ThreadNode* node)
+{
+	
+}
+//访问node节点
+void BinaryTree_Visit_Thread(ThreadNode* node)
+{
+	if (node)
+	{
+		std::cout << node->name << " ";
+	}
+	else
+	{
+		std::cout << "TreeNode is not exist" << std::endl;
+		exit(0);
+	}
+}
+
+void BinaryTree_Modify_ThreadTree(ThreadNode* node);
+
+void BinaryTree_Traversal_Thread_Inorder(ThreadNode* node);
+
+*/
+
+
