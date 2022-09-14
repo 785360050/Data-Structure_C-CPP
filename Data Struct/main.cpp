@@ -110,10 +110,8 @@ void TestLinkQueue()
 		LinkQueue_Destroy(q);
 	}
 
-
-void TestBinaryTree()
+void BinaryTree()
 {
-	
 	TNode* a = BinaryTree_CreateNode("A");
 	TNode* b = BinaryTree_CreateNode("B");
 	TNode* c = BinaryTree_CreateNode("C");
@@ -125,7 +123,7 @@ void TestBinaryTree()
 	TNode* k = BinaryTree_CreateNode("K");
 
 	BTree* Tree = BinaryTree_Init_Root(a);
-	
+
 	BinaryTree_Insert(Tree, a, left, b);
 	BinaryTree_Insert(Tree, a, right, e);
 	BinaryTree_Insert(Tree, b, right, c);
@@ -152,7 +150,35 @@ void TestBinaryTree()
 	BinaryTree_Traversal_Postorder(Tree->root);
 	std::cout << std::endl << "Level：";
 	BinaryTree_Traversal_Level(Tree);
+}
+void BinaryThreadTree()
+{
+	TNode* a = BinaryTree_CreateNode("A");
+	TNode* b = BinaryTree_CreateNode("B");
+	TNode* c = BinaryTree_CreateNode("C");
+	TNode* d = BinaryTree_CreateNode("D");
+	TNode* e = BinaryTree_CreateNode("E");
+	TNode* f = BinaryTree_CreateNode("F");
+	TNode* g = BinaryTree_CreateNode("G");
+	TNode* h = BinaryTree_CreateNode("H");
+	TNode* k = BinaryTree_CreateNode("K");
 
+	BTree* Tree = BinaryTree_Init_Root(a);
+
+	BinaryTree_Insert(Tree, a, left, b);
+	BinaryTree_Insert(Tree, a, right, e);
+	BinaryTree_Insert(Tree, b, right, c);
+	BinaryTree_Insert(Tree, c, left, d);
+	BinaryTree_Insert(Tree, e, right, f);
+	BinaryTree_Insert(Tree, f, left, g);
+	BinaryTree_Insert(Tree, g, left, h);
+	BinaryTree_Insert(Tree, g, right, k);
+}
+
+void TestBinaryTree()
+{
+	BinaryTree();
+	BinaryThreadTree();
 }
 
 

@@ -133,6 +133,7 @@
     <ClCompile Include="C\Definition\Liner_Stack_Link.cpp" />
     <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,8 @@
     <ClInclude Include="C\API\Liner_Queue.h" />
     <ClInclude Include="C\API\Liner_Stack.h" />
     <ClInclude Include="C\API\Tree_Binary.h" />
+    <ClInclude Include="C\API\Tree_Binary_Thread.h" />
+    <ClInclude Include="C\API\Global Variables.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

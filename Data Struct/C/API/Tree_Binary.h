@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-typedef int DataType;
+
+#include "Global Variables.h"
 
 struct TreeNode
 {
@@ -18,7 +19,7 @@ struct BinaryTree
 };
 typedef BinaryTree BTree;
 
-enum Direction {left = 1,right = 2 };
+
 
 //新建二叉树头节点
 BTree* BinaryTree_Init_Root(TNode* root);

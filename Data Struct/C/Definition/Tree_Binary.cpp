@@ -97,7 +97,6 @@ struct TStack
 };
 typedef struct TStack TStack;
 
-
 TStack* TStack_Init()
 {
 	TStack* s = new TStack;
@@ -146,12 +145,6 @@ TNode* TStack_Pop(TStack* stack)
 	stack->top--;
 	return stack->data[stack->top];
 }
-
-
-
-
-
-
 
 
 
