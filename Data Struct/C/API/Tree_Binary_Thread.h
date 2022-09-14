@@ -27,7 +27,7 @@ BTree_Thread* BinaryTree_Init_Root(ThreadNode* root);
 
 ThreadNode* BinaryTree_CreateNode_Thread(std::string name);
 // 插入节点，指定父、左右方向
-void BinaryTree_Insert_Thread(BTree_Thread* tree, ThreadNode* parent, ThreadNode* child, int flags);
+void BinaryTree_Insert_Thread(BTree_Thread* tree, ThreadNode* parent, Direction pos, ThreadNode* node);
 //访问线索节点
 void BinaryTree_Visit(ThreadNode* node);
 // 中序线索化

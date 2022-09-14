@@ -5,7 +5,7 @@
 #include "C/API/Liner_Stack.h"
 #include "C/API/Liner_Queue.h"
 #include "C/API/Tree_Binary.h"
-
+#include "C/API/Tree_Binary_Thread.h"
 
 
 
@@ -153,32 +153,37 @@ void BinaryTree()
 }
 void BinaryThreadTree()
 {
-	TNode* a = BinaryTree_CreateNode("A");
-	TNode* b = BinaryTree_CreateNode("B");
-	TNode* c = BinaryTree_CreateNode("C");
-	TNode* d = BinaryTree_CreateNode("D");
-	TNode* e = BinaryTree_CreateNode("E");
-	TNode* f = BinaryTree_CreateNode("F");
-	TNode* g = BinaryTree_CreateNode("G");
-	TNode* h = BinaryTree_CreateNode("H");
-	TNode* k = BinaryTree_CreateNode("K");
+	ThreadNode* a = BinaryTree_CreateNode_Thread("A");
+	ThreadNode* b = BinaryTree_CreateNode_Thread("B");
+	ThreadNode* c = BinaryTree_CreateNode_Thread("C");
+	ThreadNode* d = BinaryTree_CreateNode_Thread("D");
+	ThreadNode* e = BinaryTree_CreateNode_Thread("E");
+	ThreadNode* f = BinaryTree_CreateNode_Thread("F");
+	ThreadNode* g = BinaryTree_CreateNode_Thread("G");
+	ThreadNode* h = BinaryTree_CreateNode_Thread("H");
+	ThreadNode* k = BinaryTree_CreateNode_Thread("K");
 
-	BTree* Tree = BinaryTree_Init_Root(a);
+	BTree_Thread* Tree = BinaryTree_Init_Root(a);
 
-	BinaryTree_Insert(Tree, a, left, b);
-	BinaryTree_Insert(Tree, a, right, e);
-	BinaryTree_Insert(Tree, b, right, c);
-	BinaryTree_Insert(Tree, c, left, d);
-	BinaryTree_Insert(Tree, e, right, f);
-	BinaryTree_Insert(Tree, f, left, g);
-	BinaryTree_Insert(Tree, g, left, h);
-	BinaryTree_Insert(Tree, g, right, k);
+	BinaryTree_Insert_Thread(Tree, a, left, b);
+	BinaryTree_Insert_Thread(Tree, a, right, e);
+	BinaryTree_Insert_Thread(Tree, b, right, c);
+	BinaryTree_Insert_Thread(Tree, c, left, d);
+	BinaryTree_Insert_Thread(Tree, e, right, f);
+	BinaryTree_Insert_Thread(Tree, f, left, g);
+	BinaryTree_Insert_Thread(Tree, g, left, h);
+	BinaryTree_Insert_Thread(Tree, g, right, k);
+
+	BinaryTree_Thread_Inorder(Tree->root);
+
+	BinaryTree_Traversal_Inorder_Thread(Tree->root);
+
 }
 
 void TestBinaryTree()
 {
 	BinaryTree();
-	BinaryThreadTree();
+	//BinaryThreadTree();
 }
 
 
@@ -190,7 +195,7 @@ void C_Test()
 		//TestLinkStack();//完毕
 		//TestSeqQueue();//完毕
 		//TestLinkQueue();//完毕
-		//TestBinaryTree();//完毕
+		TestBinaryTree();//完毕
 
 	}
 
