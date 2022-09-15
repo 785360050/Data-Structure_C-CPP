@@ -181,6 +181,7 @@ void BinaryThreadTree()
 
 	BinaryTree_Traversal_Inorder_Thread(Tree->root);
 
+	std::cout << std::endl;
 	BinaryTree_Destory(Tree);
 }
 

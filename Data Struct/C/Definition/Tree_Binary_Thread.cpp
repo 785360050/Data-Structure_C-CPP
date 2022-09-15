@@ -6,10 +6,13 @@
 
 BTree_Thread* BinaryTree_Init_Root(ThreadNode* root)
 {
-	BTree_Thread* t = new BTree_Thread;
-	t->num = 0;
-	t->root = root;
-	return t;
+	if (root)
+	{
+		BTree_Thread* t = new BTree_Thread;
+		t->num = 1;
+		t->root = root;
+		return t;
+	}
 }
 
 static void DeleteNode(BTree_Thread* tree, ThreadNode* node)
