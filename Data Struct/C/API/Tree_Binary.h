@@ -28,23 +28,22 @@ struct BinaryTree
 	TNode* root;
 	int num;
 };
-typedef BinaryTree BTree;
+typedef struct BinaryTree BTree;
 
 
 
-//�½�������ͷ�ڵ�
+//新建二叉树头节点
 BTree* BinaryTree_Init_Root(TNode* root);
-//�½���ͨ�������ڵ�
-//ɾ����
+//删除树
 void BinaryTree_Destory(BTree* tree);
-//�½��ڵ�
+//新建节点
 TreeNode* BinaryTree_CreateNode(std::string name);
-//������tree��,�ڸ��ڵ�parent��pos[��/��]λ�ã�����ڵ�node,
+//二叉树tree中,在父节点parent的pos[左/右]位置，插入节点node,
 void BinaryTree_Insert(BTree* tree, TNode* parent, Direction pos, TNode* node);
-//����node�ڵ�
+//访问node节点
 void BinaryTree_Visit(TNode* node);
 
-//��ȱ���
+//广度遍历
 void BinaryTree_Traversal_Level(BTree* tree);
 //DLR
 void BinaryTree_Traversal_Preorder(TNode* node);
@@ -55,22 +54,6 @@ void BinaryTree_Traversal_Inorder_NoneRecursion(TNode* node);
 //LRD
 void BinaryTree_Traversal_Postorder(TNode* node);
 void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node);
-
-
-/*����������
-//�½������������ڵ�
-ThreadNode* BinaryTree_CreateNode_Thread(std::string name);
-//TODO: BinaryTree_Destory
-
-void BinaryTree_Insert_Thread(BTree* tree, ThreadNode* parent, Direction pos, TNode* node);
-//����node�ڵ�
-void BinaryTree_Visit_Thread(ThreadNode* node);
-
-void BinaryTree_Modify_ThreadTree(ThreadNode* node);
-
-void BinaryTree_Traversal_Thread_Inorder(ThreadNode* node);
-
-*/
 
 
 
