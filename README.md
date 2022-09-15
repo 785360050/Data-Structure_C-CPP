@@ -80,7 +80,7 @@ Files in Github
 # In Progress
 - Developing C++ codes by using Object-Oriented
 - Memory Digrames for each structure.
-
+- Supplement Thread Tree Preorder and Postorder traversal
 
 
 
@@ -88,7 +88,8 @@ Files in Github
 ## Test Case
 ![二叉树遍历示例树](https://i.imgur.com/mOViysT.png)
 
-
+## Thread Tree
+Currently only Inorder Traversal is available.
 
 
 
