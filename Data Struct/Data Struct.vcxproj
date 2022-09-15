@@ -137,6 +137,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C++\API\Object.h" />
     <ClInclude Include="C\API\Liner_List_Link.h" />
     <ClInclude Include="C\API\Liner_List_Sequential.h" />
     <ClInclude Include="C\API\Liner_Queue.h" />
