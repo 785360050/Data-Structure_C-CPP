@@ -12,16 +12,16 @@ struct SeqQueue
 };
 typedef struct SeqQueue SeqQueue;
 
-//³õÊ¼»¯maxsize¿Õ¼ä´óĞ¡µÄË³Ğò¶ÓÁĞ
+//åˆå§‹åŒ–maxsizeç©ºé—´å¤§å°çš„é¡ºåºé˜Ÿåˆ—
 SeqQueue* SeqQueue_Init();
 
-//ÊÍ·Å¶ÓÁĞSeqQueue¿Õ¼ä
+//é‡Šæ”¾é˜Ÿåˆ—SeqQueueç©ºé—´
 void SeqQueue_Destory(SeqQueue* SeqQueue);
 
-//Êı¾İÔªËØdataÈë¶ÓSeqQueue
+//æ•°æ®å…ƒç´ dataå…¥é˜ŸSeqQueue
 void SeqQueue_Push(SeqQueue* SeqQueue, DataType data);
 
-//ÔªËØ³ö¶Ó£¬·µ»ØÊı¾İÔªËØ
+//å…ƒç´ å‡ºé˜Ÿï¼Œè¿”å›æ•°æ®å…ƒç´ 
 DataType SeqQueue_Pop(SeqQueue* SeqQueue);
 
 
@@ -40,18 +40,18 @@ struct LinkQueue
 };
 typedef struct LinkQueue LinkQueue;
 
-//³õÊ¼»¯Á´Ê½¶ÓÁĞ£¬·µ»ØÁ´Ê½¶ÓÁĞÃû
-//ÎªÁË±ÜÃâÔÚÕ»ÉÏ´´½¨Á´Ê½¶ÓÁĞÍ·½ÚµãÎŞ·¨ÓÃDestroyÊÍ·ÅÆÕÍ¨±äÁ¿
-//¾¡Á¿ÓÃÖ¸Õë´æ·ÅÍ·½Úµã
+//åˆå§‹åŒ–é“¾å¼é˜Ÿåˆ—ï¼Œè¿”å›é“¾å¼é˜Ÿåˆ—å
+//ä¸ºäº†é¿å…åœ¨æ ˆä¸Šåˆ›å»ºé“¾å¼é˜Ÿåˆ—å¤´èŠ‚ç‚¹æ— æ³•ç”¨Destroyé‡Šæ”¾æ™®é€šå˜é‡
+//å°½é‡ç”¨æŒ‡é’ˆå­˜æ”¾å¤´èŠ‚ç‚¹
 LinkQueue* LinkQueue_Init();
 
-//Ïú»ÙÁ´Ê½¶ÓÁĞ
+//é”€æ¯é“¾å¼é˜Ÿåˆ—
 void LinkQueue_Destroy(LinkQueue* LinkQueue);
 
-//Êı¾İÔªËØdataÈë¶ÓLinkQueue
+//æ•°æ®å…ƒç´ dataå…¥é˜ŸLinkQueue
 void LinkQueue_Push(LinkQueue* LinkQueue, DataType data);
 
-//³ö¶Ó£¬·µ»ØÊı¾İÔªËØ
+//å‡ºé˜Ÿï¼Œè¿”å›æ•°æ®å…ƒç´ 
 DataType LinkQueue_Pop(LinkQueue* LinkQueue);
 
 

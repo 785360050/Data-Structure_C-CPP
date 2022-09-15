@@ -18,7 +18,7 @@ BTree_Thread* BinaryTree_Init_Root(ThreadNode* root)
 static void DeleteNode(BTree_Thread* tree, ThreadNode* node)
 {
 	if (node)
-	{///ÆÁ±ÎÏßË÷½øÈëµÄÉ¾³ı½Úµãµİ¹é
+	{///å±è”½çº¿ç´¢è¿›å…¥çš„åˆ é™¤èŠ‚ç‚¹é€’å½’
 		if (node->Thread_left == false)
 			DeleteNode(tree, node->left);
 		if (node->Thread_right == false)
@@ -30,17 +30,17 @@ static void DeleteNode(BTree_Thread* tree, ThreadNode* node)
 	}
 }
 void BinaryTree_Destory(BTree_Thread* tree)
-{///×ÔÏÂ¶øÉÏµİ¹éÏú»Ù½Úµã
+{///è‡ªä¸‹è€Œä¸Šé€’å½’é”€æ¯èŠ‚ç‚¹
 	if (tree)
 	{
-		std::cout << "É¾³ı¶ş²æÊ÷Ê÷½Úµã¸öÊı:" << tree->num << std::endl;
+		std::cout << "åˆ é™¤äºŒå‰æ ‘æ ‘èŠ‚ç‚¹ä¸ªæ•°:" << tree->num << std::endl;
 		if (tree->root)
 			DeleteNode(tree, tree->root);
 	}
 }
 
 ThreadNode* BinaryTree_CreateNode_Thread(std::string name)
-{///³õÊ¼»¯×óÓÒÖ¸ÕëÎª¿Õ£¬ÏßË÷±ê¼ÇÎªfalse
+{///åˆå§‹åŒ–å·¦å³æŒ‡é’ˆä¸ºç©ºï¼Œçº¿ç´¢æ ‡è®°ä¸ºfalse
 	ThreadNode* n = new ThreadNode;
 	n->left = n->right = nullptr;
 	n->Thread_left = n->Thread_right = false;
@@ -51,7 +51,7 @@ ThreadNode* BinaryTree_CreateNode_Thread(std::string name)
 void BinaryTree_Insert_Thread(BTree_Thread* tree, ThreadNode* parent, Direction pos, ThreadNode* node)
 {
 	/// <summary>
-	/// ÓÃÓÚ³õÊ¼»¯ÏßË÷Ê÷µÄ²âÊÔ£¬¿ÉÄÜ¿¼ÂÇ²»È«
+	/// ç”¨äºåˆå§‹åŒ–çº¿ç´¢æ ‘çš„æµ‹è¯•ï¼Œå¯èƒ½è€ƒè™‘ä¸å…¨
 	/// </summary>
 	/// <param name="tree"></param>
 	/// <param name="parent"></param>
@@ -76,12 +76,12 @@ void BinaryTree_Visit(ThreadNode* node)
 
 }
 
-static ThreadNode* pre = NULL;///¸¨ÖúÖ¸Õë£¬Ö¸ÏòÂß¼­Ç°Çı
+static ThreadNode* pre = NULL;///è¾…åŠ©æŒ‡é’ˆï¼ŒæŒ‡å‘é€»è¾‘å‰é©±
 void BinaryTree_Thread_Inorder(ThreadNode* node)
 {	/// <summary>
-	/// ÀûÓÃ¸¨ÖúÖ¸ÕëÖ¸ÏòÂß¼­Ç°Çı½Úµã
-	/// ÏÈÕÒµ½ÖĞĞòÆğµã£¬
-	/// ÔÚµİ¹éÖĞĞò±éÀúµÄÍ¬Ê±¼ì²éÁ´Óò£¬Îª¿ÕÊ±Ìí¼ÓÏßË÷
+	/// åˆ©ç”¨è¾…åŠ©æŒ‡é’ˆæŒ‡å‘é€»è¾‘å‰é©±èŠ‚ç‚¹
+	/// å…ˆæ‰¾åˆ°ä¸­åºèµ·ç‚¹ï¼Œ
+	/// åœ¨é€’å½’ä¸­åºéå†çš„åŒæ—¶æ£€æŸ¥é“¾åŸŸï¼Œä¸ºç©ºæ—¶æ·»åŠ çº¿ç´¢
 	/// 
 	/// </summary>
 	/// <param name="node"></param>
@@ -89,40 +89,40 @@ void BinaryTree_Thread_Inorder(ThreadNode* node)
 	{
 		BinaryTree_Thread_Inorder(node->left);
 		if (node->left==NULL)
-		{///¶¨Î»µ½Âß¼­Æğµã
+		{///å®šä½åˆ°é€»è¾‘èµ·ç‚¹
 			node->Thread_left = true;
 			node->left = pre;
 		}
 		if (pre && pre->right == NULL)
-		{///Í¨¹ı¸¨Öú½ÚµãÌí¼ÓÂß¼­ºó¼ÌµÄÏßË÷
+		{///é€šè¿‡è¾…åŠ©èŠ‚ç‚¹æ·»åŠ é€»è¾‘åç»§çš„çº¿ç´¢
 			pre->Thread_right = true;
 			pre->right = node;
 		}
-		pre = node;///ÏòÂß¼­ºó¼Ì½ÚµãÒÆ¶¯
+		pre = node;///å‘é€»è¾‘åç»§èŠ‚ç‚¹ç§»åŠ¨
 		BinaryTree_Thread_Inorder(node->right);
 	}
 }
 
 void BinaryTree_Traversal_Inorder_Thread(ThreadNode* node)
 {	/// <summary>
-	/// ÏßË÷»¯ºóÓÅ»¯±éÀú¿ªÏú
-	/// ÏÈÕÒµ½Âß¼­Æğµã£¬¿ªÊ¼Ñ­»·Ïòºó±éÀú(¹Ø¼üË¼Â·)
-	/// ÏßË÷´æÔÚÊ±Ö±½ÓÏòÂß¼­ºó¼ÌÒÆ¶¯²¢·ÃÎÊ
-	/// ÏßË÷²»´æÔÚÊ±ÔÚÓÒº¢×Ó¼ÌĞøÕÒÂß¼­ÆğµãÏòºóÕÒÏßË÷
-	/// (¼´²»¶ÏÕÒÂß¼­Æğµã£¬Í¨¹ı½öÓÃÏßË÷±éÀúÏòºó±éÀú)
+	/// çº¿ç´¢åŒ–åä¼˜åŒ–éå†å¼€é”€
+	/// å…ˆæ‰¾åˆ°é€»è¾‘èµ·ç‚¹ï¼Œå¼€å§‹å¾ªç¯å‘åéå†(å…³é”®æ€è·¯)
+	/// çº¿ç´¢å­˜åœ¨æ—¶ç›´æ¥å‘é€»è¾‘åç»§ç§»åŠ¨å¹¶è®¿é—®
+	/// çº¿ç´¢ä¸å­˜åœ¨æ—¶åœ¨å³å­©å­ç»§ç»­æ‰¾é€»è¾‘èµ·ç‚¹å‘åæ‰¾çº¿ç´¢
+	/// (å³ä¸æ–­æ‰¾é€»è¾‘èµ·ç‚¹ï¼Œé€šè¿‡ä»…ç”¨çº¿ç´¢éå†å‘åéå†)
 	/// </summary>
 	/// <param name="node"></param>
 	while (node)
 	{
 		while (node->Thread_left == false)
-			node = node->left;///¶¨Î»µ½Âß¼­Æğµã
+			node = node->left;///å®šä½åˆ°é€»è¾‘èµ·ç‚¹
 		BinaryTree_Visit(node);
 		while (node->Thread_right==true&&node->right)
-		{///ÏßË÷´æÔÚÊ±Ö±½ÓÏòÂß¼­ºó¼ÌÒÆ¶¯ÔÙ·ÃÎÊ
+		{///çº¿ç´¢å­˜åœ¨æ—¶ç›´æ¥å‘é€»è¾‘åç»§ç§»åŠ¨å†è®¿é—®
 			node = node->right;
 			BinaryTree_Visit(node);
 		}
-		node = node->right;///ÏßË÷²»´æÔÚÊ±ÏòºóÒÆ¶¯ÊÓ½Ç
+		node = node->right;///çº¿ç´¢ä¸å­˜åœ¨æ—¶å‘åç§»åŠ¨è§†è§’
 	}
 }
 

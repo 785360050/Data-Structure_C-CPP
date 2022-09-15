@@ -10,7 +10,7 @@ LinerLists_SequentialList<void*>::LinerLists_SequentialList(int maxsize)
 	this->data=new 
 
 	L->data = (DataType*)malloc(sizeof(DataType) * maxsize);
-	memset(L->data, 0, sizeof(DataType) * maxsize);//È«²¿ÔªËØ¿Õ¼ä³õÊ¼»¯Îª0
+	memset(L->data, 0, sizeof(DataType) * maxsize);//å…¨éƒ¨å…ƒç´ ç©ºé—´åˆå§‹åŒ–ä¸º0
 	L->length = 0;
 	L->maxsize = maxsize;
 	return L;
@@ -60,7 +60,7 @@ void LinerLists_SequentialList<void*>::Insert<void*>(SeqList* List, int pos, Dat
 	List->data[pos - 1] = data;
 	List->length++;
 }
-//É¾³ıÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØ£¬·µ»ØÔªËØÖµ
+//åˆ é™¤é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ ï¼Œè¿”å›å…ƒç´ å€¼
 DataType LinerLists_SequentialList<void*>::Delete(SeqList* List, int pos)
 {
 	try
@@ -85,7 +85,7 @@ DataType LinerLists_SequentialList<void*>::Delete(SeqList* List, int pos)
 	List->length--;
 	return x;
 }
-//ĞŞ¸ÄÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØÖµÎªdata
+//ä¿®æ”¹é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ å€¼ä¸ºdata
 void LinerLists_SequentialList<void*>::Update(SeqList* List, int pos, DataType data)
 {
 	try
@@ -104,7 +104,7 @@ void LinerLists_SequentialList<void*>::Update(SeqList* List, int pos, DataType d
 	}
 	List->data[pos - 1] = data;
 }
-//ÏÔÊ¾Ë³Ğò±íListÔªËØ¿Õ¼äÉÏµÄËùÓĞÔªËØ
+//æ˜¾ç¤ºé¡ºåºè¡¨Listå…ƒç´ ç©ºé—´ä¸Šçš„æ‰€æœ‰å…ƒç´ 
 void LinerLists_SequentialList<void*>::Show(SeqList* List)
 {
 	try

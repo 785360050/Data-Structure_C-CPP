@@ -1,14 +1,14 @@
-#include "C:/Users/len/Desktop/Data Struct/Data Struct/API/Liner_List_Link.h"
+#include "../API/Liner_List_Link.h"
 #include <iostream>
 
 
 LinkList* LinkList_Init()
 {
 	/// <summary>
-	/// ¶¨ÒåÍ·½Úµã¡¢Ê×Ôª½Úµã
-	/// Í·½Úµã´æ·ÅÁ´±íĞÅÏ¢£¬Ö¸ÏòÊ×Ôª½Úµã
+	/// å®šä¹‰å¤´èŠ‚ç‚¹ã€é¦–å…ƒèŠ‚ç‚¹
+	/// å¤´èŠ‚ç‚¹å­˜æ”¾é“¾è¡¨ä¿¡æ¯ï¼ŒæŒ‡å‘é¦–å…ƒèŠ‚ç‚¹
 	/// </summary>
-	/// <returns>·µ»ØÍ·½ÚµãÖ¸Õë</returns>
+	/// <returns>è¿”å›å¤´èŠ‚ç‚¹æŒ‡é’ˆ</returns>
 	LinkList* L = (LinkList*)malloc(sizeof(LinkList));
 	if (L)
 	{
@@ -17,7 +17,7 @@ LinkList* LinkList_Init()
 	}
 	else
 	{
-		std::cout << "Í·½Úµã»òÊ×Ôª½Úµã·ÖÅäÊ§°Ü" << std::endl;
+		std::cout << "å¤´èŠ‚ç‚¹æˆ–é¦–å…ƒèŠ‚ç‚¹åˆ†é…å¤±è´¥" << std::endl;
 	}
 	return L;
 }
@@ -25,7 +25,7 @@ LinkList* LinkList_Init()
 void LinkList_FreeNode(ListNode* n)
 {
 	/// <summary>
-	/// Èô½Úµã´æÔÚ£¬ÊÍ·Å½Úµã¿Õ¼ä
+	/// è‹¥èŠ‚ç‚¹å­˜åœ¨ï¼Œé‡Šæ”¾èŠ‚ç‚¹ç©ºé—´
 	/// </summary>
 	/// <param name="n"></param>
 	if(n)
@@ -34,13 +34,13 @@ void LinkList_FreeNode(ListNode* n)
 void LinkList_DeleteList(LinkList* L)
 {
 	/// <summary>
-	/// ÈôÁ´±í²»Îª¿Õ(Í·½Úµã»òÊ×Ôª½Úµã´æÔÚ)
-	/// É¾³ıÕû¸öÁ´±í
+	/// è‹¥é“¾è¡¨ä¸ä¸ºç©º(å¤´èŠ‚ç‚¹æˆ–é¦–å…ƒèŠ‚ç‚¹å­˜åœ¨)
+	/// åˆ é™¤æ•´ä¸ªé“¾è¡¨
 	/// </summary>
-	/// <param name="L">´ıÉ¾³ıÁ´±íÃû</param>
+	/// <param name="L">å¾…åˆ é™¤é“¾è¡¨å</param>
 	if (L)
 	{
-		while (L->front)//Ñ­»·É¾³ıÊ×Ôª½Úµã
+		while (L->front)//å¾ªç¯åˆ é™¤é¦–å…ƒèŠ‚ç‚¹
 		{
 			ListNode* temp = L->front;
 			L->front = temp->next;
@@ -57,11 +57,11 @@ void LinkList_DeleteList(LinkList* L)
 ListNode* LinkList_MakeNode( DataType value)
 {
 	/// <summary>
-	/// ¶¨Òå²¢³õÊ¼»¯ĞÂ½Úµã 
-	/// data=value£¬next=NULL
+	/// å®šä¹‰å¹¶åˆå§‹åŒ–æ–°èŠ‚ç‚¹ 
+	/// data=valueï¼Œnext=NULL
 	/// </summary>
-	/// <param name="value">ÔªËØÖµ</param>
-	/// <returns>·µ»ØĞÂ½¨µÄ½ÚµãÖ¸Õë£¬´´½¨Ê§°ÜÔò·µ»Ø¿ÕÖ¸ÕëNULL</returns>
+	/// <param name="value">å…ƒç´ å€¼</param>
+	/// <returns>è¿”å›æ–°å»ºçš„èŠ‚ç‚¹æŒ‡é’ˆï¼Œåˆ›å»ºå¤±è´¥åˆ™è¿”å›ç©ºæŒ‡é’ˆNULL</returns>
 	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
 	if (!p)
 	{
@@ -79,10 +79,10 @@ ListNode* LinkList_MakeNode( DataType value)
 void LinkList_AddNode_front(LinkList* Listname,DataType value)
 {
 	/// <summary>
-	/// ÓÃÍ·²å·¨ÔÚÁ´±íÍ·²åÈëĞÂ½¨½Úµã data=value
+	/// ç”¨å¤´æ’æ³•åœ¨é“¾è¡¨å¤´æ’å…¥æ–°å»ºèŠ‚ç‚¹ data=value
 	/// </summary>
-	/// <param name="Listname">Á´±íÃû</param>
-	/// <param name="value">ÔªËØÖµ</param>
+	/// <param name="Listname">é“¾è¡¨å</param>
+	/// <param name="value">å…ƒç´ å€¼</param>
 	ListNode* p = LinkList_MakeNode(value);
 	p->next = Listname->front;
 	Listname->front = p;
@@ -90,8 +90,8 @@ void LinkList_AddNode_front(LinkList* Listname,DataType value)
 }
 void LinkList_AddNode_rear(LinkList* L, DataType e);
 
-//¼ì²é pos¡Ê[ BeginPos , EndPos ]
-//ÊôÓÚÊ±·µ»Øtrue
+//æ£€æŸ¥ posâˆˆ[ BeginPos , EndPos ]
+//å±äºæ—¶è¿”å›true
 bool CheckPosition(int Pos, int BeginPos, int EndPos)
 {
 	if (BeginPos <= Pos && Pos <= EndPos)
@@ -101,12 +101,12 @@ bool CheckPosition(int Pos, int BeginPos, int EndPos)
 DataType LinkList_GetElem(ListNode* node)
 {
 	/// <summary>
-	/// Èôµ±Ç°½Úµã´æÔÚ
-	/// È¡³ö¸Ã½ÚµãµÄÊı¾İ
-	/// ·ñÔò·µ»ØNULL(0)
+	/// è‹¥å½“å‰èŠ‚ç‚¹å­˜åœ¨
+	/// å–å‡ºè¯¥èŠ‚ç‚¹çš„æ•°æ®
+	/// å¦åˆ™è¿”å›NULL(0)
 	/// </summary>
-	/// <param name="node">µ±Ç°½Úµã</param>
-	/// <returns>Êı¾İ</returns>
+	/// <param name="node">å½“å‰èŠ‚ç‚¹</param>
+	/// <returns>æ•°æ®</returns>
 	try
 	{
 		if (!node)
@@ -114,7 +114,7 @@ DataType LinkList_GetElem(ListNode* node)
 	}
 	catch (...)
 	{
-		std::cout << "¸Ã½Úµã²»´æÔÚ" << std::endl;
+		std::cout << "è¯¥èŠ‚ç‚¹ä¸å­˜åœ¨" << std::endl;
 		exit(0);
 	}
 	return node->data;		
@@ -123,12 +123,12 @@ DataType LinkList_GetElem(ListNode* node)
 ListNode* LinkList_LocateNode(const LinkList* L, int pos)
 {
 	/// <summary>
-	/// ·µ»ØÁ´±íLÖĞ£¬µÚpos¸öÔªËØ½ÚµãµÄÖ¸Õë
+	/// è¿”å›é“¾è¡¨Lä¸­ï¼Œç¬¬posä¸ªå…ƒç´ èŠ‚ç‚¹çš„æŒ‡é’ˆ
 	/// </summary>
-	/// <param name="L">Á´±í</param>
-	/// <param name="pos">ÔªËØÎ»ÖÃ</param>
-	/// <returns>½ÚµãÖ¸Õë</returns>
-	//ÅĞ¶Ï·Ç¿ÕÇÒ²»³¬¹ıl->length
+	/// <param name="L">é“¾è¡¨</param>
+	/// <param name="pos">å…ƒç´ ä½ç½®</param>
+	/// <returns>èŠ‚ç‚¹æŒ‡é’ˆ</returns>
+	//åˆ¤æ–­éç©ºä¸”ä¸è¶…è¿‡l->length
 	try
 	{
 		if (pos<=0 || pos>L->length)
@@ -141,10 +141,10 @@ ListNode* LinkList_LocateNode(const LinkList* L, int pos)
 	}
 
 	const LinkList* list = L;
-	ListNode* p;	//ÕÒÒÑ´æÔÚµÄ½Úµã²»ĞèÒªmalloc
+	ListNode* p;	//æ‰¾å·²å­˜åœ¨çš„èŠ‚ç‚¹ä¸éœ€è¦malloc
 	p = L->front;
 	for (int i = 1; i < pos; i++)
-	{//±éÀú¶¨Î»µ½µÚpos¸öÔªËØ½Úµã
+	{//éå†å®šä½åˆ°ç¬¬posä¸ªå…ƒç´ èŠ‚ç‚¹
 		p = p->next;
 	}
 	return p;
@@ -152,11 +152,11 @@ ListNode* LinkList_LocateNode(const LinkList* L, int pos)
 ListNode* LinkList_PriNode(const LinkList* L, ListNode* const node)
 {
 	/// <summary>
-	/// ·µ»ØÁ´±íLÖĞ,node½ÚµãµÄÇ°Çı½Úµã
+	/// è¿”å›é“¾è¡¨Lä¸­,nodeèŠ‚ç‚¹çš„å‰é©±èŠ‚ç‚¹
 	/// </summary>
-	/// <param name="L">Á´±í</param>
-	/// <param name="node">½Úµã</param>
-	/// <returns>Ç°Çı½Úµã</returns>
+	/// <param name="L">é“¾è¡¨</param>
+	/// <param name="node">èŠ‚ç‚¹</param>
+	/// <returns>å‰é©±èŠ‚ç‚¹</returns>
 	try
 	{
 		if (L->length<=1||!L->front)
@@ -164,7 +164,7 @@ ListNode* LinkList_PriNode(const LinkList* L, ListNode* const node)
 	}
 	catch (...)
 	{
-		std::cout << "Ç°Çı½Úµã²»´æÔÚ" << std::endl;
+		std::cout << "å‰é©±èŠ‚ç‚¹ä¸å­˜åœ¨" << std::endl;
 		exit(0);
 	}
 	ListNode* t;
@@ -178,11 +178,11 @@ ListNode* LinkList_PriNode(const LinkList* L, ListNode* const node)
 ListNode* LinkList_NextNode(const LinkList* L, const ListNode* node)
 {
 	/// <summary>
-	/// ·µ»ØÁ´±íLÖĞnode½ÚµãµÄºó¼Ì½Úµã
+	/// è¿”å›é“¾è¡¨Lä¸­nodeèŠ‚ç‚¹çš„åç»§èŠ‚ç‚¹
 	/// </summary>
-	/// <param name="L">Á´±í</param>
-	/// <param name="node">½Úµã</param>
-	/// <returns>½ÚµãÖ¸Õë</returns>
+	/// <param name="L">é“¾è¡¨</param>
+	/// <param name="node">èŠ‚ç‚¹</param>
+	/// <returns>èŠ‚ç‚¹æŒ‡é’ˆ</returns>
 	return node->next;
 }
 
@@ -190,16 +190,16 @@ ListNode* LinkList_NextNode(const LinkList* L, const ListNode* node)
 void LinkList_InsertNode(LinkList* L, int pos, DataType e)
 {
 	/// <summary>
-	/// ÔÚÁ´±íLµÄµÚpos¸öÎ»ÖÃÉÏ£¬´´½¨²¢²åÈëĞÂ½Úµã£¬data=e
+	/// åœ¨é“¾è¡¨Lçš„ç¬¬posä¸ªä½ç½®ä¸Šï¼Œåˆ›å»ºå¹¶æ’å…¥æ–°èŠ‚ç‚¹ï¼Œdata=e
 	/// </summary>
-	/// <param name="L">Á´±í</param>
-	/// <param name="pos">ÔªËØÎ»ÖÃ</param>
-	/// <param name="e">½ÚµãÖµ</param>
+	/// <param name="L">é“¾è¡¨</param>
+	/// <param name="pos">å…ƒç´ ä½ç½®</param>
+	/// <param name="e">èŠ‚ç‚¹å€¼</param>
 	try
 	{
 		if(!CheckPosition(pos,1,L->length))
 			throw 1;
-	}//Î´µ÷Õû  
+	}//æœªè°ƒæ•´  
 	catch (...)
 	{
 		std::cout << "Illegal position" << std::endl;
@@ -212,7 +212,7 @@ void LinkList_InsertNode(LinkList* L, int pos, DataType e)
 	}
 	else
 	{
-		std::cout << "´´½¨Ê§°Ü" << std::endl;
+		std::cout << "åˆ›å»ºå¤±è´¥" << std::endl;
 		exit(0);
 	}
 	if (pos==1)
@@ -232,10 +232,10 @@ void LinkList_InsertNode(LinkList* L, int pos, DataType e)
 void LinkList_DeleteNode(LinkList* L, int pos)
 {
 	/// <summary>
-	/// É¾³ıÁ´±íLµÄµÚpos¸öÔªËØ½Úµã
+	/// åˆ é™¤é“¾è¡¨Lçš„ç¬¬posä¸ªå…ƒç´ èŠ‚ç‚¹
 	/// </summary>
-	/// <param name="L">Á´±í</param>
-	/// <param name="pos">ÔªËØÎ»ÖÃ</param>
+	/// <param name="L">é“¾è¡¨</param>
+	/// <param name="pos">å…ƒç´ ä½ç½®</param>
 	try
 	{
 		if (!CheckPosition(pos, 1, L->length))

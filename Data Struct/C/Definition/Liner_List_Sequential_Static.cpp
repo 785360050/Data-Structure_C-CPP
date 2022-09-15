@@ -1,12 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
-#include "C:/Users/len/Desktop/Data Struct/Data Struct/API/Liner_List_Sequential.h"
+#include "../API/Liner_List_Sequential.h"
 
 SeqList* SeqList_Init(int maxsize)
 {
 	SeqList* L = new SeqList;
 	L->data = (DataType* )malloc(sizeof(DataType) * maxsize);
-	memset(L->data, 0, sizeof(DataType) * maxsize);//È«²¿ÔªËØ¿Õ¼ä³õÊ¼»¯Îª0
+	memset(L->data, 0, sizeof(DataType) * maxsize);//å…¨éƒ¨å…ƒç´ ç©ºé—´åˆå§‹åŒ–ä¸º0
 	L->length = 0;
 	L->maxsize = maxsize;
 	return L;
@@ -124,7 +124,7 @@ void SeqList_Show(SeqList* List)
 }
 
 
-//SeqList* InitialList(int x)	//´´½¨²¢³õÊ¼»¯ÓÐx¸öÔªËØµÄÏßÐÔË³Ðò±í£¬·µ»Ø±íÊ×µØÖ·
+//SeqList* InitialList(int x)	//åˆ›å»ºå¹¶åˆå§‹åŒ–æœ‰xä¸ªå…ƒç´ çš„çº¿æ€§é¡ºåºè¡¨ï¼Œè¿”å›žè¡¨é¦–åœ°å€
 //{
 //	SeqList* L = (SeqList*)malloc(sizeof(SeqList));
 //	L->data = (DataType*)malloc(sizeof(DataType)*x);
@@ -134,7 +134,7 @@ void SeqList_Show(SeqList* List)
 //	return L;
 //}
 //
-//void ListDestroy(SeqList* L)	//Ïú»ÙÏßÐÔË³Ðò±í
+//void ListDestroy(SeqList* L)	//é”€æ¯çº¿æ€§é¡ºåºè¡¨
 //{
 //	if (L)
 //	{
@@ -147,7 +147,7 @@ void SeqList_Show(SeqList* List)
 //	}
 //}
 //
-//void ListInsert(SeqList* L, int p, DataType e)		//ÔÚÏßÐÔË³Ðò±íLµÚp¸öÎ»ÖÃ²åÈëÔªËØe
+//void ListInsert(SeqList* L, int p, DataType e)		//åœ¨çº¿æ€§é¡ºåºè¡¨Lç¬¬pä¸ªä½ç½®æ’å…¥å…ƒç´ e
 //{
 //	if (p > L->length || p < 0)
 //	{
@@ -180,7 +180,7 @@ void SeqList_Show(SeqList* List)
 //	{
 //		std::cout << L->data[i] << "-";
 //	}
-//	std::cout << "NULL" << std::endl << "ListLenth£º" << L->length << std::endl;
+//	std::cout << "NULL" << std::endl << "ListLenthï¼š" << L->length << std::endl;
 //}
 
 

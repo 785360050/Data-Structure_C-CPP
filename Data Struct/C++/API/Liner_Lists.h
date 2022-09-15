@@ -4,23 +4,23 @@ template <class DataType>
 class SeqList
 {
 public:
-	//´´½¨ÓĞmaxsize¸öÔªËØ¿Õ¼äµÄË³Ğò±í£¬·µ»Ø±íÊ×µØÖ·
-	//ËùÓĞÔªËØÖµ³õÊ¼»¯Îª0
+	//åˆ›å»ºæœ‰maxsizeä¸ªå…ƒç´ ç©ºé—´çš„é¡ºåºè¡¨ï¼Œè¿”å›è¡¨é¦–åœ°å€
+	//æ‰€æœ‰å…ƒç´ å€¼åˆå§‹åŒ–ä¸º0
 	SeqList();
-	//ÔÚË³Ğò±íListµÄµÚpos¸öÎ»ÖÃÉÏ²åÈëÊı¾İÔªËØdata
+	//åœ¨é¡ºåºè¡¨Listçš„ç¬¬posä¸ªä½ç½®ä¸Šæ’å…¥æ•°æ®å…ƒç´ data
 	void Insert(SeqList* List, int pos, DataType data);
-	//É¾³ıÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØ£¬·µ»ØÔªËØÖµ
+	//åˆ é™¤é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ ï¼Œè¿”å›å…ƒç´ å€¼
 	DataType Delete(SeqList* List, int pos);
-	//ĞŞ¸ÄÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØÖµÎªdata
+	//ä¿®æ”¹é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ å€¼ä¸ºdata
 	void Update(SeqList* List, int pos, DataType data);
-	//ÏÔÊ¾Ë³Ğò±íListÔªËØ¿Õ¼äÉÏµÄËùÓĞÔªËØ
+	//æ˜¾ç¤ºé¡ºåºè¡¨Listå…ƒç´ ç©ºé—´ä¸Šçš„æ‰€æœ‰å…ƒç´ 
 	void Show(SeqList* List);
-	//Ïú»ÙÏßĞÔË³Ğò±í
+	//é”€æ¯çº¿æ€§é¡ºåºè¡¨
 	~SeqList();
 
-	int* data;	//ÔªËØÖµ
-	int length;	//µ±Ç°±í³¤
-	int MAXSIZE;//×î´óÈİÁ¿
+	int* data;	//å…ƒç´ å€¼
+	int length;	//å½“å‰è¡¨é•¿
+	int MAXSIZE;//æœ€å¤§å®¹é‡
 };
 
 

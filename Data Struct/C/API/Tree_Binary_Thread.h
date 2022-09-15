@@ -4,10 +4,10 @@
 #include "Global Variables.h"
 
 /// <summary>
-/// ½«¶ş²æÊ÷ÏßË÷»¯ºó£¬
-/// ¶ÔÓ¦µÄ±éÀú¿ªÏú½µµÍ
-/// ÇÒÒ×ÓÚ´ÓÈÎÒâ½ÚµãÑ°ÕÒÂß¼­Ç°ÇıºÍºó¼Ì
-/// (ÈÎÒân¸ö½ÚµãµÄ¶ş²æÊ÷ÓĞn+1¸ö¿ÕÁ´Óò)
+/// å°†äºŒå‰æ ‘çº¿ç´¢åŒ–åï¼Œ
+/// å¯¹åº”çš„éå†å¼€é”€é™ä½
+/// ä¸”æ˜“äºä»ä»»æ„èŠ‚ç‚¹å¯»æ‰¾é€»è¾‘å‰é©±å’Œåç»§
+/// (ä»»æ„nä¸ªèŠ‚ç‚¹çš„äºŒå‰æ ‘æœ‰n+1ä¸ªç©ºé“¾åŸŸ)
 /// </summary>
 
 struct ThreadNode
@@ -16,9 +16,9 @@ struct ThreadNode
 	struct ThreadNode* left;
 	struct ThreadNode* right;
 	std::string name;
-	//±ê¼ÇÊÇ·ñÎª×óÏßË÷£¬Ö¸ÏòÂß¼­Ç°Çı
+	//æ ‡è®°æ˜¯å¦ä¸ºå·¦çº¿ç´¢ï¼ŒæŒ‡å‘é€»è¾‘å‰é©±
 	bool Thread_left;
-	//±ê¼ÇÊÇ·ñÎªÓÒÏßË÷£¬Ö¸ÏòÂß¼­ºó¼Ì
+	//æ ‡è®°æ˜¯å¦ä¸ºå³çº¿ç´¢ï¼ŒæŒ‡å‘é€»è¾‘åç»§
 	bool Thread_right;
 };
 typedef struct ThreadNode ThreadNode;
@@ -30,19 +30,19 @@ struct BinaryTree_Thread
 };
 typedef BinaryTree_Thread BTree_Thread;
 
-//´´½¨ÏßË÷Ê÷Í·½Úµã£¬°ó¶¨½ÚµãrootÎª¸ù
+//åˆ›å»ºçº¿ç´¢æ ‘å¤´èŠ‚ç‚¹ï¼Œç»‘å®šèŠ‚ç‚¹rootä¸ºæ ¹
 BTree_Thread* BinaryTree_Init_Root(ThreadNode* root);
-//É¾³ıÏßË÷¶ş²æÊ÷
+//åˆ é™¤çº¿ç´¢äºŒå‰æ ‘
 void BinaryTree_Destory(BTree_Thread* tree);
-//´´½¨ÏßË÷½Úµã£¬½ÚµãÃû×ÖÎªname
+//åˆ›å»ºçº¿ç´¢èŠ‚ç‚¹ï¼ŒèŠ‚ç‚¹åå­—ä¸ºname
 ThreadNode* BinaryTree_CreateNode_Thread(std::string name);
-// ²åÈëÏßË÷½Úµã£¬ÔÚÏßË÷Ê÷treeÖĞ£¬Ë«Ç×ÎªparenrµÄ[×ó/ÓÒ]Î»ÖÃ
+// æ’å…¥çº¿ç´¢èŠ‚ç‚¹ï¼Œåœ¨çº¿ç´¢æ ‘treeä¸­ï¼ŒåŒäº²ä¸ºparenrçš„[å·¦/å³]ä½ç½®
 void BinaryTree_Insert_Thread(BTree_Thread* tree, ThreadNode* parent, Direction pos, ThreadNode* node);
-//·ÃÎÊÏßË÷½ÚµãÃû
+//è®¿é—®çº¿ç´¢èŠ‚ç‚¹å
 void BinaryTree_Visit(ThreadNode* node);
-// ÖĞĞòÏßË÷»¯¶ş²æÊ÷
+// ä¸­åºçº¿ç´¢åŒ–äºŒå‰æ ‘
 void BinaryTree_Thread_Inorder(ThreadNode* node);
-// ÖĞĞò±éÀúÏßË÷»¯Ê÷(ÓÅ»¯¿ªÏú)
+// ä¸­åºéå†çº¿ç´¢åŒ–æ ‘(ä¼˜åŒ–å¼€é”€)
 void BinaryTree_Traversal_Inorder_Thread(ThreadNode* node);
 
 

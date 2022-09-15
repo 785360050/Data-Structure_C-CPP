@@ -5,22 +5,22 @@ typedef int DataType;
 struct SequentialList
 {
 	DataType* data;
-	int length;	//µ±Ç°±í³¤
+	int length;	//å½“å‰è¡¨é•¿
 	int maxsize;
 };
 typedef struct SequentialList SeqList;
-//´´½¨ÓĞmaxsize¸öÔªËØ¿Õ¼äµÄË³Ğò±í£¬·µ»Ø±íÊ×µØÖ·
-//ËùÓĞÔªËØÖµ³õÊ¼»¯Îª0
+//åˆ›å»ºæœ‰maxsizeä¸ªå…ƒç´ ç©ºé—´çš„é¡ºåºè¡¨ï¼Œè¿”å›è¡¨é¦–åœ°å€
+//æ‰€æœ‰å…ƒç´ å€¼åˆå§‹åŒ–ä¸º0
 SeqList* SeqList_Init(int maxsize);	
-//Ïú»ÙÏßĞÔË³Ğò±í
+//é”€æ¯çº¿æ€§é¡ºåºè¡¨
 void SeqList_Destroy(SeqList* List);	
-//ÔÚÏßĞÔË³Ğò±íListµÚpos¸öÎ»ÖÃ²åÈëÔªËØÖµdata
+//åœ¨çº¿æ€§é¡ºåºè¡¨Listç¬¬posä¸ªä½ç½®æ’å…¥å…ƒç´ å€¼data
 void SeqList_Insert(SeqList* List, int pos, DataType data);	
-//É¾³ıÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØ£¬·µ»ØÔªËØÖµ
+//åˆ é™¤é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ ï¼Œè¿”å›å…ƒç´ å€¼
 DataType SeqList_Delete(SeqList* List, int pos);
-//ĞŞ¸ÄÁ´±íListµÚpos¸öÎ»ÖÃÉÏµÄÔªËØÖµÎªdata
+//ä¿®æ”¹é“¾è¡¨Listç¬¬posä¸ªä½ç½®ä¸Šçš„å…ƒç´ å€¼ä¸ºdata
 void SeqList_Update(SeqList* List, int pos, DataType data);
-//ÏÔÊ¾Ë³Ğò±íListÔªËØ¿Õ¼äÉÏµÄËùÓĞÔªËØ
+//æ˜¾ç¤ºé¡ºåºè¡¨Listå…ƒç´ ç©ºé—´ä¸Šçš„æ‰€æœ‰å…ƒç´ 
 void SeqList_Show(SeqList* List);
 
 

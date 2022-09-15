@@ -1,4 +1,4 @@
-#include "C:/Users/len/Desktop/Data Struct/Data Struct/API/Liner_Stack.h"
+#include "../API/Liner_Stack.h"
 #include <iostream>
 
 

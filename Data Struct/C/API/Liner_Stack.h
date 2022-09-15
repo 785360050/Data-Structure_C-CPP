@@ -1,14 +1,14 @@
 #pragma once
 
 
-#define Á´Õ»	//[Ë³ĞòÕ»/Á´Õ»]
-#define Ë³ĞòÕ»
+#define é“¾æ ˆ	//[é¡ºåºæ ˆ/é“¾æ ˆ]
+#define é¡ºåºæ ˆ
 
 typedef int DataType;
-#ifdef Ë³ĞòÕ»
-//µİÔöÂúÕ»(top=0Õ»¿Õ)
+#ifdef é¡ºåºæ ˆ
+//é€’å¢æ»¡æ ˆ(top=0æ ˆç©º)
 
-//TODO ½öÊµÏÖË³ĞòÕ»£¬ÇÒÓÃintµÄtop·ÃÎÊdataÊı×é£¬¿ÉÓÃTOPÖ¸Õë
+//TODO ä»…å®ç°é¡ºåºæ ˆï¼Œä¸”ç”¨intçš„topè®¿é—®dataæ•°ç»„ï¼Œå¯ç”¨TOPæŒ‡é’ˆ
 #define StackSize 10
 struct SeqStack
 {
@@ -17,19 +17,19 @@ struct SeqStack
 };
 typedef struct SeqStack SeqStack;
 
-//ÉêÇë´óĞ¡ÎªstacksizeµÄÕ»¿Õ¼ä
+//ç”³è¯·å¤§å°ä¸ºstacksizeçš„æ ˆç©ºé—´
 SeqStack* SeqStack_Init(int stacksize);
-//ÊÍ·ÅstackËùÓĞ¿Õ¼ä
+//é‡Šæ”¾stackæ‰€æœ‰ç©ºé—´
 void SeqStack_Destroy(SeqStack* stack);
 
-//½«Êı¾İÔªËØdataÑ¹ÈëÕ»
+//å°†æ•°æ®å…ƒç´ dataå‹å…¥æ ˆ
 void SeqStack_Push(SeqStack* stack, DataType data);
-//³öÕ»£¬²¢·µ»ØÊı¾İÔªËØdata
+//å‡ºæ ˆï¼Œå¹¶è¿”å›æ•°æ®å…ƒç´ data
 DataType SeqStack_Pop(SeqStack* stack);
 
-#endif // Ë³ĞòÕ»
+#endif // é¡ºåºæ ˆ
 
-#ifdef Á´Õ»
+#ifdef é“¾æ ˆ
 struct LinkStack
 {
 	DataType data;
@@ -37,17 +37,17 @@ struct LinkStack
 };
 typedef struct LinkStack LinkStack;
 
-//ÉêÇë´óĞ¡ÎªstacksizeµÄÕ»¿Õ¼ä
+//ç”³è¯·å¤§å°ä¸ºstacksizeçš„æ ˆç©ºé—´
 LinkStack* LinkStack_Init();
-//ÊÍ·ÅstackËùÓĞ¿Õ¼ä
+//é‡Šæ”¾stackæ‰€æœ‰ç©ºé—´
 void LinkStack_Destroy(LinkStack* stack);
 
-//½«Êı¾İÔªËØdataÑ¹ÈëÕ»
+//å°†æ•°æ®å…ƒç´ dataå‹å…¥æ ˆ
 void LinkStack_Push(LinkStack* stack, DataType data);
-//³öÕ»£¬²¢·µ»ØÊı¾İÔªËØdata
+//å‡ºæ ˆï¼Œå¹¶è¿”å›æ•°æ®å…ƒç´ data
 DataType LinkStack_Pop(LinkStack* stack);
 
-#endif // Á´Õ»
+#endif // é“¾æ ˆ
 
 
 

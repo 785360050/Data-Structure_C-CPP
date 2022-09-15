@@ -17,14 +17,14 @@ struct head
 };
 typedef struct head LinkList;
 
-//´´½¨´øÍ·½ÚµãµÄ¿ÕÁ´±í
+//åˆ›å»ºå¸¦å¤´èŠ‚ç‚¹çš„ç©ºé“¾è¡¨
 LinkList* LinkList_Init();
-//É¾³ıÁ´±í
+//åˆ é™¤é“¾è¡¨
 void LinkList_DeleteList(LinkList* L);
 
-//Í·²å·¨
+//å¤´æ’æ³•
 void LinkList_AddNode_front(LinkList* L, DataType e);
-//void LinkList_AddNode_rear(LinkList L, DataType e);//Î²²å·¨
+//void LinkList_AddNode_rear(LinkList L, DataType e);//å°¾æ’æ³•
 
 ListNode* LinkList_LocateNode(const LinkList* L, int pos);
 ListNode* LinkList_PriNode(const LinkList* L, ListNode* const node);

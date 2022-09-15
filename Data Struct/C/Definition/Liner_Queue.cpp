@@ -1,6 +1,6 @@
-#include "C:/Users/len/Desktop/Data Struct/Data Struct/API/Liner_Queue.h"
+#include "../API/Liner_Queue.h"
 
-///顺序队列
+///椤哄簭闃熷垪
 SeqQueue* SeqQueue_Init()
 {
 	SeqQueue* q = new SeqQueue;
@@ -21,7 +21,7 @@ void SeqQueue_Destory(SeqQueue* SeqQueue)
 		//{
 		//	free(SeqQueue->data);
 		//}			
-		//此处应为非malloc申请的空间，而是定义的data[maxsize]，free(SeqQueue->data)后SeqQueue->data是野指针，所以无法free(SeqQueue)
+		//姝ゅ搴斾负闈瀖alloc鐢宠鐨勭┖闂达紝鑰屾槸瀹氫箟鐨刣ata[maxsize]锛宖ree(SeqQueue->data)鍚嶴eqQueue->data鏄噹鎸囬拡锛屾墍浠ユ棤娉昮ree(SeqQueue)
 		free(SeqQueue);
 }
 
@@ -74,7 +74,7 @@ DataType SeqQueue_Pop(SeqQueue* SeqQueue)
 
 
 
-///链式队列
+///閾惧紡闃熷垪
 LinkQueue* LinkQueue_Init()
 {
 	LinkQueue* q = new LinkQueue;

@@ -1,5 +1,5 @@
 #pragma once
 
 typedef int DataType;
-//¶ş²æÊ÷×óÓÒÖ¸ÕëÓò
+//äºŒå‰æ ‘å·¦å³æŒ‡é’ˆåŸŸ
 enum Direction { left = 1, right = 2 };
