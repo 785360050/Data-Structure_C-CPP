@@ -182,8 +182,8 @@ void BinaryThreadTree()
 
 void TestBinaryTree()
 {
-	BinaryTree();
-	//BinaryThreadTree();
+	//BinaryTree();
+	BinaryThreadTree();
 }
 
 

@@ -54,7 +54,7 @@ void BinaryTree_Thread_Inorder(ThreadNode* node)
 			node->Thread_left = true;
 			node->left = pre;
 		}
-		if (node->right == NULL)
+		if (pre && pre->right == NULL)
 		{
 			pre->Thread_right = true;
 			pre->right = node;
