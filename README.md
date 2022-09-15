@@ -47,6 +47,7 @@ Files in Github
 - //完毕 only refers functions are basically tested, it may well be something wrong when modifying them.
 - So I reccommend you commit in issues , even commit updates.
 - Hope it helps your study :D
+- 项目->右键属性->C/C++ -> 命令行，添加 /utf-8，采用utf-8来编译
 
 #### Basic Knowledege
 * baisc print function in **C** is printf while I used std::cout in **C++** instead all the times
