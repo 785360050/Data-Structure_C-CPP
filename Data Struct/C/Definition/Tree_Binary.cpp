@@ -97,7 +97,6 @@ struct TStack
 };
 typedef struct TStack TStack;
 
-
 TStack* TStack_Init()
 {
 	TStack* s = new TStack;
@@ -149,12 +148,6 @@ TNode* TStack_Pop(TStack* stack)
 
 
 
-
-
-
-
-
-
 //二叉树函数
 
 BTree* BinaryTree_Init_Root(TNode* root)
@@ -163,6 +156,27 @@ BTree* BinaryTree_Init_Root(TNode* root)
 	t->num = 1;
 	t->root = root;
 	return t;
+}
+
+static void DeleteNode(BTree* tree , TNode* node)
+{
+	if (node)
+	{
+		DeleteNode(tree, node->left);
+		DeleteNode(tree, node->right);
+		std::cout << node->name << " ";
+		free(node);
+		tree->num--;
+	}
+}
+void BinaryTree_Destory(BTree* tree)
+{///自下而上递归销毁节点
+	if (tree)
+	{
+		std::cout << "删除二叉树树节点个数:" << tree->num << std::endl;
+		if (tree->root)
+			DeleteNode(tree, tree->root);
+	}
 }
 
 TreeNode* BinaryTree_CreateNode(std::string name )

@@ -36,6 +36,9 @@
     <ClCompile Include="C\Definition\Tree_Binary.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Liner_List_Link.h">
@@ -51,6 +54,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Tree_Binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\API\Tree_Binary_Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\API\Global Variables.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

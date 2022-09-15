@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-typedef int DataType;
+
+#include "Global Variables.h"
 
 struct TreeNode
 {
@@ -29,18 +30,21 @@ struct BinaryTree
 };
 typedef BinaryTree BTree;
 
-enum Direction {left = 1,right = 2 };
 
-//ÐÂ½¨¶þ²æÊ÷Í·½Úµã
+
+//ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Úµï¿½
 BTree* BinaryTree_Init_Root(TNode* root);
-//ÐÂ½¨ÆÕÍ¨¶þ²æÊ÷½Úµã
+//ï¿½Â½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
+//É¾ï¿½ï¿½ï¿½ï¿½
+void BinaryTree_Destory(BTree* tree);
+//ï¿½Â½ï¿½ï¿½Úµï¿½
 TreeNode* BinaryTree_CreateNode(std::string name);
-//¶þ²æÊ÷treeÖÐ,ÔÚ¸¸½ÚµãparentµÄpos[×ó/ÓÒ]Î»ÖÃ£¬²åÈë½Úµãnode,
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½treeï¿½ï¿½,ï¿½Ú¸ï¿½ï¿½Úµï¿½parentï¿½ï¿½pos[ï¿½ï¿½/ï¿½ï¿½]Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½node,
 void BinaryTree_Insert(BTree* tree, TNode* parent, Direction pos, TNode* node);
-//·ÃÎÊnode½Úµã
+//ï¿½ï¿½ï¿½ï¿½nodeï¿½Úµï¿½
 void BinaryTree_Visit(TNode* node);
 
-//¹ã¶È±éÀú
+//ï¿½ï¿½È±ï¿½ï¿½ï¿½
 void BinaryTree_Traversal_Level(BTree* tree);
 //DLR
 void BinaryTree_Traversal_Preorder(TNode* node);
@@ -53,13 +57,13 @@ void BinaryTree_Traversal_Postorder(TNode* node);
 void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node);
 
 
-/*ÏßË÷¶þ²æÊ÷
-//ÐÂ½¨ÏßË÷¶þ²æÊ÷½Úµã
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
 ThreadNode* BinaryTree_CreateNode_Thread(std::string name);
 //TODO: BinaryTree_Destory
 
 void BinaryTree_Insert_Thread(BTree* tree, ThreadNode* parent, Direction pos, TNode* node);
-//·ÃÎÊnode½Úµã
+//ï¿½ï¿½ï¿½ï¿½nodeï¿½Úµï¿½
 void BinaryTree_Visit_Thread(ThreadNode* node);
 
 void BinaryTree_Modify_ThreadTree(ThreadNode* node);
