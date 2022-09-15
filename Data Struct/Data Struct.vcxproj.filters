@@ -15,28 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Link.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Queue.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Stack_Link.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp">
+    <ClCompile Include="C++ main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="C++\Definition\Liner_Lists.cpp">
@@ -44,27 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C\API\Liner_List_Link.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_List_Sequential.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_Queue.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_Stack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_Thread.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Global Variables.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\API\Object.h">
       <Filter>头文件</Filter>
     </ClInclude>

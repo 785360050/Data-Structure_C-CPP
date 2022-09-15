@@ -128,25 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C++\Definition\Liner_Lists.cpp" />
-    <ClCompile Include="C\Definition\Liner_List_Link.cpp" />
-    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp" />
-    <ClCompile Include="C\Definition\Liner_Queue.cpp" />
-    <ClCompile Include="C\Definition\Liner_Stack_Link.cpp" />
-    <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp" />
-    <ClCompile Include="C\Definition\Tree_Binary.cpp" />
-    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="C++ main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C++\API\Liner_Lists.h" />
     <ClInclude Include="C++\API\Object.h" />
-    <ClInclude Include="C\API\Liner_List_Link.h" />
-    <ClInclude Include="C\API\Liner_List_Sequential.h" />
-    <ClInclude Include="C\API\Liner_Queue.h" />
-    <ClInclude Include="C\API\Liner_Stack.h" />
-    <ClInclude Include="C\API\Tree_Binary.h" />
-    <ClInclude Include="C\API\Tree_Binary_Thread.h" />
-    <ClInclude Include="C\API\Global Variables.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

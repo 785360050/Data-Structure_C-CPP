@@ -3,12 +3,20 @@
 
 
 template <typename DataType>
-class SeqList:public Liner_Structure
+struct ListHead
+{
+	DataType* elem;
+	int length;
+	int size;
+};
+
+
+template <typename DataType>
+class SeqList//:public Liner_Structure
 {
 public:
-	//创建有maxsize个元素空间的顺序表，返回表首地址
-	//所有元素值初始化为0
-	SeqList();
+	///创建有maxsize个元素空间的顺序表，返回表首地址
+	SeqList(int size);
 	//在顺序表List的第pos个位置上插入数据元素data
 	void InsertElement(SeqList* List, int pos, DataType elem);
 	//删除链表List第pos个位置上的元素，返回元素值
@@ -23,17 +31,17 @@ public:
 private:
 	int* element;//元素值
 	int length;	//当前表长
-	int maxsize;//最大容量
+	int size;//最大容量
 };
 
 
 
 
 
-void test()
+void test_SeqList()
 {
-	SeqList<int> a;
-	a.
+	SeqList<int> a(2);
+	a.~SeqList();
 }
 
 

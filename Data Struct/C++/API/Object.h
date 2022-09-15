@@ -4,9 +4,9 @@ class DataStructure
 {
 public:
 private:
-	Liner_Structure;
-	Tree;
-	Graph;
+	//Liner_Structure;
+	//Tree;
+	//Graph;
 };
 
 class Liner_Structure :public DataStructure

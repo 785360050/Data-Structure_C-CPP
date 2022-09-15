@@ -1,4 +1,18 @@
-﻿  main.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Tree_Binary.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-D:\GitHub\Data-Structure_C-CPP\Data Struct\main.cpp(215,1): warning C4326: “main”的返回类型应为“int”而非“void”
-  Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Struct.exe
+﻿  Liner_Lists.cpp
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(10,1): error C2512: “SeqList<int>”: 没有合适的默认构造函数可用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(9): message : 在编译 类 模板 成员函数“SeqList<int>::SeqList(int)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(43): message : 查看对正在编译的函数 模板 实例化“SeqList<int>::SeqList(int)”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(43): message : 查看对正在编译的 类 模板 实例化“SeqList<int>”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(14,2): error C2534: “SeqList<int>”: 构造函数无法返回值
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(43): message : 参见“SeqList<int>”的声明
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(14,2): error C2562: “SeqList<int>::SeqList”:“void”函数返回值
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(19): message : 参见“SeqList<int>::SeqList”的声明
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(30,1): error C3867: “SeqList<int>::Delete”: 非标准语法；请使用 "&" 来创建指向成员的指针
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Definition\Liner_Lists.cpp(19): message : 在编译 类 模板 成员函数“SeqList<int>::~SeqList(void)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(43): message : 查看对正在编译的函数 模板 实例化“SeqList<int>::~SeqList(void)”的引用
+  C++ main.cpp
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\API\Liner_Lists.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++ main.cpp(7,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  正在生成代码...
