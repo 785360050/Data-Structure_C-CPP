@@ -148,8 +148,11 @@ void BinaryTree()
 	BinaryTree_Traversal_Inorder(Tree->root);
 	std::cout << std::endl << "LRD：";
 	BinaryTree_Traversal_Postorder(Tree->root);
-	std::cout << std::endl << "Level：";
-	BinaryTree_Traversal_Level(Tree);
+	//std::cout << std::endl << "Level：";
+	//BinaryTree_Traversal_Level(Tree);
+
+	std::cout << std::endl;
+	BinaryTree_Destory(Tree);
 }
 void BinaryThreadTree()
 {
@@ -178,13 +181,16 @@ void BinaryThreadTree()
 
 	BinaryTree_Traversal_Inorder_Thread(Tree->root);
 
+	BinaryTree_Destory(Tree);
 }
 
 void TestBinaryTree()
 {
 	//BinaryTree();
-	BinaryThreadTree();
+	//BinaryThreadTree();
 }
+
+
 
 
 void C_Test()
@@ -198,9 +204,6 @@ void C_Test()
 		TestBinaryTree();//完毕
 
 	}
-
-
-
 
 void CPP_Test()
 {
