@@ -12,17 +12,6 @@ struct TreeNode
 };
 typedef struct TreeNode TNode;
 
-struct TreeNode_Thread
-{
-	DataType data;
-	bool Thread_Left;
-	struct TreeNode* left;
-	bool Thread_Right;
-	struct TreeNode* right;
-	std::string name;
-};
-typedef TreeNode_Thread ThreadNode;
-
 struct BinaryTree
 {
 	TNode* root;
