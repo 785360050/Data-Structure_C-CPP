@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C++\Definition\Liner_Lists.cpp" />
     <ClCompile Include="C\Definition\Liner_List_Link.cpp" />
     <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp" />
     <ClCompile Include="C\Definition\Liner_Queue.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C++\API\Liner_Lists.h" />
     <ClInclude Include="C++\API\Object.h" />
     <ClInclude Include="C\API\Liner_List_Link.h" />
     <ClInclude Include="C\API\Liner_List_Sequential.h" />

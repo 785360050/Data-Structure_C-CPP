@@ -11,17 +11,17 @@ private:
 
 class Liner_Structure :public DataStructure
 {
-	void Init();
-	void Destroy();
-	void Clear();
-	void CheckEmpty();
-	void GetLength();
-	void LocateElement();
-	void PriorElement();
-	void NextElement();
-	void InsertElement();
-	void DeleteElement();
-	void Traverse();
+	virtual void Init();
+	virtual void Destroy();
+	virtual void Clear();
+	virtual void CheckEmpty();
+	virtual void GetLength();
+	virtual void LocateElement();
+	virtual void PriorElement();
+	virtual void NextElement();
+	virtual void InsertElement();
+	virtual void DeleteElement();
+	virtual void Traverse();
 
 };///precursor node
 

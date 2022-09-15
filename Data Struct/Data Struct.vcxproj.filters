@@ -39,6 +39,9 @@
     <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C++\Definition\Liner_Lists.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Liner_List_Link.h">
@@ -63,6 +66,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\API\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\API\Liner_Lists.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
