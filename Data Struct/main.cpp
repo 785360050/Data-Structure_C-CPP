@@ -1,13 +1,12 @@
 ﻿#include <iostream>
 
-#include "C/API/Liner_List_Link.h"
-#include "C/API/Liner_List_Sequential.h"
-#include "C/API/Liner_Stack.h"
-#include "C/API/Liner_Queue.h"
-#include "C/API/Tree_Binary.h"
-#include "C/API/Tree_Binary_Thread.h"
 
-
+#include "API/Liner_List_Link.h"
+#include "API/Liner_List_Sequential.h"
+#include "API/Liner_Stack.h"
+#include "API/Liner_Queue.h"
+#include "API/Tree_Binary.h"
+#include "API/Tree_Binary_Thread.h"
 
 
 
@@ -150,7 +149,7 @@ void BinaryTree()
 	BinaryTree_Traversal_Postorder(Tree->root);
 	//std::cout << std::endl << "Level：";
 	//BinaryTree_Traversal_Level(Tree);
-
+	///BUG
 	std::cout << std::endl;
 	BinaryTree_Destory(Tree);
 }
@@ -187,34 +186,20 @@ void BinaryThreadTree()
 
 void TestBinaryTree()
 {
-	//BinaryTree();
+	BinaryTree();
 	BinaryThreadTree();
 }
 
 
-
-
-void C_Test()
-	{
-		//TestSeqList();//完毕
-		//TestLinkList();//完毕
-		//TestSeqStack();//完毕
-		//TestLinkStack();//完毕
-		//TestSeqQueue();//完毕
-		//TestLinkQueue();//完毕
-		//TestBinaryTree();//完毕
-
-	}
-
-void CPP_Test()
-{
-	return;
-}
-
 void main()
 {
-	C_Test();
-	CPP_Test();
+	//TestSeqList();//完毕
+	//TestLinkList();//完毕
+	//TestSeqStack();//完毕
+	//TestLinkStack();//完毕
+	//TestSeqQueue();//完毕
+	//TestLinkQueue();//完毕
+	//TestBinaryTree();//完毕
 }
 
 
