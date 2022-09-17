@@ -1,12 +1,3 @@
 ﻿  C main .cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C main .cpp(202,1): warning C4326: “main”的返回类型应为“int”而非“void”
-  Tree_Binary_Search.cpp
-  正在生成代码...
-Liner_List_Link.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Liner_List_Link.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Liner_List_Sequential_Static.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Liner_List_Sequential_Static.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Liner_Queue.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Liner_Queue.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Liner_Stack_Link.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Liner_Stack_Link.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Liner_Stack_Sequential.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Liner_Stack_Sequential.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Tree_Binary.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Tree_Binary.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Tree_Binary_Thread.obj : warning LNK4099: 未找到 PDB“vc143.pdb”(使用“Tree_Binary_Thread.obj”或在“D:\GitHub\Data-Structure_C-CPP\x64\Debug\vc143.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C main .cpp(224,1): warning C4326: “main”的返回类型应为“int”而非“void”
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Struct.exe

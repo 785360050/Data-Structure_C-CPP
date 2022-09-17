@@ -185,35 +185,29 @@ void BinaryThreadTree()
 	BinaryTree_Destory(Tree);
 }
 
-void BinarySearcha()
+void BinarySearch()
 {
-	BTree* Tree = new BTree;
-	TNode* a = BinaryTree_CreateNode("A");
-	TNode* b = BinaryTree_CreateNode("B");
-	TNode* c = BinaryTree_CreateNode("C");
-	TNode* d = BinaryTree_CreateNode("D");
-	TNode* e = BinaryTree_CreateNode("E");
-	TNode* f = BinaryTree_CreateNode("F");
-	TNode* g = BinaryTree_CreateNode("G");
-	TNode* h = BinaryTree_CreateNode("H");
-	TNode* k = BinaryTree_CreateNode("K");
+	TNode* d = BinaryTree_CreateNode(4);
+	
+	BTree* Tree = BinaryTree_Init_Root(d);
 
-	//insertBSTreeNoRecursive(tree, 8);
-	//insertBSTreeNoRecursive(tree, 10);
-	//insertBSTreeNoRecursive(tree, 20);
-	//insertBSTreeNoRecursive(tree, 30);
-	//insertBSTreeNoRecursive(tree, 6);
-	//insertBSTreeNoRecursive(tree, 40);
-	//BinaryTree_Order_Increase(Tree);
-	//
-	//TNode* node = BinaryTree_Search_LocateElement(Tree, 130);
-	//if (node)
-	//	std::cout << "Node Found" << std::endl;
-	//else
-	//	std::cout << "Node Not Found" << std::endl;
+	BinaryTree_Search_Insert(Tree, 2);
+	BinaryTree_Search_Insert(Tree, 1);
+	BinaryTree_Search_Insert(Tree, 3);
+	BinaryTree_Search_Insert(Tree, 6);
+	BinaryTree_Search_Insert(Tree, 5);
+	BinaryTree_Search_Insert(Tree, 7);
 
-	//void BinaryTree_Search_Delete(BTree * tree, DataType data);
-	//BinaryTree_Order_Increase(Tree);
+	BinaryTree_Order_Increase(Tree->root);
+	
+	TNode* node = BinaryTree_Search_LocateElement(Tree, 7);///查找测试
+	if (node)
+		std::cout << std::endl << "Node Found" << std::endl;
+	else
+		std::cout << std::endl << "Node Not Found" << std::endl;
+
+	BinaryTree_Search_Delete(Tree, 2);
+	BinaryTree_Order_Increase(Tree);
 	//BinaryTree_Destory(Tree);
 }
 
@@ -222,7 +216,7 @@ void TestBinaryTree()
 {
 	//BinaryTree();
 	//BinaryThreadTree();
-	BinarySearcha();
+	BinarySearch();
 }
 
 

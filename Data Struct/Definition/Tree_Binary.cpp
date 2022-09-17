@@ -186,6 +186,14 @@ TNode* BinaryTree_CreateNode(std::string name)
 	n->name = name;
 	return n;
 }
+TNode* BinaryTree_CreateNode(DataType data)
+{
+	TNode* n = new TNode;
+	n->left = n->right = nullptr;
+	n->data = data;
+	return n;
+}
+
 
 void BinaryTree_Insert(BTree* tree, TNode* parent, Direction pos, TNode* node)
 {
@@ -206,9 +214,19 @@ void BinaryTree_Visit(TNode* node)
 		std::cout << "TreeNode is not exist" << std::endl;
 		exit(0);
 	}
-	
 }
-
+void BinaryTree_Visit_Data(TNode* node)
+{
+	if (node)
+	{
+		std::cout << node->data << " ";
+	}
+	else
+	{
+		std::cout << "TreeNode is not exist" << std::endl;
+		exit(0);
+	}
+}
 
 void BinaryTree_Traversal_Level(BTree* tree)
 {
@@ -245,6 +263,15 @@ void BinaryTree_Traversal_Inorder(TNode* node)
 		BinaryTree_Traversal_Inorder(node->left);//L
 		BinaryTree_Visit(node);//D
 		BinaryTree_Traversal_Inorder(node->right);//R
+	}
+}
+void BinaryTree_Traversal_Inorder_Data(TNode* node)
+{
+	if (node)
+	{
+		BinaryTree_Traversal_Inorder_Data(node->left);//L
+		BinaryTree_Visit_Data(node);//D
+		BinaryTree_Traversal_Inorder_Data(node->right);//R
 	}
 }
 
