@@ -7,6 +7,7 @@
 #include "API/Liner_Queue.h"
 #include "API/Tree_Binary.h"
 #include "API/Tree_Binary_Thread.h"
+#include "API/Tree_Binary_Search.h"
 
 
 
@@ -136,9 +137,9 @@ void BinaryTree()
 	std::cout << std::endl << "DLR：";
 	BinaryTree_Traversal_Preorder_NoneRecursion(Tree->root);
 	std::cout << std::endl << "LDR：";
-	BinaryTree_Traversal_Inorder_NoneRecursion(Tree->root);
+	BinaryTree_Traversal_Inorder_NonRecursive(Tree->root);
 	std::cout << std::endl << "LRD：";
-	BinaryTree_Traversal_Postorder_NoneRecursion(Tree->root);
+	BinaryTree_Traversal_Postorder_NonRecursive(Tree->root);
 
 	std::cout << std::endl << std::endl << "递归：";
 	std::cout << std::endl << "DLR：";
@@ -184,10 +185,44 @@ void BinaryThreadTree()
 	BinaryTree_Destory(Tree);
 }
 
+void BinarySearcha()
+{
+	BTree* Tree = new BTree;
+	TNode* a = BinaryTree_CreateNode("A");
+	TNode* b = BinaryTree_CreateNode("B");
+	TNode* c = BinaryTree_CreateNode("C");
+	TNode* d = BinaryTree_CreateNode("D");
+	TNode* e = BinaryTree_CreateNode("E");
+	TNode* f = BinaryTree_CreateNode("F");
+	TNode* g = BinaryTree_CreateNode("G");
+	TNode* h = BinaryTree_CreateNode("H");
+	TNode* k = BinaryTree_CreateNode("K");
+
+	//insertBSTreeNoRecursive(tree, 8);
+	//insertBSTreeNoRecursive(tree, 10);
+	//insertBSTreeNoRecursive(tree, 20);
+	//insertBSTreeNoRecursive(tree, 30);
+	//insertBSTreeNoRecursive(tree, 6);
+	//insertBSTreeNoRecursive(tree, 40);
+	//BinaryTree_Order_Increase(Tree);
+	//
+	//TNode* node = BinaryTree_Search_LocateElement(Tree, 130);
+	//if (node)
+	//	std::cout << "Node Found" << std::endl;
+	//else
+	//	std::cout << "Node Not Found" << std::endl;
+
+	//void BinaryTree_Search_Delete(BTree * tree, DataType data);
+	//BinaryTree_Order_Increase(Tree);
+	//BinaryTree_Destory(Tree);
+}
+
+
 void TestBinaryTree()
 {
-	BinaryTree();
-	BinaryThreadTree();
+	//BinaryTree();
+	//BinaryThreadTree();
+	BinarySearcha();
 }
 
 
@@ -200,6 +235,7 @@ void main()
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
 	TestBinaryTree();//完毕
+	
 }
 
 

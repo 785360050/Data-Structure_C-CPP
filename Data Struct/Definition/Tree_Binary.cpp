@@ -179,9 +179,9 @@ void BinaryTree_Destory(BTree* tree)
 	}
 }
 
-TreeNode* BinaryTree_CreateNode(std::string name )
+TNode* BinaryTree_CreateNode(std::string name)
 {
-	TreeNode* n = new TreeNode;
+	TNode* n = new TNode;
 	n->left = n->right = nullptr;
 	n->name = name;
 	return n;
@@ -288,7 +288,7 @@ void BinaryTree_Traversal_Preorder_NoneRecursion(TNode* node)
 	}
 }
 
-void BinaryTree_Traversal_Inorder_NoneRecursion(TNode* node)
+void BinaryTree_Traversal_Inorder_NonRecursive(TNode* node)
 {
 	/// <summary>
 	/// 利用顺序栈实现递归特性，递归在栈上分配空间，非递归的栈在堆上分配空间
@@ -319,7 +319,7 @@ void BinaryTree_Traversal_Inorder_NoneRecursion(TNode* node)
 	}
 }
 
-void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node)
+void BinaryTree_Traversal_Postorder_NonRecursive(TNode* node)
 {
 	/// <summary>
 	/// 利用两个栈实现递归特性，s1记录每个子树的头节点，s2记录头节点的左右孩子
@@ -347,42 +347,5 @@ void BinaryTree_Traversal_Postorder_NoneRecursion(TNode* node)
 	TStack_Destroy(s1);
 	TStack_Destroy(s2);
 }
-
-
-
-/*线索二叉树
-ThreadNode* BinaryTree_CreateNode_Thread(std::string name)
-{
-	ThreadNode* tnode = new ThreadNode;
-	tnode->data = 0;
-	tnode->Thread_Left = tnode->Thread_Right = false;
-	tnode->name = name;
-	return tnode;
-}
-//BinaryTree_Destory
-
-void BinaryTree_Insert_Thread(BTree* tree, ThreadNode* parent, Direction pos, ThreadNode* node)
-{
-	
-}
-//访问node节点
-void BinaryTree_Visit_Thread(ThreadNode* node)
-{
-	if (node)
-	{
-		std::cout << node->name << " ";
-	}
-	else
-	{
-		std::cout << "TreeNode is not exist" << std::endl;
-		exit(0);
-	}
-}
-
-void BinaryTree_Modify_ThreadTree(ThreadNode* node);
-
-void BinaryTree_Traversal_Thread_Inorder(ThreadNode* node);
-
-*/
 
 

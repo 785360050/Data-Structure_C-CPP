@@ -39,6 +39,9 @@
     <ClCompile Include="C main .cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Definition\Tree_Binary_Search.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API\Global Variables.h">
@@ -60,6 +63,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="API\Tree_Binary_Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="API\Tree_Binary_Search.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
