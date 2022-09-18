@@ -85,14 +85,15 @@ Files in Github
 
 
 
-# Binary Tree
-## Test Case
+# Test Case
+## Binary Tree
 ![二叉树遍历示例树](https://i.imgur.com/mOViysT.png)
 
 ## Thread Tree
 Currently only Inorder Traversal is available.
 
-
+## Binary Search Tree
+![二叉搜索树案例](https://i.imgur.com/pMzjRuA.png)
 
 
 
