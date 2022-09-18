@@ -206,9 +206,9 @@ void BinarySearch()
 	else
 		std::cout << std::endl << "Node Not Found" << std::endl;
 
-	BinaryTree_Search_Delete(Tree, 2);
-	BinaryTree_Order_Increase(Tree);
-	//BinaryTree_Destory(Tree);
+	BinaryTree_Search_Delete(Tree->root, 2);///可能有缺陷
+	BinaryTree_Order_Increase(Tree->root);
+	BinaryTree_Destory(Tree);
 }
 
 
