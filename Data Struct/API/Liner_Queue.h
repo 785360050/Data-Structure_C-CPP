@@ -1,8 +1,10 @@
 #pragma once
+
+#include "Global Variables.h"
 #include <iostream>
 
 
-#define maxsize 10
+
 typedef int DataType;
 struct SeqQueue
 {

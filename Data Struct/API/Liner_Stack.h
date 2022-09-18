@@ -1,15 +1,16 @@
 #pragma once
 
+#include "Global Variables.h"
 
 #define 链栈	//[顺序栈/链栈]
 #define 顺序栈
 
-typedef int DataType;
+
 #ifdef 顺序栈
 //递增满栈(top=0栈空)
 
 //TODO 仅实现顺序栈，且用int的top访问data数组，可用TOP指针
-#define StackSize 10
+
 struct SeqStack
 {
 	DataType data[StackSize];
