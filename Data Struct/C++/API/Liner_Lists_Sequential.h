@@ -16,6 +16,16 @@ private:///头节点
 	int length;	//当前表长
 	int maxsize;//最大容量
 
+private:
+	void Expand()
+	{
+		DataType* temp = (DataType*)malloc(sizeof(DataType) * maxsize);
+		memcpy(temp, head, sizeof(DataType) * maxsize);
+		Destory();
+		Init(maxsize * 2);
+		memcpy(head, temp, sizeof(DataType) * maxsize);
+
+	}
 public:
 	//初始化表头
 	Sequential_List()
@@ -50,6 +60,8 @@ public:
 				std::cout << "List insert failed: Position out of range" << std::endl;
 			//exit(0);
 		}
+		if (length >= maxsize)
+			Expand();
 		/// 从后往前，把当前索引向后搬
 		for (int index = Index(length); Index(pos) <= index; index--)
 			head[index + 1] = head[index];

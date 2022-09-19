@@ -246,8 +246,8 @@ void Test_C()
 void TestSeqList()
 {
 	Sequential_List<int> a;
-	a.Init(10);
-	a.Show("初始化10个元素空间的顺序表后");
+	a.Init(5);
+	a.Show("初始化5个元素空间的顺序表后");
 
 	for (int i = 1; i <= 5; i++)
 		a.InsertElement(i, i);
