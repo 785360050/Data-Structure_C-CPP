@@ -253,8 +253,13 @@ void TestSeqList()
 		a.InsertElement(i, i);
 	a.Show("插入5个元素后");
 	a.InsertElement(2, 9);
-	a.Show("第二个元素插入9后");
+	a.Show("第二个位置插入9后，检测到存储空间已满，扩展空间");
 	
+	std::cout << std::endl;
+	a.InsertElement(20, 20);
+	a.Show("第20个非法位置插入20后");
+
+	std::cout << std::endl;
 	a.Update(2, 999);
 	a.Show("第二个元素改为999后");
 

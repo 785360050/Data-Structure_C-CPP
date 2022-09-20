@@ -17,14 +17,16 @@ private:///头节点
 	int maxsize;//最大容量
 
 private:
+	//扩展空间为2倍
 	void Expand()
-	{
+	{///重新申请2倍的空间，移动原有数据至该空间
 		DataType* temp = (DataType*)malloc(sizeof(DataType) * maxsize);
-		memcpy(temp, head, sizeof(DataType) * maxsize);
-		Destory();
-		Init(maxsize * 2);
-		memcpy(head, temp, sizeof(DataType) * maxsize);
-
+		if (temp)
+			memcpy(temp, head, sizeof(DataType) * maxsize);
+		Destory();///释放空间
+		maxsize *= 2;
+		Init(maxsize);///申请2倍空间
+		memcpy(head, temp, sizeof(DataType) * maxsize/2);
 	}
 public:
 	//初始化表头
@@ -44,24 +46,19 @@ public:
 
 	//在顺序表的第pos个位置上插入数据元素elem
 	void InsertElement(int pos, DataType elem)
-	{
+	{///n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
 		try
 		{
-			//if (length >= maxsize)
-			//	throw 1;
 			if (pos<0 || pos>length + 1)
 				throw 2;
 		}
-		catch (int x)
+		catch (...)
 		{
-			if (x == 1)
-			//	std::cout << "List insert failed: SeqList is Full" << std::endl;
-			if (x == 2)
-				std::cout << "List insert failed: Position out of range" << std::endl;
-			//exit(0);
+			std::cout << "List insert failed: Position out of range" << std::endl;
+			return;
 		}
 		if (length >= maxsize)
-			Expand();
+			Expand();///空间扩展为2倍
 		/// 从后往前，把当前索引向后搬
 		for (int index = Index(length); Index(pos) <= index; index--)
 			head[index + 1] = head[index];
@@ -96,8 +93,6 @@ public:
 	//{
 	//	Delete this;
 	//}
-
-
 };
 
 
