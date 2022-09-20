@@ -263,6 +263,11 @@ void TestSeqList()
 	a.Update(2, 999);
 	a.Show("第二个元素改为999后");
 
+	int del;
+	a.Delete(2, del);
+	a.Show("删除第二个元素后");
+	std::cout << "删除的第二个元素为:" << del << std::endl;
+
 	a.Destory();
 }
 

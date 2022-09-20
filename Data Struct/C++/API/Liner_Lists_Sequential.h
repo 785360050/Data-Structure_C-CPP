@@ -3,6 +3,7 @@
 
 //#include "Object.h"
 
+//序号转为下标索引
 static int Index(int num)
 {
 	return num - 1;
@@ -65,8 +66,15 @@ public:
 		head[Index(pos)] = elem;
 		length++;
 	}
-	//删除链表List第pos个位置上的元素，返回元素值
-	DataType Delete(Sequential_List* List, int pos);
+	//删除链表List第pos个位置上的元素，返回给元素elem
+	void Delete(int pos, DataType& elem)
+	{
+		elem = head[Index(pos)];
+		for (int i = Index(pos); i <= Index(length) - 1; i++)
+			head[i] = head[i + 1];
+		head[length] = 0;
+		length--;
+	}
 	//修改链表List第pos个位置上的元素为elem
 	void Update(int pos, DataType elem)
 	{
