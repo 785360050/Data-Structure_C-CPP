@@ -20,13 +20,22 @@ It's a normalized coding style project that might be mied by c++ grammer in C pr
 ### Using Tool: Visual Studio 2022
 
 Files in Github 
-|File/Folder name | describtion||
+> Non Visual Studio Users can get started by main.cpp and C or C++  
+
+|File/Folder name | describtion|Path|
 |:-:|:-:|:-:|
 |C| place where store C codes |Data Struct/C |
 |C++|place where store C++ codes |Data Struct/C++|
 |API| place where store .h files |Annotations help you call functions|
 |Definition|place where store C codes |Specific codes how function runs
-|Data Struct.sln| File Starts all codes(**Enterance**) |
+|main.cpp|**Standard Enterance**|Data Struct/main.cpp|
+|Data Struct.sln| **VS Enterance** |
+
+
+##  `C++ Details`
+- [Class Diagram](#class-diagram)
+- [Structure Storage](#memory-structure)
+
 
 ## main.cpp
 >    you can control wheather C or C++ Data Structure
@@ -47,7 +56,7 @@ Files in Github
 - //完毕 only refers functions are basically tested, it may well be something wrong when modifying them.
 - So I reccommend you commit in issues , even commit updates.
 - Hope it helps your study :D
-- 项目->右键属性->C/C++ -> 命令行，添加 /utf-8，采用utf-8来编译
+
 
 #### Basic Knowledege
 * baisc print function in **C** is printf while I used std::cout in **C++** instead all the times
@@ -95,7 +104,32 @@ Currently only Inorder Traversal is available.
 ## Binary Search Tree
 ![二叉搜索树案例](https://i.imgur.com/pMzjRuA.png)
 
+# Memory Structure
+## Sequentence List
+![顺序表](https://i.imgur.com/lOkHXih.png)
 
+
+
+# Class Diagram
+```mermaid
+classDiagram
+class Sequentice_List{
+    - head
+    - int length
+    - int maxsize
+    - void Expand()
+	+ Sequential_List()
+	+ void Init(int maxsize)
+	+ void InsertElement(int pos, DataType elem)
+	+ void Delete(int pos, DataType& elem)
+	+ void Update(int pos, DataType elem)
+	+ void Show(const char* string)
+	+ void Destory()
+}
+
+```
+
+# [Top](#executable-data-structure-code-for-cc)
 
 
 
