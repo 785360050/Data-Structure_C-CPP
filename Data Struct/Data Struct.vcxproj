@@ -137,6 +137,7 @@
     <ClCompile Include="C\Definition\Tree_Binary.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Search.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_AVL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C++\API\Liner_Lists_Sequential.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="C\API\Tree_Binary.h" />
     <ClInclude Include="C\API\Tree_Binary_Thread.h" />
     <ClInclude Include="C\API\Tree_Binary_Search.h" />
+    <ClInclude Include="C\API\Tree_Binary_AVL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

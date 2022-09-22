@@ -42,6 +42,9 @@
     <ClCompile Include="C\Definition\Tree_Binary_Search.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Definition\Tree_Binary_AVL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h">
@@ -69,6 +72,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\API\Liner_Lists_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\API\Tree_Binary_AVL.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 
-//#define C
-#define CPP
+#define C
+//#define CPP
 
 #ifdef C
 ///C
@@ -12,6 +12,7 @@
 #include "C/API/Tree_Binary.h"
 #include "C/API/Tree_Binary_Thread.h"
 #include "C/API/Tree_Binary_Search.h"
+#include "C/API/Tree_Binary_AVL.h"
 
 
 ///C function
@@ -214,13 +215,28 @@ void BinarySearch()
 	BinaryTree_Order_Increase(Tree->root);
 	BinaryTree_Destory(Tree);
 }
-
+void BinarySearch_AVL()
+{
+	BinaryTree_AVL* Tree = BinaryTree_Init_Root_AVL();
+	BinaryTree_Insert_AVL(Tree, 8);
+	BinaryTree_Insert_AVL(Tree, 4);
+	BinaryTree_Insert_AVL(Tree, 2);
+	BinaryTree_Insert_AVL(Tree, 6);
+	BinaryTree_Insert_AVL(Tree, 9);
+	//std::cout << Tree->num << std::endl;
+	BinaryTree_Traversal_Inorder_AVL(Tree->root);
+	BinaryTree_AVL_Delete(Tree, Tree->root, 8);
+	std::cout << std::endl;
+	BinaryTree_Traversal_Inorder_AVL(Tree->root);
+	BinaryTree_Destory(Tree);
+}
 
 void TestBinaryTree()
 {
 	//BinaryTree();
 	//BinaryThreadTree();
-	BinarySearch();
+	//BinarySearch();
+	BinarySearch_AVL();
 }
 
 void Test_C()
@@ -281,8 +297,8 @@ void Test_CPP()
 
 void main()
 {
-	//Test_C();
-	Test_CPP();
+	Test_C();
+	//Test_CPP();
 }
 
 
