@@ -1,7 +1,7 @@
 ﻿#include <iostream>
-
-#define C
-//#define CPP
+#include <vector>
+//#define C
+#define CPP
 
 #ifdef C
 ///C
@@ -256,8 +256,8 @@ void Test_C()
 ///C++
 
 //#include "C++/API/Object.h"
-#include "C++/API/Liner_Lists_Sequential.h"
-
+#include "C++/API/Liner_List_Sequential.h"
+#include "C++/API/Liner_List_Link.h"
 
 void TestSeqList()
 {
@@ -287,9 +287,29 @@ void TestSeqList()
 	a.Destory();
 }
 
+void TestLinkList()
+{///在堆上而不是栈上新建链表节点(不用构造函数新建)
+	List_SingleLinked<int>* L=new List_SingleLinked<int>;
+	L->List_Init();
+	for (int i = 1; i <= 5; i++)
+		L->Insert_Front(i);
+	Node_SingleLinked<int>* pri = L->Element_Prior(L->Element_Locate(2));
+	Node_SingleLinked<int>* next = L->Element_Next(L->Element_Locate(2));
+	std::cout << pri->element << next->element << std::endl;
+	L->Element_Delete(2);
+	L->List_Show("删除第2个节点后：");
+	L->Element_Insert(2, 2);
+	L->List_Show("删除第2个节点元素2后：");
+	L->List_Destroy();
+
+
+}
+
 void Test_CPP()
 {
-	TestSeqList();
+	//TestSeqList();
+	TestLinkList();
+	
 }
 
 #endif // CPP
@@ -297,8 +317,8 @@ void Test_CPP()
 
 void main()
 {
-	Test_C();
-	//Test_CPP();
+	//Test_C();
+	Test_CPP();
 }
 
 
