@@ -1,7 +1,9 @@
 ﻿#include <iostream>
-#include <vector>
-//#define C
-#define CPP
+
+
+
+#define C
+//#define CPP
 
 #ifdef C
 ///C
@@ -13,6 +15,7 @@
 #include "C/API/Tree_Binary_Thread.h"
 #include "C/API/Tree_Binary_Search.h"
 #include "C/API/Tree_Binary_AVL.h"
+#include "C/API/Tree_MergeFind_Set.h"
 
 
 ///C function
@@ -239,6 +242,37 @@ void TestBinaryTree()
 	BinarySearch_AVL();
 }
 
+void TestMergeFindSet()
+{
+	int n = 5;
+	DataType data[5] = { 0,1,2,3,4 };
+
+	///——————————————————QucikFind
+	MFSet_QuickFind* set_QF = Set_Create_QuickFind(n);
+	Set_Init(set_QF, data, n);
+	Merge(set_QF, 0, 2);
+	Merge(set_QF, 4, 2);
+	std::cout << Find(set_QF, 0, 2) << std::endl;
+	std::cout << Find(set_QF, 1, 2) << std::endl;
+	Set_Show(set_QF);
+	Set_Destroy(set_QF);
+
+	///———————————————————QuickMerge
+	MFSet_QuickMerge* set_QM = Set_Create_QuickMerge(n);
+	Set_Init(set_QM, data, n);
+	Set_Show(set_QM);
+	Merge(set_QM, 0, 2);
+	Merge(set_QM, 4, 2);
+	Merge(set_QM, 1, 3);
+	std::cout << Find(set_QM, 0, 2) << std::endl;
+	std::cout << Find(set_QM, 1, 2) << std::endl;
+	Set_Show(set_QM);
+	std::cout << "RootIndex(2)= " << RootIndex(set_QM, 2) << std::endl;
+	std::cout << "RootIndex(2)= " << RootIndex_Optimized(set_QM, 2) << std::endl;
+	Set_Destroy(set_QM);
+
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -247,7 +281,8 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	TestBinaryTree();//完毕
+	//TestBinaryTree();//完毕
+	TestMergeFindSet();
 }
 
 #endif // C
@@ -317,8 +352,8 @@ void Test_CPP()
 
 void main()
 {
-	//Test_C();
-	Test_CPP();
+	Test_C();
+	//Test_CPP();
 }
 
 
