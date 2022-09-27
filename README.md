@@ -1,5 +1,5 @@
 # Executable Data-Structure Code for C/C++
-## Inturoduction
+## Introduction
 > Hi there! This is Jevon 
 > - I'm new to all these thing including 
 >  **GitHub ,   Data Struct ,   Coding Language C and C++**  

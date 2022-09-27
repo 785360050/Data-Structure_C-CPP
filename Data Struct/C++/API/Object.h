@@ -38,6 +38,36 @@ struct Liner_Structure// :public DataStructure
 };///precursor node
 
 template <typename DataType>
+class Liner_List
+{
+	//初始化线性表
+	virtual void List_Init() = 0;
+	//销毁线性表
+	virtual void List_Destroy() = 0;
+	//清空线性表
+	virtual void List_Clear() = 0;
+	//判断是否表空
+	virtual void List_CheckEmpty() = 0;
+	//返回表长(元素个数)
+	virtual void List_GetLenghth() = 0;
+	//返回第pos个元素的元素值
+	virtual void List_GetElement() = 0;
+	//显示线性表所有信息
+	virtual void List_Show() = 0;
+	//定位并返回元素值为element的元素
+	virtual void Element_Locate() = 0;
+	//返回目标元素的前驱
+	virtual void Element_Prior() = 0;
+	//返回目标元素的后继
+	virtual void Element_Next() = 0;
+	//插入元素
+	virtual void Element_Insert() = 0;
+	//删除元素
+	virtual void Element_Delete() = 0;
+
+};
+
+template <typename DataType>
 struct Stack
 {
 	//初始化栈
@@ -126,7 +156,38 @@ public:
 
 class Graph// :public DataStructure
 {
-
+	/// <summary>
+	/// 数据对象：Vertex
+	///		顶点集合，具有相同特性的数据元素的集合
+	/// 数据关系：Vertex Arc ???
+	/// </summary>
+	Graph();
+	//初始化图
+	virtual void Graph_Create() = 0;
+	//销毁图
+	virtual void Graph_Destroy() = 0;
+	//返回节点元素值
+	virtual void Graph_GetVertex() = 0;
+	//返回顶点vertex的邻接顶点
+	virtual void Graph_GetAdjacentVertex_First() = 0;
+	//返回顶点vertex的下一个邻接节点
+	virtual void Graph_GetAdjacentVertex_Next() = 0;
+	//深度优先遍历
+	virtual void Graph_Traverse_DFS() = 0;
+	//广度优先遍历
+	virtual void Graph_Traverse_BFS() = 0;
+	//定位并返回顶点v
+	virtual void Vertex_Locate() = 0;
+	//设置元素vertex值为data
+	virtual void Vertex_Set() = 0;
+	//插入顶点
+	virtual void Vertex_Insert() = 0;
+	//删除顶点
+	virtual void Vertex_Delete() = 0;
+	//对两个顶点添加弧
+	virtual void Arc_Insert() = 0;
+	//删除两个顶点之间的弧
+	virtual void Arc_Delete() = 0;
 };
 
 
