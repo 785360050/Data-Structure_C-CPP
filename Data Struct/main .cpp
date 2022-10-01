@@ -16,7 +16,7 @@
 #include "C/API/Tree_Binary_Search.h"
 #include "C/API/Tree_Binary_AVL.h"
 #include "C/API/Tree_MergeFind_Set.h"
-
+#include "C/API/Graph_matrix.h"
 
 ///C function
 void TestSeqList()
@@ -273,6 +273,11 @@ void TestMergeFindSet()
 
 }
 
+void TestGraph()
+{
+
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -282,7 +287,8 @@ void Test_C()
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
-	TestMergeFindSet();
+	//TestMergeFindSet();
+	//TestGraph();
 }
 
 #endif // C
@@ -354,6 +360,7 @@ void main()
 {
 	Test_C();
 	//Test_CPP();
+	///std::cout << "撒旦大苏打";无法显示中文
 }
 
 

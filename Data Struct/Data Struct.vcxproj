@@ -105,6 +105,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +140,9 @@
     <ClCompile Include="C\Definition\Tree_Binary_Search.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
     <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp" />
+    <ClCompile Include="C\Definition\Graph_matrix.cpp" />
+    <ClCompile Include="C\Definition\Graph_AcrossLinker.cpp" />
+    <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
     <ClCompile Include="main .cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +156,9 @@
     <ClInclude Include="C\API\Tree_Binary_Search.h" />
     <ClInclude Include="C\API\Tree_Binary_Thread.h" />
     <ClInclude Include="C\API\Tree_MergeFind_Set.h" />
+    <ClInclude Include="C\API\Graph_matrix.h" />
+    <ClInclude Include="C\API\Graph_AcrossLinker.h" />
+    <ClInclude Include="C\API\Graph_AdjacencyList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
