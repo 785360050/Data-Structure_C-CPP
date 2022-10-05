@@ -1,7 +1,43 @@
 #pragma once
 
-#include "Object.h"
+
 #include <iostream>
+
+#include "Liner_List_ADT.h"
+
+//链式存储结构模板
+template <typename NodeType, typename DataType>
+struct Liner_Structure:public Liner_List<DataType>
+{
+	//初始化线性表
+	virtual void List_Init(int maxsize) = 0;
+	//清空线性表
+	virtual void List_Clear() = 0;
+	//销毁线性表
+	virtual void List_Destroy() = 0;
+	//判断线性表是否为空
+	virtual bool List_CheckEmpty() = 0;
+	//求当前表长度
+	virtual int List_GetLength() = 0;
+	//返回第pos个元素的元素值
+	virtual DataType List_GetElement(int pos) = 0;
+	//显示线性表所有内容
+	virtual void List_Show(const char* string) = 0;
+
+	//定位节点
+	virtual NodeType* Element_Locate(int pos) = 0;
+	virtual NodeType* Element_Prior(const NodeType* const node) = 0;
+	virtual NodeType* Element_Next(const NodeType* const node) = 0;
+	virtual void Element_Insert(int pos, DataType element) = 0;
+	virtual DataType Element_Delete(int pos) = 0;
+
+
+};
+///precursor node == prior node
+
+
+
+
 
 //单链节点
 template<typename DataType>
@@ -19,34 +55,69 @@ public:
 	}
 };
 
+
+
 //单链表(头节点)
 template<typename DataType>
-class List_SingleLinked:public Liner_Structure<Node_SingleLinked<int>,int>
+class List_SingleLinked:public Liner_Structure<Node_SingleLinked<DataType>, DataType>
 {
 private:
 	Node_SingleLinked<DataType>* front;///模板型成员变量
 	int length;
-public:
+public:///链表操作
 	//初始化头节点信息，存放链表信息
-	void List_Init() override
+	void List_Init(int maxsize) override
 	{
 		length = 0;
 		front = NULL;
+		for (int i = 0; i < maxsize; i++)
+		{///循环创建maxsize个节点插入链表
+			Insert_Front(0);
+		}
 	}
-	//清空所有表节点
+	//重置所有元素值为0
 	void List_Clear() override
 	{
-		while (front)
+		//while (front)
+		//{
+		//	Node_SingleLinked<DataType>* temp = front;
+		//	front = front->next;
+		//	delete temp;
+		//}
+		try
 		{
-			Node_SingleLinked<DataType>* temp = front;
-			front = front->next;
-			delete temp;
+			if (!front)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "List is not exist" << std::endl;
+			return;
+		}
+		Node_SingleLinked<DataType>* node = front;
+		for (int i = 1; i <= length; i++)
+		{
+			node->element = 0;
+			node = node->next;
 		}
 	}
 	//释放整个表
 	void List_Destroy() override
-	{
-		List_Clear();
+	{///销毁链表后不可访问
+		if (length > 0)
+		{
+			Node_SingleLinked<DataType>* list = front;
+			Node_SingleLinked<DataType>* del;
+			while (list->next != NULL)
+			{
+				del = list;
+				list = list->next;
+				delete del;
+			}
+			delete list;
+		}
+
+		front = nullptr;
 		delete this;
 	}
 	//检查链表是否非空
@@ -61,6 +132,24 @@ public:
 	{
 		return length;
 	}
+	//返回第pos个元素的元素值
+	DataType List_GetElement(int pos) override
+	{
+		try
+		{
+			if (pos<1 || pos>this->length)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Position is not exist" << std::endl;
+			exit(0);
+		}
+		Node_SingleLinked<DataType>* node = this->front;
+		for (int i = 1; i <= Index(pos); i++)
+			node = node->next;
+		return node->element;
+	}
 	//显示整个链表
 	void List_Show(const char* string) override
 	{
@@ -69,10 +158,11 @@ public:
 			<< "[length]: " << length << std::endl
 			<< "Head->";
 		for (int index = 1; index <= length; index++)
-			std::cout << '[' << index << ':' << Element_Show(Element_Locate(index)) << "]->";
+			std::cout << '[' << index << ':' << List_GetElement(index) << "]->";
 		std::cout << "NULL\n";
 	}
 	//定位并返回单链表第pos个元素节点
+public:///元素操作
 	Node_SingleLinked<DataType>* Element_Locate(int pos) override
 	{
 		try
@@ -129,20 +219,6 @@ public:
 	{
 		return node->next;
 	}
-	//单链表头插法
-	void Insert_Front(DataType element)
-	{
-		Node_SingleLinked<DataType>* node = new Node_SingleLinked<DataType>;
-		node->Init(element);
-		if (front)
-		{
-			node->next = front;
-			front = node;
-		}
-		else
-			front = node;
-		length++;
-	}
 	//在单链表第pos位置插入新建的元素element
 	void Element_Insert(int pos, DataType element) override
 	{
@@ -160,6 +236,7 @@ public:
 		p->Init(element);
 		if (pos == 1)
 		{
+			p->next = front;
 			front = p;
 			length++;
 		}
@@ -173,29 +250,34 @@ public:
 		}
 	}
 	//删除链表L的第pos个元素节点
-	void Element_Delete(int pos) override
+	DataType Element_Delete(int pos) override
 	{
 		Node_SingleLinked<DataType>* node = Element_Locate(pos - 1);
 		Node_SingleLinked<DataType>* del = node->next;
 		node->next = del->next;
+		DataType temp = del->element;
 		delete del;
 		length--;
+		return temp;
 	}
-	//返回当前节点node的元素值
-	DataType Element_Show(Node_SingleLinked<DataType>* node) override
+
+public:
+	//单链表头插法
+	void Insert_Front(DataType element)
 	{
-		try
+		Node_SingleLinked<DataType>* node = new Node_SingleLinked<DataType>;
+		node->Init(element);
+		if (front)
 		{
-			if (!node)
-				throw 1;
+			node->next = front;
+			front = node;
 		}
-		catch (...)
-		{
-			std::cout << "当前节点不存在" << std::endl;
-			exit(0);
-		}
-		return node->element;
+		else
+			front = node;
+		length++;
 	}
+
+	
 };
 
 

@@ -1,20 +1,27 @@
 #pragma once
 
 
+///线性表全局函数
+//位置序号 转为 下标索引
+static int Index(int num)
+{
+	return num - 1;
+}
 
+//线性表
 template <typename DataType>
 class Liner_List
 {///ADT 
-	//初始化线性表
+	//初始化线性表空间
 	virtual void List_Init(int maxsize) = 0;
 	//销毁线性表
 	virtual void List_Destroy() = 0;
-	//清空线性表
+	//重置线性表所有元素为0
 	virtual void List_Clear() = 0;
 	//判断是否表空
 	virtual bool List_CheckEmpty() = 0;
 	//返回表长(元素个数)
-	virtual int List_GetLenghth() = 0;
+	virtual int List_GetLength() = 0;
 	//返回第pos个元素的元素值
 	virtual DataType List_GetElement(int pos) = 0;
 	//显示线性表所有信息
@@ -23,15 +30,14 @@ class Liner_List
 	//插入元素
 	virtual void Element_Insert(int pos, DataType elem) = 0;
 	//删除元素
-	virtual void Element_Delete(int pos, DataType& elem) = 0;
+	virtual DataType Element_Delete(int pos) = 0;
 
-	/*
-	//定位并返回元素值为element的元素
-	virtual void Element_Locate() = 0;//链表
-	//返回目标元素的前驱
-	virtual void Element_Prior() = 0;//链表
-	//返回目标元素的后继
-	virtual void Element_Next() = 0;//链表
+	/*			链表派生
+	virtual NodeType* Element_Locate(int pos) = 0;
+	virtual NodeType* Element_Prior(const NodeType* const node) = 0;
+	virtual NodeType* Element_Next(const NodeType* const node) = 0;
+	virtual void Element_Insert(int pos, DataType element) = 0;
+	virtual DataType Element_Delete(int pos) = 0;
 	*/
 };
 

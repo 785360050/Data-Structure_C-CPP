@@ -4,11 +4,7 @@
 //#include "Object.h"
 #include "Liner_List_ADT.h"
 
-//位置序号 转为 下标索引
-static int Index(int num)
-{
-	return num - 1;
-}
+
 
 template <typename DataType>
 class Sequential_List:public Liner_List<DataType>
@@ -69,7 +65,7 @@ public:///表操作
 		return false;
 	}
 	//返回表长(元素个数)
-	int List_GetLenghth() override
+	int List_GetLength() override
 	{
 		return length;
 	}
@@ -122,13 +118,14 @@ public:///元素操作
 		length++;
 	}
 	//删除链表List第pos个位置上的元素，返回给元素elem
-	void Element_Delete(int pos, DataType& elem)
+	DataType Element_Delete(int pos)
 	{
-		elem = head[Index(pos)];
+		DataType elem = head[Index(pos)];
 		for (int i = Index(pos); i <= Index(length) - 1; i++)
 			head[i] = head[i + 1];
 		head[length] = 0;
 		length--;
+		return elem;
 	}
 	//修改链表List第pos个位置上的元素为elem
 	void Element_Update(int pos, DataType elem)

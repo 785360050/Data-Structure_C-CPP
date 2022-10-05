@@ -23,9 +23,6 @@
     <ClInclude Include="C++\Liner_List_Link.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Sequential.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\Liner_List_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>

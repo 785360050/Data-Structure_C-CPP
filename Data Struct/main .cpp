@@ -296,8 +296,6 @@ void Test_C()
 #ifdef CPP
 ///C++
 
-#include "C++/Object.h"
-#include "C++/Liner_List_ADT.h"
 #include "C++/Liner_List_Sequential.h"
 #include "C++/Liner_List_Link.h"
 void TestSeqList()
@@ -322,17 +320,17 @@ void TestSeqList()
 	L.List_Show("第二个元素改为999后");
 
 	int del;
-	L.Element_Delete(2, del);
+	del = L.Element_Delete(2);
 	L.List_Show("删除第二个元素后");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
 
 	std::cout << "获取第二个元素值:" << L.List_GetElement(2) << std::endl;
 	
 	std::cout << "判空 {0=F,1=T}:" << L.List_CheckEmpty() << std::endl;
-	std::cout << "当前表长：" << L.List_GetLenghth() << std::endl;
+	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 	L.List_Clear();
 	L.List_Show("清空后");
-	std::cout << "当前表长：" << L.List_GetLenghth() << std::endl;
+	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 
 	L.List_Destroy();
 }
@@ -340,16 +338,23 @@ void TestSeqList()
 void TestLinkList()
 {///在堆上而不是栈上新建链表节点(不用构造函数新建)
 	List_SingleLinked<int>* L = new List_SingleLinked<int>;
-	L->List_Init();
+	L->List_Init(5);
+	L->List_Show("初始化5个节点后：");
 	for (int i = 1; i <= 5; i++)
 		L->Insert_Front(i);
-	Node_SingleLinked<int>* pri = L->Element_Prior(L->Element_Locate(2));
-	Node_SingleLinked<int>* next = L->Element_Next(L->Element_Locate(2));
-	std::cout << pri->element << next->element << std::endl;
+	L->List_Show("头插法插入5个节点后：");
+	Node_SingleLinked<int>* pri = L->Element_Prior(L->Element_Locate(5));
+	std::cout << "第5个元素的前驱节点为: " << pri->element << std::endl;
+	Node_SingleLinked<int>* next = L->Element_Next(L->Element_Locate(5));
+	std::cout << "第5个元素的后继节点为: " << next->element << std::endl;
 	L->Element_Delete(2);
 	L->List_Show("删除第2个节点后：");
 	L->Element_Insert(2, 2);
-	L->List_Show("删除第2个节点元素2后：");
+	L->List_Show("在第2个节点插入元素2后：");
+	L->List_Clear();
+	L->List_Show("重置链表后：");
+	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
+	std::cout << "链表判空: " << L->List_CheckEmpty() << std::endl;
 	L->List_Destroy();
 
 
@@ -357,8 +362,8 @@ void TestLinkList()
 
 void Test_CPP()
 {
-	TestSeqList();
-	//TestLinkList();
+	//TestSeqList();
+	TestLinkList();
 
 }
 
