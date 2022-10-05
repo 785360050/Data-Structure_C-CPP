@@ -26,5 +26,14 @@
     <ClInclude Include="C++\Liner_List_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Liner_Stack_ADT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Stack_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_List_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

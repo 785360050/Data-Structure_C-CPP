@@ -298,6 +298,9 @@ void Test_C()
 
 #include "C++/Liner_List_Sequential.h"
 #include "C++/Liner_List_Link.h"
+#include "C++/Liner_Stack_Sequential.h"
+
+
 void TestSeqList()
 {
 	Sequential_List<int> L;
@@ -360,10 +363,34 @@ void TestLinkList()
 
 }
 
+void TestSequenceStack()
+{
+	Sequence_Stack<char> s;
+	s.Stack_Init(5);
+	s.Stack_Show("初始化5个单位的栈空间后：");
+	for (int i = 65; i < 70; i++)
+		s.Element_Push(i);
+	s.Stack_Show("压入5个元素后：");
+	//s.Stack_Clear();
+	std::cout << "当前栈顶元素为：" << s.Stack_GetTop() << std::endl;
+	std::cout << "当前栈长度为：" << s.Stack_GetLength() << std::endl;
+	std::cout << "栈判空：" << s.Stack_CheckEmpty() << std::endl;
+	while (s.Stack_GetLength() > 0)
+	{
+		std::cout << s.Element_Pop() <<"出栈" << std::endl;
+	}
+
+	std::cout << "栈判空：" << s.Stack_CheckEmpty() << std::endl;
+	s.Stack_Destroy();
+	s.Stack_Destroy();
+
+}
+
 void Test_CPP()
 {
 	//TestSeqList();
-	TestLinkList();
+	//TestLinkList();
+	TestSequenceStack();
 
 }
 
