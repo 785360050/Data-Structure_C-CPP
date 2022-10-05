@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include <iostream>
 
 //单链节点
 template<typename DataType>

@@ -2,8 +2,8 @@
 
 
 
-#define C
-//#define CPP
+//#define C
+#define CPP
 
 #ifdef C
 ///C
@@ -296,36 +296,36 @@ void Test_C()
 #ifdef CPP
 ///C++
 
-//#include "C++/API/Object.h"
-#include "C++/API/Liner_List_Sequential.h"
+#include "C++/API/Object.h"
+#include "C++/API/Liner_List_ADT.h"
+#include "C++/API/Liner_List_Sequential_CPP.h"
 #include "C++/API/Liner_List_Link.h"
-
 void TestSeqList()
 {
-	Sequential_List<int> a;
-	a.Init(5);
-	a.Show("初始化5个元素空间的顺序表后");
+	Sequential_List<int> L;
+	L.List_Init(5);
+	L.List_Show("初始化5个元素空间的顺序表后");
 
 	for (int i = 1; i <= 5; i++)
-		a.InsertElement(i, i);
-	a.Show("插入5个元素后");
-	a.InsertElement(2, 9);
-	a.Show("第二个位置插入9后，检测到存储空间已满，扩展空间");
+		L.Element_Insert(i, i);
+	L.List_Show("插入5个元素后");
+	L.Element_Insert(2, 9);
+	L.List_Show("第二个位置插入9后，检测到存储空间已满，扩展空间");
 	
 	std::cout << std::endl;
-	a.InsertElement(20, 20);
-	a.Show("第20个非法位置插入20后");
+	L.Element_Insert(20, 20);
+	L.List_Show("第20个非法位置插入20后");
 
 	std::cout << std::endl;
-	a.Update(2, 999);
-	a.Show("第二个元素改为999后");
+	L.Element_Update(2, 999);
+	L.List_Show("第二个元素改为999后");
 
 	int del;
-	a.Delete(2, del);
-	a.Show("删除第二个元素后");
+	L.Element_Delete(2, del);
+	L.List_Show("删除第二个元素后");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
 
-	a.Destory();
+	L.List_Destroy();
 }
 
 void TestLinkList()
@@ -348,8 +348,8 @@ void TestLinkList()
 
 void Test_CPP()
 {
-	//TestSeqList();
-	TestLinkList();
+	TestSeqList();
+	//TestLinkList();
 	
 }
 
@@ -358,8 +358,8 @@ void Test_CPP()
 
 void main()
 {
-	Test_C();
-	//Test_CPP();
+	//Test_C();
+	Test_CPP();
 	///std::cout << "撒旦大苏打";无法显示中文
 }
 
