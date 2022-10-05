@@ -45,7 +45,7 @@ public:///表操作
 		memset(this->head, 0, maxsize * sizeof(DataType));
 		this->maxsize = maxsize;
 	}
-	//清空线性表
+	//清空线性表(置0)
 	void List_Clear() override
 	{
 		try
@@ -76,7 +76,7 @@ public:///表操作
 	//返回第pos个元素的元素值
 	DataType List_GetElement(int pos) override
 	{
-		return head[pos];
+		return head[Index(pos)];
 	}
 	//显示顺序表List元素空间上的所有元素
 	void List_Show(const char* string) override
@@ -136,32 +136,6 @@ public:///元素操作
 		head[Index(pos)] = elem;
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

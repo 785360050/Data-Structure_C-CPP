@@ -309,6 +309,7 @@ void TestSeqList()
 	for (int i = 1; i <= 5; i++)
 		L.Element_Insert(i, i);
 	L.List_Show("插入5个元素后");
+
 	L.Element_Insert(2, 9);
 	L.List_Show("第二个位置插入9后，检测到存储空间已满，扩展空间");
 
@@ -324,6 +325,14 @@ void TestSeqList()
 	L.Element_Delete(2, del);
 	L.List_Show("删除第二个元素后");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
+
+	std::cout << "获取第二个元素值:" << L.List_GetElement(2) << std::endl;
+	
+	std::cout << "判空 {0=F,1=T}:" << L.List_CheckEmpty() << std::endl;
+	std::cout << "当前表长：" << L.List_GetLenghth() << std::endl;
+	L.List_Clear();
+	L.List_Show("清空后");
+	std::cout << "当前表长：" << L.List_GetLenghth() << std::endl;
 
 	L.List_Destroy();
 }
