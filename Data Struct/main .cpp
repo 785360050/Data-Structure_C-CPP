@@ -296,10 +296,10 @@ void Test_C()
 #ifdef CPP
 ///C++
 
-#include "C++/API/Object.h"
-#include "C++/API/Liner_List_ADT.h"
-#include "C++/API/Liner_List_Sequential_CPP.h"
-#include "C++/API/Liner_List_Link.h"
+#include "C++/Object.h"
+#include "C++/Liner_List_ADT.h"
+#include "C++/Liner_List_Sequential.h"
+#include "C++/Liner_List_Link.h"
 void TestSeqList()
 {
 	Sequential_List<int> L;
@@ -311,7 +311,7 @@ void TestSeqList()
 	L.List_Show("插入5个元素后");
 	L.Element_Insert(2, 9);
 	L.List_Show("第二个位置插入9后，检测到存储空间已满，扩展空间");
-	
+
 	std::cout << std::endl;
 	L.Element_Insert(20, 20);
 	L.List_Show("第20个非法位置插入20后");
@@ -330,7 +330,7 @@ void TestSeqList()
 
 void TestLinkList()
 {///在堆上而不是栈上新建链表节点(不用构造函数新建)
-	List_SingleLinked<int>* L=new List_SingleLinked<int>;
+	List_SingleLinked<int>* L = new List_SingleLinked<int>;
 	L->List_Init();
 	for (int i = 1; i <= 5; i++)
 		L->Insert_Front(i);
@@ -350,23 +350,34 @@ void Test_CPP()
 {
 	TestSeqList();
 	//TestLinkList();
-	
+
 }
 
 #endif // CPP
 
 
-void main()
+#include <Windows.h>
+///修改cmd编码方式
+static bool  SetEncode(int EncodeId = 936)
 {
-	//Test_C();
-	Test_CPP();
-	///std::cout << "撒旦大苏打";无法显示中文
+	/// <summary>
+	/// EncodeId 是代码页，设置它等于设置我们指定的编码格式。
+	///	默认936为unicode编码
+	/// SetConsoleCP() 设置控制台输入时使用的编码。
+	///	SetConsoleOutputCP() 设置控制台输出时使用的编码。
+	/// </summary>
+	/// <param name="EncodeId"></param>
+	/// <returns></returns>
+	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
 
-
-
-
-
+void main()
+{
+	SetEncode(65001);//设置控制台为utf-8编码格式
+	
+	//Test_C();
+	Test_CPP();
+}
 
 
 

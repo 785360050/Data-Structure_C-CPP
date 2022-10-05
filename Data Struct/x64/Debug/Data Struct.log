@@ -1,9 +1,1 @@
-﻿  Liner_List_Sequential_CPP.cpp
-main .obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Sequential_List<int>::Sequential_List<int>(void)" (??0?$Sequential_List@H@@QEAA@XZ)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl Sequential_List<int>::List_Init(int)" (?List_Init@?$Sequential_List@H@@UEAAXH@Z)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl Sequential_List<int>::List_Show(char const *)" (?List_Show@?$Sequential_List@H@@UEAAXPEBD@Z)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl Sequential_List<int>::List_Destroy(void)" (?List_Destroy@?$Sequential_List@H@@UEAAXXZ)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl Sequential_List<int>::Element_Insert(int,int)" (?Element_Insert@?$Sequential_List@H@@UEAAXHH@Z)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl Sequential_List<int>::Element_Delete(int,int &)" (?Element_Delete@?$Sequential_List@H@@UEAAXHAEAH@Z)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-main .obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl Sequential_List<int>::Element_Update(int,int)" (?Element_Update@?$Sequential_List@H@@QEAAXHH@Z)，函数 "void __cdecl TestSeqList(void)" (?TestSeqList@@YAXXZ) 中引用了该符号
-D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Struct.exe : fatal error LNK1120: 7 个无法解析的外部命令
+﻿  Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Struct.exe

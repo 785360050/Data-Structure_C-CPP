@@ -130,14 +130,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Definition\Liner_List_Link.cpp" />
-    <ClCompile Include="C++\Definition\Liner_List_Sequential_CPP.cpp" />
     <ClCompile Include="main .cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C++\API\Liner_List_ADT.h" />
-    <ClInclude Include="C++\API\Liner_List_Link.h" />
-    <ClInclude Include="C++\API\Liner_List_Sequential_CPP.h" />
+    <ClInclude Include="C++\Liner_List_ADT.h" />
+    <ClInclude Include="C++\Liner_List_Link.h" />
+    <ClInclude Include="C++\Liner_List_Sequential.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

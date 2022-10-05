@@ -18,21 +18,15 @@
     <ClCompile Include="main .cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="C++\Definition\Liner_List_Sequential_CPP.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C++\Definition\Liner_List_Link.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C++\API\Liner_List_Link.h">
+    <ClInclude Include="C++\Liner_List_Link.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\API\Liner_List_Sequential_CPP.h">
+    <ClInclude Include="C++\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\API\Liner_List_ADT.h">
+    <ClInclude Include="C++\Liner_List_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
