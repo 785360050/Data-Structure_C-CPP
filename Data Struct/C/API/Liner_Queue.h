@@ -26,7 +26,9 @@ void SeqQueue_Push(SeqQueue* SeqQueue, DataType data);
 //元素出队，返回数据元素
 DataType SeqQueue_Pop(SeqQueue* SeqQueue);
 
-
+/// <summary>
+/// 链式队列
+/// </summary>
 struct QueNode
 {
 	DataType data;

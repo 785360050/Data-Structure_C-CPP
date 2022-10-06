@@ -30,6 +30,16 @@ public:
 	//初始化队列
 	void Queue_Init(int maxsize) override
 	{//初始化为0
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Queue Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
 		element = new DataType[maxsize + 1];
 		memset(element, 0, sizeof(DataType) * (maxsize + 1) );
 		this->maxsize = maxsize;
@@ -165,6 +175,16 @@ private:
 public:
 	Sequence_Queue()
 	{
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Queue Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
 		front = rear = length = maxsize = full = 0;
 		element = nullptr;
 	}
