@@ -300,7 +300,7 @@ void Test_C()
 #include "C++/Liner_List_Link.h"
 #include "C++/Liner_Stack_Sequential.h"
 #include "C++/Liner_Stack_Linked.h"
-
+#include "C++/Liner_Queue_Sequential.h"
 
 void TestSeqList()
 {
@@ -401,12 +401,33 @@ void TestLinkStack()
 	s.Stack_Destroy();
 }
 
+void TestSeqQueue()
+{
+	Sequence_Queue<int> q;
+	q.Queue_Init(5);
+	q.Queue_Show("初始化5个队列空间后");
+	for (int i = 10; i < 15; i++)
+		q.Element_Enqueue(i);
+	q.Queue_Show("5个元素入队后");
+	std::cout << "当前队头元素为: " << q.Queue_GetHead() << std::endl;
+	std::cout << "当前队列长度为: " << q.Queue_Length() << std::endl;
+	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
+	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
+	q.Queue_Show("出队2个元素后：");
+	q.Queue_Clear();
+	q.Queue_Show("清空队列后");
+
+
+	q.Queue_Destroy();
+}
+
 void Test_CPP()
 {
 	//TestSeqList();
 	//TestLinkList();
 	//TestSequenceStack();
-	TestLinkStack();
+	//TestLinkStack();
+	TestSeqQueue();
 }
 
 #endif // CPP
