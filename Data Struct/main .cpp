@@ -299,6 +299,7 @@ void Test_C()
 #include "C++/Liner_List_Sequential.h"
 #include "C++/Liner_List_Link.h"
 #include "C++/Liner_Stack_Sequential.h"
+#include "C++/Liner_Stack_Linked.h"
 
 
 void TestSeqList()
@@ -337,7 +338,6 @@ void TestSeqList()
 
 	L.List_Destroy();
 }
-
 void TestLinkList()
 {///在堆上而不是栈上新建链表节点(不用构造函数新建)
 	List_SingleLinked<int>* L = new List_SingleLinked<int>;
@@ -382,16 +382,31 @@ void TestSequenceStack()
 
 	std::cout << "栈判空：" << s.Stack_CheckEmpty() << std::endl;
 	s.Stack_Destroy();
-	s.Stack_Destroy();
 
+}
+void TestLinkStack()
+{
+	Link_Stack<char> s;
+	int c = 'Z';
+	s.Stack_Init(5);
+	s.Stack_Show("初始化链栈空间最大为5");
+	for (int i = 0; i < 5; i++)
+		s.Element_Push(c--);
+	s.Stack_Show("插入5个元素后");
+	std::cout << "当前栈顶元素为：" << s.Stack_GetTop() << std::endl;
+	std::cout << "当前栈长度为：" << s.Stack_GetLength() << std::endl;
+	std::cout << "依次出栈" << std::endl;
+	while (!s.Stack_CheckEmpty())
+		std::cout << s.Element_Pop() << std::endl;
+	s.Stack_Destroy();
 }
 
 void Test_CPP()
 {
 	//TestSeqList();
 	//TestLinkList();
-	TestSequenceStack();
-
+	//TestSequenceStack();
+	TestLinkStack();
 }
 
 #endif // CPP

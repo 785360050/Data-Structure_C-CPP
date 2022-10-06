@@ -9,7 +9,7 @@
 
 template <typename DataType>
 class Sequence_Stack:public Stack<DataType>
-{///递增空栈
+{///空栈
 private:
 	int top;
 	int maxsize;

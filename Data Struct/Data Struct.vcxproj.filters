@@ -35,5 +35,8 @@
     <ClInclude Include="C++\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Liner_Stack_Linked.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
