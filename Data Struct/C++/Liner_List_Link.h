@@ -68,6 +68,16 @@ public:///链表操作
 	//初始化头节点信息，存放链表信息
 	void List_Init(int maxsize) override
 	{
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "List Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
 		length = 0;
 		front = NULL;
 		for (int i = 0; i < maxsize; i++)

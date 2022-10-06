@@ -38,6 +38,16 @@ public:///栈操作
 	//初始化栈空间，maxsize个元素(节点)空间
 	void Stack_Init(int maxsize) override
 	{
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
 		this->maxsize = maxsize;
 	}
 	//销毁栈

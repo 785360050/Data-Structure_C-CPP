@@ -446,7 +446,7 @@ void Test_CPP()
 	//TestSequenceStack();
 	//TestLinkStack();
 	//TestSeqQueue();
-	TestLinkQueue();
+	//TestLinkQueue();
 }
 
 #endif // CPP

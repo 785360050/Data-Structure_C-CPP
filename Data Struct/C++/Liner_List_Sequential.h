@@ -37,6 +37,16 @@ public:///表操作
 	//创建有maxsize个元素空间的顺序表，返回表首地址
 	void List_Init(int maxsize) override
 	{
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "List Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
 		head = new DataType[maxsize];
 		memset(this->head, 0, maxsize * sizeof(DataType));
 		this->maxsize = maxsize;

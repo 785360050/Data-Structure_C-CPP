@@ -175,6 +175,14 @@ private:
 public:
 	Sequence_Queue()
 	{
+		front = rear = length = maxsize = full = 0;
+		element = nullptr;
+	}
+
+public:
+	//初始化队列
+	void Queue_Init(int maxsize) override
+	{//初始化为0
 		try
 		{
 			if (maxsize < 1)
@@ -185,14 +193,6 @@ public:
 			std::cout << "Queue Init Failed: maxsize must be greater than 1" << std::endl;
 			return;
 		}
-		front = rear = length = maxsize = full = 0;
-		element = nullptr;
-	}
-
-public:
-	//初始化队列
-	void Queue_Init(int maxsize) override
-	{//初始化为0
 		element = new DataType[maxsize];
 		for (int i = 0; i < maxsize; i++)
 			element[i] = 0;
