@@ -47,5 +47,14 @@
     <ClInclude Include="C++\Liner_Queue_Linked.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Tree_ADT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Binary_Normal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Binary_ADT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

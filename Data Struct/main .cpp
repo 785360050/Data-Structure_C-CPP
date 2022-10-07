@@ -302,6 +302,7 @@ void Test_C()
 #include "C++/Liner_Stack_Linked.h"
 #include "C++/Liner_Queue_Sequential.h"
 #include "C++/Liner_Queue_Linked.h"
+#include "C++/Tree_Binary_Normal.h"
 
 
 void TestSeqList()
@@ -439,6 +440,76 @@ void TestLinkQueue()
 	q.Queue_Show("清空队列后");
 }
 
+void TestBinaryTree()
+{
+	Binary_Tree<bool> tree;
+
+
+	Node_BinaryTree<bool>* a = tree.Node_Create("A");
+	Node_BinaryTree<bool>* b = tree.Node_Create("B");
+	Node_BinaryTree<bool>* c = tree.Node_Create("C");
+	Node_BinaryTree<bool>* d = tree.Node_Create("D");
+	Node_BinaryTree<bool>* e = tree.Node_Create("E");
+	Node_BinaryTree<bool>* f = tree.Node_Create("F");
+	Node_BinaryTree<bool>* g = tree.Node_Create("G");
+	Node_BinaryTree<bool>* h = tree.Node_Create("H");
+	Node_BinaryTree<bool>* k = tree.Node_Create("K");
+	//Node_BinaryTree<bool>* i = tree.Node_Create("I");
+	
+	tree.Tree_Init(a);
+	tree.Node_Insert(b, a, left);
+	tree.Node_Insert(e, a, right);
+	tree.Node_Insert(c, b, right);
+	tree.Node_Insert(d, c, left);
+	tree.Node_Insert(f, e, right);
+	tree.Node_Insert(g, f, left);
+	tree.Node_Insert(h, g, left);
+	tree.Node_Insert(k, g, right);
+	//tree.Node_Insert(i, k, right);
+
+	std::cout << tree.Tree_GetDepth() << std::endl;
+
+	//std::cout << "LEVEL: ";
+	//tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());
+	//std::cout << std::endl;
+	std::cout << "DLR: ";
+	tree.Tree_Traverse_PreOrder(tree.Tree_GetRoot());
+	std::cout << std::endl;
+	std::cout << "LDR: ";
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
+	std::cout << std::endl;
+	std::cout << "LRD: ";
+	tree.Tree_Traverse_PostOrder(tree.Tree_GetRoot());
+	std::cout << std::endl;
+
+	tree.Tree_Show();
+
+	tree.Tree_Destroy();
+
+	//std::cout << "非递归：";
+	//std::cout << std::endl << "DLR：";
+	//BinaryTree_Traversal_Preorder_NoneRecursion(Tree->root);
+	//std::cout << std::endl << "LDR：";
+	//BinaryTree_Traversal_Inorder_NonRecursive(Tree->root);
+	//std::cout << std::endl << "LRD：";
+	//BinaryTree_Traversal_Postorder_NonRecursive(Tree->root);
+
+	//std::cout << std::endl << std::endl << "递归：";
+	//std::cout << std::endl << "DLR：";
+	//BinaryTree_Traversal_Preorder(Tree->root);
+	//std::cout << std::endl << "LDR：";
+	//BinaryTree_Traversal_Inorder(Tree->root);
+	//std::cout << std::endl << "LRD：";
+	//BinaryTree_Traversal_Postorder(Tree->root);
+	////std::cout << std::endl << "Level：";
+	////BinaryTree_Traversal_Level(Tree);
+	/////BUG
+	//std::cout << std::endl;
+	//BinaryTree_Destory(Tree);
+
+}
+
+
 void Test_CPP()
 {
 	//TestSeqList();
@@ -447,6 +518,7 @@ void Test_CPP()
 	//TestLinkStack();
 	//TestSeqQueue();
 	//TestLinkQueue();
+	TestBinaryTree();
 }
 
 #endif // CPP
@@ -473,6 +545,8 @@ void main()
 	
 	//Test_C();
 	Test_CPP();
+
+
 }
 
 
