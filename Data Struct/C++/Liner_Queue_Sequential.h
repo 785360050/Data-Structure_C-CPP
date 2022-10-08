@@ -225,6 +225,8 @@ public:
 	{
 		if (full == true)
 			return false;
+		if (length > 0)
+			return false;
 		return true;
 	}
 	//返回队列长度(元素个数)
@@ -299,10 +301,10 @@ public:
 		}
 		DataType x = element[front];
 		element[front] = 0;
-		front = (front + 1) % Index(maxsize);
+		front = (front + 1) % maxsize;
 		length--;
-
-		if (Queue_CheckFull())
+		
+		if (!Queue_CheckFull())
 			full = false;
 		return x;
 	}

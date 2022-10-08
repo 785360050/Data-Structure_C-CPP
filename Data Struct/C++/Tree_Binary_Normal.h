@@ -4,6 +4,7 @@
 
 
 #include <iostream>
+#include <queue>
 
 #include "Tree_Binary_ADT.h"
 #include "Liner_Queue_Sequential.h"
@@ -253,21 +254,42 @@ public:
 	//层次遍历二叉树
 	void Tree_Traverse_LevelOrder(Node_BinaryTree<DataType>* node)
 	{///队列实现层次遍历
-		Sequence_Queue<Node_BinaryTree<DataType>> q;//todo
-		q.Queue_Init(count);
-		q.Element_Enqueue(root);
-		int length = q.Queue_Length();
+//#define Standard_Queue	///标准模板库实现
+#define Queue	///自制的队列实现
+
+#ifdef Queue
+		Sequence_Queue<Node_BinaryTree<DataType>* >* q = new Sequence_Queue<Node_BinaryTree<DataType>* >;
+		q->Queue_Init(count);
+		q->Element_Enqueue(root);
+		int length = q->Queue_Length();
 		Node_BinaryTree<DataType>* v;
-		while (length > 0)
+		while ( q->Queue_Length() > 0)
 		{
-			v = q.Element_Dequeue();
+			v = q->Element_Dequeue();
 			Tree_Visit_Name(v);
 			if (v->left)
-				q.Element_Enqueue(v->left);
+				q->Element_Enqueue(v->left);
 			if (v->right)
-				q.Element_Enqueue(v->right);
+				q->Element_Enqueue(v->right);
 		}
-		q.Queue_Destroy();
+		q->Queue_Destroy();
+#endif // Queue
+
+#ifdef Standard_Queue	///std::queue
+		std::queue<Node_BinaryTree<DataType>* > q;
+		q.push(root);
+		Node_BinaryTree<DataType>* v;
+		while (!q.empty())
+		{
+			v = q.front();
+			q.pop();
+			Tree_Visit_Name(v);
+			if (v->left)
+				q.push(v->left);
+			if (v->right)
+				q.push(v->right);
+		}
+#endif
 	}
 	//访问节点名
 	void Tree_Visit_Name(Node_BinaryTree<DataType>* node)

@@ -469,9 +469,9 @@ void TestBinaryTree()
 
 	std::cout << tree.Tree_GetDepth() << std::endl;
 
-	//std::cout << "LEVEL: ";
-	//tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());
-	//std::cout << std::endl;
+	std::cout << "LEVEL: ";
+	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());
+	std::cout << std::endl;
 	std::cout << "DLR: ";
 	tree.Tree_Traverse_PreOrder(tree.Tree_GetRoot());
 	std::cout << std::endl;
