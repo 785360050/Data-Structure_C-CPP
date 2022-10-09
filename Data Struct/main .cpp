@@ -467,45 +467,34 @@ void TestBinaryTree()
 	tree.Node_Insert(k, g, right);
 	//tree.Node_Insert(i, k, right);
 
-	std::cout << tree.Tree_GetDepth() << std::endl;
+	std::cout <<"当前树深度为: " << tree.Tree_GetDepth() << std::endl;
 
-	std::cout << "LEVEL: ";
+	std::cout << "LEVEL: \n";
 	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());
-	std::cout << std::endl;
-	std::cout << "DLR: ";
+	std::cout << std::endl << std::endl;
+	std::cout << "DLR: \n";
 	tree.Tree_Traverse_PreOrder(tree.Tree_GetRoot());
-	std::cout << std::endl;
-	std::cout << "LDR: ";
+	std::cout << std::endl << "DLR None Recursive：\n";
+	tree.Tree_Traverse_PreOrder_NoneRecursive(tree.Tree_GetRoot());
+
+
+	std::cout << std::endl << "LDR: \n";
 	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
-	std::cout << std::endl;
-	std::cout << "LRD: ";
+	std::cout << std::endl << "LDR None Recursive：\n";
+	tree.Tree_Traverse_InOrder_NoneRecursive(tree.Tree_GetRoot());
+
+	std::cout << std::endl << std::endl << "LRD: \n";
 	tree.Tree_Traverse_PostOrder(tree.Tree_GetRoot());
-	std::cout << std::endl;
+	std::cout << std::endl << "LRD None Recursive：\n";
+	tree.Tree_Traverse_PostOrder_NoneRecursive(tree.Tree_GetRoot());
 
-	tree.Tree_Show();
-
+	
+	//tree.Tree_Show();
+	//tree.Tree_Clear();
 	tree.Tree_Destroy();
 
-	//std::cout << "非递归：";
-	//std::cout << std::endl << "DLR：";
-	//BinaryTree_Traversal_Preorder_NoneRecursion(Tree->root);
-	//std::cout << std::endl << "LDR：";
-	//BinaryTree_Traversal_Inorder_NonRecursive(Tree->root);
-	//std::cout << std::endl << "LRD：";
-	//BinaryTree_Traversal_Postorder_NonRecursive(Tree->root);
 
-	//std::cout << std::endl << std::endl << "递归：";
-	//std::cout << std::endl << "DLR：";
-	//BinaryTree_Traversal_Preorder(Tree->root);
-	//std::cout << std::endl << "LDR：";
-	//BinaryTree_Traversal_Inorder(Tree->root);
-	//std::cout << std::endl << "LRD：";
-	//BinaryTree_Traversal_Postorder(Tree->root);
-	////std::cout << std::endl << "Level：";
-	////BinaryTree_Traversal_Level(Tree);
-	/////BUG
-	//std::cout << std::endl;
-	//BinaryTree_Destory(Tree);
+
 
 }
 
