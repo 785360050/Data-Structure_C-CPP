@@ -2,8 +2,8 @@
 
 
 
-//#define C
-#define CPP
+#define C
+//#define CPP
 
 #ifdef C
 ///C
@@ -31,29 +31,29 @@ void TestSeqList()
 	SeqList_Destroy(L);
 }
 
-void TestLinkList()
-{
-	/// <summary>
-	/// 测试链表的函数
-	/// </summary>
-	LinkList* L = LinkList_Init();
-	for (int i = 1; i <= 10; i++)
-		LinkList_AddNode_front(L, i);
-	//LinkList_AddNode_rear(L, e);
-	LinkList_Show(L);
-
-
-	LinkList_InsertNode(L, 2, 2);
-	LinkList_Show(L);
-	ListNode* s = (ListNode*)malloc(sizeof(ListNode));
-	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
-	s = LinkList_LocateNode(L, 2);
-	std::cout << LinkList_GetElem(s) << std::endl;
-	p = LinkList_PriNode(L, s);
-	std::cout << LinkList_GetElem(p) << std::endl;
-	LinkList_DeleteList(L);
-
-}
+//void TestLinkList()
+//{
+//	/// <summary>
+//	/// 测试链表的函数
+//	/// </summary>
+//	LinkList* L = LinkList_Init();
+//	for (int i = 1; i <= 10; i++)
+//		LinkList_AddNode_front(L, i);
+//	//LinkList_AddNode_rear(L, e);
+//	LinkList_Show(L);
+//
+//
+//	LinkList_InsertNode(L, 2, 2);
+//	LinkList_Show(L);
+//	ListNode* s = (ListNode*)malloc(sizeof(ListNode));
+//	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+//	s = LinkList_LocateNode(L, 2);
+//	std::cout << LinkList_GetElem(s) << std::endl;
+//	p = LinkList_PriNode(L, s);
+//	std::cout << LinkList_GetElem(p) << std::endl;
+//	LinkList_DeleteList(L);
+//
+//}
 
 void TestSeqStack()
 {
@@ -273,9 +273,27 @@ void TestMergeFindSet()
 
 }
 
-void TestGraph()
+void TestMatrixGraph()
 {
+	Graph_matrix* g = new Graph_matrix;
+	Graph_Init(g, 8, false);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+	Graph_Edge_Add(g, 0, 1, 1);
+	Graph_Edge_Add(g, 0, 2, 1);
+	Graph_Edge_Add(g, 1, 3, 1);
+	Graph_Edge_Add(g, 1, 4, 1);
+	Graph_Edge_Add(g, 3, 7, 1);
+	Graph_Edge_Add(g, 4, 7, 1);
+	Graph_Edge_Add(g, 2, 6, 1);
+	Graph_Edge_Add(g, 2, 5, 1);
+	Graph_Edge_Add(g, 5, 6, 1);
+	
 
+	Graph_Show_Matrix(g);
+
+	std::cout << "DFS" << std::endl;
+	Graph_Traverse_DFS(g, 0);
+
+	delete g;
 }
 
 void Test_C()
@@ -288,7 +306,7 @@ void Test_C()
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();
-	//TestGraph();
+	TestMatrixGraph();
 }
 
 #endif // C
@@ -532,8 +550,9 @@ void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	
-	//Test_C();
-	Test_CPP();
+	Test_C();
+	//Test_CPP();
+	
 
 
 }
