@@ -58,8 +58,8 @@ void LinkQueue_Push(LinkQueue* LinkQueue, DataType data);
 //出队，返回数据元素
 DataType LinkQueue_Pop(LinkQueue* LinkQueue);
 
-
-
+bool SeqQueue_CheckFull(SeqQueue* SeqQueue);
+bool SeqQueue_CheckEmpty(SeqQueue* SeqQueue);
 
 
 

@@ -121,10 +121,17 @@ static void Visit(Graph_matrix_Vertex& vertex)
 	std::cout << vertex.no << ' ';
 }
 
+//重置访问状态，用于辅助遍历
+static void Clear_VistiedState(Graph_matrix* graph)
+{
+	for (int i = 0; i < graph->num_vertex; i++)
+		graph->state_visited[i] = 0;
+}
 
 //static bool History_Visited[maxsize];
 void Graph_Traverse_DFS(Graph_matrix* graph, int no_vertex)
 {
+	//Clear_VistiedState(graph);///BUG
 	Visit(graph->vertex[no_vertex]);
 	graph->state_visited[no_vertex] = true;//标记为已访问
 	for (int i = 0; i <= graph->num_vertex; i++)
@@ -140,6 +147,36 @@ void Graph_Traverse_DFS(Graph_matrix* graph, int no_vertex)
 
 }
 
-void Graph_Traverse_BFS(Graph_matrix* graph, int num);
+
+
+#include <queue>
+void Graph_Traverse_BFS(Graph_matrix* graph, int no_vertex)
+{
+	Clear_VistiedState(graph);
+#define Standard_Queue
+#ifdef Standard_Queue
+	std::queue<int> q;
+	int front;
+	q.push(no_vertex);
+	while (!q.empty())
+	{
+		std::cout << q.front() << ' ';
+		graph->state_visited[q.front()] = true;
+		front = q.front();
+		q.pop();
+		for (int i = 0; i <= graph->num_vertex; i++)
+		{
+			if (!CheckEdge_Infinit(graph->edge[front][i]) && !graph->state_visited[i])
+			{
+				q.push(i);
+				graph->state_visited[i] = true;
+			}
+		}
+	}
+
+#endif // Standard_Queue
+
+
+}
 
 

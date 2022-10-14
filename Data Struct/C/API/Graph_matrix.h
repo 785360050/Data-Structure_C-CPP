@@ -31,9 +31,9 @@ void Graph_Edge_Add(Graph_matrix* graph, int no_origin, int no_destination, int 
 void Graph_Show_Matrix(Graph_matrix* graph);
 
 //广度优先遍历
-void Graph_Traverse_DFS(Graph_matrix* graph, int no);
+void Graph_Traverse_DFS(Graph_matrix* graph, int no_vertex);
 //深度优先遍历
-void Graph_Traverse_BFS(Graph_matrix* graph, int num);
+void Graph_Traverse_BFS(Graph_matrix* graph, int no_vertex);
 
 
 

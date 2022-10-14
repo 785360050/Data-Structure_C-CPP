@@ -17,6 +17,7 @@
 #include "C/API/Tree_Binary_AVL.h"
 #include "C/API/Tree_MergeFind_Set.h"
 #include "C/API/Graph_matrix.h"
+#include "C/API/Graph_AdjacencyList.h"
 
 ///C function
 void TestSeqList()
@@ -292,6 +293,33 @@ void TestMatrixGraph()
 
 	std::cout << "DFS" << std::endl;
 	Graph_Traverse_DFS(g, 0);
+	std::cout << std::endl << "BFS" << std::endl;
+	Graph_Traverse_BFS(g, 0);
+
+	delete g;
+}
+
+void TestAdjacencyListGraph()
+{
+	AdjacencyList* g = new AdjacencyList;
+	Graph_AdjacencyList_Init(g, 8, false);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+	Graph_AdjacencyList_Edge_Add(g, 0, 1, 1);
+	Graph_AdjacencyList_Edge_Add(g, 0, 2, 1);
+	Graph_AdjacencyList_Edge_Add(g, 1, 3, 1);
+	Graph_AdjacencyList_Edge_Add(g, 1, 4, 1);
+	Graph_AdjacencyList_Edge_Add(g, 3, 7, 1);
+	Graph_AdjacencyList_Edge_Add(g, 4, 7, 1);
+	Graph_AdjacencyList_Edge_Add(g, 2, 6, 1);
+	Graph_AdjacencyList_Edge_Add(g, 2, 5, 1);
+	Graph_AdjacencyList_Edge_Add(g, 5, 6, 1);
+
+	Graph_Show_AdjacencyList(g);
+
+	std::cout << "DFS" << std::endl;
+	Graph_AdjacencyList_Traverse_DFS(g, 0);
+	Reset_VistedState(g);
+	std::cout << std::endl << "BFS" << std::endl;
+	Graph_AdjacencyList_Traverse_BFS(g, 0);
 
 	delete g;
 }
@@ -306,7 +334,8 @@ void Test_C()
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();
-	TestMatrixGraph();
+	//TestMatrixGraph();
+	TestAdjacencyListGraph();
 }
 
 #endif // C

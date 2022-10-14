@@ -34,6 +34,13 @@ bool SeqQueue_CheckFull(SeqQueue* SeqQueue)
 	return false;
 }
 
+bool SeqQueue_CheckEmpty(SeqQueue* SeqQueue)
+{
+	if (SeqQueue->front == SeqQueue->rear)
+		return true;
+	return false;
+}
+
 void SeqQueue_Push(SeqQueue* SeqQueue, DataType data)
 {
 	try

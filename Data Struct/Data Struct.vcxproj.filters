@@ -51,6 +51,9 @@
     <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h">
@@ -84,6 +87,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Tree_MergeFind_Set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\API\Graph_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
