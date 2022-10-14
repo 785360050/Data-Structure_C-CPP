@@ -32,29 +32,29 @@ void TestSeqList()
 	SeqList_Destroy(L);
 }
 
-//void TestLinkList()
-//{
-//	/// <summary>
-//	/// 测试链表的函数
-//	/// </summary>
-//	LinkList* L = LinkList_Init();
-//	for (int i = 1; i <= 10; i++)
-//		LinkList_AddNode_front(L, i);
-//	//LinkList_AddNode_rear(L, e);
-//	LinkList_Show(L);
-//
-//
-//	LinkList_InsertNode(L, 2, 2);
-//	LinkList_Show(L);
-//	ListNode* s = (ListNode*)malloc(sizeof(ListNode));
-//	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
-//	s = LinkList_LocateNode(L, 2);
-//	std::cout << LinkList_GetElem(s) << std::endl;
-//	p = LinkList_PriNode(L, s);
-//	std::cout << LinkList_GetElem(p) << std::endl;
-//	LinkList_DeleteList(L);
-//
-//}
+void TestLinkList()
+{
+	/// <summary>
+	/// 测试链表的函数
+	/// </summary>
+	LinkList* L = LinkList_Init();
+	for (int i = 1; i <= 10; i++)
+		LinkList_AddNode_front(L, i);
+	//LinkList_AddNode_rear(L, e);
+	LinkList_Show(L);
+
+
+	LinkList_InsertNode(L, 2, 2);
+	LinkList_Show(L);
+	ListNode* s = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	s = LinkList_LocateNode(L, 2);
+	std::cout << LinkList_GetElem(s) << std::endl;
+	p = LinkList_PriNode(L, s);
+	std::cout << LinkList_GetElem(p) << std::endl;
+	LinkList_DeleteList(L);
+
+}
 
 void TestSeqStack()
 {
@@ -335,7 +335,7 @@ void Test_C()
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();
 	//TestMatrixGraph();
-	TestAdjacencyListGraph();
+	//TestAdjacencyListGraph();
 }
 
 #endif // C
