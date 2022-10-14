@@ -43,11 +43,11 @@ void Graph_Init
 		graph->state_visited[i] = 0;
 	}
 	//int(*graph->edge)[num_vertex] = new int[num_vertex][num_vertex];
-	graph->edge = new int* [num_vertex];
+	graph->edge = new int* [num_vertex];///分配指针数组空间
 	for (int i = 0; i < num_vertex; i++)
-	{
+	{///分配二位数组空间
 		graph->edge[i] = new int[num_vertex];
-		for (int c = 0; c < num_vertex; c++)
+		for (int c = 0; c < num_vertex; c++)///初始化为全0
 			graph->edge[i][c] = 0;
 	}
 
@@ -147,8 +147,6 @@ void Graph_Traverse_DFS(Graph_matrix* graph, int no_vertex)
 
 }
 
-
-
 #include <queue>
 void Graph_Traverse_BFS(Graph_matrix* graph, int no_vertex)
 {
@@ -179,4 +177,19 @@ void Graph_Traverse_BFS(Graph_matrix* graph, int no_vertex)
 
 }
 
-
+void Graph_Destroy(Graph_matrix* graph)
+{
+	try
+	{
+		if (!graph)
+			throw 1;
+	}
+	catch (...)
+	{
+		std::cout << "Graph Destroy Failed: Graph is not exist" << std::endl;
+		return;
+	}
+	for (int i = 0; i < graph->num_vertex; i++)
+		delete[] graph->edge[i];
+	delete graph;
+}

@@ -17,14 +17,16 @@ struct Graph_matrix
 	bool directed;//判断是否为有向图
 	int num_vertex;//顶点总数;
 	int num_edge;//边总数
-	Vertex_Matrix* vertex;//存放顶点的集合
 	bool* state_visited;//访问状态
+	Vertex_Matrix* vertex;//存放顶点的集合
 	int** edge;//邻接矩阵
 };
 
 
 //初始化邻接矩阵
 void Graph_Init(Graph_matrix* graph, int num_vertex, bool directed);
+//释放邻接矩阵空间
+void Graph_Destroy(Graph_matrix* graph);
 //添加边(已存在时不添加)
 void Graph_Edge_Add(Graph_matrix* graph, int no_origin, int no_destination, int w);
 //显示邻接矩阵

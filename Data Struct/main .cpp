@@ -296,7 +296,7 @@ void TestMatrixGraph()
 	std::cout << std::endl << "BFS" << std::endl;
 	Graph_Traverse_BFS(g, 0);
 
-	delete g;
+	Graph_Destroy(g);
 }
 
 void TestAdjacencyListGraph()
@@ -334,7 +334,7 @@ void Test_C()
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();
-	//TestMatrixGraph();
+	TestMatrixGraph();
 	//TestAdjacencyListGraph();
 }
 
