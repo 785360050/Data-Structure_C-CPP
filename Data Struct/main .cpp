@@ -294,7 +294,7 @@ void TestMatrixGraph()
 	std::cout << "DFS" << std::endl;
 	Graph_Traverse_DFS(g, 0);
 	std::cout << std::endl << "BFS" << std::endl;
-	Graph_Traverse_BFS(g, 0);
+	Graph_Traverse_BFS(g, 0); 
 
 	Graph_Destroy(g);
 }
@@ -324,6 +324,14 @@ void TestAdjacencyListGraph()
 	delete g;
 }
 
+void TestMininumSpanningTree()
+{
+	
+	/// Kruskal用边集数组存储方便
+	//int Sum = Graph_MininumSpanningTree_Kruskal(g, edgeset, 8, result);
+	//std::cout << "最小生成树权值为：" << Sum << std::endl;
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -334,8 +342,9 @@ void Test_C()
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();
-	TestMatrixGraph();
+	//TestMatrixGraph();
 	//TestAdjacencyListGraph();
+	TestMininumSpanningTree();
 }
 
 #endif // C

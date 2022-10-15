@@ -53,7 +53,7 @@ struct MergeFind_Set_QuickMerge
 };
 typedef MergeFind_Set_QuickMerge MFSet_QuickMerge;
 
-//初始化查并集头节点
+//初始化查并集头节点，各自申请n个大小的数组空间
 MFSet_QuickMerge* Set_Create_QuickMerge(int n);
 //释放查并集空间
 void Set_Destroy(MFSet_QuickMerge* set);

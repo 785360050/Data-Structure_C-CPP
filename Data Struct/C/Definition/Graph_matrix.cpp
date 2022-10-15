@@ -1,5 +1,6 @@
 #include "../API/Graph_matrix.h"
 
+
 static int Index(int x)
 {
 	return x - 1;
@@ -193,3 +194,10 @@ void Graph_Destroy(Graph_matrix* graph)
 		delete[] graph->edge[i];
 	delete graph;
 }
+
+
+
+
+
+
+

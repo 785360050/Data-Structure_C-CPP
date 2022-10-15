@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
+    <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
     <ClCompile Include="C\Definition\Graph_matrix.cpp" />
     <ClCompile Include="C\Definition\Liner_List_Link.cpp" />
     <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp" />
@@ -147,7 +148,9 @@
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h" />
     <ClInclude Include="C\API\Graph_AdjacencyList.h" />
+    <ClInclude Include="C\API\Graph_EdgeSetList.h" />
     <ClInclude Include="C\API\Graph_matrix.h" />
+    <ClInclude Include="C\API\Graph_MininumSpanningTree.h" />
     <ClInclude Include="C\API\Liner_List_Link.h" />
     <ClInclude Include="C\API\Liner_List_Sequential.h" />
     <ClInclude Include="C\API\Liner_Queue.h" />

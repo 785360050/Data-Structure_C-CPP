@@ -43,6 +43,3 @@ void Graph_Traverse_BFS(Graph_matrix* graph, int no_vertex);
 
 
 
-
-
-
