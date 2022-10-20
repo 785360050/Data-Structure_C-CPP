@@ -19,6 +19,7 @@
 #include "C/API/Graph_matrix.h"
 #include "C/API/Graph_AdjacencyList.h"
 #include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
+#include "C/Algorithm/Graph_MininumSpanningTree.h"
 #include "C/Algorithm/Graph_TopoSort.h"
 
 ///C function
@@ -332,8 +333,51 @@ void TestMininumSpanningTree()
 	/// Kruskal用边集数组存储方便
 	//int Sum = Graph_MininumSpanningTree_Kruskal(g, edgeset, 8, result);
 	//std::cout << "最小生成树权值为：" << Sum << std::endl;
-	Dijkstra_Graph();
+
+	Graph_matrix* g = new Graph_matrix;
+	Graph_Init(g, 7, false);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+	Graph_Edge_Add(g, 0, 1, 12);
+	Graph_Edge_Add(g, 0, 5, 16);
+	Graph_Edge_Add(g, 0, 6, 14);
+	Graph_Edge_Add(g, 1, 2, 10);
+	Graph_Edge_Add(g, 1, 5, 7);
+	Graph_Edge_Add(g, 6, 5, 9);
+	Graph_Edge_Add(g, 6, 4, 8);
+	Graph_Edge_Add(g, 5, 4, 2);
+	Graph_Edge_Add(g, 5, 2, 6);
+	Graph_Edge_Add(g, 2, 4, 5);
+	Graph_Edge_Add(g, 2, 3, 3);
+	Graph_Edge_Add(g, 3, 4, 4);
+
+
+	Graph_Show_Matrix(g);
+
+	Graph_matrix* minimum=Graph_MininumSpanningTree_Prim(*g,0);
+	std::cout << "获得的最小生成树为：" << std::endl;
+	Graph_Show_Matrix(minimum);
 }
+
+void TestShortestPath()
+{
+	Graph_matrix* g = new Graph_matrix;
+	Graph_Init(g, 7, true);
+	Graph_Edge_Add(g, 0, 1, 4);
+	Graph_Edge_Add(g, 0, 2, 6);
+	Graph_Edge_Add(g, 0, 3, 6);
+	Graph_Edge_Add(g, 1, 2, 1);
+	Graph_Edge_Add(g, 1, 4, 7);
+	Graph_Edge_Add(g, 2, 4, 6);
+	Graph_Edge_Add(g, 2, 5, 4);
+	Graph_Edge_Add(g, 3, 2, 2);
+	Graph_Edge_Add(g, 3, 5, 5);
+	Graph_Edge_Add(g, 4, 6, 6);
+	Graph_Edge_Add(g, 5, 4, 1);
+	Graph_Edge_Add(g, 5, 6, 8);
+
+	Graph_Show_Matrix(g);
+	ShortestPath_Dijkstra(*g, 0);
+}
+
 
 void TestTopoSort()
 {
@@ -364,8 +408,9 @@ void Test_C()
 	//TestMergeFindSet();
 	//TestMatrixGraph();
 	//TestAdjacencyListGraph();
-	//TestMininumSpanningTree();
-	TestTopoSort();
+	TestMininumSpanningTree();
+	//TestShortestPath();
+	//TestTopoSort();
 }
 
 #endif // C
