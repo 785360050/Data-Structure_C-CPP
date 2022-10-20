@@ -18,6 +18,8 @@
 #include "C/API/Tree_MergeFind_Set.h"
 #include "C/API/Graph_matrix.h"
 #include "C/API/Graph_AdjacencyList.h"
+#include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
+#include "C/Algorithm/Graph_TopoSort.h"
 
 ///C function
 void TestSeqList()
@@ -330,6 +332,24 @@ void TestMininumSpanningTree()
 	/// Kruskal用边集数组存储方便
 	//int Sum = Graph_MininumSpanningTree_Kruskal(g, edgeset, 8, result);
 	//std::cout << "最小生成树权值为：" << Sum << std::endl;
+	Dijkstra_Graph();
+}
+
+void TestTopoSort()
+{
+	AdjacencyList* g = new AdjacencyList;
+	Graph_AdjacencyList_Init(g, 6 , true);
+	Graph_AdjacencyList_Edge_Add(g, 0, 1, 1);
+	Graph_AdjacencyList_Edge_Add(g, 0, 2, 1);
+	Graph_AdjacencyList_Edge_Add(g, 0, 3, 1);
+	Graph_AdjacencyList_Edge_Add(g, 2, 1, 1);
+	Graph_AdjacencyList_Edge_Add(g, 2, 4, 1);
+	Graph_AdjacencyList_Edge_Add(g, 3, 4, 1);
+	Graph_AdjacencyList_Edge_Add(g, 5, 3, 1);
+	Graph_AdjacencyList_Edge_Add(g, 5, 4, 1);
+
+	Graph_Show_AdjacencyList(g);
+	TopoSort(g);
 }
 
 void Test_C()
@@ -344,7 +364,8 @@ void Test_C()
 	//TestMergeFindSet();
 	//TestMatrixGraph();
 	//TestAdjacencyListGraph();
-	TestMininumSpanningTree();
+	//TestMininumSpanningTree();
+	TestTopoSort();
 }
 
 #endif // C

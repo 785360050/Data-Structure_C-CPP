@@ -95,10 +95,16 @@
     <ClInclude Include="C\API\Graph_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C\API\Graph_MininumSpanningTree.h">
+    <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Graph_EdgeSetList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_TopoSort.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

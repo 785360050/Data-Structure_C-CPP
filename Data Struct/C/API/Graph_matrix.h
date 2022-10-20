@@ -22,6 +22,8 @@ struct Graph_matrix
 	int** edge;//邻接矩阵
 };
 
+//检查是边权值否为∞
+bool CheckEdge_Infinit(int weight);
 
 //初始化邻接矩阵
 void Graph_Init(Graph_matrix* graph, int num_vertex, bool directed);

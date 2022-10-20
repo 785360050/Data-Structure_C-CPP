@@ -74,7 +74,7 @@ void Graph_Show_Matrix(Graph_matrix* graph)
 	std::cout << std::endl;
 }
 
-static bool CheckEdge_Infinit(int weight)
+bool CheckEdge_Infinit(int weight)
 {///	<0的边权值视为∞;
 	if (weight <= 0)
 		return true;

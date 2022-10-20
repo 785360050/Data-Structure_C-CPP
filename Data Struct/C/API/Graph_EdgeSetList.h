@@ -11,10 +11,12 @@ typedef struct Graph_EdgeSet_Edge Graph_EdgeSet_Edge;
 
 struct Graph_EdgeSet
 {
-	int count;
 	bool directed;
+	int num_vertex;
+	int num_edge;
 	int* vertex;//存放顶点的数组
 	Graph_EdgeSet_Edge* edge;//存放边的数组
+	int index;//边集索引
 };
 typedef struct Graph_EdgeSet Graph_EdgeSet;
 
