@@ -6,8 +6,8 @@
 
 
 //求最小生成树,返回总权值	Kruskal
-Graph_matrix* Graph_MininumSpanningTree_Kruskal(Graph_matrix* graph, int* set, int n, int* result)
-{
+Graph_matrix* Graph_MininumSpanningTree_Kruskal(const Graph_matrix& graph)
+{///TODO Unfinished
 	/// <summary>
 	/// Kruskal算法求最小生成树——相比Prim适合稀疏图
 	/// 将任意存储方式转化为边集数组，方便边按权值排序
@@ -23,12 +23,12 @@ Graph_matrix* Graph_MininumSpanningTree_Kruskal(Graph_matrix* graph, int* set, i
 	/// <returns></returns>
 
 	Graph_matrix* g = new Graph_matrix;
-	Graph_Init(g, 8, false);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
-	MFSet_QuickMerge* set_QM = Set_Create_QuickMerge(n);
-	Set_Init(set_QM, set, n);
+	Graph_Init(g, graph.num_vertex, graph.directed);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+	MFSet_QuickMerge* set_QM = Set_Create_QuickMerge(graph.num_vertex);
+	//Set_Init(set_QM, set, graph.num_vertex);
 
 	int a, b;
-	for (int i = 0; i < graph->num_edge; i++)
+	for (int i = 0; i < graph.num_edge; i++)
 	{
 		//a=
 	}
@@ -44,7 +44,7 @@ Graph_matrix* Graph_MininumSpanningTree_Kruskal(Graph_matrix* graph, int* set, i
 	std::cout << "RootIndex(2)= " << RootIndex(set_QM, 2) << std::endl;
 	std::cout << "RootIndex(2)= " << RootIndex_Optimized(set_QM, 2) << std::endl;
 	Set_Destroy(set_QM);
-	return graph;
+	return g;
 
 
 }
@@ -52,9 +52,10 @@ Graph_matrix* Graph_MininumSpanningTree_Kruskal(Graph_matrix* graph, int* set, i
 
 
 Graph_matrix* Graph_MininumSpanningTree_Prim(const Graph_matrix& graph, int no_startvertex)
-{///BUG
-	static int src = no_startvertex;
+{
+	int src = no_startvertex;
 	int dst = 0;
+	int totalcost = 0;
 	bool* visited = new bool[graph.num_vertex];//标记是否已经加入生成树
 	memset(visited, 0, sizeof(bool) * graph.num_vertex);
 	int* cost = new int[graph.num_vertex];//标记最短路径的开销
@@ -65,9 +66,10 @@ Graph_matrix* Graph_MininumSpanningTree_Prim(const Graph_matrix& graph, int no_s
 	Graph_matrix* g = new Graph_matrix;
 	Graph_Init(g, graph.num_vertex, graph.directed);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
 
+	//初始化辅助记录表的信息
 	for (int i = 0; i < graph.num_vertex; i++)
-	{///初始化辅助记录信息
-		path[i] = 0;
+	{
+		path[i] = 0;///空时为0
 		if (visited[i] == false && !CheckEdge_Infinit(graph.edge[no_startvertex][i]))
 		{///初始化起点的邻接距离
 			cost[i] = graph.edge[src][i];
@@ -77,9 +79,10 @@ Graph_matrix* Graph_MininumSpanningTree_Prim(const Graph_matrix& graph, int no_s
 			cost[i] = 0;
 	}
 	
-
+	//每一轮的Prim算法选择路径
 	for (int round = 0; round < graph.num_vertex; round++)
 	{
+#ifdef info
 		for (int i = 0; i < 7; i++)
 			std::cout << cost[i] << '\t';
 		std::cout << std::endl;
@@ -89,33 +92,33 @@ Graph_matrix* Graph_MininumSpanningTree_Prim(const Graph_matrix& graph, int no_s
 		for (int i = 0; i < 7; i++)
 			std::cout << path[i] << '\t';
 		std::cout << std::endl << std::endl;
+#endif // info
 
 		int min = 1e4;
 		for (int i = 0; i < graph.num_vertex; i++)
 		{///遍历开销表找最小的点
 			if (visited[i] == false && cost[i] > 0 && cost[i] < min )
-			{///遍历未访问的点
+			{///更新最小开销和目的顶点
 				min = cost[i];
 				dst = i;
 			}
 		}
 		for (int i = 0; i < graph.num_vertex; i++)
 		{///根据选中顶点更新开销表
-			if ((graph.edge[dst][i] < cost[i] && graph.edge[dst][i]>0) && visited[i] == false)
-			{///若到未访问的点开销比原来小，则更新开销和源点
-				cost[i] = graph.edge[dst][i];
-				path[i] = src;
-			}
-			if (cost[i] == 0 && graph.edge[dst][i] > 0)///首次连通初始化开销
-			{
-				cost[i] = graph.edge[dst][i];
+			int c = graph.edge[dst][i];///路径开销
+			bool e = !CheckEdge_Infinit(c);///边有效
+			if (visited[i] == false && e && (c < cost[i] || cost[i] == 0))
+			{///若到未访问的点开销比原来小，则更新开销和源点(或未被初始化时)
+				cost[i] = c;
 				path[i] = dst;
 			}
 		}
 		visited[dst] = true;///找到最短路径并加入最小生成树
-		Graph_Edge_Add(g, src, dst, graph.edge[src][dst]);
-		src = dst;
+		Graph_Edge_Add(g, path[dst], dst, cost[dst]);
 	}
+	for (int i = 0; i < graph.num_vertex; i++)
+		totalcost += cost[i];
+	std::cout << "最小生成数的总权值为：" << totalcost << std::endl;
 	delete[] visited;
 	delete[] cost;
 	delete[] path;

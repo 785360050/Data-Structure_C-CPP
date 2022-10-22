@@ -18,8 +18,9 @@
 #include "C/API/Tree_MergeFind_Set.h"
 #include "C/API/Graph_matrix.h"
 #include "C/API/Graph_AdjacencyList.h"
-#include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
 #include "C/Algorithm/Graph_MininumSpanningTree.h"
+#include "C/API/Graph_EdgeSetList.h"
+#include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
 #include "C/Algorithm/Graph_TopoSort.h"
 
 ///C function
@@ -326,7 +327,7 @@ void TestAdjacencyListGraph()
 
 	delete g;
 }
-
+///Unfinished
 void TestMininumSpanningTree()
 {
 	
@@ -355,6 +356,8 @@ void TestMininumSpanningTree()
 	Graph_matrix* minimum=Graph_MininumSpanningTree_Prim(*g,0);
 	std::cout << "获得的最小生成树为：" << std::endl;
 	Graph_Show_Matrix(minimum);
+	Graph_Destroy(g);
+	Graph_Destroy(minimum);
 }
 
 void TestShortestPath()
