@@ -107,5 +107,8 @@
     <ClInclude Include="C\Algorithm\Graph_TopoSort.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

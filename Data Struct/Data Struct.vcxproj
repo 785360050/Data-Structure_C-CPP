@@ -146,6 +146,7 @@
     <ClCompile Include="main .cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h" />
     <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
     <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
     <ClInclude Include="C\API\Global Variables.h" />

@@ -22,6 +22,7 @@
 #include "C/API/Graph_EdgeSetList.h"
 #include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
 #include "C/Algorithm/Graph_TopoSort.h"
+#include "C/Algorithm/Graph_CriticalPath.h"
 
 ///C function
 void TestSeqList()
@@ -381,7 +382,6 @@ void TestShortestPath()
 	ShortestPath_Dijkstra(*g, 0);
 }
 
-
 void TestTopoSort()
 {
 	AdjacencyList* g = new AdjacencyList;
@@ -399,6 +399,32 @@ void TestTopoSort()
 	TopoSort(g);
 }
 
+void TestCriticalPath()
+{
+	AdjacencyList* g = new AdjacencyList;
+	Graph_AdjacencyList_Init(g, 9, true);//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+
+	Graph_AdjacencyList_Edge_Add(g, 0, 1, 6);
+	Graph_AdjacencyList_Edge_Add(g, 0, 2, 4);
+	Graph_AdjacencyList_Edge_Add(g, 0, 3, 5);
+	Graph_AdjacencyList_Edge_Add(g, 1, 4, 1);
+	Graph_AdjacencyList_Edge_Add(g, 2, 4, 1);
+	Graph_AdjacencyList_Edge_Add(g, 3, 5, 2);
+	Graph_AdjacencyList_Edge_Add(g, 4, 6, 9);
+	Graph_AdjacencyList_Edge_Add(g, 4, 7, 7);
+	Graph_AdjacencyList_Edge_Add(g, 5, 7, 4);
+	Graph_AdjacencyList_Edge_Add(g, 6, 8, 2);
+	Graph_AdjacencyList_Edge_Add(g, 7, 8, 4);
+	std::cout << "当前图的邻接表为：" << std::endl;
+	Graph_Show_AdjacencyList(g);
+
+	std::cout << "当前图的拓扑排序为：" << std::endl;
+	Graph_CriticalPath(g);
+	
+	delete[] g->vertex;
+	delete g;
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -411,9 +437,10 @@ void Test_C()
 	//TestMergeFindSet();
 	//TestMatrixGraph();
 	//TestAdjacencyListGraph();
-	TestMininumSpanningTree();
+	//TestMininumSpanningTree();
 	//TestShortestPath();
 	//TestTopoSort();
+	TestCriticalPath();
 }
 
 #endif // C

@@ -11,7 +11,7 @@ static void show(const int* indegree)
 	std::cout << std::endl;
 }
 
-void TopoSort(AdjacencyList* graph)
+bool TopoSort(AdjacencyList* graph)
 {
 #define Standard_Stack
 #ifdef Standard_Stack
@@ -54,9 +54,15 @@ void TopoSort(AdjacencyList* graph)
 	}
 	delete[] indegree;
 	if (count == graph->num_vertex)
+	{
 		std::cout << "Topo Sort Succeeded" << std::endl;
+		return true;
+	}
 	else
+	{
 		std::cout << "Topo Sort Faild: Cycle exisit" << std::endl;
+		return false;
+	}
 
 #endif // Standard_Stack
 
