@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C\Algorithm\Sort_Insert.cpp" />
     <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
     <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
     <ClCompile Include="C\Definition\Graph_matrix.cpp" />
@@ -149,6 +150,8 @@
     <ClInclude Include="C\Algorithm\Graph_CriticalPath.h" />
     <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
     <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
+    <ClInclude Include="C\Algorithm\Sort_Insert.h" />
+    <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
     <ClInclude Include="C\API\Global Variables.h" />
     <ClInclude Include="C\API\Graph_AdjacencyList.h" />
     <ClInclude Include="C\API\Graph_EdgeSetList.h" />

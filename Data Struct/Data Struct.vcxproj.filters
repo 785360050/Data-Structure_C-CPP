@@ -57,6 +57,9 @@
     <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Algorithm\Sort_Insert.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h">
@@ -108,6 +111,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\Algorithm\Graph_CriticalPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_Insert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_TestCase.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

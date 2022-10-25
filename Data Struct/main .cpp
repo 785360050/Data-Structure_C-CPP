@@ -425,6 +425,35 @@ void TestCriticalPath()
 	delete g;
 }
 
+void TestInsertSort()
+{
+	
+}
+#include "C/Algorithm/Sort_TestCase.h"
+#include "C/Algorithm/Sort_Insert.h"
+void TestCost_Sort()
+{
+//#define info
+
+	int n = 100000;
+	SortList* l = generateRandomArray(n, 0, n);
+#ifdef info
+	for (int i = 0; i < l->length; i++)
+		std::cout << l->data[i].key << ' ';
+	printf("\n");
+#endif // info
+	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
+	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, l);
+	//testSort("Shell Sort", Sort_Insert_Shell, l);
+#ifdef info
+	for (int i = 0; i < l->length; i++)
+		std::cout << l->data[i].key << ' ';
+#endif // info
+
+	SortList_Destroy(l);
+
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -440,7 +469,9 @@ void Test_C()
 	//TestMininumSpanningTree();
 	//TestShortestPath();
 	//TestTopoSort();
-	TestCriticalPath();
+	//TestCriticalPath();
+	TestInsertSort();
+	TestCost_Sort();
 }
 
 #endif // C
@@ -686,7 +717,7 @@ void main()
 	
 	Test_C();
 	//Test_CPP();
-	
+
 
 
 }
