@@ -425,32 +425,68 @@ void TestCriticalPath()
 	delete g;
 }
 
-void TestInsertSort()
-{
-	
-}
+//void TestInsertSort()
+//{
+//	
+//}
 #include "C/Algorithm/Sort_TestCase.h"
 #include "C/Algorithm/Sort_Insert.h"
-void TestCost_Sort()
+#include "C/Algorithm/Sort_Swap.h"
+void TestSort()
 {
-//#define info
-
-	int n = 100000;
+	int n = 10;
 	SortList* l = generateRandomArray(n, 0, n);
-#ifdef info
-	for (int i = 0; i < l->length; i++)
-		std::cout << l->data[i].key << ' ';
-	printf("\n");
-#endif // info
+
+	SortList_Show(l);
+
 	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
 	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, l);
 	//testSort("Shell Sort", Sort_Insert_Shell, l);
-#ifdef info
-	for (int i = 0; i < l->length; i++)
-		std::cout << l->data[i].key << ' ';
-#endif // info
+	//testSort("Bubble Sort", Sort_Bubble_Classic, l);
+	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, l);
+	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, l);
+	//testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, l);
+	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, l);
+
+	SortList_Show(l);
+	SortList_Destroy(l);
+
+}
+
+void TestCost_Sort()
+{
+	int n = 100000;
+	SortList* l = generateRandomArray(n, 0, n);
+	SortList* a = SortList_Copy(l);
+	SortList* b = SortList_Copy(l);
+	SortList* c = SortList_Copy(l);
+	SortList* d = SortList_Copy(l);
+	SortList* e = SortList_Copy(l);
+	SortList* f = SortList_Copy(l);
+	SortList* g = SortList_Copy(l);
+	//SortList* h = SortList_Copy(l);
+	//SortList* i = SortList_Copy(l);
+
+	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
+	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
+	//testSort("Shell Sort", Sort_Insert_Shell, b);
+	//testSort("Bubble Sort", Sort_Bubble_Classic, c);
+	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
+	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
+	testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, f);
+	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, g);
 
 	SortList_Destroy(l);
+	SortList_Destroy(a);
+	SortList_Destroy(b);
+	SortList_Destroy(c);
+	SortList_Destroy(d);
+	SortList_Destroy(e);
+	SortList_Destroy(f);
+	SortList_Destroy(g);
+	//SortList_Destroy(h);
+	//SortList_Destroy(i);
+
 
 }
 
@@ -470,7 +506,7 @@ void Test_C()
 	//TestShortestPath();
 	//TestTopoSort();
 	//TestCriticalPath();
-	TestInsertSort();
+	//TestSort();
 	TestCost_Sort();
 }
 

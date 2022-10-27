@@ -121,7 +121,13 @@ void testSort(const char* sortName, void sort_method(SortList*), SortList* table
     //printf("%s cost time: %fs.\n", sortName, (double)(end - start));
 }
 
-
+//显示排序数据集合
+void SortList_Show(const SortList* const list)
+{
+    for (int i = 0; i < list->length; i++)
+        std::cout << list->data[i].key << ' ';
+    std::cout << std::endl;
+}
 
 
 
