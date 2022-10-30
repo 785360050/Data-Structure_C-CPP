@@ -23,6 +23,7 @@
 #include "C/Algorithm/Graph_ShortestPath_Dijkstra.h"
 #include "C/Algorithm/Graph_TopoSort.h"
 #include "C/Algorithm/Graph_CriticalPath.h"
+#include "C/API/Tree_Binary_Heap.h"
 
 ///C function
 void TestSeqList()
@@ -240,12 +241,35 @@ void BinarySearch_AVL()
 	BinaryTree_Destory(Tree);
 }
 
+
+void Binary_Heap()
+{
+	BinaryHeap* h = new BinaryHeap;
+	BinaryHeap_Init(h, 5);
+	std::cout << "堆的顺序数组首个空间不使用" << std::endl;
+	BinaryHeap_Show(h);
+	BinaryHeap_Element_Insert(h, 1);
+	BinaryHeap_Element_Insert(h, 2);
+	BinaryHeap_Element_Insert(h, 3);
+	BinaryHeap_Element_Insert(h, 4);
+	BinaryHeap_Element_Insert(h, 5);
+	//BinaryHeap_Element_Insert(h, 6);
+
+	BinaryHeap_Show(h);
+
+	BinaryHeap_Root_Extract(h);
+	BinaryHeap_Show(h);
+
+	BinaryHeap_Destroy(h);
+}
+
 void TestBinaryTree()
 {
 	//BinaryTree();
 	//BinaryThreadTree();
 	//BinarySearch();
-	BinarySearch_AVL();
+	//BinarySearch_AVL();
+	Binary_Heap();
 }
 
 void TestMergeFindSet()
@@ -446,7 +470,8 @@ void TestSort()
 	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, l);
 	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, l);
 	//testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, l);
-	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, l);
+	//testSort("Quick Sort Single Way", Sort_Quick_SingleWay, l);
+	testSort("Heap Sort", Sort_Heap, l);
 
 	SortList_Show(l);
 	SortList_Destroy(l);
@@ -455,7 +480,7 @@ void TestSort()
 
 void TestCost_Sort()
 {
-	int n = 100000;
+	int n = 10000;
 	SortList* l = generateRandomArray(n, 0, n);
 	SortList* a = SortList_Copy(l);
 	SortList* b = SortList_Copy(l);
@@ -464,17 +489,18 @@ void TestCost_Sort()
 	SortList* e = SortList_Copy(l);
 	SortList* f = SortList_Copy(l);
 	SortList* g = SortList_Copy(l);
-	//SortList* h = SortList_Copy(l);
+	SortList* h = SortList_Copy(l);
 	//SortList* i = SortList_Copy(l);
 
-	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
-	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
-	//testSort("Shell Sort", Sort_Insert_Shell, b);
-	//testSort("Bubble Sort", Sort_Bubble_Classic, c);
-	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
-	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
+	testSort("Directly Insert Sort", Sort_Insert_Direct, l);
+	testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
+	testSort("Shell Sort", Sort_Insert_Shell, b);
+	testSort("Bubble Sort", Sort_Bubble_Classic, c);
+	testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
+	testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
 	testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, f);
 	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, g);
+	testSort("Heap Sort", Sort_Heap, h);
 
 	SortList_Destroy(l);
 	SortList_Destroy(a);
@@ -484,7 +510,7 @@ void TestCost_Sort()
 	SortList_Destroy(e);
 	SortList_Destroy(f);
 	SortList_Destroy(g);
-	//SortList_Destroy(h);
+	SortList_Destroy(h);
 	//SortList_Destroy(i);
 
 

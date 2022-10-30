@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Sort_TestCase.h"
+#include "../API/Tree_Binary_Heap.h"
 
 //经典冒泡排序
 void Sort_Bubble_Classic(SortList* list)
@@ -113,7 +114,7 @@ void Sort_Quick_DoubleWay(SortList* list)
 	Sort_Quick_DoubleWay(list, 0, list->length - 1);
 }
 
-///————————————————————————
+///————————————————————————快排
 int Get_Datum_SingleWay(SortList* list, int index_start, int index_end)
 {
 	int temp = list->data[index_start].key;
@@ -146,3 +147,18 @@ void Sort_Quick_SingleWay(SortList* list)
 	Sort_Quick_SingleWay(list, 0, list->length - 1);
 }
 
+
+
+///——————————————————————堆排序
+
+void Sort_Heap(SortList* list)
+{///堆的第一个数组存储空间不使用
+	BinaryHeap* h = new BinaryHeap;
+	BinaryHeap_Init(h, list->length);
+	for (int i = 0; i < list->length; i++)///复制待排数据到堆中
+		BinaryHeap_Element_Insert(h, list->data[i].key);///插入的同时排序
+	for (int i = 0; i < list->length; i++)///复制回待排列表中
+		list->data[i].key = BinaryHeap_Root_Extract(h);
+
+	BinaryHeap_Destroy(h);
+}

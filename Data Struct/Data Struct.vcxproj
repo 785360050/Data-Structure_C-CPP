@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C\Algorithm\Sort_Swap.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp" />
     <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
     <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
     <ClCompile Include="C\Definition\Graph_matrix.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="C\API\Liner_Stack.h" />
     <ClInclude Include="C\API\Tree_Binary.h" />
     <ClInclude Include="C\API\Tree_Binary_AVL.h" />
+    <ClInclude Include="C\API\Tree_Binary_Heap.h" />
     <ClInclude Include="C\API\Tree_Binary_Search.h" />
     <ClInclude Include="C\API\Tree_Binary_Thread.h" />
     <ClInclude Include="C\API\Tree_MergeFind_Set.h" />
