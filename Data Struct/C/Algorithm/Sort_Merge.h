@@ -13,6 +13,7 @@ static void Merge(SortList* list, int left, int mid, int right)
 	Element* a1 = new Element[num_left];
 	Element* a2 = new Element[num_right];
 
+	///复制原有数据元素到辅助空间
 	for (int i = 0; i < num_left; i++)
 		a1[i] = list->data[left + i];
 	for (int i = 0; i < num_right; i++)
@@ -54,12 +55,14 @@ static void Merge(SortList* list, int left, int mid, int right)
 static void BinaryMerge(SortList* list, int index_left, int index_right)
 {
 	if (index_left >= index_right)
-		return;
+		return;///递归终止
 	int mid = (index_left + index_right) / 2;
 
 	BinaryMerge(list, index_left, mid);
 	BinaryMerge(list, mid + 1, index_right);
+	/// 递	拆分所有元素为独立的有序数组
 	///——————————————————————
+	/// 归	合并有序数组
 	Merge(list, index_left, mid, index_right);
 }
 
