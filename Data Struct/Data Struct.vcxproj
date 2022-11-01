@@ -130,7 +130,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C\Algorithm\Sort_Swap.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp" />
     <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
     <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
@@ -152,6 +151,7 @@
     <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
     <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
     <ClInclude Include="C\Algorithm\Sort_Insert.h" />
+    <ClInclude Include="C\Algorithm\Sort_Merge.h" />
     <ClInclude Include="C\Algorithm\Sort_Swap.h" />
     <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
     <ClInclude Include="C\API\Global Variables.h" />

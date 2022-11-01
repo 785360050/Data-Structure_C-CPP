@@ -456,6 +456,7 @@ void TestCriticalPath()
 #include "C/Algorithm/Sort_TestCase.h"
 #include "C/Algorithm/Sort_Insert.h"
 #include "C/Algorithm/Sort_Swap.h"
+#include "C/Algorithm/Sort_Merge.h"
 void TestSort()
 {
 	int n = 10;
@@ -471,7 +472,8 @@ void TestSort()
 	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, l);
 	//testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, l);
 	//testSort("Quick Sort Single Way", Sort_Quick_SingleWay, l);
-	testSort("Heap Sort", Sort_Heap, l);
+	//testSort("Heap Sort", Sort_Heap, l);
+	testSort("Binary Merge Sort", Sort_Merge, l);
 
 	SortList_Show(l);
 	SortList_Destroy(l);
@@ -492,15 +494,15 @@ void TestCost_Sort()
 	SortList* h = SortList_Copy(l);
 	//SortList* i = SortList_Copy(l);
 
-	testSort("Directly Insert Sort", Sort_Insert_Direct, l);
-	testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
-	testSort("Shell Sort", Sort_Insert_Shell, b);
-	testSort("Bubble Sort", Sort_Bubble_Classic, c);
-	testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
-	testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
+	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
+	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
+	//testSort("Shell Sort", Sort_Insert_Shell, b);
+	//testSort("Bubble Sort", Sort_Bubble_Classic, c);
+	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
+	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
 	testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, f);
 	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, g);
-	testSort("Heap Sort", Sort_Heap, h);
+	//testSort("Heap Sort", Sort_Heap, h);
 
 	SortList_Destroy(l);
 	SortList_Destroy(a);
@@ -532,8 +534,8 @@ void Test_C()
 	//TestShortestPath();
 	//TestTopoSort();
 	//TestCriticalPath();
-	//TestSort();
-	TestCost_Sort();
+	TestSort();
+	//TestCost_Sort();
 }
 
 #endif // C
