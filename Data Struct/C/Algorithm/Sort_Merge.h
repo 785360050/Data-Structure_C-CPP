@@ -14,9 +14,9 @@ static void Merge(SortList* list, int left, int mid, int right)
 	Element* a2 = new Element[num_right];
 
 	for (int i = 0; i < num_left; i++)
-		a1[i] = list->data[left];
+		a1[i] = list->data[left + i];
 	for (int i = 0; i < num_right; i++)
-		a2[i] = list->data[mid + i];
+		a2[i] = list->data[mid + i + 1];
 
 	///合并有序数组算法合并两组数据
 	int i = 0, j = 0, k = left;
@@ -59,6 +59,7 @@ static void BinaryMerge(SortList* list, int index_left, int index_right)
 
 	BinaryMerge(list, index_left, mid);
 	BinaryMerge(list, mid + 1, index_right);
+	///——————————————————————
 	Merge(list, index_left, mid, index_right);
 }
 

@@ -492,17 +492,18 @@ void TestCost_Sort()
 	SortList* f = SortList_Copy(l);
 	SortList* g = SortList_Copy(l);
 	SortList* h = SortList_Copy(l);
-	//SortList* i = SortList_Copy(l);
+	SortList* i = SortList_Copy(l);
 
-	//testSort("Directly Insert Sort", Sort_Insert_Direct, l);
-	//testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
-	//testSort("Shell Sort", Sort_Insert_Shell, b);
-	//testSort("Bubble Sort", Sort_Bubble_Classic, c);
-	//testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
-	//testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
+	testSort("Directly Insert Sort", Sort_Insert_Direct, l);
+	testSort("Optimized Directly Insert Sort", Sort_Insert_Direct_Optimized, a);
+	testSort("Shell Sort", Sort_Insert_Shell, b);
+	testSort("Bubble Sort", Sort_Bubble_Classic, c);
+	testSort("Bubble Sort Optimized 1", Sort_Bubble_Optimized_1, d);
+	testSort("Bubble Sort Optimized 2", Sort_Bubble_Optimized_2, e);
 	testSort("Quick Sort Double Way", Sort_Quick_DoubleWay, f);
 	testSort("Quick Sort Single Way", Sort_Quick_SingleWay, g);
-	//testSort("Heap Sort", Sort_Heap, h);
+	testSort("Heap Sort", Sort_Heap, h);
+	testSort("Binary Merge Sort", Sort_Merge, i);
 
 	SortList_Destroy(l);
 	SortList_Destroy(a);
@@ -513,7 +514,7 @@ void TestCost_Sort()
 	SortList_Destroy(f);
 	SortList_Destroy(g);
 	SortList_Destroy(h);
-	//SortList_Destroy(i);
+	SortList_Destroy(i);
 
 
 }
@@ -534,8 +535,8 @@ void Test_C()
 	//TestShortestPath();
 	//TestTopoSort();
 	//TestCriticalPath();
-	TestSort();
-	//TestCost_Sort();
+	//TestSort();
+	TestCost_Sort();
 }
 
 #endif // C

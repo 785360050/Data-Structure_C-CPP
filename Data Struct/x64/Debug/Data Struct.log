@@ -4,6 +4,6 @@ D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_MininumSpanningTree
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_MininumSpanningTree.h(97,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Sort_TestCase.h(50,22): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Sort_TestCase.h(60,22): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(779,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(780,1): warning C4326: “main”的返回类型应为“int”而非“void”
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_CriticalPath.h(73): warning C4715: “TopoSort_ForCriticalPath”: 不是所有的控件路径都返回值
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Struct.exe
