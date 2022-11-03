@@ -22,8 +22,8 @@ DataType SeqList_Delete(SeqList* List, int pos);
 void SeqList_Update(SeqList* List, int pos, DataType data);
 //显示顺序表List元素空间上的所有元素
 void SeqList_Show(SeqList* List);
-
-
+//查询顺序表中数据元素data的索引位置
+DataType SeqList_Element_Locate(SeqList* List, DataType data);
 
 
 

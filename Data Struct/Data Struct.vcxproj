@@ -24,6 +24,7 @@
     <ProjectGuid>{1ef7f2bd-09e1-4bb1-9f1e-68d7ad7da62a}</ProjectGuid>
     <RootNamespace>DataStruct</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Data Structure</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -150,6 +151,7 @@
     <ClInclude Include="C\Algorithm\Graph_CriticalPath.h" />
     <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
     <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
+    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h" />
     <ClInclude Include="C\Algorithm\Sort_Insert.h" />
     <ClInclude Include="C\Algorithm\Sort_Merge.h" />
     <ClInclude Include="C\Algorithm\Sort_Swap.h" />

@@ -35,6 +35,7 @@ void TestSeqList()
 	std::cout << SeqList_Delete(L, 3) << std::endl;
 	SeqList_Update(L, 9, 9);
 	SeqList_Show(L);
+	std::cout << "元素9的索引位置是：" << SeqList_Element_Locate(L, 9) << std::endl;
 	SeqList_Destroy(L);
 }
 
@@ -521,7 +522,7 @@ void TestCost_Sort()
 
 void Test_C()
 {
-	//TestSeqList();//完毕
+	TestSeqList();//完毕
 	//TestLinkList();//完毕
 	//TestSeqStack();//完毕
 	//TestLinkStack();//完毕
@@ -536,7 +537,7 @@ void Test_C()
 	//TestTopoSort();
 	//TestCriticalPath();
 	//TestSort();
-	TestCost_Sort();
+	//TestCost_Sort();
 }
 
 #endif // C

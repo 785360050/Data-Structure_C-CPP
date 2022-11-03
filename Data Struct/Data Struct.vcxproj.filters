@@ -128,5 +128,8 @@
     <ClInclude Include="C\Algorithm\Sort_Merge.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

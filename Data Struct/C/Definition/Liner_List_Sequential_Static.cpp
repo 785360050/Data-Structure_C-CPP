@@ -101,6 +101,24 @@ void SeqList_Update(SeqList* List, int pos, DataType data)
 	List->data[pos - 1] = data;
 }
 
+int SeqList_Element_Locate(SeqList* List, DataType data)
+{
+	try
+	{
+		if (List->length == 0)
+			throw 1;
+	}
+	catch (...)
+	{
+		std::cout << "Search Failed: List is not exist" << std::endl;
+		return NULL;
+	}
+	int index = 0;
+	while (List->data[index] != data && index < List->maxsize)
+		index++;
+	return index;
+}
+
 void SeqList_Show(SeqList* List)
 {
 	try
