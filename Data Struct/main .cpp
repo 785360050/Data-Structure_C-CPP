@@ -9,6 +9,7 @@
 ///C
 #include "C/API/Liner_List_Link.h"
 #include "C/API/Liner_List_Sequential.h"
+#include "C/API/Liner_List_Hash.h"
 #include "C/API/Liner_Stack.h"
 #include "C/API/Liner_Queue.h"
 #include "C/API/Tree_Binary.h"
@@ -38,7 +39,6 @@ void TestSeqList()
 	std::cout << "元素9的索引位置是：" << SeqList_Element_Locate(L, 9) << std::endl;
 	SeqList_Destroy(L);
 }
-
 void TestLinkList()
 {
 	/// <summary>
@@ -61,6 +61,14 @@ void TestLinkList()
 	std::cout << LinkList_GetElem(p) << std::endl;
 	LinkList_DeleteList(L);
 
+}
+void TestHashList()
+{
+	HashList* h = new HashList;
+	HashList_Init(h, 5);
+	HashList_Show(h);
+
+	HashList_Destroy(h);
 }
 
 void TestSeqStack()
@@ -520,24 +528,40 @@ void TestCost_Sort()
 
 }
 
+#include "C/Algorithm/Search_Static_Sequential.h"
+void TestSearch()
+{
+	SearchList* s = new SearchList;
+	SearchList_Init(s, 10);
+	SearchList_Show(s);
+
+	int result = Search_Sequence(s, 3);
+	std::cout << result << std::endl;
+	result = Search_Binary(s, 5);
+	std::cout << result << std::endl;
+
+}
+
 void Test_C()
 {
-	TestSeqList();//完毕
+	//TestSeqList();//完毕
 	//TestLinkList();//完毕
+	TestHashList();
 	//TestSeqStack();//完毕
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
 	//TestBinaryTree();//完毕
-	//TestMergeFindSet();
-	//TestMatrixGraph();
-	//TestAdjacencyListGraph();
-	//TestMininumSpanningTree();
-	//TestShortestPath();
-	//TestTopoSort();
-	//TestCriticalPath();
-	//TestSort();
-	//TestCost_Sort();
+	//TestMergeFindSet();//完毕
+	//TestMatrixGraph();//完毕
+	//TestAdjacencyListGraph();//完毕
+	//TestMininumSpanningTree();//完毕
+	//TestShortestPath();//完毕
+	//TestTopoSort();//完毕
+	//TestCriticalPath();//完毕
+	//TestSort();//完毕
+	//TestCost_Sort();//完毕
+	//TestSearch();
 }
 
 #endif // C
