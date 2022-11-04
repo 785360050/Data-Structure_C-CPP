@@ -75,8 +75,8 @@ void HashList_Show(const HashList* const list)
 		return;
 	}
 	std::cout
-		<< "Length:" << list->length
-		<< "Maxsize:" << list->maxsize;
+		<< "Length:" << list->length << std::endl
+		<< "Maxsize:" << list->maxsize << std::endl;
 	for (int i = 0; i < list->maxsize; i++)
 		std::cout << list->data[i] << ' ';
 	std::cout << std::endl;

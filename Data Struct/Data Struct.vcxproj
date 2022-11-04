@@ -145,7 +145,6 @@
     <ClCompile Include="C\Definition\Tree_Binary_Search.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
     <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp" />
-    <ClCompile Include="C\Definition\Liner_List_Hash.cpp" />
     <ClCompile Include="main .cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +161,7 @@
     <ClInclude Include="C\API\Graph_EdgeSetList.h" />
     <ClInclude Include="C\API\Graph_matrix.h" />
     <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h" />
+    <ClInclude Include="C\API\Liner_List_Hash.h" />
     <ClInclude Include="C\API\Liner_List_Link.h" />
     <ClInclude Include="C\API\Liner_List_Sequential.h" />
     <ClInclude Include="C\API\Liner_Queue.h" />
@@ -172,7 +172,6 @@
     <ClInclude Include="C\API\Tree_Binary_Search.h" />
     <ClInclude Include="C\API\Tree_Binary_Thread.h" />
     <ClInclude Include="C\API\Tree_MergeFind_Set.h" />
-    <ClInclude Include="C\API\Liner_List_Hash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

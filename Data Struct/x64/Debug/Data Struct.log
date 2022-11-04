@@ -1,49 +1,4 @@
 ﻿D:\Visual Studio\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Data Struct.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  Tree_Binary_Heap.cpp
-  Graph_AdjacencyList.cpp
-  Graph_EdgeSetList.cpp
-  Graph_matrix.cpp
-  Liner_List_Link.cpp
-  Liner_List_Sequential_Static.cpp
-  Liner_Queue.cpp
-  Liner_Stack_Link.cpp
-  Liner_Stack_Sequential.cpp
-  Tree_Binary.cpp
-  Tree_Binary_AVL.cpp
-  Tree_Binary_Search.cpp
-  Tree_Binary_Thread.cpp
-  Tree_MergeFind_Set.cpp
-  Liner_List_Hash.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x135 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x136 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x139 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x140 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x141 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x142 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x146 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x147 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x148 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x195 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x196 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x199 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a1 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a4 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a7 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1aa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1ac 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1b0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
   main .cpp
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x135 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x136 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
@@ -160,15 +115,5 @@ D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(1,1): warning C4828: 文件包含在偏移 0x4bb 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(7,22): warning C4091: “extern ”: 没有声明变量时忽略“Element”的左侧
 D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(805,1): warning C4326: “main”的返回类型应为“int”而非“void”
-  正在生成代码...
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_CriticalPath.h(73): warning C4715: “TopoSort_ForCriticalPath”: 不是所有的控件路径都返回值
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Tree_Binary_Thread.cpp(16): warning C4715: “BinaryTree_Init_Root”: 不是所有的控件路径都返回值
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Tree_Binary_Search.cpp(145): warning C4715: “BinaryTree_Search_Delete”: 不是所有的控件路径都返回值
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Link.cpp(99): warning C4715: “CheckPosition”: 不是所有的控件路径都返回值
-main .obj : error LNK2005: "int __cdecl CollisionFuction_OpenAddressing_LinerProbing(struct HashList *,int,int)" (?CollisionFuction_OpenAddressing_LinerProbing@@YAHPEAUHashList@@HH@Z) 已经在 Liner_List_Hash.obj 中定义
-main .obj : error LNK2005: "int __cdecl HashFunction_Remain(int,int)" (?HashFunction_Remain@@YAHHH@Z) 已经在 Liner_List_Hash.obj 中定义
-main .obj : error LNK2005: "void __cdecl HashList_Destroy(struct HashList *)" (?HashList_Destroy@@YAXPEAUHashList@@@Z) 已经在 Liner_List_Hash.obj 中定义
-main .obj : error LNK2005: "void __cdecl HashList_Init(struct HashList *,int)" (?HashList_Init@@YAXPEAUHashList@@H@Z) 已经在 Liner_List_Hash.obj 中定义
-main .obj : error LNK2005: "void __cdecl HashList_Insert(struct HashList *,int)" (?HashList_Insert@@YAXPEAUHashList@@H@Z) 已经在 Liner_List_Hash.obj 中定义
-main .obj : error LNK2005: "void __cdecl HashList_Show(struct HashList const * const)" (?HashList_Show@@YAXQEBUHashList@@@Z) 已经在 Liner_List_Hash.obj 中定义
-D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe : fatal error LNK1169: 找到一个或多个多重定义的符号
+  Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe
