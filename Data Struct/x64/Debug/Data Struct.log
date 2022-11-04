@@ -1,35 +1,96 @@
 ﻿D:\Visual Studio\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Data Struct.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Liner_List_Hash.cpp
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf1 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf2 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf6 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf7 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xf9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xfa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xfb 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xfc 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xfd 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0xfe 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x102 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x103 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x104 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x152 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x153 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x156 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x157 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x158 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x15a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x15b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x15c 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x15d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x15e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x161 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x164 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x165 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x167 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x169 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Liner_List_Hash.cpp(1,1): warning C4828: 文件包含在偏移 0x16d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xad 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xae 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb1 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb2 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb3 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb6 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb7 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xba 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xbe 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xbf 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xc0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf4 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfc 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfd 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfe 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xff 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x100 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x103 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x106 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x107 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x109 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x10b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x10f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
   main .cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x135 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x136 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x139 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x13f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x140 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x141 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x142 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x146 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x147 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x148 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x195 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x196 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x199 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x19f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a1 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a4 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a7 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1a8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1aa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1ac 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x1b0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xad 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xae 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb1 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb2 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb3 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb6 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb7 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xb9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xba 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xbe 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xbf 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xc0 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf4 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xf9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfc 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfd 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xfe 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0xff 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x100 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x103 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x106 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x107 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x109 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x10b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x10f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_MininumSpanningTree.h(30,6): warning C4101: “a”: 未引用的局部变量
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_MininumSpanningTree.h(30,9): warning C4101: “b”: 未引用的局部变量
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_MininumSpanningTree.h(97,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
@@ -115,5 +176,6 @@ D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(1,1): warning C4828: 文件包含在偏移 0x4bb 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(7,22): warning C4091: “extern ”: 没有声明变量时忽略“Element”的左侧
 D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(805,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  正在生成代码...
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_CriticalPath.h(73): warning C4715: “TopoSort_ForCriticalPath”: 不是所有的控件路径都返回值
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

@@ -60,6 +60,9 @@
     <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Definition\Liner_List_Hash.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h">

@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C\Definition\Liner_List_Hash.cpp" />
     <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp" />
     <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
     <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
