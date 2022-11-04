@@ -64,11 +64,46 @@ void TestLinkList()
 }
 void TestHashList()
 {
+	//线性探测法解决冲突
+	std::cout << "线性探测法解决冲突" << std::endl;
 	HashList* h = new HashList;
 	HashList_Init(h, 5);
 	HashList_Show(h);
+	HashList_Insert(h, 1);
+	HashList_Insert(h, 2);
+	HashList_Insert(h, 7);
+	HashList_Insert(h, 12);
+	HashList_Insert(h, 17);
+	HashList_Show(h);
+
+	std::cout << "key为12的下标索引为:" << HashList_Locate(h, 12) << std::endl;
+	std::cout << "key为2的下标索引为:" << HashList_Locate(h, 2) << std::endl;
+	std::cout << "key为17的下标索引为:" << HashList_Locate(h, 17) << std::endl;
 
 	HashList_Destroy(h);
+
+	///——————————————————————————
+	std::cout << std::endl;
+	//链地址法解决冲突
+	std::cout << "链地址法解决冲突" << std::endl;
+	HashList_Link* h2 = new HashList_Link;
+	HashList_Init(h2, 5);
+	HashList_Show(h2);
+
+	HashList_Insert(h2, 1);
+	HashList_Insert(h2, 2);
+	HashList_Insert(h2, 3);
+	HashList_Insert(h2, 4);
+	HashList_Insert(h2, 5);
+	HashList_Insert(h2, 7);
+	HashList_Insert(h2, 12);
+	HashList_Insert(h2, 23);
+	HashList_Show(h2);
+
+	std::cout << "key为12的下标索引为:" << HashList_Locate(h2, 12) << std::endl;
+	std::cout << "key为23的下标索引为:" << HashList_Locate(h2, 23) << std::endl;
+
+	HashList_Destroy(h2);
 }
 
 void TestSeqStack()
