@@ -16,6 +16,7 @@
 #include "C/API/Tree_Binary_Thread.h"
 #include "C/API/Tree_Binary_Search.h"
 #include "C/API/Tree_Binary_AVL.h"
+#include "C/API/Tree_Binary_BRT.h"
 #include "C/API/Tree_MergeFind_Set.h"
 #include "C/API/Graph_matrix.h"
 #include "C/API/Graph_AdjacencyList.h"
@@ -284,7 +285,25 @@ void BinarySearch_AVL()
 	BinaryTree_Traversal_Inorder_AVL(Tree->root);
 	BinaryTree_Destory(Tree);
 }
+void BinarySearch_RBT()
+{
+	RBTree* tree = BRT_Init();
 
+	RBNode* a = RBNode_Create(1);
+	RBNode* b = RBNode_Create(2);
+	RBNode* c = RBNode_Create(3);
+	//RBNode* d = RBNode_Create(4);
+	//RBNode* e = RBNode_Create(5);
+
+	RBTree_Insert(tree, a);
+	RBTree_Insert(tree, b);
+	RBTree_Insert(tree, c);
+	//RBTree_Insert(tree, d);
+	//RBTree_Insert(tree, e);
+
+	RBTree_Traverse_Inorder(tree->root);
+	RBTree_Destroy(tree);
+}
 
 void Binary_Heap()
 {
@@ -313,7 +332,8 @@ void TestBinaryTree()
 	//BinaryThreadTree();
 	//BinarySearch();
 	//BinarySearch_AVL();
-	Binary_Heap();
+	BinarySearch_RBT();
+	//Binary_Heap();
 }
 
 void TestMergeFindSet()
@@ -581,12 +601,12 @@ void Test_C()
 {
 	//TestSeqList();//完毕
 	//TestLinkList();//完毕
-	TestHashList();
+	//TestHashList();
 	//TestSeqStack();//完毕
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	//TestBinaryTree();//完毕
+	TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
