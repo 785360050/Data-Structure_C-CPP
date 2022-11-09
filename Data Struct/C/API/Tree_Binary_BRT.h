@@ -36,3 +36,4 @@ RBNode* RBNode_Create(int key, Colour colour = red);
 void RBTree_Insert(RBTree* tree, RBNode* node);
 
 void RBTree_Traverse_Inorder(RBNode* node);
+void RBTree_Traverse_Preorder(RBNode* node);

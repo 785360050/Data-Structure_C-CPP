@@ -37,17 +37,20 @@ static void Rotate_Right(RBTree* tree, RBNode* node)
 //节点颜色切换
 static void Colour_Switch(RBNode* const node)
 {
+	//node->colour = node->colour == red ? black : red;
 	if (node->colour == red)
 		node->colour = black;
+	else
+		node->colour = red;
 }
 static void RBTree_Adjust(RBTree* tree, RBNode* node)
 {
 	RBNode* parent, * ancestor, * uncle, * temp;//ancestor=GrandParent
 	parent = node->partent;
-	while (parent && parent->colour == red)
+	while (parent && (parent->colour == red))
 	{///父节点为红
 		ancestor = parent->partent;
-		parent = ancestor->left ?///定位uncle节点位置
+		parent == ancestor->left ?///定位uncle节点位置
 			uncle = ancestor->right : uncle = ancestor->left;
 		if (uncle && uncle->colour == red)
 		{///叔节点为红色->父、祖父、叔节点变色
@@ -58,37 +61,38 @@ static void RBTree_Adjust(RBTree* tree, RBNode* node)
 			parent = node->partent;
 			continue;
 		}
+		///叔节点为黑色
 		if (ancestor->left == parent)
 		{///L
 			if (parent->right == node)
-			{///LR插入->左旋转为LL
+			{///LR插入->左旋转父节点为LL
 				Rotate_Left(tree, parent);
 				temp = parent;
 				parent = node;
 				node = temp;
 			}
-			///LL时->右旋+变色祖父、父节点
-			Rotate_Right(tree, parent);
+			///LL时->右旋祖父节点+变色祖父、父节点
+			Rotate_Right(tree, ancestor);
 			Colour_Switch(ancestor);
 			Colour_Switch(parent);
 		}
 		else
-		{///叔节点为黑
+		{///R
 			if (parent->left == node)
-			{///RL插入->右边旋转为RR
+			{///RL插入->右旋父节点为RR
 				Rotate_Right(tree, parent);
 				temp = parent;
 				parent = node;
 				node = temp;
 			}
-			///RR时->左旋+变色祖父、父节点
-			Rotate_Left(tree, parent);
+			///RR时->左旋祖父节点+变色祖父、父节点
+			Rotate_Left(tree, ancestor);
 			Colour_Switch(ancestor);
 			Colour_Switch(parent);
 		}
 	}
 	///插入为根时，跳过所有条件判断变色根节点
-	Colour_Switch(tree->root);
+	tree->root->colour = black;
 }
 
 
@@ -187,7 +191,15 @@ void RBTree_Traverse_Inorder(RBNode* node)
 		RBTree_Traverse_Inorder(node->right);//R
 	}
 }
-
+void RBTree_Traverse_Preorder(RBNode* node)
+{
+	if (node)
+	{
+		RBTree_Visit(node);//D
+		RBTree_Traverse_Preorder(node->left);//L
+		RBTree_Traverse_Preorder(node->right);//R
+	}
+}
 
 
 

@@ -289,19 +289,32 @@ void BinarySearch_RBT()
 {
 	RBTree* tree = BRT_Init();
 
-	RBNode* a = RBNode_Create(1);
-	RBNode* b = RBNode_Create(2);
-	RBNode* c = RBNode_Create(3);
-	//RBNode* d = RBNode_Create(4);
-	//RBNode* e = RBNode_Create(5);
+	RBNode* a = RBNode_Create(8);
+	RBNode* b = RBNode_Create(5);
+	RBNode* c = RBNode_Create(15);
+	RBNode* d = RBNode_Create(12);
+	RBNode* e = RBNode_Create(19);
+	RBNode* f = RBNode_Create(9);
+	RBNode* g = RBNode_Create(13);
+	RBNode* h = RBNode_Create(23);
+	RBNode* i = RBNode_Create(10);
 
 	RBTree_Insert(tree, a);
 	RBTree_Insert(tree, b);
 	RBTree_Insert(tree, c);
-	//RBTree_Insert(tree, d);
-	//RBTree_Insert(tree, e);
+	RBTree_Insert(tree, d);///叔红 变色父、祖父、叔节点
+	RBTree_Insert(tree, e);
+	RBTree_Insert(tree, f);///叔红 变色父、祖父、叔节点
+	RBTree_Insert(tree, g);
+	RBTree_Insert(tree, h);
+	///叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
+	RBTree_Insert(tree, i);
 
+	std::cout << "\nDLR:";
+	RBTree_Traverse_Preorder(tree->root);
+	std::cout << "\nLDR:";
 	RBTree_Traverse_Inorder(tree->root);
+
 	RBTree_Destroy(tree);
 }
 
