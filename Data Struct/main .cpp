@@ -345,6 +345,11 @@ void Binary_Heap()
 	BinaryHeap_Destroy(h);
 }
 
+void Test_B_Tree()
+{
+
+}
+
 void TestBinaryTree()
 {
 	//BinaryTree();
@@ -625,7 +630,7 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	TestBinaryTree();//完毕
+	//TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
@@ -636,6 +641,7 @@ void Test_C()
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
 	//TestSearch();
+	Test_B_Tree();
 }
 
 #endif // C
