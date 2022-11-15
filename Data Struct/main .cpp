@@ -297,7 +297,6 @@ void BinarySearch_RBT()
 	RBNode* f = RBNode_Create(9);
 	RBNode* g = RBNode_Create(13);
 	RBNode* h = RBNode_Create(23);
-	RBNode* i = RBNode_Create(10);
 
 	RBTree_RBNode_Insert(tree, a);
 	RBTree_RBNode_Insert(tree, b);
@@ -307,19 +306,21 @@ void BinarySearch_RBT()
 	RBTree_RBNode_Insert(tree, f);///叔红 变色父、祖父、叔节点
 	RBTree_RBNode_Insert(tree, g);
 	RBTree_RBNode_Insert(tree, h);
-	///叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
-	RBTree_RBNode_Insert(tree, i);
+	/////叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
 
-	RBTree_RBNode_Delete(tree, i);
-	RBTree_RBNode_Delete(tree, h);
-	RBTree_RBNode_Delete(tree, g);
+	RBTree_RBNode_Delete(tree, 15);
+	RBTree_RBNode_Delete(tree, 19);
+	RBTree_RBNode_Delete(tree, 13);
+	RBTree_RBNode_Delete(tree, 23);
+
+	
 
 	std::cout << "\nDLR:";
 	RBTree_Traverse_Preorder(tree->root);
 	std::cout << "\nLDR:";
 	RBTree_Traverse_Inorder(tree->root);
 
-	std::cout <<std::endl<<"\n搜索节点13：" << RBTree_Search(tree, 13)->key;
+	std::cout <<std::endl<<"\n搜索节点9：目标节点值为" << RBTree_Search(tree, 9)->key;
 
 	RBTree_Destroy(tree);
 }
@@ -630,7 +631,7 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	//TestBinaryTree();//完毕
+	TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
@@ -641,7 +642,7 @@ void Test_C()
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
 	//TestSearch();
-	Test_B_Tree();
+	//Test_B_Tree();
 }
 
 #endif // C

@@ -96,78 +96,109 @@ static void RBTree_Adjust_Insert(RBTree* tree, RBNode* node)
 	///插入为根时，跳过所有条件判断变色根节点
 	tree->root->colour = black;
 }
-static void RBTree_Adjust_Delete(RBTree* tree, RBNode* del, RBNode* parent)
+static void RBTree_Adjust_Delete(RBTree* tree, RBNode* instead, RBNode* parent)
 {
-	RBNode* temp;
-	while (tree->root != del->partent && (!del || del->colour == black))
-	{///del为非红时
-		if (parent->left==del)
-		{///del为左孩子
-			temp = parent->right;
-			if (temp->colour == red)
-			{///兄弟节点为红色
-				Colour_Switch(temp);
-				Colour_Switch(parent);
+	RBNode* brother;
+	while 
+	(
+		tree->root != instead			///instead非根
+		&& 
+		(!instead || instead->colour == black)	///instead为黑
+	)///instead为黑
+	{///instead非根节点，且为红色时
+		if (parent->left== instead)
+		{///instead为左孩子,则brother为右孩子
+			brother = parent->right;
+			if (brother->colour == red)
+			{///兄弟节点为红色时
+				/// 父、兄变色，旋转 转为兄黑处理
+				//Colour_Switch(brother);
+				//Colour_Switch(parent);
+				brother->colour = black;
+				parent->colour = red;
 				Rotate_Left(tree, parent);
-				temp = parent->right;
+				brother = parent->right;
 			}
-			if ((!temp->left && temp->left->colour == black) && (!temp || temp->right->colour == black))
-			{///兄弟节点为黑色
-				Colour_Switch(temp);
-				del = parent;
-				parent = del->partent;
+			if ((!brother->left && brother->left->colour == black)	
+				&& 
+				(!brother || brother->right->colour == black))
+			{///兄弟两孩子都为黑色
+				///兄弟变红，while执行向上递推处理
+				//Colour_Switch(brother);
+				brother->colour = red;
+				instead = parent;
+				parent = instead->partent;
 			}
 			else
 			{///兄弟节点至少有一个为红色
-				if (!temp->right || temp->right->colour == black)
-				{///temp右孩子非红时
-					Colour_Switch(temp->left);
-					Colour_Switch(temp);
-					Rotate_Right(tree, temp);
-					temp = parent->right;
+				if (!brother->right || brother->right->colour == black)
+				{///LR红时，转为LL红
+					//Colour_Switch(brother->left);
+					//Colour_Switch(brother);
+					brother->left->colour = black;
+					brother->colour = red;
+					Rotate_Right(tree, brother);
+					brother = parent->right;
 				}
-				temp->colour = parent->colour;
-				Colour_Switch(temp->right);
-				Colour_Switch(parent);
+				///RR红时
+				brother->colour = parent->colour;
+				//Colour_Switch(brother->right);
+				//Colour_Switch(parent);
+				brother->right->colour = black;
+				parent->colour = black;
 				Rotate_Left(tree, parent);
 				break;
 			}
 		}
 		else
-		{
-			temp = parent->left;
-			if (temp->colour == red)
-			{
-				Colour_Switch(temp);
-				Colour_Switch(parent);
+		{///brother为左孩子,方法同上
+			brother = parent->left;
+			if (brother->colour == red)
+			{///兄弟节点为红色时
+				/// 父、兄变色，旋转 转为兄黑处理
+				//Colour_Switch(brother);
+				//Colour_Switch(parent);
+				brother->colour = black;
+				parent->colour = red;
 				Rotate_Right(tree, parent);
-				temp = parent->left;
+				brother = parent->left;
 			}
-			if ((!temp->left || temp->left->colour == black) && (!temp->right || temp->right->colour == black))
-			{
-				Colour_Switch(temp);
-				Colour_Switch(del);
-				parent = del->partent;
+			if ((!brother->left || brother->left->colour == black) 
+				&& 
+				(!brother->right || brother->right->colour == black))
+			{///兄弟两孩子都为黑色
+				///兄弟变红，while执行向上递推处理
+				//Colour_Switch(brother);
+				//Colour_Switch(instead);
+				brother->colour = red;
+				instead = parent;
+				parent = instead->partent;
 			}
 			else
 			{
-				if (!temp->left || temp->left->colour == black)
-				{///通向为黑色时
-					Colour_Switch(temp->right);
-					Colour_Switch(temp);
-					Rotate_Left(tree, temp);
-					temp = parent->left;
+				if (!brother->left || brother->left->colour == black)
+				{///RL红时，转RR处理
+					//Colour_Switch(brother->right);
+					//Colour_Switch(brother);
+					brother->right->colour = black;
+					brother->colour = red;
+					Rotate_Left(tree, brother);
+					brother = parent->left;
 
 				}
-				///通向红时
-				temp->colour = parent->colour;
-				Colour_Switch(temp);
-				Colour_Switch(parent);
+				///RR红时
+				brother->colour = parent->colour;
+				//Colour_Switch(brother);
+				//Colour_Switch(parent);
+				brother->left->colour = black;
+				parent->colour = black;
 				Rotate_Right(tree, parent);
 				break;
 			}
 		}
 	}
+	if (instead)
+		instead->colour = black;
 }
 
 
@@ -215,35 +246,69 @@ void RBTree_RBNode_Insert(RBTree* tree, RBNode* node)
 	tree->num++;
 }
 
-void RBTree_RBNode_Delete(RBTree* tree, RBNode* node)
+void RBTree_RBNode_Delete(RBTree* tree, int key)
 {
-	RBNode* del, * instead, * parent;
+	RBNode* node = RBTree_Search(tree, key);
+	if (!node)///删除节点不存在
+		return;
+
+	RBNode
+		* del,		///删除的节点
+		* instead,	///替换的节点，覆盖删除的节点del
+		* parent;	///父节点
+
+	///————————————————————————
+	///定位删除节点
+	///————————————————————————
 	if (node->left == nullptr || node->right == nullptr)
 		del = node;
 	else
-	{///del度为2，del指向中序逻辑后继
-		del = node->right;
-		while (del->left)
-			del = del->left;
+	{///del度为2时(逻辑后继)
+		//del = node->right;
+		//while (del->left)
+		//	del = del->left;
+		del = node->left;
+		while (del->right)///逻辑前驱
+			del = del->right;
 	}
-	///定位到删除节点，找删除节点的逻辑后继(替换节点)
+	///————————————————————————
+	///定位替换节点
+	///————————————————————————
 	instead = del->left ? del->left : del->right;
 	parent = del->partent;
+
+	///————————————————————————
 	///开始删除
+	///————————————————————————
 	if (instead)
 		instead->partent = parent;
-	if (del->partent == nullptr)
-		tree->root = instead;///替换根节点
-	else if (del->partent->left == del)
-		del->partent->left = instead;
+	if (del->partent == nullptr)	///del为根时
+		tree->root = instead;		///替换根节点
+	//else if (del->partent->left == del)
+	//	del->partent->left = instead;
+	//else
+	//	instead->partent->right = instead;
 	else
-		instead->partent->right = instead;
+	{
+		if (del->partent->left == del)
+			del->partent->left = instead;
+		else
+			del->partent->right = instead;
+	}
 
+	///————————————————————————
+	/// 删除del完毕，更新instead值
+	///————————————————————————
 	if (del != node)
 		node->key = del->key;
-	if (del->colour == black)
+
+	///————————————————————————
+	///删除红色节点不调整
+	///————————————————————————
+	if (del->colour == black)	///删除黑色节点时(删除并替换后)
 		RBTree_Adjust_Delete(tree, instead, parent);
 	delete del;
+	tree->num--;
 }
 
 RBNode* RBTree_Search(RBTree* tree, int key)

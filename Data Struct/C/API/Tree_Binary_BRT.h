@@ -36,7 +36,7 @@ RBNode* RBNode_Create(int key, Colour colour = red);
 void RBTree_RBNode_Insert(RBTree* tree, RBNode* node);
 
 //在红黑树tree插入node节点
-void RBTree_RBNode_Delete(RBTree* tree, RBNode* node);
+void RBTree_RBNode_Delete(RBTree* tree, int key);
 
 //搜索红黑树tree中键值为key的节点
 RBNode* RBTree_Search(RBTree* tree, int key);
