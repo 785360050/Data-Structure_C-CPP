@@ -1,4 +1,5 @@
 ﻿D:\Tools\Visual Studio\IDE\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Data Struct.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Tree_Advanced_B_Tree.cpp
   main .cpp
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x31 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\API\Liner_List_Hash.h(1,1): warning C4828: 文件包含在偏移 0x33 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
@@ -232,6 +233,8 @@ D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(1,1): warning C4828: 文件包含在偏移 0x4b9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(1,1): warning C4828: 文件包含在偏移 0x4bb 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Search_Static_Sequential.h(7,22): warning C4091: “extern ”: 没有声明变量时忽略“Element”的左侧
-D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(886,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\main .cpp(901,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  Tree_Binary_BRT.cpp
+  正在生成代码...
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Algorithm\Graph_CriticalPath.h(73): warning C4715: “TopoSort_ForCriticalPath”: 不是所有的控件路径都返回值
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

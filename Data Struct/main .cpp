@@ -26,6 +26,7 @@
 #include "C/Algorithm/Graph_TopoSort.h"
 #include "C/Algorithm/Graph_CriticalPath.h"
 #include "C/API/Tree_Binary_Heap.h"
+#include "C/API/Tree_Advanced_B_Tree.h"
 
 ///C function
 void TestSeqList()
@@ -348,7 +349,21 @@ void Binary_Heap()
 
 void Test_B_Tree()
 {
+	B_Tree* tree = new B_Tree;
+	B_Tree_Init(tree, 5);///
 
+	B_Tree_Insert(tree, 8);
+	B_Tree_Insert(tree, 9);
+	B_Tree_Insert(tree, 10);
+	B_Tree_Insert(tree, 11);
+	B_Tree_Insert(tree, 15);
+	B_Tree_Insert(tree, 16);
+	B_Tree_Insert(tree, 17);
+	B_Tree_Insert(tree, 18);
+
+	B_Tree_Traverse_Inorder(tree->root);
+	
+	B_Tree_Destroy(tree);
 }
 
 void TestBinaryTree()
@@ -631,7 +646,7 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	TestBinaryTree();//完毕
+	//TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
@@ -642,7 +657,7 @@ void Test_C()
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
 	//TestSearch();
-	//Test_B_Tree();
+	Test_B_Tree();
 }
 
 #endif // C

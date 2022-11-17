@@ -66,6 +66,9 @@
     <ClCompile Include="C\Definition\Tree_Binary_BRT.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C\Definition\Tree_Advanced_B_Tree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C\API\Global Variables.h">
@@ -141,6 +144,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C\API\Tree_Binary_BRT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\API\Tree_Advanced_B_Tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

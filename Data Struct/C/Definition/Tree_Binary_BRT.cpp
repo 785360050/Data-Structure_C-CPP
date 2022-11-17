@@ -263,7 +263,7 @@ void RBTree_RBNode_Delete(RBTree* tree, int key)
 	if (node->left == nullptr || node->right == nullptr)
 		del = node;
 	else
-	{///del度为2时(逻辑后继)
+	{///del度为2时
 		//del = node->right;
 		//while (del->left)
 		//	del = del->left;
@@ -272,7 +272,7 @@ void RBTree_RBNode_Delete(RBTree* tree, int key)
 			del = del->right;
 	}
 	///————————————————————————
-	///定位替换节点
+	///定位替换节点(逻辑前驱)
 	///————————————————————————
 	instead = del->left ? del->left : del->right;
 	parent = del->partent;
