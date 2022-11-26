@@ -8,7 +8,6 @@ struct AcrossList_Edge
 {
 	int weight;
 	struct AcrossList_Edge* next_tail;
-	struct AcrossList_Edge* next_tail;
 	int Arc_Tail;//弧头
 	int Arc_Head;//弧尾
 };
@@ -26,7 +25,7 @@ typedef struct AcrossList_Vertex Vertex_AcrossList;
 
 struct AcrossList
 {
-	AcrossList_Vertex[maxsize];
+	//AcrossList_Vertex[maxsize];
 	int num_node;
 	int num_edge;
 };

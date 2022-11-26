@@ -657,7 +657,7 @@ void Test_C()
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
 	//TestSearch();
-	Test_B_Tree();
+	//Test_B_Tree();
 }
 
 #endif // C

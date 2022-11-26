@@ -131,12 +131,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C++\main .cpp" />
+    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h" />
+    <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h" />
+    <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
+    <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
+    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h" />
+    <ClInclude Include="C\Algorithm\Sort_Insert.h" />
+    <ClInclude Include="C\Algorithm\Sort_Merge.h" />
+    <ClInclude Include="C\Algorithm\Sort_Swap.h" />
+    <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
+    <ClInclude Include="C\API\Global Variables.h" />
+    <ClInclude Include="C\API\Graph_AdjacencyList.h" />
+    <ClInclude Include="C\API\Graph_EdgeSetList.h" />
+    <ClInclude Include="C\API\Graph_matrix.h" />
+    <ClInclude Include="C\API\Liner_List_Hash.h" />
+    <ClInclude Include="C\API\Liner_List_Link.h" />
+    <ClInclude Include="C\API\Liner_List_Sequential.h" />
+    <ClInclude Include="C\API\Liner_Queue.h" />
+    <ClInclude Include="C\API\Liner_Stack.h" />
+    <ClInclude Include="C\API\Tree_Binary.h" />
+    <ClInclude Include="C\API\Tree_Binary_AVL.h" />
+    <ClInclude Include="C\API\Tree_Binary_BRT.h" />
+    <ClInclude Include="C\API\Tree_Binary_Heap.h" />
+    <ClInclude Include="C\API\Tree_Binary_Search.h" />
+    <ClInclude Include="C\API\Tree_Binary_Thread.h" />
+    <ClInclude Include="C\API\Tree_MergeFind_Set.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C++\Liner_List_ADT.h" />
-    <ClInclude Include="C++\Liner_List_Link.h" />
-    <ClInclude Include="C++\Liner_List_Sequential.h" />
+    <ClCompile Include="C\Definition\Graph_AcrossLinker.cpp" />
+    <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp" />
+    <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp" />
+    <ClCompile Include="C\Definition\Graph_matrix.cpp" />
+    <ClCompile Include="C\Definition\Liner_List_Hash.cpp" />
+    <ClCompile Include="C\Definition\Liner_List_Link.cpp" />
+    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp" />
+    <ClCompile Include="C\Definition\Liner_Queue.cpp" />
+    <ClCompile Include="C\Definition\Liner_Stack_Link.cpp" />
+    <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp" />
+    <ClCompile Include="C\Definition\Tree_Advanced_B_Tree.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_AVL.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_BRT.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_Search.cpp" />
+    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
+    <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp" />
+    <ClCompile Include="main .cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
