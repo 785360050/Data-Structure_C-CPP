@@ -196,6 +196,32 @@ void B_Tree_Insert(B_Tree* tree, int key)
 
 }
 
+static void Delete(B_Tree* tree, B_Node* parent, int position)
+{
+	if (parent->index[position])
+	{
+		Successor(parent, position);
+		Delete(tree, parent, 1);
+	}
+	else
+	{
+		RemoveNode(parent, position);
+		if (parent->length < (parent->maxsize - 1) / 2);	///阈值可自定义
+			//调整B树
+	}
+}
+void B_Tree_Delete(B_Tree* tree, int key)
+{
+	Result result = B_Tree_Search(tree, key);
+	if (result.tag)
+	{
+		Delete(tree,result.index,result.pos)
+		tree->count--;
+	}
+	else
+		std::cout << "key is not exist" << std::endl;
+}
+
 void B_Tree_Traverse_Inorder(B_Node* node)
 {
 	if (node)
