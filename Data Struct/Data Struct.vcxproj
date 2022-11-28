@@ -156,6 +156,7 @@
     <ClInclude Include="C\API\Tree_Binary_Search.h" />
     <ClInclude Include="C\API\Tree_Binary_Thread.h" />
     <ClInclude Include="C\API\Tree_MergeFind_Set.h" />
+    <ClInclude Include="C\API\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C\Definition\Graph_AcrossLinker.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp" />
     <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp" />
     <ClCompile Include="main .cpp" />
+    <ClCompile Include="C\Definition\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

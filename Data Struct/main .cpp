@@ -27,6 +27,7 @@
 #include "C/Algorithm/Graph_CriticalPath.h"
 #include "C/API/Tree_Binary_Heap.h"
 #include "C/API/Tree_Advanced_B_Tree.h"
+#include "C/API/String.h"
 
 ///C function
 void TestSeqList()
@@ -637,6 +638,28 @@ void TestSearch()
 
 }
 
+void Test_String()
+{
+	String string;
+	String Sub_String;
+	string.string_ = NULL;
+	String_Init(string, "ABCDABCABCABABCABCDA");
+	//String_Init(string, "ABC");
+	std::cout << string.string_ << std::endl;
+	Sub_String.string_ = NULL;
+	String_Init(Sub_String, "ABCABCD");
+	//String_Init(Sub_String, "BC");
+	std::cout << Sub_String.string_ << std::endl;
+
+	std::cout << "Brute Force: " <<
+		String_Fetch_Brute_Force(string, Sub_String) << std::endl;
+	std::cout << "KMP: " <<
+		String_Fetch_KMP(string, Sub_String) << std::endl;
+
+	String_Destroy(string);
+	String_Destroy(Sub_String);
+}
+
 void Test_C()
 {
 	//TestSeqList();//完毕
@@ -658,6 +681,7 @@ void Test_C()
 	//TestCost_Sort();//完毕
 	//TestSearch();
 	//Test_B_Tree();
+	Test_String();
 }
 
 #endif // C

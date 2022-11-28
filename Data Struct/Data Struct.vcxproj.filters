@@ -90,6 +90,9 @@
     <ClInclude Include="C\API\Tree_MergeFind_Set.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C\API\String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main .cpp">
@@ -147,6 +150,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="C\Definition\String.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
