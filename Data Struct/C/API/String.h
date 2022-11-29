@@ -2,7 +2,7 @@
 
 #include <iostream> 
 
-
+/// 从1开始存储，第一个空间不使用
 struct String
 {
 	char* string_;	///0开始计数

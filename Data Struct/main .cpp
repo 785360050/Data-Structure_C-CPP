@@ -643,18 +643,26 @@ void Test_String()
 	String string;
 	String Sub_String;
 	string.string_ = NULL;
-	String_Init(string, "ABCDABCABCABABCABCDA");
+	//String_Init(string, "ABCDABCABCABABCABCDA");
+	//String_Init(string, "bacbababaabcbab");
+	//String_Init(string, "ABADABABC");
 	//String_Init(string, "ABC");
 	std::cout << string.string_ << std::endl;
 	Sub_String.string_ = NULL;
-	String_Init(Sub_String, "ABCABCD");
-	//String_Init(Sub_String, "BC");
+	//String_Init(Sub_String, "ABCABCD");
+	//String_Init(Sub_String, "abababca");
+	//String_Init(Sub_String, "ABC");
+	//String_Init(Sub_String, "C");
 	std::cout << Sub_String.string_ << std::endl;
 
 	std::cout << "Brute Force: " <<
 		String_Fetch_Brute_Force(string, Sub_String) << std::endl;
 	std::cout << "KMP: " <<
 		String_Fetch_KMP(string, Sub_String) << std::endl;
+
+	///——————————————————————————
+	/// KMP-BUG
+	///——————————————————————————
 
 	String_Destroy(string);
 	String_Destroy(Sub_String);
