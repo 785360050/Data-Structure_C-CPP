@@ -2,22 +2,23 @@
 
 
 #include <iostream>
+#include "Sort_TestCase.h"
 
 
 extern struct Element;
 
 struct SearchList
 {
-    Element* data;      // ´æ·Å²éÕÒ±íÖÐÊý¾ÝÔªËØµÄÊ×µØÖ·
-    int length;         // ±íÔªËØ¸öÊý
-    int maxsize;        // ±í¿Õ¼äÈÝÁ¿
+    Element* data;      // å­˜æ”¾æŸ¥æ‰¾è¡¨ä¸­æ•°æ®å…ƒç´ çš„é¦–åœ°å€
+    int length;         // è¡¨å…ƒç´ ä¸ªæ•°
+    int maxsize;        // è¡¨ç©ºé—´å®¹é‡
 };
 typedef struct SearchList SearchList;
 
 
-//Éú³Émaxsize¸ö¿Õ¼äµÄµÝÔöÊý¾Ý¼¯,Ê×ÔªËØ²»ÓÃÓÚ´æ´¢
+//ç”Ÿæˆmaxsizeä¸ªç©ºé—´çš„é€’å¢žæ•°æ®é›†,é¦–å…ƒç´ ä¸ç”¨äºŽå­˜å‚¨
 void SearchList_Init(SearchList* list, int maxsize)
-{///´ÓÏÂ±ê1¿ªÊ¼´æ´¢Êý¾Ý
+{///ä»Žä¸‹æ ‡1å¼€å§‹å­˜å‚¨æ•°æ®
     list->length = maxsize;
     list->maxsize = maxsize+1;
     list->data = new Element[maxsize+1];
@@ -39,7 +40,7 @@ void SearchList_Show(const SearchList* const list)
 }
 
 
-//Ë³Ðò²éÕÒ£¬·µ»ØkeyÔªËØÏÂ±ê
+//é¡ºåºæŸ¥æ‰¾ï¼Œè¿”å›žkeyå…ƒç´ ä¸‹æ ‡
 int Search_Sequence(SearchList* const list, int key)
 {
     list->data[0].key = key;
@@ -51,9 +52,18 @@ int Search_Sequence(SearchList* const list, int key)
     return i;
 }
 
-//ÕÛ°ë²éÕÒ£¬ÒªÇó²éÕÒÇ°Êý¾Ý¼¯ÓÐÐò
+//æŠ˜åŠæŸ¥æ‰¾ï¼Œè¦æ±‚æŸ¥æ‰¾å‰æ•°æ®é›†æœ‰åº
 int Search_Binary(const SearchList* const list, int key)
 {
+    try
+    {
+        if (list->length <= 0)
+            throw std::exception{ "Searh List is not exisit" };
+    }
+    catch (const std::exception& ex)
+    {
+        std::cout << ex.what() << std::endl;
+    }
     int begin = 1;
     int end = list->maxsize;
     int mid;
