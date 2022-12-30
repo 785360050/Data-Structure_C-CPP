@@ -38,7 +38,6 @@ struct Liner_Structure:public Liner_List<DataType>
 
 
 
-
 //单链节点
 template<typename DataType>
 struct Node_SingleLinked
@@ -289,6 +288,8 @@ public:
 
 	
 };
+
+
 
 
 

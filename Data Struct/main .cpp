@@ -2,8 +2,8 @@
 
 
 
-#define C
-//#define CPP
+//#define C
+#define CPP
 
 #ifdef C
 ///C
@@ -689,7 +689,7 @@ void Test_C()
 	//TestCost_Sort();//完毕
 	//TestSearch();
 	//Test_B_Tree();
-	Test_String();
+	//Test_String();//KMP_BUG
 }
 
 #endif // C
@@ -763,8 +763,6 @@ void TestLinkList()
 	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
 	std::cout << "链表判空: " << L->List_CheckEmpty() << std::endl;
 	L->List_Destroy();
-
-
 }
 
 void TestSequenceStack()
@@ -903,12 +901,12 @@ void TestBinaryTree()
 void Test_CPP()
 {
 	//TestSeqList();
-	//TestLinkList();
+	TestLinkList();
 	//TestSequenceStack();
 	//TestLinkStack();
 	//TestSeqQueue();
 	//TestLinkQueue();
-	TestBinaryTree();
+	//TestBinaryTree();
 }
 
 #endif // CPP
@@ -933,8 +931,8 @@ void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	
-	Test_C();
-	//Test_CPP();
+	//Test_C();
+	Test_CPP();
 
 
 
