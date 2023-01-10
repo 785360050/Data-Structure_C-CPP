@@ -15,18 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_List_Sequential\Test.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="C++\Liner_List_Sequential2\Liner_List_ADT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\Liner_List_Link.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Liner_List_Sequential2\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Liner_Queue_ADT.h">
@@ -59,20 +48,25 @@
     <ClInclude Include="C++\Tree_Binary_Normal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Link\Liner_List_ADT.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Link\List_Node.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Link\List_Head.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Head.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Sequential\Liner_List_ADT.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_List_Sequential\Liner_List_Sequential.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C++\Liner_Structure\Liner_List_Link\Test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

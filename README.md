@@ -140,23 +140,7 @@ void main()
 
 
 # Class Diagram
-```mermaid
-classDiagram
-class Sequentice_List{
-    - head
-    - int length
-    - int maxsize
-    - void Expand()
-	+ Sequential_List()
-	+ void Init(int maxsize)
-	+ void InsertElement(int pos, DataType elem)
-	+ void Delete(int pos, DataType& elem)
-	+ void Update(int pos, DataType elem)
-	+ void Show(const char* string)
-	+ void Destory()
-}
-
-```
+![Liner_Structure](https://i.imgur.com/SzzrtU3.png)
 
 # [Top](#executable-data-structure-code-for-cc)
 

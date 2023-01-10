@@ -131,17 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_List_Sequential\Test.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="C++\Liner_List_Sequential2\Liner_List_ADT.h" />
     <ClInclude Include="C++\Liner_List_Link.h" />
-    <ClInclude Include="C++\Liner_List_Link\Liner_List_ADT.h" />
-    <ClInclude Include="C++\Liner_List_Link\List_Head.h" />
-    <ClInclude Include="C++\Liner_List_Link\List_Node.h" />
-    <ClInclude Include="C++\Liner_List_Sequential2\Liner_List_Sequential.h" />
-    <ClInclude Include="C++\Liner_List_Sequential\Liner_List_ADT.h" />
-    <ClInclude Include="C++\Liner_List_Sequential\Liner_List_Sequential.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Head.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Node.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_ADT.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_Sequential.h" />
     <ClInclude Include="C++\Liner_Queue_ADT.h" />
     <ClInclude Include="C++\Liner_Queue_Linked.h" />
     <ClInclude Include="C++\Liner_Queue_Sequential.h" />
@@ -152,6 +147,9 @@
     <ClInclude Include="C++\Tree_ADT.h" />
     <ClInclude Include="C++\Tree_Binary_ADT.h" />
     <ClInclude Include="C++\Tree_Binary_Normal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C++\Liner_Structure\Liner_List_Link\Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
