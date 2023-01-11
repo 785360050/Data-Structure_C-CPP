@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C++\Liner_List_Link.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\Liner_Queue_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -27,13 +24,10 @@
     <ClInclude Include="C++\Liner_Queue_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Stack_ADT.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Stack_Linked.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Liner_Stack_Sequential.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Linked\Liner_Stack_Linked.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Object.h">
@@ -51,21 +45,24 @@
     <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Node.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\List_Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_List_Link\List_Head.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\List_Head.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_ADT.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_List_Sequential\Liner_List_Sequential.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential2.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_List_Link\Test.cpp">
+    <ClCompile Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
