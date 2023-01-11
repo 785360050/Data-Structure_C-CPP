@@ -5,19 +5,31 @@
 
 #include "../Liner_Stack_ADT.h"
 
-
+/// <summary>
+/// 四种类型：满增栈、满减栈、空增栈、空减栈。
+/// 
+/// 满、空栈区别：根据当前指针所在位置是否有东西。
+/// 满栈（Full stack）：栈指针指向最后压入栈的数据，数据入栈时，sp先减一（或加一）再入栈。
+/// 空栈（Empty stack）：栈指针指向下一个将要放入数据的位置，数据入栈时，先入栈sp再减一（或加一）。
+/// 
+/// 增、减栈区别：根据堆栈的生成方向不同。
+/// 递增堆栈(Ascending stack)：堆栈由低地址向高地址生长。
+/// 递减堆栈(Decending stack)：堆栈由高地址向低地址生长。
+/// </summary>
+/// <typeparam name="DataType"></typeparam>
 
 template <typename DataType>
 class Sequence_Stack:public Stack<DataType>
-{///空栈
-private:
-	int top;
+{///默认为空增栈：top=0,Push=top++
+protected:
+	int top;			///注:signed与unsigned类型比较会默认转为unsigned后再比较
 	size_t maxsize;
 	DataType* element;
+protected:
+	virtual void Top_Reset()
+	{top=0;}
 public:
-	//初始化头节点信息
-	Sequence_Stack()
-		:top{ 0 }, element{ nullptr }, maxsize{ 0 } {};
+	Sequence_Stack() = default;
 	//初始化栈空间
 	Sequence_Stack(size_t maxsize)
 	{///申请空间并置为默认值
@@ -31,7 +43,7 @@ public:
 			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
 			return;
 		}
-		top = 0;
+		Top_Reset();
 		element = new DataType[maxsize]{};
 		this->maxsize = maxsize;
 	}
@@ -50,24 +62,24 @@ public:///栈操作
 			return;
 		}
 		delete[] element;
-		top = 0;
+		Top_Reset();
 		element = nullptr;
 	}
 	//清空栈
 	void Stack_Clear() override
 	{///重置栈内存为0
 		memset(element, 0, sizeof(DataType) * maxsize);
-		top = 0;
+		Top_Reset();
 	}
 	//判断是否栈空
-	bool Stack_CheckEmpty() { return top == 0 ? true : false; };
+	virtual bool Stack_CheckEmpty() { return top == 0 ? true : false; };
 	//返回栈长度(元素个数)
-	int Stack_GetLength() override
+	virtual int Stack_GetLength() override
 	{///满栈top从0开始
 		return top;
 	}
 	//返回栈顶元素
-	DataType Stack_GetTop() override
+	virtual DataType Stack_GetTop() override
 	{///读取栈顶元素
 		try
 		{
@@ -83,7 +95,7 @@ public:///栈操作
 	}
 public:///元素操作
 	//元素入栈
-	void Element_Push(DataType element) override
+	virtual void Element_Push(DataType element) override
 	{
 		try
 		{
@@ -100,7 +112,7 @@ public:///元素操作
 		this->element[top++] = element;
 	}
 	//元素出栈
-	DataType Element_Pop() override
+	virtual DataType Element_Pop() override
 	{
 		try
 		{
@@ -119,7 +131,7 @@ public:///元素操作
 
 public:
 	//输出栈所有信息
-	void Stack_Show(string string) override
+	virtual void Stack_Show(string string) override
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]:\n"
@@ -133,10 +145,244 @@ public:
 
 
 
+template <typename DataType>
+class Sequence_Stack_Full_Ascending :public Sequence_Stack<DataType>
+{
+protected:
+	void Top_Reset() override final
+	{this->top=-1;}
+public:
+	Sequence_Stack_Full_Ascending(size_t maxsize)
+	{///申请空间并置为默认值
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
+		Top_Reset();
+		this->element = new DataType[maxsize]{};
+		this->maxsize = maxsize;
+	}
+	bool Stack_CheckEmpty() override { return this->top == -1 ? true : false; };
+	//返回栈长度(元素个数)
+	int Stack_GetLength() override final
+	{///满栈top从0开始
+		return this->top + 1;
+	}
+//	//返回栈顶元素
+	DataType Stack_GetTop() override final
+	{///读取栈顶元素
+		try
+		{
+			if (Stack_CheckEmpty())
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			return NULL;
+		}
+		return this->element[this->top];
+	}
+public:///元素操作
+	//元素入栈
+	void Element_Push(DataType element) override final
+	{
+		try
+		{
+			if (this->top >= int(this->maxsize))
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Overflow" << std::endl;
+			return;
+		}
+		this->element[++this->top] = element;
+	}
+	//元素出栈
+	DataType Element_Pop() override final
+	{
+		try
+		{
+			if (this->top < 0)
+			{
+				throw 1;
+			}
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			exit(0);
+		}
+		return this->element[this->top--];
+	}
 
+};
 
+template <typename DataType>
+class Sequence_Stack_Empty_Decending :public Sequence_Stack<DataType>
+{
+protected:
+	void Top_Reset() override final
+	{this->top = this->maxsize-1;}
+public:
+	Sequence_Stack_Empty_Decending(size_t maxsize)
+	{///申请空间并置为默认值
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
+		this->maxsize = maxsize;
+		Top_Reset();
+		this->element = new DataType[maxsize]{};
+	}
+	bool Stack_CheckEmpty() override { return this->top +1 == this->maxsize ? true : false; };
+	//返回栈长度(元素个数)
+	int Stack_GetLength() override final
+	{return this->maxsize - this->top-1;}
+	//	//返回栈顶元素
+	DataType Stack_GetTop() override final
+	{///读取栈顶元素
+		try
+		{
+			if (Stack_CheckEmpty())
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			return NULL;
+		}
+		return this->element[this->top + 1];
+	}
+public:///元素操作
+	//元素入栈
+	void Element_Push(DataType element) override final
+	{
+		try
+		{
+			int top = this->top, maxsize = this->maxsize;
+			if (top < 0)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Overflow" << std::endl;
+			return;
+		}
+		this->element[this->top--] = element;
+	}
+	//元素出栈
+	DataType Element_Pop() override final
+	{
+		try
+		{
+			int top = this->top, maxsize = this->maxsize;
+			if (top >= maxsize)
+			{
+				throw 1;
+			}
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			exit(0);
+		}
+		return this->element[++this->top];
+	}
 
+};
 
+template <typename DataType>
+class Sequence_Stack_Full_Decending :public Sequence_Stack<DataType>
+{
+protected:
+	void Top_Reset() override final
+	{this->top = this->maxsize;}
+public:
+	Sequence_Stack_Full_Decending(size_t maxsize)
+	{///申请空间并置为默认值
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
+		this->maxsize = maxsize;
+		Top_Reset();
+		this->element = new DataType[maxsize]{};
+	}
+	bool Stack_CheckEmpty() override { return this->top == this->maxsize ? true : false; };
+	//返回栈长度(元素个数)
+	int Stack_GetLength() override final
+	{///满栈top从0开始
+		return this->maxsize - this->top;
+	}
+	//	//返回栈顶元素
+	DataType Stack_GetTop() override final
+	{///读取栈顶元素
+		try
+		{
+			if (Stack_CheckEmpty())
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			return NULL;
+		}
+		return this->element[this->top];
+	}
+public:///元素操作
+	//元素入栈
+	void Element_Push(DataType element) override final
+	{
+		try
+		{
+			if (this->top <= 0)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Overflow" << std::endl;
+			return;
+		}
+		this->element[--this->top] = element;
+	}
+	//元素出栈
+	DataType Element_Pop() override final
+	{
+		try
+		{
+			if (this->top >=int(this->maxsize))
+			{
+				throw 1;
+			}
+		}
+		catch (...)
+		{
+			std::cout << "Stack is Empty" << std::endl;
+			exit(0);
+		}
+		return this->element[this->top++];
+	}
 
+};
 
 

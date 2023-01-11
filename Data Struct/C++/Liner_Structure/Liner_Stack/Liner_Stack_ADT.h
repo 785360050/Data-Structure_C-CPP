@@ -7,8 +7,6 @@ template <typename DataType>
 struct Stack
 {
 public:///栈操作
-	//初始化栈空间
-	//virtual void Stack_Init(int maxsize) = 0;
 	//销毁栈
 	virtual void Stack_Destroy() = 0;
 	//清空栈

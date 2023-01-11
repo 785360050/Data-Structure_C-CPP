@@ -57,12 +57,21 @@
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential2.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_ADT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Linked\Liner_Queue_Linked.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Liner_Queue_Sequential.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Test.cpp">
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

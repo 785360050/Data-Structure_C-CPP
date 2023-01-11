@@ -131,7 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential2.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_ADT.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Linked\Liner_Queue_Linked.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Liner_Queue_Sequential.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\List_Head.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\List_Node.h" />
@@ -148,7 +151,7 @@
     <ClInclude Include="C++\Tree_Binary_Normal.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Test.cpp" />
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

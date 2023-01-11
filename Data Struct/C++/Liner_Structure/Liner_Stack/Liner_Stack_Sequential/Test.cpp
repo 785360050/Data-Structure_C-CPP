@@ -1,4 +1,4 @@
-#include "Liner_Stack_Sequential2.h"
+#include "Liner_Stack_Sequential.h"
 
 #include <Windows.h>
 ///修改cmd编码方式
