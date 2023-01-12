@@ -1,5 +1,5 @@
 #include <iostream>
-#include "List_Node.h"
+#include "../../List_Node.h"
 #include "List_Head.h"
 
 #include <Windows.h>
@@ -17,27 +17,6 @@ static bool  SetEncode(int EncodeId = 936)
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
 
-void Test()
-{
-	using namespace std;
-	List_Node<int>* node1 = new List_Node_SingleWay<int>(5);
-	List_Node<int>* node2 = new List_Node_DoubleWay<int>(5);
-	cout << node1->element << endl;
-	cout << node2->element << endl;
-
-	node1->Show();
-	node2->Show();
-
-	delete node1;
-	delete node2;
-
-	Link_List_Forward<int> l;
-	for (int i = 0; i < 5; ++i)
-		l.Insert_Front(i);
-	l.List_Show("");
-
-
-}
 
 void Test_Forward_List()
 {

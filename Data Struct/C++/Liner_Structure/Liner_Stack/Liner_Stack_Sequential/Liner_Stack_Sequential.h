@@ -18,7 +18,7 @@
 /// </summary>
 /// <typeparam name="DataType"></typeparam>
 
-template <typename DataType>
+template <typename DataType>///Sequence_Stack_Empty_Ascending
 class Sequence_Stack:public Stack<DataType>
 {///默认为空增栈：top=0,Push=top++
 protected:
@@ -47,24 +47,18 @@ public:
 		element = new DataType[maxsize]{};
 		this->maxsize = maxsize;
 	}
-public:///栈操作
 	//销毁栈
-	void Stack_Destroy() override
+	~Sequence_Stack() override
 	{
-		try
+		if (element)
 		{
-			if (!element)
-				throw 1;
+			delete[] element;
+			Top_Reset();
+			element = nullptr;
 		}
-		catch (...)
-		{
-			std::cout << "Stack is not exist" << std::endl;
-			return;
-		}
-		delete[] element;
-		Top_Reset();
-		element = nullptr;
+		std::cout << "Sequence_Stack Destroyed" << std::endl;
 	}
+public:///栈操作
 	//清空栈
 	void Stack_Clear() override
 	{///重置栈内存为0
@@ -142,8 +136,6 @@ public:
 		std::cout << "TOP[" << top << ']' << std::endl;
 	}
 };
-
-
 
 template <typename DataType>
 class Sequence_Stack_Full_Ascending :public Sequence_Stack<DataType>

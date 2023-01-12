@@ -1,3 +1,3 @@
-﻿  Test.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Test.cpp(53,1): warning C4326: “main”的返回类型应为“int”而非“void”
+﻿  main.cpp
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Binary_Tree\main.cpp(73,1): warning C4326: “main”的返回类型应为“int”而非“void”
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

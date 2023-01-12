@@ -30,8 +30,6 @@ void TestSequenceStack_Empty_Ascending()
 		std::cout << s.Element_Pop() << "出栈" << std::endl;
 
 	std::cout << "栈判空：" << std::boolalpha << s.Stack_CheckEmpty() << std::endl;
-	s.Stack_Destroy();
-
 }
 
 void TestSequenceStack_Full_Ascending()
@@ -49,7 +47,6 @@ void TestSequenceStack_Full_Ascending()
 		std::cout << s.Element_Pop() << "出栈" << std::endl;
 
 	std::cout << "栈判空：" << std::boolalpha << s.Stack_CheckEmpty() << std::endl;
-	s.Stack_Destroy();
 
 }
 
@@ -68,7 +65,6 @@ void TestSequenceStack_Empty_Decending()
 		std::cout << s.Element_Pop() << "出栈" << std::endl;
 
 	std::cout << "栈判空：" << std::boolalpha << s.Stack_CheckEmpty() << std::endl;
-	s.Stack_Destroy();
 
 }
 
@@ -87,7 +83,6 @@ void TestSequenceStack_Full_Decending()
 		std::cout << s.Element_Pop() << "出栈" << std::endl;
 
 	std::cout << "栈判空：" << std::boolalpha << s.Stack_CheckEmpty() << std::endl;
-	s.Stack_Destroy();
 
 }
 

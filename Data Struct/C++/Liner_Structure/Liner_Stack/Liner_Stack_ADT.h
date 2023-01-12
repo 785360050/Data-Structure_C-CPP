@@ -6,9 +6,8 @@ using std::string;
 template <typename DataType>
 struct Stack
 {
+	virtual ~Stack() = default;
 public:///栈操作
-	//销毁栈
-	virtual void Stack_Destroy() = 0;
 	//清空栈
 	virtual void Stack_Clear() = 0;
 	//判断是否栈空

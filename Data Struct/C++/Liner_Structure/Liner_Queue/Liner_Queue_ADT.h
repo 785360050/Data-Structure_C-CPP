@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "string"
+using std::string;
 
 template<typename DataType>
 struct Queue
@@ -17,7 +18,7 @@ public:
 	//返回队头
 	virtual DataType Queue_GetHead() = 0;
 	//显示整个队列信息
-	virtual void Queue_Show(const char* string) = 0;
+	virtual void Queue_Show(string string) = 0;
 	//元素入队
 	virtual void Element_Enqueue(DataType element) = 0;
 	//元素出队

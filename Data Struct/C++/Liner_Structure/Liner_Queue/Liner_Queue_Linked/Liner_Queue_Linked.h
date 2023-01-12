@@ -4,20 +4,11 @@
 
 
 #include <iostream>
-#include "Liner_Queue_ADT.h"
+#include "../Liner_Queue_ADT.h"
+#include "../../List_Node.h"
 
 template <typename DataType>
-struct QueueNode
-{
-	DataType element;
-	QueueNode* next;
-public:
-	void Node_Init(DataType element = 0, QueueNode<DataType>* next = nullptr)
-	{
-		this->element = element;
-		this->next = next;
-	}
-};
+using QueueNode = List_Node_SingleWay<DataType>;
 
 template<typename DataType>
 class Link_Queue:public Queue<DataType>
@@ -27,17 +18,11 @@ private:
 	int maxsize;
 	QueueNode<DataType>* front;
 	QueueNode<DataType>* rear;
-
 public:
 	Link_Queue()
-	{
-		length = maxsize = 0;
-		front = rear = nullptr;
-	}
-	
-public:///链表操作
+		:length{ 0 }, maxsize{ 0 }, front{ nullptr }, rear{ 0 } {};
 	//初始化队列
-	void Queue_Init(int maxsize)
+	Link_Queue(int maxsize)
 	{
 		try
 		{
@@ -52,16 +37,16 @@ public:///链表操作
 		this->maxsize = maxsize;
 	}
 	//销毁队列
-	void Queue_Destroy()
+	~Link_Queue()
 	{
 		try
 		{
 			if (!front)
-				throw 1;
+				throw std::exception("Queue Destroy Faild: Queue is not exist");
 		}
-		catch (const std::exception&)
+		catch (const std::exception& e)
 		{
-			std::cout << "Queue Destroy Faild: Queue is not exist" << std::endl;
+			std::cout << e.what() << std::endl;
 			return;
 		}
 		rear = nullptr;
@@ -73,26 +58,35 @@ public:///链表操作
 			delete del;
 		}
 		length = 0;
+		std::cout << "Link_Queue Destroyed" << std::endl;
 	}
+public:///链表操作
 	//清空队列(等价于销毁队列)，链式队列不需要空节点
-	void Queue_Clear()
+	void Queue_Clear() override
 	{
-		Queue_Destroy();
+		if (front)
+		{
+			rear = nullptr;
+			QueueNode<DataType>* del;
+			while (!front)
+			{
+				del = front;
+				front = front->next;
+				delete del;
+			}
+			length = 0;
+		}
 	}
 	//判断是否队空
-	bool Queue_CheckEmpty()
-	{
-		if (front == NULL && rear == NULL)
-			return true;
-		return false;
-	}
+	bool Queue_CheckEmpty() override
+	{return (front == nullptr && rear == nullptr) ? true : false;}
 	//返回队列长度(元素个数)
-	int Queue_Length()
+	int Queue_Length() override
 	{
 		return length;
 	}
 	//返回队头
-	DataType Queue_GetHead()
+	DataType Queue_GetHead() override
 	{
 		try
 		{
@@ -107,7 +101,7 @@ public:///链表操作
 		return front->element;
 	}
 	//显示整个队列信息
-	void Queue_Show(const char* string)
+	void Queue_Show(string string) override
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]:" << " [" << length << '/' << maxsize << ']' << std::endl
@@ -120,11 +114,11 @@ public:///链表操作
 	}
 public:///元素操作
 	//元素入队
-	void Element_Enqueue(DataType element)
+	void Element_Enqueue(DataType element) override
 	{
 		try
 		{
-			if (length == maxsize)
+			if (length >= maxsize)
 				throw 1;
 		}
 		catch (...)
@@ -132,8 +126,7 @@ public:///元素操作
 			std::cout << "Enqueue Faild: Queue is full" << std::endl;
 			return;
 		}
-		QueueNode<DataType>* node = new QueueNode<DataType>;
-		node->Node_Init(element);
+		QueueNode<DataType>* node = new QueueNode<DataType>(element);
 		if (length == 0)
 			front = rear = node;
 		else
@@ -144,7 +137,7 @@ public:///元素操作
 		length++;
 	}
 	//元素出队
-	DataType Element_Dequeue()
+	DataType Element_Dequeue() override
 	{
 		try
 		{

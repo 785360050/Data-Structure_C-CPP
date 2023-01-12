@@ -3,40 +3,38 @@
 
 #include <iostream>
 
-#include "Liner_Stack_ADT.h"
+#include "../Liner_Stack_ADT.h"
+#include "../../../Node.h"
+#include "../../List_Node.h"
 
-
+//template <typename DataType>
+//struct Stack_Node:public Node<DataType>
+//{///链栈单链节点
+//	Stack_Node* next;
+//public:
+//	//格式化节点内元素值为element
+//	Stack_Node()
+//		:Node<DataType>(), next{nullptr} {};
+//	Stack_Node(DataType element, Stack_Node<DataType>* next = nullptr)
+//		:Node<DataType>(element), next{ next } {};
+//};
 template <typename DataType>
-struct Stack_Node
-{///链栈单链节点
-	DataType element;
-	Stack_Node* next;
-public:
-	//格式化节点内元素值为element
-	void Node_Init(DataType element, Stack_Node<DataType>* next=nullptr)
-	{
-		this->element = element;
-		this->next = next;
-	}
-};
+using Stack_Node = List_Node_SingleWay<DataType>;
 
 template <typename DataType>
 class Link_Stack:public Stack<DataType>
 {///空栈
-private:
+protected:
 	Stack_Node<DataType>* top;
-	int length;
-	int maxsize;
+	int length;			///当前元素个数
+	int maxsize;		///链栈元素上限
+private:
+	bool Stack_CheckFull()
+	{return length == maxsize ? true : false;}
 public:///对象维护头节点，存放栈信息
-	//初始化头节点信息
 	Link_Stack()
-	{
-		top = nullptr;
-		length = 0;
-	}
-public:///栈操作
-	//初始化栈空间，maxsize个元素(节点)空间
-	void Stack_Init(int maxsize) override
+		:top{ nullptr }, length{ 0 } {};
+	Link_Stack(int maxsize)
 	{
 		try
 		{
@@ -51,53 +49,43 @@ public:///栈操作
 		this->maxsize = maxsize;
 	}
 	//销毁栈
-	void Stack_Destroy() override
+	~Link_Stack() 
 	{
-		try
-		{
-			if (!top)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Destroy Faild: Stack is not exist" << std::endl;
-			return;
-		}
 		while (top)
 		{
 			Stack_Node<DataType>* del = top;
 			top = top->next;
 			delete del;
 		}
-
+		std::cout << "Link_Stack Destroyed" << std::endl;
 	}
+public:///栈操作
 	//清空栈(等价于销毁栈空间)
-	///由于链栈空间利用率高，不存在空节点，所以不存在清空链表元素
+	///由于链栈空间利用率高，不存在空节点，所以清空链表元素==销毁所有链表节点
 	void Stack_Clear() override
 	{
-		Stack_Destroy();
+		while (top)
+		{
+			Stack_Node<DataType>* del = top;
+			top = top->next;
+			delete del;
+		}
 	}
 	//判断是否栈空
 	bool Stack_CheckEmpty() override
-	{
-		if (length == 0)
-			return true;
-		return false;
-	}
-	
+	{return length == 0 ? true : false;}
 	//返回栈长度(元素个数)
 	int Stack_GetLength() override
 	{
 		return length;
 	}
-
 	//返回栈顶元素
 	DataType Stack_GetTop() override
 	{
 		return top->element;
 	}
 	//输出栈所有信息
-	void Stack_Show(const char* string) override
+	void Stack_Show(string string) override
 	{
 		Stack_Node<DataType>* node = top;
 		std::cout << string << std::endl
@@ -122,10 +110,9 @@ public:///元素操作
 			std::cout << "Stack is Full" << std::endl;
 			return;
 		}
-		Stack_Node<DataType>* node = new Stack_Node<DataType>;
-		node->Node_Init(element, top);
+		Stack_Node<DataType>* node = new Stack_Node<DataType>(element, top);
 		top = node;
-		length++;
+		++length;
 		
 	}
 	//元素出栈
@@ -147,22 +134,10 @@ public:///元素操作
 		top = top->next;
 		DataType x = node->element;
 		delete node;
-		length--;
+		--length;
 		return x;
 	}
 	//更新节点元素值
-
-
-public:
-	bool Stack_CheckFull()
-	{
-		if (length == maxsize)
-			return true;
-		return false;
-	}
-
-
-
 };
 
 
