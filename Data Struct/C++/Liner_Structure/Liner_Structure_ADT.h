@@ -23,6 +23,8 @@ public:///元素操作
 	virtual void Element_Insert(int pos, DataType elem) = 0;
 	//删除元素
 	virtual DataType Element_Delete(int pos) = 0;
+	//更新元素
+	virtual void Element_Update(size_t pos, DataType elem) = 0;
 public:
 	//显示线性表所有信息
 	virtual void List_Show( string) = 0;

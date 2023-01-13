@@ -3,6 +3,7 @@
 
 //#include "Object.h"
 #include "../Liner_List_ADT.h"
+#include <iostream>
 
 ///线性表全局函数
 //位置序号 转为 下标索引
@@ -78,7 +79,7 @@ public:///元素操作
 	//删除元素
 	virtual DataType Element_Delete(size_t pos) = 0;
 	//修改顺序表List第pos个位置上的元素为elem
-	void Element_Update(int pos, DataType elem)
+	void Element_Update(size_t pos, DataType elem) override
 	{head[Index(pos)] = elem;}
 public:
 	//显示线性表所有信息

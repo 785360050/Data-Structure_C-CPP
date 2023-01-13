@@ -149,7 +149,7 @@
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Normal.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Binary_Tree\main.cpp" />
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -76,7 +76,7 @@ public:
 		return element[front];
 	}
 	//显示整个队列信息
-	virtual void Queue_Show(const char* string) override
+	virtual void Queue_Show(string string) override
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]:" << " [" << length << '/' << maxsize << ']' << std::endl
@@ -174,7 +174,7 @@ public:
 		std::cout << "Sequence_Queue_Tag Destroyed" << std::endl;
 	}
 public:
-	void Queue_Show(const char* string) override
+	void Queue_Show(string string) override
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]=" << "[" << this->length << '/' << this->maxsize << ']' << std::endl

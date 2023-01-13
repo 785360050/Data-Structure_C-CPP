@@ -32,6 +32,8 @@ void Test_Forward_List()
 	L->List_Show("删除第2个节点后：");
 	L->Element_Insert(2, 2);
 	L->List_Show("在第2个节点插入元素2后：");
+	L->Element_Update(2, 999);
+	L->List_Show("更新第2个节点为999后：");
 	L->List_Clear();
 	L->List_Show("重置链表后：");
 	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
@@ -54,6 +56,8 @@ void Test_Link_List_Double()
 	L->List_Show("删除第2个节点后：");
 	L->Element_Insert(2, 2);
 	L->List_Show("在第2个节点插入元素2后：");
+	L->Element_Update(2, 999);
+	L->List_Show("更新第2个节点为999后：");
 	L->List_Clear();
 	L->List_Show("重置链表后：");
 	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
@@ -65,6 +69,6 @@ void Test_Link_List_Double()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	Test_Forward_List();
+	//Test_Forward_List();
 	Test_Link_List_Double();
 }

@@ -32,6 +32,12 @@ public:
 	virtual NodeType* Element_Next(const NodeType* const node) const = 0;
 	virtual void Element_Insert(size_t pos, DataType element) = 0;
 	virtual DataType Element_Delete(size_t pos) = 0;
+	virtual void Element_Update(size_t pos, DataType elem)
+	{
+		
+		NodeType* node = Element_Locate(pos);
+		node->element = elem;
+	}
 
 
 };
@@ -133,22 +139,14 @@ public:///元素操作
 		try
 		{//判断非空且不超过l->length
 			if (pos <= 0)
-				throw 1;
+				throw std::out_of_range("LocateNode Faild: Position < 0");
 			if (pos > this->length)
-				throw 2;
+				throw std::out_of_range("LocateNode Faild: Position > List Length");
 		}
-		catch (int x)
+		catch (const std::exception e)
 		{
-			if (x == 1)
-			{
-				std::cout << "LocateNode Faild: Position < 0" << std::endl;
-				exit(0);
-			}
-			if (x == 2)
-			{
-				std::cout << "LocateNode Faild: Position > List Length" << std::endl;
-				exit(0);
-			}
+			std::cout << e.what() << std::endl;
+			return nullptr;
 		}
 
 		List_Node_SingleWay<DataType>* p = this->front;
@@ -193,7 +191,7 @@ public:///元素操作
 		catch (...)
 		{
 			std::cout << "Insert Faild: Illegal position" << std::endl;
-			exit(0);
+			return;
 		}
 		List_Node_SingleWay<DataType>* p = new List_Node_SingleWay<DataType>(element);
 		if (pos == 1)
@@ -331,22 +329,14 @@ public:///元素操作
 		try
 		{//判断非空且不超过l->length
 			if (pos <= 0)
-				throw 1;
+				throw std::out_of_range("LocateNode Faild: Position < 0");
 			if (pos > this->length)
-				throw 2;
+				throw std::out_of_range("LocateNode Faild: Position > List Length");
 		}
-		catch (int x)
+		catch (const std::exception e)
 		{
-			if (x == 1)
-			{
-				std::cout << "LocateNode Faild: Position < 0" << std::endl;
-				exit(0);
-			}
-			if (x == 2)
-			{
-				std::cout << "LocateNode Faild: Position > List Length" << std::endl;
-				exit(0);
-			}
+			std::cout << e.what() << std::endl;
+			return nullptr;
 		}
 
 		List_Node_DoubleWay<DataType>* p = this->front;
@@ -389,7 +379,7 @@ public:///元素操作
 		catch (...)
 		{
 			std::cout << "Insert Faild: Illegal position" << std::endl;
-			exit(0);
+			return;
 		}
 		if (pos == 1)
 		{

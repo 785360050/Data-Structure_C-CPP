@@ -8,7 +8,7 @@ using std::string;
 template <typename ElementType,typename DataType>
 class Liner_List
 {///ADT 
-protected:
+public:
 	virtual ~Liner_List() = default;
 public:///链表操作
 	//销毁线性表
@@ -26,6 +26,8 @@ public:///元素操作
 	virtual void Element_Insert(size_t pos, DataType elem) = 0;
 	//删除元素
 	virtual DataType Element_Delete(size_t pos) = 0;
+	//更新元素
+	virtual void Element_Update(size_t pos, DataType elem) = 0;
 public:
 	//显示线性表所有信息
 	virtual void List_Show(const string& string) = 0;
