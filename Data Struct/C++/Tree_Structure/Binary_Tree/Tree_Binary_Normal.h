@@ -9,42 +9,13 @@
 #include "Tree_Binary_ADT.h"
 //#include "Liner_Queue_Sequential.h"
 //#include "Liner_Stack_Sequential.h"
-#include "../../Node.h"
+
+#include "Binary_Node.h"
 
 enum Direction { left = 1, right = 2 };
 
-
-
-template <typename DataType>
-class TreeNode:public Node<DataType>
-{
-protected:
-	std::string name;
-};
-
 template <typename DataType>
 class Binary_Tree;
-
-template <typename DataType>
-class Node_BinaryTree :public TreeNode<DataType>
-{
-	Node_BinaryTree<DataType>* left;
-	Node_BinaryTree<DataType>* right;
-	friend class Binary_Tree<DataType>;
-public:
-	Node_BinaryTree(std::string name , DataType element=0 )
-	{
-		this->name = name;
-		this->element = element;
-		left = right = nullptr;
-	}
-	void Set_Element(DataType element)
-	{this->element=element;}
-	void Set_Name(std::string name)
-	{this->name=name;}
-
-};
-
 
 template <typename DataType>
 class Binary_Tree

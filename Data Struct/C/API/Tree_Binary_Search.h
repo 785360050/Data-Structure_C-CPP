@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Tree_Binary.h"
 
@@ -25,4 +26,6 @@ TNode* BinaryTree_Search_Delete(TNode* tree, DataType data);
 TNode* NextNode(TNode* node);
 //定位逻辑前驱节点，即左子树的中序末节点
 TNode* PriNode(TNode* node);
+
+
 

@@ -58,6 +58,34 @@ void BinaryTree_Search_Insert(BTree* tree, DataType data)
 	insertnode(temp, tree->root, data);
 }
 void BinaryTree_Search_Insert_NonRecursive(BTree* tree, DataType data);
+//todo 非递归
+//void insertBSTreeNoRecursive(BSTree* tree, KeyType k) {
+//	BSNode* cur = tree->root;
+//	BSNode* pre = NULL;
+//	while (cur) {
+//		pre = cur;
+//		if (k < cur->data) {
+//			cur = cur->left;
+//		}
+//		else if (k > cur->data) {
+//			cur = cur->right;
+//		}
+//		else {
+//			return;      // k值已经在树中存在
+//		}
+//	}
+//	BSNode* node = createBSNode(k);
+//	tree->count++;
+//	if (pre && k < pre->data) {
+//		pre->left = node;
+//	}
+//	else if (pre && k > pre->data) {
+//		pre->right = node;
+//	}
+//	if (!pre) {
+//		tree->root = node;
+//	}
+//}
 
 
 TNode* NextNode(TNode* node)

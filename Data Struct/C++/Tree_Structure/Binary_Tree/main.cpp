@@ -1,5 +1,8 @@
 
 #include "Tree_Binary_Normal.h"
+#include "Binary_Node.h"
+#include "Binary_Tree_Thread.h"
+#include "Tree_Binary_Search.h"
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -13,8 +16,6 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
-
-
 
 void Test_Binary_Tree()
 {
@@ -69,10 +70,72 @@ void Test_Binary_Tree()
 	tree.Tree_Clear();
 }
 
+void Test_Binary_Thread_Tree()
+{
+	Node_BinaryThreadTree<int>* a = new Node_BinaryThreadTree<int>("A");
+	Node_BinaryThreadTree<int>* b = new Node_BinaryThreadTree<int>("B");
+	Node_BinaryThreadTree<int>* c = new Node_BinaryThreadTree<int>("C");
+	Node_BinaryThreadTree<int>* d = new Node_BinaryThreadTree<int>("D");
+	Node_BinaryThreadTree<int>* e = new Node_BinaryThreadTree<int>("E");
+	Node_BinaryThreadTree<int>* f = new Node_BinaryThreadTree<int>("F");
+	Node_BinaryThreadTree<int>* g = new Node_BinaryThreadTree<int>("G");
+	Node_BinaryThreadTree<int>* h = new Node_BinaryThreadTree<int>("H");
+	Node_BinaryThreadTree<int>* k = new Node_BinaryThreadTree<int>("K");
+
+	///指定a节点为树根
+	BinaryTree_Thread<int> tree(a);
+
+	tree.BinaryTree_Insert_Thread(a, left, b);
+	tree.BinaryTree_Insert_Thread(a, right, e);
+	tree.BinaryTree_Insert_Thread(b, right, c);
+	tree.BinaryTree_Insert_Thread(c, left, d);
+	tree.BinaryTree_Insert_Thread(e, right, f);
+	tree.BinaryTree_Insert_Thread(f, left, g);
+	tree.BinaryTree_Insert_Thread(g, left, h);
+	tree.BinaryTree_Insert_Thread(g, right, k);
+
+	tree.BinaryTree_Thread_Inorder(tree.root);
+
+	tree.BinaryTree_Traversal_Inorder_Thread(tree.root);
+
+	std::cout << std::endl;
+}
+
+void BinarySearch()
+{
+	Binary_Tree_Search<int> tree;
+	Node_BinaryTree<int>* d = tree.Node_Create("4");
+
+	tree.Tree_Set_Root(d);
+	//
+	//tree.BinaryTree_Search_Insert(Tree, "2");
+	//BinaryTree_Search_Insert(Tree, "1");
+	//BinaryTree_Search_Insert(Tree, "3");
+	//BinaryTree_Search_Insert(Tree, "6");
+	//BinaryTree_Search_Insert(Tree, "5");
+	//BinaryTree_Search_Insert(Tree, "7");
+
+	//BinaryTree_Order_Increase(Tree->root);
+
+	//TNode* node = BinaryTree_Search_LocateElement(Tree, 7);///查找测试
+	//if (node)
+	//	std::cout << std::endl << "Node Found" << std::endl;
+	//else
+	//	std::cout << std::endl << "Node Not Found" << std::endl;
+
+	//BinaryTree_Search_Delete(Tree->root, 2);///可能有缺陷
+	//BinaryTree_Order_Increase(Tree->root);
+	//BinaryTree_Destory(Tree);
+}
+
+
+
+
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	Test_Binary_Tree();
-
-	
+	//Test_Binary_Tree();
+	//Test_Binary_Thread_Tree();
+	BinarySearch();
 }
