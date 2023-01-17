@@ -2,8 +2,8 @@
 
 
 
-//#define C
-#define CPP
+#define C
+//#define CPP
 
 #ifdef C
 ///C
@@ -253,12 +253,21 @@ void BinarySearch()
 
 	BTree* Tree = BinaryTree_Init_Root(d);
 
-	BinaryTree_Search_Insert(Tree, 2);
-	BinaryTree_Search_Insert(Tree, 1);
-	BinaryTree_Search_Insert(Tree, 3);
-	BinaryTree_Search_Insert(Tree, 6);
-	BinaryTree_Search_Insert(Tree, 5);
-	BinaryTree_Search_Insert(Tree, 7);
+	///递归插入
+	//BinaryTree_Search_Insert(Tree, 2);
+	//BinaryTree_Search_Insert(Tree, 1);
+	//BinaryTree_Search_Insert(Tree, 3);
+	//BinaryTree_Search_Insert(Tree, 6);
+	//BinaryTree_Search_Insert(Tree, 5);
+	//BinaryTree_Search_Insert(Tree, 7);
+
+	///非递归插入
+	BinaryTree_Search_Insert_NonRecursive(Tree, 2);
+	BinaryTree_Search_Insert_NonRecursive(Tree, 1);
+	BinaryTree_Search_Insert_NonRecursive(Tree, 3);
+	BinaryTree_Search_Insert_NonRecursive(Tree, 6);
+	BinaryTree_Search_Insert_NonRecursive(Tree, 5);
+	BinaryTree_Search_Insert_NonRecursive(Tree, 7);
 
 	BinaryTree_Order_Increase(Tree->root);
 
@@ -371,9 +380,9 @@ void TestBinaryTree()
 {
 	//BinaryTree();
 	//BinaryThreadTree();
-	//BinarySearch();
+	BinarySearch();
 	//BinarySearch_AVL();
-	BinarySearch_RBT();
+	//BinarySearch_RBT();
 	//Binary_Heap();
 }
 
@@ -672,7 +681,7 @@ void Test_C()
 {
 	//TestSeqList();//完毕
 	//TestLinkList();//完毕
-	//TestHashList();
+	//TestHashList();//完毕
 	//TestSeqStack();//完毕
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
@@ -687,8 +696,8 @@ void Test_C()
 	//TestCriticalPath();//完毕
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
-	//TestSearch();
-	//Test_B_Tree();
+	//TestSearch();//完毕
+	Test_B_Tree();
 	//Test_String();//KMP_BUG
 }
 
@@ -931,8 +940,8 @@ void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	
-	//Test_C();
-	Test_CPP();
+	Test_C();
+	//Test_CPP();
 
 
 

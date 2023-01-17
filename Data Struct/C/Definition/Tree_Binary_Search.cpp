@@ -57,36 +57,29 @@ void BinaryTree_Search_Insert(BTree* tree, DataType data)
 	BTree* temp = tree;
 	insertnode(temp, tree->root, data);
 }
-void BinaryTree_Search_Insert_NonRecursive(BTree* tree, DataType data);
-//todo 非递归
-//void insertBSTreeNoRecursive(BSTree* tree, KeyType k) {
-//	BSNode* cur = tree->root;
-//	BSNode* pre = NULL;
-//	while (cur) {
-//		pre = cur;
-//		if (k < cur->data) {
-//			cur = cur->left;
-//		}
-//		else if (k > cur->data) {
-//			cur = cur->right;
-//		}
-//		else {
-//			return;      // k值已经在树中存在
-//		}
-//	}
-//	BSNode* node = createBSNode(k);
-//	tree->count++;
-//	if (pre && k < pre->data) {
-//		pre->left = node;
-//	}
-//	else if (pre && k > pre->data) {
-//		pre->right = node;
-//	}
-//	if (!pre) {
-//		tree->root = node;
-//	}
-//}
+void BinaryTree_Search_Insert_NonRecursive(BTree* tree, DataType data)
+{
+	TNode* current = tree->root, * precursor = nullptr;
+	while (current)
+	{///查找是否已存在相同节点
+		precursor = current;
+		if (data < current->data)
+			current = current->left;
+		else if (data > current->data)
+			current = current->right;
+		else
+			return;
+	}
+	TNode* node = BinaryTree_CreateNode(data);
+	++tree->num;
+	if (precursor && data < precursor->data)
+		precursor->left = node;
+	else if (precursor && data > precursor->data)
+		precursor->right = node;
+	if (!precursor) 
+		tree->root = node;
 
+}
 
 TNode* NextNode(TNode* node)
 {///不存在抛错

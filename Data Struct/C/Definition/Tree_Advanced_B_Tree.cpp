@@ -1,12 +1,16 @@
 #include "../API/Tree_Advanced_B_Tree.h"
 
 
+///————————————————————————————————
+/// 默认B树节点元素个数最少为 1/2阶数(向下取值)
+///————————————————————————————————
+
 B_Node* B_Tree_Create_Node(int order)
 {
 	B_Node* n = new B_Node;
 	n->length = 0;
 	n->maxsize = order;
-	n->key = new int[order];		///order-1用于存储，多一个元素空间用于预存
+	n->key = new int[order];		///order-1个元素用于存储，最后一个元素空间用于预存
 	n->index = new B_Node*[order];
 	for (int i = 0; i < order; i++)
 		n->index[i] = nullptr;
@@ -21,16 +25,14 @@ void B_Tree_Init(B_Tree* tree, int order)
 	tree->root = nullptr;
 }
 
-static void DeleteNode(B_Tree* tree, B_Node* node)
+static void Destroy(B_Tree* tree, B_Node* node)
 {
 	if (node)
 	{
 		for (int i = 0; i < tree->order; i++)
 		{
 			if (node->index[i])
-			{
-				DeleteNode(tree, tree->root->index[i]);
-			}
+				Destroy(tree, tree->root->index[i]);
 		}
 		delete[] node->key;
 		delete[] node->index;
@@ -45,16 +47,25 @@ void B_Tree_Destroy(B_Tree* tree)
 		std::cout << "删除B树节点个数:" << tree->count << std::endl;
 		if (tree->root)
 			for (int i = 0; i < tree->order; i++)
-				DeleteNode(tree, tree->root->index[i]);
+				Destroy(tree, tree->root->index[i]);
 	}
 }
 
 struct Result
 {
 	bool tag;		///查找是否成功
-	int pos;		///查到的key所在指针索引(node->index[])	失败时为父节点
-	B_Node* index;	///查到的key下标索引(node->key[])	失败时为父节点
+	int pos;		///查到的key所在指针索引(parent_node->index[])	失败时为父节点
+	B_Node* index;	///查到的key下标索引(parent_node->key[])	失败时为父节点
 };
+
+//定位key在节点中的位置
+static int B_Tree_Node_Locate(B_Node* node, int key)
+{
+	int i = 0;
+	while (i < node->length && node->key[i] < key)
+		++i;
+	return i;
+}
 //查找
 Result B_Tree_Search(B_Tree* tree, int key)
 {
@@ -84,7 +95,7 @@ Result B_Tree_Search(B_Tree* tree, int key)
 	{
 		result.tag = false;
 		result.index = precursor;
-		result.pos = pos;
+		result.pos = NULL;
 	}
 	return result;
 }
@@ -196,18 +207,37 @@ void B_Tree_Insert(B_Tree* tree, int key)
 
 }
 
+static void RestoreBTree(B_Tree* tree, B_Node* parent)
+{
+
+}
+static void RemoveNode(B_Node* parent, int position)
+{
+
+}
+static void Successor(B_Node* parent, int position)
+{
+	B_Node* leaf = parent;
+	if (leaf)
+		return;
+	leaf = leaf->index[position];
+	while (leaf->index[0])
+		leaf = leaf->index[0];
+	parent->key[position] = leaf->key[0];
+	parent = leaf;
+}
 static void Delete(B_Tree* tree, B_Node* parent, int position)
 {
 	if (parent->index[position])
-	{
-		//Successor(parent, position);
-		Delete(tree, parent, 1);
+	{///删除非叶节点
+		Successor(parent, position);	///用逻辑后继节点代替(父节点元素代替，父节点用右子树第一个代替)
+		Delete(tree, parent, 1);		///删除逻辑后继(父节点元素)
 	}
 	else
-	{
-		//RemoveNode(parent, position);
-		if (parent->length < (parent->maxsize - 1) / 2);	///阈值可自定义
-			//调整B树
+	{///删除叶节点
+		RemoveNode(parent, position);	///直接删除叶节点
+		if (parent->length < (parent->maxsize - 1) / 2)	///阈值可自定义
+			RestoreBTree(tree, parent);///调整B树
 	}
 }
 void B_Tree_Delete(B_Tree* tree, int key)
@@ -228,8 +258,8 @@ void B_Tree_Traverse_Inorder(B_Node* node)
 	{
 		for (int i = 0; i < node->length; i++)
 		{
-			if (node->index[i])
-				B_Tree_Traverse_Inorder(node->index[i]);
+			//if (node->index[i])	///感觉多余
+			B_Tree_Traverse_Inorder(node->index[i]);
 				
 			std::cout << node->key[i] << ' ';
 		}
@@ -237,14 +267,6 @@ void B_Tree_Traverse_Inorder(B_Node* node)
 	}
 }
 
-//定位key在节点中的位置
-static int B_Tree_Node_Locate(B_Node* node, int key)
-{
-	int i = 0;
-	while (i < node->length && node->key[i] < key)
-		i++;
-	return i;
-}
 
 
 
