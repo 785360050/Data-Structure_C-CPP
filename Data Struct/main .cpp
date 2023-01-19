@@ -362,16 +362,23 @@ void Test_B_Tree()
 	B_Tree* tree = new B_Tree;
 	B_Tree_Init(tree, 5);///
 
-	B_Tree_Insert(tree, 8);
-	B_Tree_Insert(tree, 9);
-	B_Tree_Insert(tree, 10);
-	B_Tree_Insert(tree, 11);
-	B_Tree_Insert(tree, 15);
-	B_Tree_Insert(tree, 16);
-	B_Tree_Insert(tree, 17);
-	B_Tree_Insert(tree, 18);
+	//B_Tree_Insert(tree, 8);
+	//B_Tree_Insert(tree, 9);
+	//B_Tree_Insert(tree, 10);
+	//B_Tree_Insert(tree, 11);
+	//B_Tree_Insert(tree, 15);
+	//B_Tree_Insert(tree, 16);
+	//B_Tree_Insert(tree, 17);
+	//B_Tree_Insert(tree, 18);
 
-	B_Tree_Traverse_Inorder(tree->root);
+	for (int i = 1; i < 18; ++i)
+	{
+
+		B_Tree_Insert(tree, i);
+
+		std::cout << std::endl;
+		B_Tree_Traverse_Inorder(tree->root);
+	}
 	
 	B_Tree_Destroy(tree);
 }
