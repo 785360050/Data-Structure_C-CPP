@@ -61,7 +61,7 @@ struct Result
 
 //定位key在节点中的位置
 static int B_Tree_Node_Locate(B_Node* node, int key)
-{///返回第一个比key大的元素位置，找其左指针
+{///返回元素值为key的下标位置，失败时返回第一个比key大的元素位置，找其左指针
 	int i = 0;
 	while (i < node->length && node->key[i] < key)
 		++i;
@@ -241,7 +241,7 @@ void B_Tree_Insert(B_Tree* tree, int key)
 void RestoreBTree(B_Tree* tree, B_Node* node);
 static void BorrowFromBrothers(B_Node* node, B_Node* brother_left, B_Node* brother_right, B_Node* parent, int position)
 {
-	if (brother_left && brother_left->length >= node->maxsize / 2)
+	if (brother_left && brother_left->length > node->maxsize / 2)
 	{///从左兄弟借元素
 		for (int i = node->length; i >= 0; --i)
 		{///后移元素，留出第一个位置
@@ -258,68 +258,76 @@ static void BorrowFromBrothers(B_Node* node, B_Node* brother_left, B_Node* broth
 		--brother_left->length;
 		++node->length;
 	}
-	else if(brother_right && brother_right->length >= node->maxsize / 2)
+	else if(brother_right && brother_right->length > node->maxsize / 2)
 	{///从右兄弟借元素
-		node->key[node->length] = node->key[position];
-		node->index[node->length] = brother_right->index[0];
+		///先把父元素移下来
+		node->key[node->length] = parent->key[position];
+		//node->index[node->length] = parent->index[0];///？？？
 		
 		if (node->index[node->length])
 			node->index[node->length]->parent = node;
 		++node->length;
+		///再把右兄弟的第一个元素移上来(逻辑后继)
 		parent->key[position] = brother_right->key[0];
 		for (int i = 0; i <brother_right->length; ++i)
-		{///后移元素，留出第一个位置
-			brother_right->key[i] = brother_right->key[i - 1];
-			brother_right->index[i] = brother_right->index[i - 1];
+		{///右兄弟被抽走一个元素，前移一格
+			brother_right->key[i] = brother_right->key[i + 1];
+			brother_right->index[i] = brother_right->index[i + 1];
 		}
 
-		brother_right->index[brother_right->length] = nullptr;
+		brother_right->index[brother_right->length+1] = nullptr;
 		--brother_right->length;
 	}
 }
 static void Merger_Brother_Left(B_Tree* tree, B_Node* brother_left, B_Node* parent, B_Node* node, int position)
 {
-	// 与左兄弟合并
-	brother_left->key[brother_left->length + 1] = parent->key[position];   
-	// 从父节点拿下分割本节点与左兄弟的关键字
+	// 从父节点移下分割元素
+	brother_left->key[brother_left->length] = parent->key[position];   
 	brother_left->index[brother_left->length + 1] = node->index[0];
 	if (brother_left->index[brother_left->length + 1]) 
 		// 给左兄弟的节点，当此结点存在时需要把其父亲指向左节点
 		brother_left->index[brother_left->length + 1]->parent = brother_left;
-	brother_left->length++;      // 左兄弟关键字加1
-	for (int i = 1; i <= node->length; ++i) 
-	{// 把本节点的关键字和子树指针赋给左兄弟
+	++brother_left->length;      // 左兄弟关键字加1
+	for (int i = 0; i < node->length; ++i) 
+	{/// 把本节点的元素和子树指针赋给左兄弟
 		brother_left->key[brother_left->length + i] = node->key[i];
-		brother_left->index[brother_left->length + i] = node->index[i];
-		if (brother_left->index[brother_left->length + i]) 
-			brother_left->index[brother_left->length + i]->parent = brother_left;
+		brother_left->index[brother_left->length + i + 1] = node->index[i + 1];
+		if (brother_left->index[brother_left->length + i + 1])
+			brother_left->index[brother_left->length + i + 1]->parent = brother_left;
 	}
 	brother_left->length += node->length;
-	parent->index[position] = NULL;
+	parent->key[position] = NULL;
+	parent->index[position+1] = nullptr;
+	--parent->length;
 	delete node;
-	for (int j = position; j < parent->length; ++j) 
-	{// 左移
-		parent->key[j] = parent->key[j + 1];
-		parent->index[j] = parent->index[j + 1];
-	}
-	parent->index[parent->length] = NULL;
-	--parent->length;       // 父节点关键字个数减1
-	if (tree->root == parent) 
-		// 如果此时父节点为根，则当父节点没有关键字时才调整
-		if (parent->length == 0) 
-			for (int i = 0; i <= parent->length + 1; ++i) 
+	//for (int j = position; j < parent->length; ++j) 
+	//{// 左移
+	//	parent->key[j] = parent->key[j + 1];
+	//	parent->index[j] = parent->index[j + 1];
+	//}
+	//parent->index[parent->length] = NULL;
+	if (tree->root == parent)
+	{/// 如果此时父节点为根，则当父节点没有关键字时才调整
+		if (parent->length == 0)
+		{
+			B_Node* del = parent;
+			for (int i = 0; i <= parent->length; ++i) 
 			{
 				if (parent->index[i]) 
 				{
 					tree->root = parent->index[i];
+					delete del;
 					break;
 				}
 				tree->root->parent = NULL;
 			}
-	else 
-		// 如果父节点不为根，则需要判断是否需要重新调整
+		}
+	}
+	else
+	{/// 如果父节点不为根，则需要判断是否需要重新调整
 		if (parent->length < tree->order/2) 
 			RestoreBTree(tree, parent);
+	}
 }
 static void Merger_Brother_Right(B_Tree* tree, B_Node* brother_right, B_Node* parent, B_Node* node, int position)
 {
@@ -383,27 +391,28 @@ static void RestoreBTree(B_Tree* tree, B_Node* node)
 	parent = node->parent;
 	if (parent)
 	{///父节点存在
-		int i;
+		int i_index;	//i_pos = i_index - 1?
 		///找父节点中的父元素,以找到兄弟节点
-		for (i = 0; i <= parent->length; ++i)
-			if (parent->index[i] == node)
+		for (i_index = 0; i_index <= parent->length; ++i_index)
+			if (parent->index[i_index] == node)
 				break;
-		brother_left = i > 0 ? parent->index[i] : nullptr;
-		brother_right = i < parent->length ? parent->index[i] : nullptr;
+			///parent->index[i_index] 指向当前节点
+		brother_left = i_index > 0 ? parent->index[i_index -1] : nullptr;
+		brother_right = i_index <= parent->length ? parent->index[i_index+1] : nullptr;
 
 		if
 		(///左或右兄弟存在多余元素可借
-			brother_left && brother_left->length >= tree->order / 2
+			brother_left && brother_left->length > tree->order / 2
 			||
-			brother_right && brother_right->length >= tree->order / 2
+			brother_right && brother_right->length > tree->order / 2
 		)
-			BorrowFromBrothers(node,brother_left,brother_right,parent,i);
+			BorrowFromBrothers(node,brother_left,brother_right,parent, i_index);
 		else
 		{///无法借元素，只能合并
 			if (brother_left)
-				Merger_Brother_Left(tree,brother_left,parent,node,i);
+				Merger_Brother_Left(tree,brother_left,parent,node, i_index-1);
 			else if (brother_right)
-				Merger_Brother_Right(tree,brother_left,parent,node,i);
+				Merger_Brother_Right(tree,brother_left,parent,node, i_index-1);
 			else
 			{///左右兄弟都不存在，合并当前元素到根节点
 				for (int i = 0; i > node->length; ++i)
@@ -438,26 +447,26 @@ static void Delete(B_Tree* tree, B_Node* node, int position)
 {///position为删除元素key的下标
 	if (node->index[position+1])///若元素存在右指针，则非叶节点
 	{///删除非叶节点
-		//Successor(node, position);	///用逻辑后继节点代替(父节点元素代替，父节点用右子树第一个代替)
+		///用逻辑后继节点代替(父节点元素代替，父节点用右子树第一个代替)
 		B_Node* leaf = node;
 		if (leaf)
 		{///右孩子的第一个叶子元素(递归)
-			leaf = leaf->index[position];
+			leaf = leaf->index[position+1];
 			while (leaf->index[0])
 				leaf = leaf->index[0];
-			node->key[position - 1] = leaf->key[0];
-			node = leaf;			///移动到逻辑后继(叶节点)
+			node->key[position] = leaf->key[0];
 		}
-		Delete(tree, node, 0);		///删除逻辑后继
+		Delete(tree, leaf, 0);		///删除逻辑后继
 	}
 	else
 	{///删除叶节点
 		
 		for (int i = position; i < node->length; ++i)
 		{///直接删除
-			node->key[i-1] = node->key[i];
-			node->index[i - 1] = node->index[i];
+			node->key[i] = node->key[i+1];		///因为key末尾预留，且插入时置为0，所以可以直接从后覆盖前，且不考虑越界
+			node->index[i] = node->index[i+1];
 		}
+		--node->length;
 		if (node->length < node->maxsize / 2)	///阈值可自定义
 			RestoreBTree(tree, node);///调整B树
 	}
@@ -467,7 +476,7 @@ void B_Tree_Delete(B_Tree* tree, int key)
 {
 	Result result = B_Tree_Search(tree, key);
 	if (result.tag)
-	{
+	{///result查找key成功时，返回key所在的节点和下标
 		Delete(tree, result.index, result.pos);
 		--tree->count;
 	}

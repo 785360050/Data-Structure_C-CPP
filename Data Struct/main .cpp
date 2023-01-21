@@ -371,7 +371,7 @@ void Test_B_Tree()
 	//B_Tree_Insert(tree, 17);
 	//B_Tree_Insert(tree, 18);
 
-	for (int i = 1; i < 4; ++i)
+	for (int i = 1; i < 21; ++i)
 	{
 
 		B_Tree_Insert(tree, i);
@@ -380,11 +380,20 @@ void Test_B_Tree()
 		B_Tree_Traverse_Inorder(tree->root);
 	}
 	
-	//B_Tree_Insert(tree, 5);
-	//B_Tree_Insert(tree, 10);
-	//B_Tree_Insert(tree, 15);
-	B_Tree_Delete(tree, 3);
+	B_Tree_Delete(tree, 20);
+	std::cout << std::endl << "After Delete 20" << std::endl;
 	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Delete(tree, 14);
+	std::cout << std::endl << "After Delete 14" << std::endl;
+	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Delete(tree, 15);
+	std::cout << std::endl << "After Delete 15" << std::endl;
+	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Delete(tree, 17);
+	std::cout << std::endl << "After Delete 17" << std::endl;
+	B_Tree_Traverse_Inorder(tree->root);
+
+
 
 	std::cout << std::endl;
 	B_Tree_Destroy(tree);
