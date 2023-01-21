@@ -32,7 +32,8 @@ B_Node* B_Tree_Create_Node(int order);
 static int B_Tree_Node_Locate(B_Node* node, int key);
 //插入关键字
 void B_Tree_Insert(B_Tree* tree, int key);
-
+//删除值为key的元素
+void B_Tree_Delete(B_Tree* tree, int key);
 //中序遍历
 void B_Tree_Traverse_Inorder(B_Node* node);
 
