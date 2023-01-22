@@ -27,9 +27,10 @@ Files in Github
 |C| C style codes with c++ |Data Struct/C |
 |C++| C++ codes with features such as template |Data Struct/C++|
 |Alogorithm|Part of sort and search method|Data Struct/Alogorithm|
-|API| Declarations of Storage srtuctures |Annotations help you call functions|
-|Definition|Definitions for API |Specific codes how function runs
+|API| Declarations of Storage srtuctures |Data Struct/C/API|
+|Definition|Definitions for API |Data Struct/C/Definition
 |main.cpp|**Test Codes for C/C++** |Data Struct/main.cpp|
+|Structure.drawio|Structure Diagram for Test Cases|/res
 |Data Struct.sln| **VS Enterance** |/|
 
 
@@ -79,28 +80,8 @@ void main()
 
 #### Basic Knowledege
 * baisc print function in **C** is printf while I used std::cout in **C++** instead all the times
->C++
-> ```C
-> void main()
-> {
->     int x;
->     std::cin >> x;//输入
->     std::cout << x << std::endl;//输出
->     return 1
-> }
-> ```
-> also you can use namespace std to remove **std::**
-> ```C++
-> using namespace std;
-> int main()
-> {
->     int x;
->     cin >> x;//输入
->     cout << x << endl;//输出
->     return 1
-> }
-> ```
->> **If you want appoint C as your coding language you should craete .c files rather than .cpp files which Visual Studio always make .cpp file for c++**
+
+> **If you want appoint C as your coding language you should craete .c files rather than .cpp files which Visual Studio always make .cpp file for c++**
 
 #### High quality Website
 [Runnoob](http://www.runoob.com/) is good enough for who unfamiliar with coding gramma.  
@@ -111,7 +92,7 @@ void main()
 - Memory Digrames for each structure.
 - Digrames storage by Edge-Set
 - Using namespace instead of long function name in CPP project
-
+- ***NEED MORE TEST CASE***
 
 
 # Test Case
@@ -132,6 +113,10 @@ void main()
 
 ## Black-Red Tree
 ![Structure-红黑树.drawio](https://i.imgur.com/EucN0tf.png)
+
+## B Tree(5 Order with 4 elements)
+![B_Tree](https://i.imgur.com/YmqNfJk.png)
+
 ---
 # Memory Structure
 ## Sequentence List
