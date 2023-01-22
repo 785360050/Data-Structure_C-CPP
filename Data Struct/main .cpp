@@ -360,40 +360,29 @@ void Binary_Heap()
 void Test_B_Tree()
 {
 	B_Tree* tree = new B_Tree;
-	B_Tree_Init(tree, 5);///
-
-	//B_Tree_Insert(tree, 8);
-	//B_Tree_Insert(tree, 9);
-	//B_Tree_Insert(tree, 10);
-	//B_Tree_Insert(tree, 11);
-	//B_Tree_Insert(tree, 15);
-	//B_Tree_Insert(tree, 16);
-	//B_Tree_Insert(tree, 17);
-	//B_Tree_Insert(tree, 18);
+	B_Tree_Init(tree, 5);
 
 	for (int i = 1; i < 21; ++i)
 	{
-
 		B_Tree_Insert(tree, i);
-
-		std::cout << std::endl;
-		B_Tree_Traverse_Inorder(tree->root);
+		//B_Tree_Show(tree, "");
 	}
+	B_Tree_Show(tree, "After Insert 1-20");
 	
 	B_Tree_Delete(tree, 20);
-	std::cout << std::endl << "After Delete 20" << std::endl;
-	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Show(tree, "After Delete 20");
 	B_Tree_Delete(tree, 14);
-	std::cout << std::endl << "After Delete 14" << std::endl;
-	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Show(tree, "After Delete 14");
 	B_Tree_Delete(tree, 15);
-	std::cout << std::endl << "After Delete 15" << std::endl;
-	B_Tree_Traverse_Inorder(tree->root);
+	B_Tree_Show(tree, "After Delete 15");
 	B_Tree_Delete(tree, 17);
-	std::cout << std::endl << "After Delete 17" << std::endl;
-	B_Tree_Traverse_Inorder(tree->root);
-
-
+	B_Tree_Show(tree, "After Delete 17");
+	B_Tree_Delete(tree, 2);
+	B_Tree_Show(tree, "After Delete 2");
+	B_Tree_Delete(tree, 7);
+	B_Tree_Show(tree, "After Delete 7");
+	B_Tree_Delete(tree, 9);
+	B_Tree_Show(tree, "After Delete 9");
 
 	std::cout << std::endl;
 	B_Tree_Destroy(tree);

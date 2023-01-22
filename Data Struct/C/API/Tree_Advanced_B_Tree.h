@@ -37,5 +37,7 @@ void B_Tree_Delete(B_Tree* tree, int key);
 //中序遍历
 void B_Tree_Traverse_Inorder(B_Node* node);
 
+///中序遍历并显示信息
+void B_Tree_Show(B_Tree* tree, std::string string);
 
 
