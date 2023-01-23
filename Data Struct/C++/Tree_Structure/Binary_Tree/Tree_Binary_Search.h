@@ -7,6 +7,7 @@ class Binary_Tree_Search :public Binary_Tree<DataType>
 {
 public:
 	Binary_Tree_Search() :Binary_Tree<DataType>() {};
+	~Binary_Tree_Search() = default;
 private:
 	//增加二叉搜索节点data
 	Node_BinaryTree<DataType>* insertnode(Node_BinaryTree<DataType>* node,DataType data)
@@ -78,14 +79,8 @@ private:
 		}
 	}
 public:
-	//递增输出所有元素(中序遍历)
-	void TreeIncrease()
-	{
-		this->Tree_Traverse_InOrder(this->root);
-		std::cout<<std::endl;
-	}
 	//查找节点  O(Logn)
-	Node_BinaryTree<DataType>* Tree_LocateElement(string name)
+	Node_BinaryTree<DataType>* Tree_Element_Locate(string name)
 	{
 		Node_BinaryTree<DataType>* p = this->root;
 		while (p)
@@ -102,19 +97,23 @@ public:
 	{
 		insertnode(this->root, data);
 	}
-	void Tree_Insert_NonRecursive(Binary_Tree_Search<DataType>* tree, DataType data)
+	void Tree_Element_Insert_NonRecursive(DataType data)
 	{
 		Node_BinaryTree<DataType>* current = this->root, * precursor = nullptr;
 		while (current)
 		{
 			precursor = current;
+			if (data == current->element)
+			{
+				std::cout << "Insert failed: Existed" << std::endl;
+				return;
+			}
 			if (data < current->element)
 				current = current->left;
-			if (data > current->element)
+			else
 				current = current->right;
-			return;
 		}
-		Node_BinaryTree<DataType>* node = new Node_BinaryTree<DataType>(data);
+		Node_BinaryTree<DataType>* node = new Node_BinaryTree<DataType>(std::to_string(data), data);
 		++this->count;
 		if (precursor && data < precursor->element) 
 			precursor->left = node;

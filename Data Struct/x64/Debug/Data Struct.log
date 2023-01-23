@@ -1,3 +1,4 @@
-﻿  Tree_Binary_Search.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C\Definition\Tree_Binary_Search.cpp(168): warning C4715: “BinaryTree_Search_Delete”: 不是所有的控件路径都返回值
+﻿  main.cpp
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Binary_Tree\main.cpp(146,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Binary_Tree\Tree_Binary_Search.h(80): warning C4715: “Binary_Tree_Search<int>::deletenode”: 不是所有的控件路径都返回值
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

@@ -107,17 +107,24 @@ void BinarySearch()
 	Node_BinaryTree<int>* d = tree.Node_Create("4",4);
 
 	tree.Tree_Set_Root(d);
-	tree.Tree_Element_Insert(2);
-	tree.Tree_Element_Insert(1);
-	tree.Tree_Element_Insert(3);
-	tree.Tree_Element_Insert(6);
-	tree.Tree_Element_Insert(5);
-	tree.Tree_Element_Insert(7);
+	//tree.Tree_Element_Insert(2);
+	//tree.Tree_Element_Insert(1);
+	//tree.Tree_Element_Insert(3);
+	//tree.Tree_Element_Insert(6);
+	//tree.Tree_Element_Insert(5);
+	//tree.Tree_Element_Insert(7);
+
+	tree.Tree_Element_Insert_NonRecursive(2);
+	tree.Tree_Element_Insert_NonRecursive(1);
+	tree.Tree_Element_Insert_NonRecursive(3);
+	tree.Tree_Element_Insert_NonRecursive(6);
+	tree.Tree_Element_Insert_NonRecursive(5);
+	tree.Tree_Element_Insert_NonRecursive(7);
 
 
-	tree.TreeIncrease();
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
 
-	auto node = tree.Tree_LocateElement("7");///查找测试
+	auto node = tree.Tree_Element_Locate("7");///查找测试
 	if (node)
 		std::cout << "Node Founded" << std::endl;
 	else
@@ -125,10 +132,10 @@ void BinarySearch()
 
 	tree.Tree_Element_Delete(2);
 	std::cout << "After Delete 2" << std::endl;
-	tree.TreeIncrease();
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
 	tree.Tree_Element_Delete(4);
 	std::cout << "After Delete 4" << std::endl;
-	tree.TreeIncrease();
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
 
 }
 
