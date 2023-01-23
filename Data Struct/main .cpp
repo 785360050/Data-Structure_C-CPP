@@ -277,7 +277,11 @@ void BinarySearch()
 	else
 		std::cout << std::endl << "Node Not Found" << std::endl;
 
-	BinaryTree_Search_Delete(Tree->root, 2);///可能有缺陷
+	std::cout << std::endl << "After Delete 2" << std::endl;
+	BinaryTree_Search_Delete(Tree->root, 2);
+	BinaryTree_Order_Increase(Tree->root);
+	std::cout << std::endl << "After Delete 4" << std::endl;
+	BinaryTree_Search_Delete(Tree->root, 4);
 	BinaryTree_Order_Increase(Tree->root);
 	BinaryTree_Destory(Tree);
 }
@@ -698,7 +702,7 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	//TestBinaryTree();//完毕
+	TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
@@ -709,7 +713,7 @@ void Test_C()
 	//TestSort();//完毕
 	//TestCost_Sort();//完毕
 	//TestSearch();//完毕
-	Test_B_Tree();
+	//Test_B_Tree();
 	//Test_String();//KMP_BUG
 }
 

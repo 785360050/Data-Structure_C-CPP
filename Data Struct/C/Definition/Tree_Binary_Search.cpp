@@ -129,11 +129,13 @@ TNode* BinaryTree_Search_Delete(TNode* tree, DataType data)
 		return nullptr;
 	if (data < tree->data)
 	{///第2-4个if用于寻路，找到删除目标节点
-		return BinaryTree_Search_Delete(tree->left, data);
+		tree->left = BinaryTree_Search_Delete(tree->left, data);
+		return tree;
 	}
 	if (data > tree->data)
 	{
-		return BinaryTree_Search_Delete(tree->right, data);
+		tree->right = BinaryTree_Search_Delete(tree->right, data);
+		return tree;
 	}
 	///删除节点，找代替节点
 	if (data == tree->data)

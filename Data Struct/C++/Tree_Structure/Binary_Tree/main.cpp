@@ -104,30 +104,33 @@ void Test_Binary_Thread_Tree()
 void BinarySearch()
 {
 	Binary_Tree_Search<int> tree;
-	Node_BinaryTree<int>* d = tree.Node_Create("4");
+	Node_BinaryTree<int>* d = tree.Node_Create("4",4);
 
 	tree.Tree_Set_Root(d);
-	//
-	//tree.BinaryTree_Search_Insert(Tree, "2");
-	//BinaryTree_Search_Insert(Tree, "1");
-	//BinaryTree_Search_Insert(Tree, "3");
-	//BinaryTree_Search_Insert(Tree, "6");
-	//BinaryTree_Search_Insert(Tree, "5");
-	//BinaryTree_Search_Insert(Tree, "7");
+	tree.Tree_Element_Insert(2);
+	tree.Tree_Element_Insert(1);
+	tree.Tree_Element_Insert(3);
+	tree.Tree_Element_Insert(6);
+	tree.Tree_Element_Insert(5);
+	tree.Tree_Element_Insert(7);
 
-	//BinaryTree_Order_Increase(Tree->root);
 
-	//TNode* node = BinaryTree_Search_LocateElement(Tree, 7);///查找测试
-	//if (node)
-	//	std::cout << std::endl << "Node Found" << std::endl;
-	//else
-	//	std::cout << std::endl << "Node Not Found" << std::endl;
+	tree.TreeIncrease();
 
-	//BinaryTree_Search_Delete(Tree->root, 2);///可能有缺陷
-	//BinaryTree_Order_Increase(Tree->root);
-	//BinaryTree_Destory(Tree);
+	auto node = tree.Tree_LocateElement("7");///查找测试
+	if (node)
+		std::cout << "Node Founded" << std::endl;
+	else
+		std::cout << "Node Not Found" << std::endl;
+
+	tree.Tree_Element_Delete(2);
+	std::cout << "After Delete 2" << std::endl;
+	tree.TreeIncrease();
+	tree.Tree_Element_Delete(4);
+	std::cout << "After Delete 4" << std::endl;
+	tree.TreeIncrease();
+
 }
-
 
 
 

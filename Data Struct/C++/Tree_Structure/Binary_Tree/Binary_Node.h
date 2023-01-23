@@ -14,8 +14,12 @@ protected:
 	std::string name;
 };
 
+
+///友元模板类声明
 template <typename DataType>
-class Binary_Tree;	///友元模板类声明
+class Binary_Tree;	
+template <typename DataType>
+class Binary_Tree_Search;
 
 template <typename DataType>
 class Node_BinaryTree :public TreeNode<DataType>
@@ -23,7 +27,9 @@ class Node_BinaryTree :public TreeNode<DataType>
 public:
 	Node_BinaryTree<DataType>* left;
 	Node_BinaryTree<DataType>* right;
+public:
 	friend class Binary_Tree<DataType>;
+	friend class Binary_Tree_Search<DataType>;
 public:
 	Node_BinaryTree(std::string name, DataType element = 0)
 	{
