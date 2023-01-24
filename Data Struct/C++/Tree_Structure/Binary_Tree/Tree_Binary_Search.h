@@ -8,9 +8,9 @@ class Binary_Tree_Search :public Binary_Tree<DataType>
 public:
 	Binary_Tree_Search() :Binary_Tree<DataType>() {};
 	~Binary_Tree_Search() = default;
-private:
+protected:
 	//增加二叉搜索节点data
-	Node_BinaryTree<DataType>* insertnode(Node_BinaryTree<DataType>* node,DataType data)
+	virtual Node_BinaryTree<DataType>* insertnode(Node_BinaryTree<DataType>* node,DataType data)
 	{
 		if (!node)
 		{

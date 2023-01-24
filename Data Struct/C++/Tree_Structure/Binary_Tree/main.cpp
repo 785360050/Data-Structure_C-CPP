@@ -3,6 +3,8 @@
 #include "Binary_Node.h"
 #include "Binary_Tree_Thread.h"
 #include "Tree_Binary_Search.h"
+#include "Tree_Binary_Search_AVL.h"
+
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -139,7 +141,20 @@ void BinarySearch()
 
 }
 
-
+void BinarySearch_AVL()
+{
+	Tree_Binary_Search_AVL<int> tree;
+	tree.BinaryTree_Insert_AVL(8);
+	tree.BinaryTree_Insert_AVL(4);
+	tree.BinaryTree_Insert_AVL(2);
+	tree.BinaryTree_Insert_AVL(6);
+	tree.BinaryTree_Insert_AVL(9);
+	//std::cout << Tree->num << std::endl;
+	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.BinaryTree_AVL_Delete(tree.root, 8);
+	std::cout << std::endl;
+	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+}
 
 
 void main()
@@ -147,5 +162,6 @@ void main()
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	//Test_Binary_Tree();
 	//Test_Binary_Thread_Tree();
-	BinarySearch();
+	//BinarySearch();
+	BinarySearch_AVL();
 }

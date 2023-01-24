@@ -78,4 +78,23 @@ public:
 	}
 };
 
+template <typename DataType>
+class Tree_Binary_Search_AVL;
+
+//template <typename DataType>
+//class Node_Binary_Search_Balance :public Node_BinaryTree<DataType>
+//{
+//protected:	
+//	///当前子树高度,创建默认高度从1开始
+//	int height;//节点的平衡因子=左子树高度-右子树高度
+//private:
+//	friend Tree_Binary_Search_AVL<DataType>;
+//public:
+//	Node_Binary_Search_Balance(std::string name)
+//		:Node_BinaryTree<DataType>(name),height(1) {};
+//	int Get_Height() const
+//	{return height;}
+//
+//};
+
 

@@ -14,8 +14,6 @@
 
 enum Direction { left = 1, right = 2 };
 
-template <typename DataType>
-class Binary_Tree;
 
 template <typename DataType>
 class Binary_Tree
@@ -154,12 +152,12 @@ public:
 		return Deep(root);
 	}
 	//返回树根节点
-	Node_BinaryTree<DataType>* Tree_GetRoot()
+	virtual Node_BinaryTree<DataType>* Tree_GetRoot()
 	{
 		return root;
 	}
 	//显示树所有信息
-	void Tree_Show()
+	virtual void Tree_Show()
 	{
 		std::cout << "当前子树节点总数: " << count << std::endl << "DLR: ";
 		Tree_Traverse_PreOrder(root);
@@ -225,25 +223,10 @@ public:
 	}
 
 	//新建节点(new 分配空间)
-	Node_BinaryTree<DataType>* Node_Create(std::string name,DataType element=0 )
+	virtual Node_BinaryTree<DataType>* Node_Create(std::string name,DataType element=0 )
 	{
 		Node_BinaryTree<DataType>* node = new Node_BinaryTree<DataType>(name, element);
 		return node;
-	}
-	//删除节点
-	void Node_Delete(Node_BinaryTree<DataType>* node)
-	{
-		try
-		{
-			if (!node)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Node Delete Failed: node is not exist" << std::endl;
-			return;
-		}
-		delete node;
 	}
 	
 

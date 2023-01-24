@@ -36,6 +36,7 @@
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_ADT.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Normal.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search.h" />
+    <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search_AVL.h" />
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
