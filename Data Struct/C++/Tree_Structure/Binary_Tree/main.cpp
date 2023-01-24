@@ -5,6 +5,7 @@
 #include "Tree_Binary_Search.h"
 #include "Tree_Binary_Search_AVL.h"
 #include "Tree_Binary_Search_BRT.h"
+#include "Tree_Binary_Heap.h"
 
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
@@ -200,6 +201,25 @@ void BinarySearch_RBT()
 
 }
 
+void Binary_Heap()
+{
+	Tree_Binary_Heap<int> h(5);
+	std::cout << "堆的顺序数组首个空间不使用" << std::endl;
+	h.BinaryHeap_Show();
+	h.BinaryHeap_Element_Insert(1);
+	h.BinaryHeap_Element_Insert(2);
+	h.BinaryHeap_Element_Insert(3);
+	h.BinaryHeap_Element_Insert(4);
+	h.BinaryHeap_Element_Insert(5);
+	//BinaryHeap_Element_Insert(6);
+
+	h.BinaryHeap_Show();
+
+	h.BinaryHeap_Root_Extract();
+	h.BinaryHeap_Show();
+
+}
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
@@ -207,5 +227,6 @@ void main()
 	//Test_Binary_Thread_Tree();
 	//BinarySearch();
 	//BinarySearch_AVL();
-	BinarySearch_RBT();
+	//BinarySearch_RBT();
+	Binary_Heap();
 }
