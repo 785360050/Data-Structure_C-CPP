@@ -98,3 +98,21 @@ class Tree_Binary_Search_AVL;
 //};
 
 
+//template <typename DataType>
+//class Tree_Binary_Search_RBT;
+//
+//enum Colour { red = 0, black = 1 };
+//
+//template <typename DataType>
+//class Node_Binary_Search_RB :public Node_BinaryTree<DataType>
+//{
+//protected:	
+//	enum Colour colour;
+//	Node_Binary_Search_RB<DataType>* parent;
+//private:
+//	friend Tree_Binary_Search_RBT<DataType>;
+//public:
+//	Node_Binary_Search_RB(std::string name)
+//		:Node_BinaryTree<DataType>(name),colour(black),parent(nullptr) {};
+//
+//};
