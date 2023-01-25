@@ -1,4 +1,7 @@
 ﻿  main.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Binary_Tree\main.cpp(224,1): warning C4326: “main”的返回类型应为“int”而非“void”
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Binary_Tree\Tree_Binary_Search.h(80): warning C4715: “Binary_Tree_Search<int>::deletenode”: 不是所有的控件路径都返回值
-  Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h(172,1): error C2819: “Link_Stack<int>”类型没有重载成员“operator ->”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h(92,3): message : 参见“Link_Stack<int>”的声明
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h(172,1): message : 是否改用“.”?
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h(172,2): message : 查看对正在编译的 类 模板 实例化“MergeFindSet_QuickMerge<DataType>”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h(172,1): error C2232: “->Link_Stack<int>::Stack_CheckEmpty”: 左操作数有“class”类型，使用“.”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\MergeFindSet\main.cpp(52,1): warning C4326: “main”的返回类型应为“int”而非“void”

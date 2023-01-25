@@ -220,6 +220,7 @@ void Binary_Heap()
 
 }
 
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
