@@ -34,6 +34,8 @@
     <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h" />
     <ClInclude Include="C++\Liner_Structure\List_Node.h" />
     <ClInclude Include="C++\Node.h" />
+    <ClInclude Include="C++\Set_Structure\Set_Hash_LinearDetection.h" />
+    <ClInclude Include="C++\Set_Structure\Set_Hash_LinkAddress.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h" />
@@ -49,7 +51,7 @@
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Graph_Structure\Graph_Matrix\main.cpp" />
+    <ClCompile Include="C++\Set_Structure\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

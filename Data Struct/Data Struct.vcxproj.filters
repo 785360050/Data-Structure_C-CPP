@@ -99,9 +99,15 @@
     <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Set_Structure\Set_Hash_LinearDetection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Set_Structure\Set_Hash_LinkAddress.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Graph_Structure\Graph_Matrix\main.cpp">
+    <ClCompile Include="C++\Set_Structure\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
