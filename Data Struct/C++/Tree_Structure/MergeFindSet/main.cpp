@@ -42,8 +42,8 @@ void QuickMerge_MergeFindSet()
 	std::cout << set_QM.Find(0, 2) << std::endl;
 	std::cout << set_QM.Find(1, 2) << std::endl;
 	set_QM.Show();
-	std::cout << "RootIndex(2)= " << set_QM.RootIndex(2) << std::endl;
-	std::cout << "RootIndex(2)= " << set_QM.RootIndex_Optimized(2) << std::endl;
+	//std::cout << "RootIndex(2)= " << set_QM.RootIndex(2) << std::endl;
+	//std::cout << "RootIndex(2)= " << set_QM.RootIndex_Optimized(2) << std::endl;
 
 }
 

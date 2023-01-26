@@ -37,7 +37,7 @@ public:
 			delete[] size;
 		std::cout << "MergeFindSet_QuickMerge Destroyed" << std::endl;
 	}
-public:
+private:
 	//寻找元素值为data的元素的下标索引
 	int Index(DataType data)
 	{///遍历找值为data的元素，返回该元素下标
@@ -74,7 +74,6 @@ public:
 		int temp = Index(data);
 		if (temp == -1)
 			return -1;
-
 #ifdef Standard_Stack
 		std::stack<DataType> path;
 		while (parents[temp] != temp)
@@ -102,7 +101,6 @@ public:
 		}
 #endif // Individual_Stack
 		return temp;
-
 	}
 
 public:

@@ -90,9 +90,18 @@
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_Matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_Structure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_AdjacencyList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\MergeFindSet\main.cpp">
+    <ClCompile Include="C++\Graph_Structure\Graph_Matrix\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
