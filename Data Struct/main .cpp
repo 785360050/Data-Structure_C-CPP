@@ -480,9 +480,35 @@ void TestAdjacencyListGraph()
 	std::cout << std::endl << "BFS" << std::endl;
 	Graph_AdjacencyList_Traverse_BFS(g, 0);
 
-	delete g;
+	Graph_AdjacencyList_Destroy(g);
 }
-///Unfinished
+
+void TestEdgeSetGraph()
+{
+	Graph_EdgeSet* g = new Graph_EdgeSet;
+	Graph_EdgeSetList_Init(g, 8, false);
+
+	Graph_EdgeSetList_Edge_Add(g, 0, 1, 1);
+	Graph_EdgeSetList_Edge_Add(g, 0, 2, 1);
+	Graph_EdgeSetList_Edge_Add(g, 1, 3, 1);
+	Graph_EdgeSetList_Edge_Add(g, 1, 4, 1);
+	Graph_EdgeSetList_Edge_Add(g, 3, 7, 1);
+	Graph_EdgeSetList_Edge_Add(g, 4, 7, 1);
+	Graph_EdgeSetList_Edge_Add(g, 2, 6, 1);
+	Graph_EdgeSetList_Edge_Add(g, 2, 5, 1);
+	Graph_EdgeSetList_Edge_Add(g, 5, 6, 1);
+
+	Graph_EdgeSetList_Show(g);
+
+	Graph_EdgeSetList_Edge_Delete(g, 1, 4);
+	Graph_EdgeSetList_Edge_Delete(g, 2, 5);
+
+	std::cout << "删除1-4,2-5边后" << std::endl;
+	Graph_EdgeSetList_Show(g);
+
+	Graph_EdgeSetList_Destroy(g);
+}
+
 void TestMininumSpanningTree()
 {
 	
@@ -702,10 +728,11 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	TestBinaryTree();//完毕
+	//TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
-	//TestAdjacencyListGraph();//完毕
+	TestAdjacencyListGraph();//完毕
+	//TestEdgeSetGraph();
 	//TestMininumSpanningTree();//完毕
 	//TestShortestPath();//完毕
 	//TestTopoSort();//完毕

@@ -18,6 +18,24 @@ void Graph_AdjacencyList_Init(AdjacencyList* graph, int num_vertex, bool directe
 		graph->vertex[i].head_edge = nullptr;
 	}
 }
+
+void Graph_AdjacencyList_Destroy(AdjacencyList* graph)
+{
+	try
+	{
+		if (!graph)
+			throw 1;
+	}
+	catch (...)
+	{
+		std::cout << "Destroy Failed: Graph is not exist!" << std::endl;
+		return;
+	}
+	delete[] graph->state_visited;
+	delete[] graph->vertex;
+	delete graph;
+}
+
 static int Index(Vertex_AdjacencyList vertex)
 {
 	return vertex.no;

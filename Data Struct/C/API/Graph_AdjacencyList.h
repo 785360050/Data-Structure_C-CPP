@@ -43,6 +43,9 @@ static void Reset_VistedState(AdjacencyList* graph)
 
 //初始化邻接表空间
 void Graph_AdjacencyList_Init(AdjacencyList* graph, int num_vertex, bool directed);
+//销毁邻接表
+void Graph_AdjacencyList_Destroy(AdjacencyList* graph);
+
 //添加图graph中，从x到y的边，权值为weight
 void Graph_AdjacencyList_Edge_Add(AdjacencyList* graph, int no_origin, int no_destination, int weight);
 
