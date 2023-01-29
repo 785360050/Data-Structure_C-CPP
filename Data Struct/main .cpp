@@ -731,8 +731,8 @@ void Test_C()
 	//TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
-	TestAdjacencyListGraph();//完毕
-	//TestEdgeSetGraph();
+	//TestAdjacencyListGraph();//完毕
+	TestEdgeSetGraph();
 	//TestMininumSpanningTree();//完毕
 	//TestShortestPath();//完毕
 	//TestTopoSort();//完毕

@@ -137,20 +137,20 @@ public:
 	//(普通树，二叉树，线索树，二叉搜索树，AVL树，并查集，红黑树)
 	///void Tree_Create_Type() = 0;
 	//清空树
-	void Tree_Clear()
-	{
-		Clear(root);
-	}
+	//void Tree_Clear()
+	//{
+	//	Clear(root);
+	//}
 	////判断是否树空
 	bool Tree_CheckEmpty()
 	{
 		return count == 0 ? true : false;
 	}
 	//返回树深度
-	size_t Tree_GetDepth()
-	{
-		return Deep(root);
-	}
+	//size_t Tree_GetDepth()
+	//{
+	//	return Deep(root);
+	//}
 	//返回树根节点
 	virtual Node_BinaryTree<DataType>* Tree_GetRoot()
 	{
@@ -196,20 +196,20 @@ public:
 		node->element=element;
 	}
 	//todo 返回节点node的双亲节点
-	Node_BinaryTree<DataType>* Node_GetParent(Node_BinaryTree<DataType>* node)
-	{
-		try
-		{
-			if (!node)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Set Element Faild: Node is not exist" << std::endl;
-			return NULL;
-		}
-		return Parent(node, node->name);
-	}
+	//Node_BinaryTree<DataType>* Node_GetParent(Node_BinaryTree<DataType>* node)
+	//{
+	//	try
+	//	{
+	//		if (!node)
+	//			throw 1;
+	//	}
+	//	catch (...)
+	//	{
+	//		std::cout << "Set Element Faild: Node is not exist" << std::endl;
+	//		return NULL;
+	//	}
+	//	return Parent(node, node->name);
+	//}
 	//返回节点node的左孩子节点
 	///void Node_GetChild_Left() = 0;
 	//返回节点node的右边兄弟节点1

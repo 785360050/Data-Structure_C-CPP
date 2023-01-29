@@ -2,71 +2,60 @@
 
 #include <iostream>
 #include <queue>
+#include <string>
 
 
 
+struct Edge_AdjacencyList
+{///邻接表的边(弧)
+	int index_vertex;//顶点的下标索引
+	int weight;//边权重
+	Edge_AdjacencyList* next;
+	Edge_AdjacencyList(int index, int weight)
+		:index_vertex{ index }, weight{ weight }, next{ nullptr } {};
+};
 
+template <typename DataType>
+struct Vertex_AdjacencyList
+{///顶点节点
+	int no;//顶点在邻接表中的下标
+	std::string name;//顶点名
+	DataType* data;//数据元素
+	Edge_AdjacencyList* head_edge;//存放边信息
+};
 
 //邻接表
-template <typename DataType>
-struct Graph_AdjacencyList
+template <typename DataType, typename ElementType = Vertex_AdjacencyList<DataType>>
+struct Graph_AdjacencyList:public Graph_Structure<ElementType,DataType>
 {
 private:
-	struct Edge_AdjacencyList
-	{///邻接表的边(弧)
-		int index_vertex;//顶点的下标索引
-		int weight;//边权重
-		Edge_AdjacencyList* next;
-	public:
-		Edge_AdjacencyList(int index, int weight)
-			:index_vertex{ index }, weight{ weight }, next{ nullptr } {};
-	};
-
-	struct Vertex_AdjacencyList
-	{///顶点节点
-		int no;//顶点在邻接表中的下标
-		std::string name;//顶点名
-		DataType* data;//数据元素
-		Edge_AdjacencyList* head_edge;//存放边信息
-	};
-
-private:
-	bool directed;
-	int num_vertex;
-	int num_edge;
 	bool* state_visited;//访问状态
-	Vertex_AdjacencyList* vertex;//顶点数组
 
 public:
-	Graph_AdjacencyList(int num_vertex, bool directed):
-		directed{ directed },
-		num_vertex{ num_vertex },
-		num_edge{0},
-		state_visited{ new bool[num_vertex](false)},
-		vertex{ new Vertex_AdjacencyList[num_vertex] }
+	Graph_AdjacencyList(bool directed,int num_vertex)
+		:Graph_Structure<ElementType, DataType>(directed, num_vertex),
+		state_visited{ new bool[num_vertex](false)}
 	{
 		for (int i = 0; i < num_vertex; i++)
 		{
-			vertex[i].no = i;
-			//graph->vertex[i].name = 'A' + i;
-			vertex[i].head_edge = nullptr;
+			this->vertex[i].no = i;
+			this->vertex[i].head_edge = nullptr;
 		}
 	}
 	~Graph_AdjacencyList()
 	{
 		delete[] state_visited;
-		delete[] vertex;
 	}
 
 private:
 	void Reset_VistedState()
 	{
-		for (int i = 0; i < num_vertex; i++)
+		for (int i = 0; i < this->num_vertex; i++)
 			state_visited[i] = false;
 	}
-	int Index(Vertex_AdjacencyList vertex) const
+	int Index(Vertex_AdjacencyList<DataType> vertex) const
 	{
-		return vertex.no;
+		return std::stoi(vertex.name);
 	}
 	Edge_AdjacencyList* Create_EdgeNode(int index, int weight)
 	{
@@ -75,13 +64,13 @@ private:
 
 public:
 	//添加图graph中，从x到y的边，权值为weight
-	void Graph_Edge_Add(int no_origin, int no_destination, int weight)
+	void Graph_Edge_Add(int no_origin, int no_destination, int weight) override
 	{
 		try
 		{
-			if (no_origin < 0 || no_origin >= num_vertex)
+			if (no_origin < 0 || no_origin >= this->num_vertex)
 				throw std::exception("Index no_origin is out of range!");
-			if (no_destination < 0 || no_destination >= num_vertex)
+			if (no_destination < 0 || no_destination >= this->num_vertex)
 				throw std::exception("Index no_destination is out of range!");
 		}
 		catch (const std::exception& e)
@@ -89,31 +78,35 @@ public:
 			std::cout << e.what() << std::endl;
 		}
 		Edge_AdjacencyList* node = Create_EdgeNode(no_destination, weight);
-		node->next = vertex[no_origin].head_edge;///头插法插入新节点
-		vertex[no_origin].head_edge = node;
-		++num_edge;
-		if (no_origin != no_destination && directed == false)
+		node->next = this->vertex[no_origin].head_edge;///头插法插入新节点
+		this->vertex[no_origin].head_edge = node;
+		++this->num_edge;
+		if (no_origin != no_destination && this->directed == false)
 		{///无向图新建插入两个节点
 			node = Create_EdgeNode(no_origin, weight);
-			node->next = vertex[no_destination].head_edge;///头插法插入新节点
-			vertex[no_destination].head_edge = node;
+			node->next = this->vertex[no_destination].head_edge;///头插法插入新节点
+			this->vertex[no_destination].head_edge = node;
 		}
 	}
-	void Graph_Traverse_DFS(int no_vertex)
+	void Graph_Edge_Delete(int no_origin, int no_destination) override
+	{
+
+	}
+	void Graph_Traverse_DFS(int no_vertex) override
 	{
 		Edge_AdjacencyList* e;
-		std::cout << vertex[no_vertex].no << ' ';
+		std::cout << this->vertex[no_vertex].no << ' ';
 		state_visited[no_vertex] = true;
-		e = vertex[no_vertex].head_edge;
+		e = this->vertex[no_vertex].head_edge;
 		while (e)
 		{
 			if (state_visited[e->index_vertex] == false)
-				Graph_Traverse_DFS(vertex[e->index_vertex].no);
+				Graph_Traverse_DFS(this->vertex[e->index_vertex].no);
 			e = e->next;
 		}
 
 	}
-	void Graph_Traverse_BFS(int no_vertex)
+	void Graph_Traverse_BFS(int no_vertex) override
 	{
 
 		Reset_VistedState();
@@ -128,7 +121,7 @@ public:
 			std::cout << x << ' ';
 			q.pop();
 			state_visited[x] = true;
-			Edge_AdjacencyList* e = vertex[x].head_edge;
+			Edge_AdjacencyList* e = this->vertex[x].head_edge;
 			while (e)
 			{///下一层全入队
 				if (state_visited[e->index_vertex] == false)
@@ -144,21 +137,21 @@ public:
 
 	}
 
-	void Graph_Show()
+	void Graph_Show() override
 	{
 		using namespace std;
-		string d = directed == true ? "有向图" : "无向图";
-		cout << "顶点数：" << num_vertex << endl
-			<< "边数：" << num_edge << endl
+		string d = ((this->directed) == true) ? "有向图" : "无向图";
+		cout << "顶点数：" << this->num_vertex << endl
+			<< "边数：" << this->num_edge << endl
 			<< d << endl;
-		for (int i = 0; i < num_vertex; i++)
+		for (int i = 0; i < this->num_vertex; i++)
 		{
-			Vertex_AdjacencyList v = vertex[i];
+			Vertex_AdjacencyList v = this->vertex[i];
 			Edge_AdjacencyList* e = v.head_edge;
 			cout << v.no << "->";
 			while (e)
 			{
-				cout << vertex[e->index_vertex].no << "->";
+				cout << this->vertex[e->index_vertex].no << "->";
 				e = e->next;
 			}
 			cout << "NULL\n";

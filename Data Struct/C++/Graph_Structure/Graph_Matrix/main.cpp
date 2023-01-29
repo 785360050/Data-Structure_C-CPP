@@ -1,6 +1,7 @@
 
 #include "Graph_Matrix.h"
 #include "Graph_AdjacencyList.h"
+#include "Graph_EdgeSetList.h"
 
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
@@ -20,7 +21,7 @@ static bool  SetEncode(int EncodeId = 936)
 void TestMatrixGraph()
 {
 	//初始化8个节点的无向无权图，用邻接矩阵graph存储,初始无边(weight=0)
-	Graph_Matrix<int> graph(8, false);
+	Graph_Matrix<int> graph(false,8);
 	graph.Graph_Edge_Add(0, 1, 1);
 	graph.Graph_Edge_Add(0, 2, 1);
 	graph.Graph_Edge_Add(1, 3, 1);
@@ -32,7 +33,7 @@ void TestMatrixGraph()
 	graph.Graph_Edge_Add(5, 6, 1);
 
 
-	graph.Show();
+	graph.Graph_Show();
 
 	std::cout << "DFS" << std::endl;
 	graph.Graph_Traverse_DFS(0);
@@ -44,7 +45,7 @@ void TestMatrixGraph()
 void TestAdjacencyListGraph()
 {
 	//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
-	Graph_AdjacencyList<int> graph(8, false);
+	Graph_AdjacencyList<int> graph(false,8);
 	graph.Graph_Edge_Add(0, 1, 1);
 	graph.Graph_Edge_Add(0, 2, 1);
 	graph.Graph_Edge_Add(1, 3, 1);
@@ -65,10 +66,35 @@ void TestAdjacencyListGraph()
 
 }
 
+void TestEdgeSetListGraph()
+{
+	//初始化8个节点的无向无权图，用邻接矩阵g存储,初始无边(weight=0)
+	Graph_EdgeSet<int> graph(false, 8);
+	graph.Graph_Edge_Add(0, 1, 1);
+	graph.Graph_Edge_Add(0, 2, 1);
+	graph.Graph_Edge_Add(1, 3, 1);
+	graph.Graph_Edge_Add(1, 4, 1);
+	graph.Graph_Edge_Add(3, 7, 1);
+	graph.Graph_Edge_Add(4, 7, 1);
+	graph.Graph_Edge_Add(2, 6, 1);
+	graph.Graph_Edge_Add(2, 5, 1);
+	graph.Graph_Edge_Add(5, 6, 1);
+
+	graph.Graph_Show();
+
+	//std::cout << "DFS" << std::endl;
+	//graph.Graph_Traverse_DFS(0);
+	//graph.Reset_VistedState();
+	//std::cout << std::endl << "BFS" << std::endl;
+	//graph.Graph_Traverse_BFS(0);
+
+}
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	//TestMatrixGraph();
-	TestAdjacencyListGraph();
+	//TestAdjacencyListGraph();
+	TestEdgeSetListGraph();
 }
 

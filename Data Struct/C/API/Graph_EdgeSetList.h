@@ -1,7 +1,7 @@
 #pragma once
 
 
-///TODO Unfinished
+
 struct Graph_EdgeSet_Edge
 {
 	int no_source;
