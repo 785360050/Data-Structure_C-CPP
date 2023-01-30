@@ -1,3 +1,4 @@
 ﻿  main.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Graph_Structure\Graph_Matrix\main.cpp(94,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Graph_Structure\main.cpp(122,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Graph_Structure\Graph_EdgeSetList\Graph_EdgeSetList.h(47): warning C4715: “Graph_EdgeSet<int>::Find”: 不是所有的控件路径都返回值
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

@@ -3,29 +3,17 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <string>
+
 
 #include "../Graph_Structure.h"
-
+#include "Vertex_Matrix.h"
 
 //template <typename DataType>
 //struct  Graph_Matrix<DataType>::Vertex_Matrix;
 
 
 
-template <typename DataType>
-struct Vertex_Matrix
-{//顶点结构体
-public:
-	//int no;//顶点编号
-	std::string name;		///顶点名
-	DataType data;			///顶点存放的数据元素
-public:
-	Vertex_Matrix()
-		:name(), data(NULL) {};
-	Vertex_Matrix(std::string name, DataType data)
-		:name(name), data(data) {};
-};
+
 
 
 //邻接矩阵

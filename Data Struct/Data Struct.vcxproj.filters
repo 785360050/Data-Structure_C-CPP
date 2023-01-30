@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_AdjacencyList.h">
+    <ClInclude Include="C++\Graph_Structure\Graph_AdjacencyList\Graph_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_Matrix.h">
@@ -49,9 +49,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_ADT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_Structure_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Liner_Structure\List_Node.h">
@@ -114,12 +111,21 @@
     <ClInclude Include="C++\Object.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Graph_EdgeSetList.h">
+    <ClInclude Include="C++\Graph_Structure\Graph_EdgeSetList\Graph_EdgeSetList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_Matrix\Vertex_Matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_AdjacencyList\Vertex_AdjacencyList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Graph_Structure\Graph_AdjacencyList\Edge_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Graph_Structure\Graph_Matrix\main.cpp">
+    <ClCompile Include="C++\Graph_Structure\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

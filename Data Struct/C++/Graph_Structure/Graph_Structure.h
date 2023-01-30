@@ -2,13 +2,10 @@
 
 
 
-
-
-
-
 template <typename ElementType,typename DataType>
 class Graph_Structure
 {
+
 protected:
 	bool directed;			///否为有向图
 	int num_edge;			///边总数
