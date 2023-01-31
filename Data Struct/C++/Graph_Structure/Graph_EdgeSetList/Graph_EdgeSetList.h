@@ -24,11 +24,13 @@ private:
 	};
 private:
 	Graph_EdgeSet_Edge* edge;//存放边的数组(顺序表实现)
-	std::pair<Graph_EdgeSet_Edge,bool>* visit_state;
+	std::pair<Graph_EdgeSet_Edge, bool>* visit_state;
 public:
 	Graph_EdgeSet(bool directed, int num_vertex)
 		:Graph_Structure<DataType, DataType>(directed, num_vertex),
-		edge(new Graph_EdgeSet_Edge[num_vertex * (num_vertex - 1)])///n个顶点最多有n(n-1)条边
+		edge(new Graph_EdgeSet_Edge[num_vertex * (num_vertex - 1)]),
+		visit_state(nullptr)
+		///n个顶点最多有n(n-1)条边
 	{};
 	//释放边集数组空间
 	~Graph_EdgeSet()
