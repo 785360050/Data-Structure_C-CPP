@@ -71,6 +71,78 @@ void main()
 ```
 >   - Select the Data structure function by remove "//"
 
+### Test Sample Demo in C++ with polymorphic
+#### Link_List
+```C++
+void Test_LinkList()
+{
+
+	Liner_List<List_Node_SingleWay<int>, int>* link_list = new Link_List_Forward<int>;
+
+	link_list->List_Show("Initialize");
+
+	for (int i = 1; i <= 5; i++)
+		link_list->Element_Insert(i, i);
+	link_list->List_Show("插入5个元素后");
+
+
+	link_list->Element_Insert(2, 9);
+	link_list->List_Show("第二个位置插入9后，链表扩展一个元素");
+
+	std::cout << std::endl;
+	link_list->Element_Insert(20, 20);
+	link_list->List_Show("第20个非法位置插入20后");
+
+	std::cout << std::endl;
+	link_list->Element_Update(2, 999);
+	link_list->List_Show("第二个元素改为999后");
+
+	int del = link_list->Element_Delete(2);
+	link_list->List_Show("删除第二个元素后");
+	std::cout << "删除的第二个元素为:" << del << std::endl;
+
+	std::cout << "获取第二个元素值:" << link_list->List_GetData(2) << std::endl;
+
+	std::cout << "判空:" << std::boolalpha << link_list->List_CheckEmpty() << std::endl;
+	std::cout << "当前表长：" << link_list->List_GetLength() << std::endl;
+	link_list->List_Clear();
+	link_list->List_Show("元素重置后");
+	std::cout << "当前表长：" << link_list->List_GetLength() << std::endl;
+
+	delete link_list;
+}
+```
+![Screenshot 2023-02-01 170242](https://i.imgur.com/yjRAXND.jpg)
+#### Graph in Matrix
+```C++
+void TestPolymorphic()
+{
+	Graph_Structure<Vertex_Matrix<int>,int>* graph=new Graph_Matrix<int>(true, 7);
+
+	graph->Graph_Edge_Add(0, 1, 4);
+	graph->Graph_Edge_Add(0, 2, 6);
+	graph->Graph_Edge_Add(0, 3, 6);
+	graph->Graph_Edge_Add(1, 2, 1);
+	graph->Graph_Edge_Add(1, 4, 7);
+	graph->Graph_Edge_Add(2, 4, 6);
+	graph->Graph_Edge_Add(2, 5, 4);
+	graph->Graph_Edge_Add(3, 2, 2);
+	graph->Graph_Edge_Add(3, 5, 5);
+	graph->Graph_Edge_Add(4, 6, 6);
+	graph->Graph_Edge_Add(5, 4, 1);
+	graph->Graph_Edge_Add(5, 6, 8);
+
+	graph->Graph_Show();
+
+	std::cout << "DFS" << std::endl;
+	graph->Graph_Traverse_DFS(0);
+	std::cout << std::endl << "BFS" << std::endl;
+	graph->Graph_Traverse_BFS(0);
+
+	delete graph;
+}
+```
+![Screenshot 2023-02-01 170409](https://i.imgur.com/eoSTCnB.jpg)
 ## Attention!
 - C Project is aim to work correctly when CPP Project is aim to clear up all these Structures.
 - //完毕 only refers functions are basically tested, it may well be something wrong when modifying them.
@@ -102,6 +174,9 @@ void main()
 ## Binary Search Tree
 ![二叉搜索树案例](https://i.imgur.com/pMzjRuA.png)
 
+## Graph 
+![Structure-图.drawio](https://i.imgur.com/2lfMCxA.png)
+
 ## Topo Sort
 ![Structure-拓扑排序.drawio](https://i.imgur.com/OHTsjvZ.png)
 
@@ -125,7 +200,7 @@ void main()
 
 
 # Class Diagram
-![Liner_Structure](https://i.imgur.com/SzzrtU3.png)
+![Liner_List](https://i.imgur.com/UVIxKAA.png)
 
 # [Top](#executable-data-structure-code-for-cc)
 

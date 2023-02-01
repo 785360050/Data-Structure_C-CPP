@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../../List_Node.h"
-#include "List_Head.h"
+#include "Link_List.h"
 
 #include <Windows.h>
 ///修改cmd编码方式
@@ -22,7 +22,7 @@ void Test_Forward_List()
 {
 	Link_List_Forward<int>* L = new Link_List_Forward<int>;
 	for (int i = 1; i <= 10; i++)
-		L->Insert_Front(i);
+		L->Element_Insert(i,i);
 	L->List_Show("头插法插入10个节点后：");
 	List_Node_SingleWay<int>* pri = L->Element_Prior(L->Element_Locate(5));
 	std::cout << "第5个元素的前驱节点为: " << pri->element << std::endl;
@@ -38,8 +38,7 @@ void Test_Forward_List()
 	L->List_Show("重置链表后：");
 	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
 	std::cout << "链表判空: " << L->List_CheckEmpty() << std::endl;
-	L->List_Destroy();
-	L->List_Show("销毁链表后");
+	delete L;
 }
 
 void Test_Link_List_Double()
@@ -62,8 +61,7 @@ void Test_Link_List_Double()
 	L->List_Show("重置链表后：");
 	std::cout << "当前链表长度为: " << L->List_GetLength() << std::endl;
 	std::cout << "链表判空: " << L->List_CheckEmpty() << std::endl;
-	L->List_Destroy();
-	L->List_Show("销毁链表后");
+	delete L;
 }
 
 void main()

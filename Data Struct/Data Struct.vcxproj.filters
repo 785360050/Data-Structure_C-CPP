@@ -24,7 +24,7 @@
     <ClInclude Include="C++\Graph_Structure\Graph_Structure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\List_Head.h">
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\Link_List.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h">
@@ -52,9 +52,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Liner_Structure\List_Node.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Liner_Structure\Monitor.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Set_Structure\Set_Hash_LinearDetection.h">
@@ -123,9 +120,12 @@
     <ClInclude Include="C++\Graph_Structure\Graph_AdjacencyList\Edge_AdjacencyList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Graph_Structure\main.cpp">
+    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

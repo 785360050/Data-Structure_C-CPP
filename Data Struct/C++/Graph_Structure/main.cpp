@@ -123,9 +123,9 @@ void TestPolymorphic()
 #endif // !directed
 
 #ifdef directed		///有向图
-	//Graph_Structure<Vertex_Matrix<int>,int>* graph=new Graph_Matrix<int>(true, 7);
+	Graph_Structure<Vertex_Matrix<int>,int>* graph=new Graph_Matrix<int>(true, 7);
 	//Graph_Structure<Vertex_AdjacencyList<int>,int>* graph=new Graph_AdjacencyList<int>(true, 7);
-	Graph_Structure<int, int>* graph = new Graph_EdgeSet<int>(true, 7);
+	//Graph_Structure<int, int>* graph = new Graph_EdgeSet<int>(true, 7);
 	graph->Graph_Edge_Add(0, 1, 4);
 	graph->Graph_Edge_Add(0, 2, 6);
 	graph->Graph_Edge_Add(0, 3, 6);
@@ -146,6 +146,7 @@ void TestPolymorphic()
 	std::cout << std::endl << "BFS" << std::endl;
 	graph->Graph_Traverse_BFS(0);
 #endif // directed
+	delete graph;
 }
 
 

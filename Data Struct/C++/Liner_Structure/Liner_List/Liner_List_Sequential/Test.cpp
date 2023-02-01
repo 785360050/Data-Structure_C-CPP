@@ -49,7 +49,7 @@ void Test_SeqList_Array()
 	L.List_Show("删除第二个元素后");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
 
-	std::cout << "获取第二个元素值:" << L.List_GetElement(2) << std::endl;
+	std::cout << "获取第二个元素值:" << L.List_GetData(2) << std::endl;
 
 	std::cout << "判空:" << boolalpha << L.List_CheckEmpty() << std::endl;
 	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
@@ -57,7 +57,6 @@ void Test_SeqList_Array()
 	L.List_Show("清空后");
 	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 
-	L.List_Destroy();
 }
 
 void Test_SeqList_Vector()
@@ -85,7 +84,7 @@ void Test_SeqList_Vector()
 	L.List_Show("删除第二个元素后，自动收缩存储空间");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
 
-	std::cout << "获取第二个元素值:" << L.List_GetElement(2) << std::endl;
+	std::cout << "获取第二个元素值:" << L.List_GetData(2) << std::endl;
 
 	for (size_t i = 5; i > 2; --i)
 		L.Element_Delete(i);
@@ -97,7 +96,6 @@ void Test_SeqList_Vector()
 	L.List_Show("清空后");
 	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 
-	L.List_Destroy();
 }
 
 void main()

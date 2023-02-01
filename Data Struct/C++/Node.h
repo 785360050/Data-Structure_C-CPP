@@ -11,4 +11,6 @@ public:
 	Node(DataType element)
 		:element{ element } {};
 	//virtual void Show() = 0;
+	//DataType Get_Element()
+	//{return element;}
 };
