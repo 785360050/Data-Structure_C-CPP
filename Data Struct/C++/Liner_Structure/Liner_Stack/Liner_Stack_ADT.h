@@ -4,9 +4,9 @@
 using std::string;
 
 template <typename DataType>
-struct Stack
-{
-	virtual ~Stack() = default;
+struct Stack_ADT
+{///Interface
+	virtual ~Stack_ADT() = default;
 public:///栈操作
 	//清空栈
 	virtual void Stack_Clear() = 0;

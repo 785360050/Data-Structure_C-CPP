@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../Liner_Stack_ADT.h"
+#include "../Liner_Stack.h"
 
 /// <summary>
 /// 四种类型：满增栈、满减栈、空增栈、空减栈。

@@ -200,7 +200,12 @@ void TestPolymorphic()
 
 
 # Class Diagram
+## Liner_Structur
+### Liner_List
 ![Liner_List](https://i.imgur.com/UVIxKAA.png)
+
+### Liner_Queue
+![Liner_Queue](https://i.imgur.com/8NX6IsT.png)
 
 # [Top](#executable-data-structure-code-for-cc)
 

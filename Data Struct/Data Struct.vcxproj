@@ -30,9 +30,11 @@
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_ADT.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Link\Link_List.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_ADT.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Linked\Liner_Queue_Linked.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Liner_Queue_Sequential.h" />
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_ADT.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Linked\Liner_Stack_Linked.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h" />
@@ -57,7 +59,7 @@
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp" />
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

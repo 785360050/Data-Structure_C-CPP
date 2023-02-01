@@ -90,7 +90,7 @@ void TestSequenceStack_Full_Decending()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	//TestSequenceStack_Empty_Ascending();///空增栈
+	TestSequenceStack_Empty_Ascending();///空增栈
 	//TestSequenceStack_Full_Ascending();///满增栈
 	//TestSequenceStack_Empty_Decending();///空减栈
 	//TestSequenceStack_Full_Decending();///空减栈

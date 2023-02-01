@@ -123,9 +123,15 @@
     <ClInclude Include="C++\Liner_Structure\Liner_List\Liner_List.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp">
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

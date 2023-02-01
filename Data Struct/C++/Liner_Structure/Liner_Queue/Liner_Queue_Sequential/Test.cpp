@@ -22,10 +22,10 @@ void Test_SeqQueue_Redundancy()
 	for (int i = 10; i < 15; i++)
 		q.Element_Enqueue(i);
 	q.Queue_Show("5个元素入队后");
-	std::cout << "当前队头元素为: " << q.Queue_GetHead() << std::endl;
+	std::cout << "当前队头元素为: " << q.Queue_GetFront() << std::endl;
 	std::cout << "当前队列长度为: " << q.Queue_Length() << std::endl;
-	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
-	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
+	q.Element_Dequeue();
+	q.Element_Dequeue();
 	q.Queue_Show("出队2个元素后：");
 	q.Queue_Clear();
 	q.Queue_Show("清空队列后");
@@ -39,10 +39,10 @@ void Test_SeqQueue_Tag()
 	for (int i = 10; i < 15; i++)
 		q.Element_Enqueue(i);
 	q.Queue_Show("5个元素入队后");
-	std::cout << "当前队头元素为: " << q.Queue_GetHead() << std::endl;
+	std::cout << "当前队头元素为: " << q.Queue_GetFront() << std::endl;
 	std::cout << "当前队列长度为: " << q.Queue_Length() << std::endl;
-	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
-	std::cout << "出队元素为: " << q.Element_Dequeue() << std::endl;
+	q.Element_Dequeue();
+	q.Element_Dequeue();
 	q.Queue_Show("出队2个元素后：");
 	q.Queue_Clear();
 	q.Queue_Show("清空队列后");
@@ -52,6 +52,6 @@ void Test_SeqQueue_Tag()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	//Test_SeqQueue_Redundancy();
+	Test_SeqQueue_Redundancy();
 	Test_SeqQueue_Tag();
 }

@@ -3,41 +3,28 @@
 
 #include <iostream>
 
-#include "../Liner_Queue_ADT.h"
+#include "../Liner_Queue.h"
 
 template<typename DataType>
-struct Sequence_Queue :public Queue<DataType>
+struct Sequence_Queue :public Queue<DataType,DataType>
 {///使用少存一个元素空间实现队列判断满
 protected:
-	int front;
-	int rear;
-	int length;
-	int maxsize;
-	DataType* element;
+	int front;			///队头下标索引
+	int rear;			///队尾下标索引
+	DataType* element;	///队列数组
 protected:
 	virtual bool Queue_CheckFull()
-	{return (rear + 1) % (maxsize + 1) == front ? true : false; }
+	{return (rear + 1) % (this->maxsize + 1) == front ? true : false; }
 	int Index(int x) const
 	{return x - 1;}
 public:///Redundancy
 	Sequence_Queue()
-		:front{ 0 }, rear{ 0 }, length{ 0 }, maxsize{ 0 }, element{ nullptr } {};
+		:Queue<DataType, DataType>(),front{ 0 }, rear{ 0 }, element{ nullptr } {};
 	Sequence_Queue(int maxsize)
-		:Sequence_Queue()
-	{
-		try
-		{
-			if (maxsize < 1)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Queue Init Failed: maxsize must be greater than 1" << std::endl;
-			return;
-		}
-		element = new DataType[maxsize + 1]{};//初始化为0
-		this->maxsize = maxsize;
-	}
+		:Queue<DataType, DataType>(maxsize),
+		front{ 0 }, rear{ 0 },
+		element{ new DataType[maxsize + 1]{} }{};
+
 	virtual ~Sequence_Queue()
 	{
 		if (element)
@@ -48,24 +35,16 @@ public:///Redundancy
 		}
 	}
 public:
-	//清空队列
 	void Queue_Clear() override
 	{
-		memset(element, 0, sizeof(DataType) * (maxsize));
-		length = front = rear = 0;
+		memset(element, 0, sizeof(DataType) * (this->maxsize));
+		this->length = front = rear = 0;
 	}
-	//判断是否队空
-	bool Queue_CheckEmpty() override
-	{return length == 0 ? true : false;}
-	//返回队列长度(元素个数)
-	int Queue_Length() override
-	{return length;}
-	//返回队头
-	DataType Queue_GetHead() override
+	DataType Queue_GetFront() override
 	{
 		try
 		{
-			if (Queue_CheckEmpty())
+			if (this->Queue_CheckEmpty())
 				throw 1;
 		}
 		catch (...)
@@ -75,19 +54,31 @@ public:
 		}
 		return element[front];
 	}
-	//显示整个队列信息
-	virtual void Queue_Show(string string) override
+	DataType Queue_GetRear() override
+	{
+		try
+		{
+			if (this->Queue_CheckEmpty())
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Queue is Empty" << std::endl;
+			return NULL;
+		}
+		return element[rear];
+	}
+	virtual void Queue_Show(const std::string& string) override
 	{
 		std::cout << string << std::endl
-			<< "[Length/Maxsize]:" << " [" << length << '/' << maxsize << ']' << std::endl
-			<< "[Front/Rear/Redundancy]: [" << front << '/' << rear << '/' << rear + maxsize << ']' << std::endl
+			<< "[Length/Maxsize]:" << " [" << this->length << '/' << this->maxsize << ']' << std::endl
+			<< "[Front/Rear/Redundancy]: [" << front << '/' << rear << '/' << rear + this->maxsize << ']' << std::endl
 			<< "Queue-";
-		for (int index = 0; index < maxsize + 1; index++)
+		for (int index = 0; index < this->maxsize + 1; index++)
 			std::cout << '[' << index << ':' << element[index] << "]-";
 		std::cout << "End" << std::endl;
 	}
 public:
-	//元素入队
 	virtual void Element_Enqueue(DataType element) override
 	{
 		try
@@ -103,29 +94,26 @@ public:
 			return;
 		}
 		this->element[rear] = element;
-		rear = (rear + 1) % maxsize;
-		length++;
+		rear = (rear + 1) % this->maxsize;
+		this->length++;
 	}
-	//元素出队
-	virtual DataType Element_Dequeue() override
+	virtual void Element_Dequeue() override
 	{
 		try
 		{
-			if (Queue_CheckEmpty())
+			if (this->Queue_CheckEmpty())
 				throw 1;
 		}
 		catch (...)
 		{
 			std::cout << "Dequeue Faild: Queue is empty" << std::endl;
-			return NULL;
+			return ;
 		}
 		DataType x = element[front];
 		element[front] = 0;
-		front = (front + 1) % Index(maxsize);
-		--length;
-		return x;
+		front = (front + 1) % Index(this->maxsize);
+		--this->length;
 	}
-
 };
 
 
@@ -141,7 +129,7 @@ public:
 	Sequence_Queue_Tag()
 		:Sequence_Queue<DataType>(), full{false} {};
 	Sequence_Queue_Tag(int maxsize)
-		:Sequence_Queue<DataType>()
+		:Sequence_Queue_Tag()
 	{
 		try
 		{
@@ -174,7 +162,7 @@ public:
 		std::cout << "Sequence_Queue_Tag Destroyed" << std::endl;
 	}
 public:
-	void Queue_Show(string string) override
+	void Queue_Show(const std::string& string) override final
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]=" << "[" << this->length << '/' << this->maxsize << ']' << std::endl
@@ -206,7 +194,7 @@ public:
 		if (Queue_CheckFull())
 			full = true;
 	}
-	DataType Element_Dequeue() override
+	void Element_Dequeue() override
 	{
 		try
 		{
@@ -216,7 +204,7 @@ public:
 		catch (...)
 		{
 			std::cout << "Dequeue Faild: Queue is empty" << std::endl;
-			return NULL;
+			return ;
 		}
 		DataType x = this->element[this->front];
 		this->element[this->front] = 0;
@@ -225,7 +213,6 @@ public:
 		
 		if (!Queue_CheckFull())
 			full = false;
-		return x;
 	}
 };
 
