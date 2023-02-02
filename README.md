@@ -210,6 +210,9 @@ void TestPolymorphic()
 ### Liner_Stack
 ![Liner_Stack](https://i.imgur.com/V1iK5XL.png)
 
+## Tree_Structur
+### Tree_MergeFindSet
+![Tree_MergeFindSet](https://i.imgur.com/P53EBAu.png)
 # [Top](#executable-data-structure-code-for-cc)
 
 

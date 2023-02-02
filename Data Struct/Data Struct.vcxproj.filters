@@ -72,7 +72,7 @@
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Heap.h">
+    <ClInclude Include="C++\Tree_Structure\Heap\Heap.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Normal.h">
@@ -85,15 +85,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search_BRT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h">
@@ -129,9 +120,21 @@
     <ClInclude Include="C++\Liner_Structure\Liner_Queue\Liner_Queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp">
+    <ClCompile Include="C++\Tree_Structure\Heap\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

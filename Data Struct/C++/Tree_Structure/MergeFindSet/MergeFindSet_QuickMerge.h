@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <stack>
-#include "../../Liner_Structure/Liner_Stack/Liner_Stack_ADT.h"
+#include "../../Liner_Structure/Liner_Stack/Liner_Stack.h"
 #include "../../Liner_Structure/Liner_Stack/Liner_Stack_Linked/Liner_Stack_Linked.h"
 
 #include "MergeFindSet_ADT.h"
@@ -12,18 +12,18 @@
 
 
 template <typename DataType>
-class MergeFindSet_QuickMerge :public Tree_MergeFindSet<DataType>
+class MergeFindSet_QuickMerge :public MergeFindSet<DataType>
 {
 private:
 	int* parents;	//存放双亲的ID
 	int* size;		//记录所在集合的元素总数(包含的子节点个数，仅在根节点合并时使用)
 public:
 	MergeFindSet_QuickMerge(int maxsize)
-		:Tree_MergeFindSet<DataType>(maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} } {};
+		:MergeFindSet<DataType>(maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} } {};
 	//元素对应双亲的索引存放在parents数组中
 	//(初始双亲为自己，即根ID=双亲ID=元素数组下标)
 	MergeFindSet_QuickMerge(int* element_array, int maxsize)	
-		:Tree_MergeFindSet<DataType>(element_array, maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} }
+		:MergeFindSet<DataType>(element_array, maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} }
 	{
 		memcpy(parents, element_array, sizeof(int) * maxsize);
 		memcpy(size, element_array, sizeof(int) * maxsize);
@@ -38,29 +38,10 @@ public:
 		std::cout << "MergeFindSet_QuickMerge Destroyed" << std::endl;
 	}
 private:
-	//寻找元素值为data的元素的下标索引
-	int Index(DataType data)
-	{///遍历找值为data的元素，返回该元素下标
-		/// <summary>
-		/// 循环遍历寻找值为data的元素的双亲parents,
-		/// 直到找到双亲ID==自己ID的节点，即为data元素所在集合的RootID
-		/// 返回根节点ID，失败返回-1
-		/// </summary>
-		/// <param name="set"></param>
-		/// <param name="data"></param>
-		/// <returns></returns>
-		for (int i = 0; i < this->count; ++i)
-		{
-			if (this->element[i] == data)
-				return i;
-		}
-		return -1;
-	}
-
 	//遍历寻找元素data所在的集合(根)ID
 	int RootIndex(DataType data)
 	{
-		int temp = Index(data);
+		int temp = this->Index(data);
 		if (temp == -1)
 			return -1;
 		///找根(双亲为自己即为根)
@@ -71,7 +52,7 @@ private:
 	//遍历寻找元素data所在的集合(根)ID(路径压缩)
 	int RootIndex_Optimized( DataType data)
 	{///利用栈实现路径压缩
-		int temp = Index(data);
+		int temp = this->Index(data);
 		if (temp == -1)
 			return -1;
 #ifdef Standard_Stack
@@ -91,12 +72,12 @@ private:
 		Link_Stack<int> path(10);
 		while (parents[temp] != temp)
 		{
-			path->Element_Push(temp);//将路径的下标索引入栈
+			path.Element_Push(temp);//将路径的下标索引入栈
 			temp = parents[temp];
 		}
-		while (!path->Stack_CheckEmpty())
+		while (!path.Stack_CheckEmpty())
 		{
-			int pos = path->Stack_GetTop(); path->Element_Pop();
+			int pos = path.Stack_GetTop(); path.Element_Pop();
 			parents[pos] = temp;
 		}
 #endif // Individual_Stack
@@ -120,7 +101,6 @@ public:
 		}
 		return (RootID_X == RootID_Y) ? true : false;	///所在集合的根ID一致时返回true
 	}
-
 	void Merge(DataType x, DataType y) override
 	{
 		/// <summary>
@@ -153,7 +133,6 @@ public:
 			}
 		}
 	}
-
 	void Show() override
 	{
 		std::cout << "[Element data : Parent ID : Group Size]" << std::endl;

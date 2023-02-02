@@ -48,18 +48,19 @@
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Binary_Node.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Binary_Tree_Thread.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_ADT.h" />
-    <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Heap.h" />
+    <ClInclude Include="C++\Tree_Structure\Heap\Heap.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Normal.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search_AVL.h" />
     <ClInclude Include="C++\Tree_Structure\Binary_Tree\Tree_Binary_Search_BRT.h" />
+    <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h" />
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp" />
+    <ClCompile Include="C++\Tree_Structure\Heap\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
