@@ -23,97 +23,31 @@ static bool  SetEncode(int EncodeId = 936)
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
 
-void TestSequenceStack_Empty_Ascending()
+void TestStack()
 {
-	Stack<char>* s=new Sequence_Stack<char> (5);
-	s->Stack_Show("初始化5个单位的栈空间后：");
+	Stack<char>* stack=new Sequence_Stack<char>(5);						///空增栈
+	//Stack<char>* stack=new Sequence_Stack_Empty_Decending<char>(5);	///空减栈
+	//Stack<char>* stack=new Sequence_Stack_Full_Ascending<char>(5);	///满增栈
+	//Stack<char>* stack=new Sequence_Stack_Full_Decending<char>(5);	///满减栈
+	//Stack<char>* stack=new Link_Stack<char>(5);						///链栈
+
+	stack->Stack_Show("初始化5个单位的栈空间后：");
 	for (int i = 65; i < 70; i++)
-		s->Element_Push(i);
-	s->Stack_Show("压入5个元素后：");
+		stack->Element_Push(i);
+	stack->Stack_Show("压入5个元素后：");
 	//s.Stack_Clear();
-	std::cout << "当前栈顶元素为：" << s->Stack_GetTop() << std::endl;
-	std::cout << "当前栈长度为：" << s->Stack_GetLength() << std::endl;
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-	while (s->Stack_GetLength() > 0)
-		std::cout << s->Element_Pop() << "出栈" << std::endl;
+	std::cout << "当前栈顶元素为：" << stack->Stack_GetTop() << std::endl;
+	std::cout << "当前栈长度为：" << stack->Stack_GetLength() << std::endl;
+	std::cout << "栈判空：" << std::boolalpha << stack->Stack_CheckEmpty() << std::endl;
+	while (stack->Stack_GetLength() > 0)
+	{
+		std::cout << stack->Stack_GetTop() << "出栈" << std::endl;
+		stack->Element_Pop();
+	}
 
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-
-	delete s;
+	std::cout << "栈判空：" << std::boolalpha << stack->Stack_CheckEmpty() << std::endl;
 }
 
-void TestSequenceStack_Full_Ascending()
-{
-	
-	Stack<char>* s = new Sequence_Stack_Full_Ascending<char>(5);
-	s->Stack_Show("初始化5个单位的栈空间后：");
-	for (int i = 65; i < 70; i++)
-		s->Element_Push(i);
-	s->Stack_Show("压入5个元素后：");
-	//s.Stack_Clear();
-	std::cout << "当前栈顶元素为：" << s->Stack_GetTop() << std::endl;
-	std::cout << "当前栈长度为：" << s->Stack_GetLength() << std::endl;
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-	while (s->Stack_GetLength() > 0)
-		std::cout << s->Element_Pop() << "出栈" << std::endl;
-
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-
-	delete s;
-}
-
-void TestSequenceStack_Empty_Decending()
-{
-	Stack<char>* s = new Sequence_Stack_Empty_Decending<char>(5);
-	s->Stack_Show("初始化5个单位的栈空间后：");
-	for (int i = 65; i < 70; i++)
-		s->Element_Push(i);
-	s->Stack_Show("压入5个元素后：");
-	//s.Stack_Clear();
-	std::cout << "当前栈顶元素为：" << s->Stack_GetTop() << std::endl;
-	std::cout << "当前栈长度为：" << s->Stack_GetLength() << std::endl;
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-	while (s->Stack_GetLength() > 0)
-		std::cout << s->Element_Pop() << "出栈" << std::endl;
-
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-
-	delete s;
-}
-
-void TestSequenceStack_Full_Decending()
-{
-	Stack<char>* s = new Sequence_Stack_Full_Decending<char>(5);
-	s->Stack_Show("初始化5个单位的栈空间后：");
-	for (int i = 65; i < 70; i++)
-		s->Element_Push(i);
-	s->Stack_Show("压入5个元素后：");
-	//s.Stack_Clear();
-	std::cout << "当前栈顶元素为：" << s->Stack_GetTop() << std::endl;
-	std::cout << "当前栈长度为：" << s->Stack_GetLength() << std::endl;
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-	while (s->Stack_GetLength() > 0)
-		std::cout << s->Element_Pop() << "出栈" << std::endl;
-
-	std::cout << "栈判空：" << std::boolalpha << s->Stack_CheckEmpty() << std::endl;
-
-	delete s;
-}
-
-void TestLinkStack()
-{
-	Stack<char>* s = new Link_Stack<char> (5);
-	int c = 'Z';
-	s->Stack_Show("初始化链栈空间最大为5");
-	for (int i = 0; i < 5; i++)
-		s->Element_Push(c--);
-	s->Stack_Show("插入5个元素后");
-	std::cout << "当前栈顶元素为：" << s->Stack_GetTop() << std::endl;
-	std::cout << "当前栈长度为：" << s->Stack_GetLength() << std::endl;
-	std::cout << "依次出栈" << std::endl;
-	while (!s->Stack_CheckEmpty())
-		std::cout << s->Element_Pop() << std::endl;
-}
 
 void main()
 {
@@ -122,5 +56,5 @@ void main()
 	//TestSequenceStack_Full_Ascending();///满增栈
 	//TestSequenceStack_Empty_Decending();///空减栈
 	//TestSequenceStack_Full_Decending();///空减栈
-	TestLinkStack();
+	TestStack();
 }

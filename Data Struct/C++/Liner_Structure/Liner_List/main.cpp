@@ -64,41 +64,41 @@ void Test_SeqList()
 
 void Test_LinkList()
 {
-	//std::unique_ptr<Liner_List<List_Node_SingleWay<int>, int>> link_list = std::make_unique<Link_List_Forward<int>>();
-	Liner_List<List_Node_SingleWay<int>, int>* link_list = new Link_List_Forward<int>;
-	//Liner_List<List_Node_DoubleWay<int>, int>* link_list = new Link_List_Double<int>;
-	link_list->List_Show("Initialize");
+	Liner_List<int, int>* list = new Sequential_List_Array<int>(5);
+	//Liner_List<int, int>* list = new Sequential_List_Vector<int>(5);
+	//Liner_List<List_Node_SingleWay<int>, int>* list = new Link_List_Forward<int>;
+	//Liner_List<List_Node_DoubleWay<int>, int>* list = new Link_List_Double<int>;
+	list->List_Show("Initialize");
 
 	for (int i = 1; i <= 5; i++)
-		link_list->Element_Insert(i, i);
-	link_list->List_Show("插入5个元素后");
+		list->Element_Insert(i, i);
+	list->List_Show("插入5个元素后");
 
 
-	link_list->Element_Insert(2, 9);
-	link_list->List_Show("第二个位置插入9后，链表扩展一个元素");
-
-	std::cout << std::endl;
-	link_list->Element_Insert(20, 20);
-	link_list->List_Show("第20个非法位置插入20后");
+	list->Element_Insert(2, 9);
+	list->List_Show("第二个位置插入9后，链表扩展一个元素");
 
 	std::cout << std::endl;
-	link_list->Element_Update(2, 999);
-	link_list->List_Show("第二个元素改为999后");
+	list->Element_Insert(20, 20);
+	list->List_Show("第20个非法位置插入20后");
 
-	int del;
-	del = link_list->Element_Delete(2);
-	link_list->List_Show("删除第二个元素后");
+	std::cout << std::endl;
+	list->Element_Update(2, 999);
+	list->List_Show("第二个元素改为999后");
+
+	int del = list->Element_Delete(2);
+	list->List_Show("删除第二个元素后");
 	std::cout << "删除的第二个元素为:" << del << std::endl;
 
-	std::cout << "获取第二个元素值:" << link_list->List_GetData(2) << std::endl;
+	std::cout << "获取第二个元素值:" << list->List_GetData(2) << std::endl;
 
-	std::cout << "判空:" << std::boolalpha << link_list->List_CheckEmpty() << std::endl;
-	std::cout << "当前表长：" << link_list->List_GetLength() << std::endl;
-	link_list->List_Clear();
-	link_list->List_Show("元素重置后");
-	std::cout << "当前表长：" << link_list->List_GetLength() << std::endl;
+	std::cout << "判空:" << std::boolalpha << list->List_CheckEmpty() << std::endl;
+	std::cout << "当前表长：" << list->List_GetLength() << std::endl;
+	list->List_Clear();
+	list->List_Show("元素重置后");
+	std::cout << "当前表长：" << list->List_GetLength() << std::endl;
 
-	delete link_list;
+	delete list;
 }
 
 

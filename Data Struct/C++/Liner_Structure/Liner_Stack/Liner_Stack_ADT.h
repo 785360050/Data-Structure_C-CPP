@@ -20,10 +20,10 @@ public:///元素操作
 	//元素入栈
 	virtual void Element_Push(DataType element) = 0;
 	//元素出栈
-	virtual DataType Element_Pop() = 0;
+	virtual void Element_Pop() = 0;
 
 public:
-	virtual void Stack_Show(string string) = 0;
+	virtual void Stack_Show(const std::string& string = "") = 0;
 };
 
 

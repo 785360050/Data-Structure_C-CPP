@@ -131,7 +131,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\Liner_Queue\main.cpp">
+    <ClCompile Include="C++\Liner_Structure\Liner_List\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

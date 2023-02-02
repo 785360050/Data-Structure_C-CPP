@@ -9,17 +9,17 @@
 
 
 
-template<typename NodeType,typename DataType>
-class Link_Queue:public Queue<NodeType, DataType>
+template<typename DataType, typename NodeType = List_Node_SingleWay<int>>
+class Link_Queue:public Queue<DataType>
 {///循环队列
 private:
 	NodeType* front;
 	NodeType* rear;
 public:
 	Link_Queue()
-		:Queue<NodeType, DataType>(), front(nullptr), rear(nullptr) {};
+		:Queue<DataType>(), front(nullptr), rear(nullptr) {};
 	Link_Queue(int maxsize)
-		:Queue<NodeType, DataType>(maxsize), front(nullptr), rear(nullptr) {};
+		:Queue<DataType>(maxsize), front(nullptr), rear(nullptr) {};
 	~Link_Queue()
 	{
 		try

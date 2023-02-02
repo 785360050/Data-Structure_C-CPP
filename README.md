@@ -205,7 +205,10 @@ void TestPolymorphic()
 ![Liner_List](https://i.imgur.com/UVIxKAA.png)
 
 ### Liner_Queue
-![Liner_Queue](https://i.imgur.com/8NX6IsT.png)
+![Liner_Queue](https://i.imgur.com/9yiNPsk.png)
+
+### Liner_Stack
+![Liner_Stack](https://i.imgur.com/V1iK5XL.png)
 
 # [Top](#executable-data-structure-code-for-cc)
 

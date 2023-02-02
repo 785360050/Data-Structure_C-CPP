@@ -3,60 +3,28 @@
 
 #include <iostream>
 
-#include "../Liner_Stack_ADT.h"
+#include "../Liner_Stack.h"
 #include "../../../Node.h"
 #include "../../List_Node.h"
 
-//template <typename DataType>
-//struct Stack_Node:public Node<DataType>
-//{///链栈单链节点
-//	Stack_Node* next;
-//public:
-//	//格式化节点内元素值为element
-//	Stack_Node()
-//		:Node<DataType>(), next{nullptr} {};
-//	Stack_Node(DataType element, Stack_Node<DataType>* next = nullptr)
-//		:Node<DataType>(element), next{ next } {};
-//};
-template <typename DataType>
-using Stack_Node = List_Node_SingleWay<DataType>;
 
-template <typename DataType>
+template <typename DataType, typename NodeType = List_Node_SingleWay<DataType>>
 class Link_Stack:public Stack<DataType>
 {///空栈
 protected:
-	Stack_Node<DataType>* top;
+	NodeType* top;
 	int length;			///当前元素个数
-	int maxsize;		///链栈元素上限
 private:
 	bool Stack_CheckFull()
-	{return length == maxsize ? true : false;}
+	{return length == this->maxsize ? true : false;}
 public:///对象维护头节点，存放栈信息
-	Link_Stack()
-		:top{ nullptr }, length{ 0 } {};
-	Link_Stack(int maxsize)
-	{
-		try
-		{
-			if (maxsize < 1)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
-			return;
-		}
-		this->maxsize = maxsize;
-	}
+	Link_Stack(int maxsize=5)
+		:Stack<DataType>(maxsize),
+		top{ nullptr }, length{ 0 } {};
 	//销毁栈
 	~Link_Stack() 
 	{
-		while (top)
-		{
-			Stack_Node<DataType>* del = top;
-			top = top->next;
-			delete del;
-		}
+		Stack_Clear();
 		std::cout << "Link_Stack Destroyed" << std::endl;
 	}
 public:///栈操作
@@ -66,7 +34,7 @@ public:///栈操作
 	{
 		while (top)
 		{
-			Stack_Node<DataType>* del = top;
+			NodeType* del = top;
 			top = top->next;
 			delete del;
 		}
@@ -85,12 +53,12 @@ public:///栈操作
 		return top->element;
 	}
 	//输出栈所有信息
-	void Stack_Show(string string) override
+	void Stack_Show(const std::string& string) override
 	{
-		Stack_Node<DataType>* node = top;
+		NodeType* node = top;
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]:\n" << '[' << Stack_GetLength() << '/'
-			<< maxsize << ']' << std::endl
+			<< this->maxsize << ']' << std::endl
 			<< "Top->";
 		for (int index = 1; index <= length; index++,node=node->next)
 			std::cout << '[' << index << ':' << node->element << "]->";
@@ -110,13 +78,13 @@ public:///元素操作
 			std::cout << "Stack is Full" << std::endl;
 			return;
 		}
-		Stack_Node<DataType>* node = new Stack_Node<DataType>(element, top);
+		NodeType* node = new NodeType(element, top);
 		top = node;
 		++length;
 		
 	}
 	//元素出栈
-	DataType Element_Pop() override
+	void Element_Pop() override
 	{
 		try
 		{
@@ -128,14 +96,13 @@ public:///元素操作
 		catch (...)
 		{
 			std::cout << "Stack is empty" << std::endl;
-			return NULL;
+			return ;
 		}
-		Stack_Node<DataType>* node = top;
+		NodeType* node = top;
 		top = top->next;
 		DataType x = node->element;
 		delete node;
 		--length;
-		return x;
 	}
 	//更新节点元素值
 };

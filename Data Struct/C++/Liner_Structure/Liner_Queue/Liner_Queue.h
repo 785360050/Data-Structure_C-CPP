@@ -8,11 +8,9 @@
 
 
 
-template<typename ElementType,typename DataType>
-struct Queue:public Queue_ADT<ElementType, DataType>
+template<typename DataType>
+struct Queue:public Queue_ADT<DataType>
 {///循环队列
-/// <typeparam name="ElementType">元素类型，链式为节点类型，顺序时=数据类型</typeparam>
-/// <typeparam name="DataType">数据类型</typeparam>
 protected:
 	int length;
 	int maxsize;

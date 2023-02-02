@@ -6,7 +6,7 @@
 #include "../Liner_Queue.h"
 
 template<typename DataType>
-struct Sequence_Queue :public Queue<DataType,DataType>
+struct Sequence_Queue :public Queue<DataType>
 {///使用少存一个元素空间实现队列判断满
 protected:
 	int front;			///队头下标索引
@@ -19,9 +19,9 @@ protected:
 	{return x - 1;}
 public:///Redundancy
 	Sequence_Queue()
-		:Queue<DataType, DataType>(),front{ 0 }, rear{ 0 }, element{ nullptr } {};
+		:Queue< DataType>(),front{ 0 }, rear{ 0 }, element{ nullptr } {};
 	Sequence_Queue(int maxsize)
-		:Queue<DataType, DataType>(maxsize),
+		:Queue<DataType>(maxsize),
 		front{ 0 }, rear{ 0 },
 		element{ new DataType[maxsize + 1]{} }{};
 

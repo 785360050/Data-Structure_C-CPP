@@ -3,7 +3,7 @@
 #include "string"
 using std::string;
 
-template<typename ElementType, typename DataType>
+template<typename DataType>
 struct Queue_ADT
 {///Interface
 public:

@@ -29,7 +29,10 @@ void TestLinkStack()
 	std::cout << "当前栈长度为：" << s.Stack_GetLength() << std::endl;
 	std::cout << "依次出栈" << std::endl;
 	while (!s.Stack_CheckEmpty())
-		std::cout << s.Element_Pop() << std::endl;
+	{
+		std::cout << s.Stack_GetTop() << std::endl;
+		s.Element_Pop();
+	}
 }
 
 void main()

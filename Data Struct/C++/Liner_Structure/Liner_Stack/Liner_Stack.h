@@ -5,6 +5,24 @@
 template <typename DataType>
 struct Stack:public Stack_ADT<DataType>
 {
+protected:
+	int maxsize;		///元素上限
+	///注:若maxszie为size_t类时signed与unsigned类型比较会默认转为unsigned后再比较
+protected:
+	Stack(int maxsize = 5)
+	{
+		try
+		{
+			if (maxsize < 1)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Stack Init Failed: maxsize must be greater than 1" << std::endl;
+			return;
+		}
+		this->maxsize = maxsize;
+	}
 	virtual ~Stack() = default;
 public:///栈操作
 	//清空栈
@@ -19,8 +37,8 @@ public:///元素操作
 	//元素入栈
 	virtual void Element_Push(DataType element) = 0;
 	//元素出栈
-	virtual DataType Element_Pop() = 0;
+	virtual void Element_Pop() = 0;
 
 public:
-	virtual void Stack_Show(string string) = 0;
+	virtual void Stack_Show(const std::string& string) = 0;
 };
