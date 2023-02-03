@@ -1,6 +1,6 @@
 
 
-#include "Heap.h"
+#include "Binary_Heap.h"
 
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
@@ -17,15 +17,18 @@ static bool  SetEncode(int EncodeId = 936)
 }
 
 
-
 void TestHeap()
 {
 	Binary_Heap<int> heap(5);
 	heap.Heap_Show();
 	heap.Heap_Push(1);
+	heap.Heap_Show();
 	heap.Heap_Push(2);
+	heap.Heap_Show();
 	heap.Heap_Push(3);
+	heap.Heap_Show();
 	heap.Heap_Push(4);
+	heap.Heap_Show();
 	heap.Heap_Push(5);
 	//heap.Heap_Push(6);
 
