@@ -20,7 +20,7 @@ public:
 	int* data;//存放排序关键值的数组
 	int length;
 	int maxsize;
-	Property property;
+	Property property;	///[大/小]根堆
 public:
 	//初始化有maxsize个元素空间的二叉堆
 	Binary_Heap(int maxsize, Property property = small)
