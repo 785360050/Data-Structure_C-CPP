@@ -141,6 +141,9 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Parent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\main.cpp">
