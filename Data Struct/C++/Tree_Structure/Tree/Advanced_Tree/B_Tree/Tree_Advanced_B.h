@@ -69,7 +69,6 @@ private:
 					Destroy(node->index[i]);
 			}
 			delete[] node->key;
-			//delete node->index;
 			delete node;
 			count--;
 		}
@@ -82,12 +81,12 @@ private:
 	};
 	//定位key在节点中的位置
 	int B_Tree_Node_Locate(B_Node* node, int key)
-{///返回元素值为key的下标位置，失败时返回第一个比key大的元素位置，找其左指针
-	int i = 0;
-	while (i < node->length && node->key[i] < key)
-		++i;
-	return i;
-}
+	{///返回元素值为key的下标位置，失败时返回第一个比key大的元素位置，找其左指针
+		int i = 0;
+		while (i < node->length && node->key[i] < key)
+			++i;
+		return i;
+	}
 
 	//分割满节点为两个节点，返回待插入的key
 	std::pair<int, B_Node*> split(B_Node* node, int mid)
@@ -152,7 +151,7 @@ private:
 	{
 		return position - 1;
 	}
-
+	//B树调整
 	void RestoreBTree( B_Node* node)
 	{
 		B_Node* parent, * brother_left, * brother_right;
@@ -351,33 +350,33 @@ private:
 		}
 	}
 	void Delete(B_Node* node, int position)
-{///删除node节点中下标为Position的元素
-	if (node->index[position + 1])///若元素存在右指针，则非叶节点
-	{///删除非叶节点
-		///用逻辑后继节点代替(父节点元素代替，父节点用右子树第一个代替)
-		B_Node* leaf = node;
-		if (leaf)
-		{///右孩子的第一个叶子元素(循环定位)
-			leaf = leaf->index[position + 1];
-			while (leaf->index[0])
-				leaf = leaf->index[0];
-			node->key[position] = leaf->key[0];
+	{///删除node节点中下标为Position的元素
+		if (node->index[position + 1])///若元素存在右指针，则非叶节点
+		{///删除非叶节点
+			///用逻辑后继节点代替(父节点元素代替，父节点用右子树第一个代替)
+			B_Node* leaf = node;
+			if (leaf)
+			{///右孩子的第一个叶子元素(循环定位)
+				leaf = leaf->index[position + 1];
+				while (leaf->index[0])
+					leaf = leaf->index[0];
+				node->key[position] = leaf->key[0];
+			}
+			Delete(leaf, 0);		///删除逻辑后继
 		}
-		Delete(leaf, 0);		///删除逻辑后继
-	}
-	else
-	{///删除叶节点
+		else
+		{///删除叶节点
 
-		for (int i = position; i < node->length; ++i)
-		{///直接删除
-			node->key[i] = node->key[i + 1];		///因为key末尾预留，且插入时置为0，所以可以直接从后覆盖前，且不考虑越界
-			node->index[i] = node->index[i + 1];
+			for (int i = position; i < node->length; ++i)
+			{///直接删除
+				node->key[i] = node->key[i + 1];		///因为key末尾预留，且插入时置为0，所以可以直接从后覆盖前，且不考虑越界
+				node->index[i] = node->index[i + 1];
+			}
+			--node->length;
+			if (node->length < node->order / 2)	///阈值可自定义
+				RestoreBTree(node);///调整B树
 		}
-		--node->length;
-		if (node->length < node->order / 2)	///阈值可自定义
-			RestoreBTree(node);///调整B树
 	}
-}
 
 public:
 	//创建有order个分叉的节点

@@ -3,12 +3,11 @@
 #include <vector>
 
 #include "../../Tree_Node.h"
+#include "../Normal Tree.h"
 
-template <typename DataType>
-class Tree_Advanced_Parent
+template <typename DataType,typename NodeType= TreeNode<DataType>>
+class Tree_Advanced_Parent:public Tree_Normal<DataType,NodeType>
 {///双亲表示法
-private:
-	using NodeType = TreeNode<DataType>;
 protected:
 	struct Element
 	{
@@ -20,9 +19,9 @@ protected:
 	};
 protected:
 	std::vector<Element> vertex;
-	int root = -1;		///根节点下标
-	int branch;			///分叉数量上限
-	int count;
+	//NodeType* root;		
+	//int branch;			///分叉数量上限
+	//int count;
 
 private:
 	//重置子树所有元素为0
@@ -63,7 +62,7 @@ private:
 	}
 public:
 	Tree_Advanced_Parent(int branch)
-		:branch(branch), count(0) {};
+		:Tree_Normal<DataType,NodeType>(branch) {};
 	~Tree_Advanced_Parent() = default;
 public:
 	//(普通树，二叉树，线索树，二叉搜索树，AVL树，并查集，红黑树)
@@ -71,35 +70,30 @@ public:
 	{
 		vertex.erase(vertex.begin(), vertex.end());
 	}
-	bool Tree_CheckEmpty()
-	{
-		return count == 0 ? true : false;
-	}
+	//bool Tree_CheckEmpty()
+	//{
+	//	return count == 0 ? true : false;
+	//}
 	//返回树深度
 	size_t Tree_GetDepth()
 	{
-		return Deep(root);
+		return Deep(this->root);
 	}
 	//返回树根节点
-	virtual NodeType* Tree_GetRoot()
+	NodeType* Tree_GetRoot() override
 	{
-		for (int i = 0; i < vertex.size(); ++i)
-		{
-			if (vertex[i].parent == -1)
-				return vertex[i].node;
-		}
-		return nullptr;
+		return this->root;
 	}
-	virtual void Tree_Set_Root(NodeType* root)
+	void Tree_Set_Root(NodeType* root)
 	{///只能在初始化的时候使用
 		vertex.push_back(Element(root, -1));
-		count++;
+		this->count++;
 	}
 	//显示树所有信息
 	virtual void Tree_Show()
 	{
-		std::cout << "当前子树节点总数: " << count << std::endl
-			<< "分叉数: " << branch << std::endl;
+		std::cout << "当前子树节点总数: " << this->count << std::endl
+			<< "分叉数: " << this->branch << std::endl;
 		std::cout << "[index] [vertex] -> [index_parent]" << std::endl;
 		for (int i = 0; i < vertex.size(); ++i)
 		{
@@ -155,13 +149,13 @@ public:
 				throw std::exception("Node_Insert Failed: node is not exsist");
 			if (!parent)
 				throw std::exception("Node_Insert Failed: parent is not exsist");
-			if (position<1 || position>branch)
+			if (position<1 || position>this->branch)
 				throw std::exception("Node_Insert Failed: position illegal");
 			for (const auto& n : vertex)
 			{
 				if (n.node == node)
 					throw std::exception("Node_Insert Failed: Node already exists");
-				if (n.node == parent && n.num >= branch)
+				if (n.node == parent && n.num >= this->branch)
 					throw std::exception("Node_Insert Failed: Parent's Child is full");
 			}
 		}
@@ -182,15 +176,15 @@ public:
 		{///父节点存在
 			++vertex[i].num;
 		}
-		count++;
+		this->count++;
 	}
 
 	//新建节点(new 分配空间)
-	virtual NodeType* Node_Create(std::string name, DataType element = 0)
-	{
-		NodeType* node = new NodeType(name, element);
-		return node;
-	}
+	//virtual NodeType* Node_Create(std::string name, DataType element = 0)
+	//{
+	//	NodeType* node = new NodeType(name, element);
+	//	return node;
+	//}
 
 public:
 	//先根遍历
@@ -200,7 +194,7 @@ public:
 		int index = Index(node);
 		if (!visit_state[index])
 		{///未访问过时输出
-			Tree_Visit_Name(node);
+			this->Tree_Visit_Name(node);
 			visit_state[Index(node)] = true;
 		}
 		for (int i = 0; i < vertex.size(); ++i)
@@ -221,7 +215,7 @@ public:
 		}
 		if (!visit_state[index])
 		{///未访问过时输出
-			Tree_Visit_Name(node);
+			this->Tree_Visit_Name(node);
 			visit_state[Index(node)] = true;
 		}
 	}
@@ -231,7 +225,7 @@ public:
 		std::queue<int> queue;	///存节点下标
 		static bool* visit_state = new bool[vertex.size()](false);
 
-		queue.push(root);
+		queue.push(Index(this->root));
 		while (!queue.empty())
 		{
 			int front = queue.front();
@@ -242,19 +236,19 @@ public:
 			}
 			if (!visit_state[front])
 			{
-				Tree_Visit_Name(vertex[front].node);
+				this->Tree_Visit_Name(vertex[front].node);
 				visit_state[front] = true;
 			}
 			queue.pop();
 		}
 	}
 	//访问节点名
-	void Tree_Visit_Name(NodeType* node)
-	{
-		if (node)
-		{
-			std::cout << node->name << ' ';
-		}
-	}
+	//void Tree_Visit_Name(NodeType* node)
+	//{
+	//	if (node)
+	//	{
+	//		std::cout << node->name << ' ';
+	//	}
+	//}
 
 };

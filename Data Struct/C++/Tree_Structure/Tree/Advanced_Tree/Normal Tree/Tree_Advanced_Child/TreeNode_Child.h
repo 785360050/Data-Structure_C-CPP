@@ -13,6 +13,6 @@ public:
 	int length;	///当前节点孩子个数
 public:
 	TreeNode_Child(std::string name, DataType element = NULL)
-		:TreeNode<DataType>(name, element) {};
+		:TreeNode<DataType>(name, element),length(0) {};
 };
 

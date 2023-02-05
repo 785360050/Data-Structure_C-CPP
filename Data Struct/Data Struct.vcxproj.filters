@@ -129,10 +129,10 @@
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Normal.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_ChildSibling\Tree_Advanced_ChildSibling.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Node_Tree_ChildSibling.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_ChildSibling\Node_Tree_ChildSibling.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Tree\Tree.h">
@@ -141,7 +141,16 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Parent.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Parent\Tree_Advanced_Parent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Child\Tree_Advanced_Child.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Child\TreeNode_Child.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Normal Tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

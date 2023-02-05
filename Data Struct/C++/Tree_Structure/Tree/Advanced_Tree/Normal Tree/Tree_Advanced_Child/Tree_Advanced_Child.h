@@ -3,15 +3,16 @@
 #include <queue>
 
 #include "TreeNode_Child.h"
+#include "../Normal Tree.h"
 
 template <typename DataType, typename NodeType = TreeNode_Child<DataType>>
-class Tree_Advanced_Child
+class Tree_Advanced_Child:public Tree_Normal<DataType,NodeType>
 {///孩子表示法
 protected:
 	std::vector<NodeType*> vertex;
-	NodeType* root;		///记录根节点
-	int branch;			///分叉数量上限
-	int count;
+	//NodeType* root;		///记录根节点
+	//int branch;			///分叉数量上限
+	//int count;
 
 private:
 	//重置子树所有元素为0
@@ -52,7 +53,7 @@ private:
 	//返回节点名为name的父节点
 	NodeType* Parent(NodeType* node, std::string name)
 	{
-		NodeType* n = root;
+		NodeType* n = this->root;
 		NodeType* parent;
 		if (n->left->name == name || n->right->name == name)
 			return n;
@@ -72,7 +73,7 @@ private:
 
 public:
 	Tree_Advanced_Child(int branch)
-		:branch(branch), count(0) {};
+		:Tree_Normal<DataType,NodeType>(branch) {};
 	~Tree_Advanced_Child()
 	{
 		for (auto& node : vertex)
@@ -82,12 +83,12 @@ public:
 	//(普通树，二叉树，线索树，二叉搜索树，AVL树，并查集，红黑树)
 	void Tree_Clear()
 	{
-		Clear(root);
+		Clear(this->root);
 	}
-	bool Tree_CheckEmpty()
-	{
-		return count == 0 ? true : false;
-	}
+	//bool Tree_CheckEmpty()
+	//{
+	//	return this->count == 0 ? true : false;
+	//}
 	//返回树深度
 	//size_t Tree_GetDepth()
 	//{
@@ -96,19 +97,19 @@ public:
 	//返回树根节点
 	virtual NodeType* Tree_GetRoot()
 	{
-		return root;
+		return this->root;
 	}
 	virtual void Tree_Set_Root(NodeType* root)
 	{///只能在初始化的时候使用，后续使用count会出错
 		this->root = root;
 		vertex.push_back(root);
-		count++;
+		this->count++;
 	}
 	//显示树所有信息
 	virtual void Tree_Show()
 	{
-		std::cout << "当前子树节点总数: " << count << std::endl
-			<< "分叉数: " << branch << std::endl;
+		std::cout << "当前子树节点总数: " << this->count << std::endl
+			<< "分叉数: " << this->branch << std::endl;
 		std::cout << "[index] [vertex] -> [child_index]" << std::endl;
 		for (int i = 0; i < vertex.size(); ++i)
 		{
@@ -177,9 +178,9 @@ public:
 				throw std::exception("Node_Insert Failed: node is not exsist");
 			if (!parent)
 				throw std::exception("Node_Insert Failed: parent is not exsist");
-			if (position<1 || position>branch)
+			if (position<1 || position>this->branch)
 				throw std::exception("Node_Insert Failed: position illegal");
-			if (parent->length >= branch)
+			if (parent->length >= this->branch)
 				throw std::exception("Node_Insert Failed: Parent's Child is full");
 			for (const auto& n : vertex)
 			{
@@ -206,7 +207,7 @@ public:
 		}
 
 		++parent->length;
-		count++;
+		this->count++;
 	}
 
 	//新建节点(new 分配空间)

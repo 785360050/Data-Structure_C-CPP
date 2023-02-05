@@ -4,14 +4,15 @@
 #include <vector>
 
 #include "Node_Tree_ChildSibling.h"
+#include "Tree_Advanced_ChildSibling.h"
 
 template <typename DataType,typename NodeType= Node_Tree_ChildSibling<DataType>>
-class Tree_Advanced_ChildSibling
+class Tree_Advanced_ChildSibling:public Tree_Normal<DataType,NodeType> 
 {///孩子兄弟表示法
 protected:
-	NodeType* root;
-	int branch;			///分叉数量上限
-	int count;
+	//NodeType* root;
+	//int branch;			///分叉数量上限
+	//int count;
 	
 private:
 	//重置子树所有元素为0
@@ -52,7 +53,7 @@ private:
 	//返回节点名为name的父节点
 	NodeType* Parent(NodeType* node, std::string name)
 	{
-		NodeType* n = root;
+		NodeType* n = this->root;
 		NodeType* parent;
 		if (n->left->name == name || n->right->name == name)
 			return n;
@@ -72,17 +73,17 @@ private:
 
 public:
 	Tree_Advanced_ChildSibling(int branch)
-		:root(nullptr), branch(branch), count(0) {};
+		:Tree_Normal<DataType, NodeType>(branch) {};
 	~Tree_Advanced_ChildSibling()
-	{Clear(root); }
+	{Clear(this->root); }
 public:
 	//(普通树，二叉树，线索树，二叉搜索树，AVL树，并查集，红黑树)
 	void Tree_Clear(NodeType* node)
 	{Clear(node); }
-	bool Tree_CheckEmpty()
-	{
-		return count == 0 ? true : false;
-	}
+	//bool Tree_CheckEmpty()
+	//{
+	//	return count == 0 ? true : false;
+	//}
 	//返回树深度
 	//size_t Tree_GetDepth()
 	//{
@@ -90,17 +91,17 @@ public:
 	//}
 	//返回树根节点
 	virtual NodeType* Tree_GetRoot()
-	{return root;}
+	{return this->root;}
 	virtual void Tree_Set_Root(NodeType* root)
 	{///只能在初始化的时候使用，后续使用count会出错
 		this->root = root;
-		count++;
+		this->count++;
 	}
 	//显示树所有信息
 	virtual void Tree_Show()
 	{
-		std::cout << "当前子树节点总数: " << count << std::endl
-			<< "分叉数: " << branch << std::endl;
+		std::cout << "当前子树节点总数: " << this->count << std::endl
+			<< "分叉数: " << this->branch << std::endl;
 		std::cout << std::endl;
 	}
 	//返回树中节点node的元素值
@@ -161,9 +162,9 @@ public:
 				throw std::exception("Node_Insert Failed: node is not exsist");
 			if (!parent)
 				throw std::exception("Node_Insert Failed: parent is not exsist");
-			if (position<1 || position>branch)
+			if (position<1 || position>this->branch)
 				throw std::exception("Node_Insert Failed: position illegal");
-			if (parent->length == branch)
+			if (parent->length == this->branch)
 				throw std::exception("Node_Insert Failed: Parent's Child is full");
 		}
 		catch (const std::exception& e)
@@ -182,16 +183,16 @@ public:
 			child->sibling_next = node;
 		}
 		++parent->length;
-		count++;
+		this->count++;
 	}
 
 	//新建节点(new 分配空间)
-	virtual NodeType* Node_Create(std::string name,DataType element=0 )
-	{
-		NodeType* node = new NodeType(name, element);
-		return node;
-	}
-	
+	//virtual NodeType* Node_Create(std::string name,DataType element=0 )
+	//{
+	//	NodeType* node = new NodeType(name, element);
+	//	return node;
+	//}
+	//
 
 public:
 	//先根遍历
@@ -199,7 +200,7 @@ public:
 	{
 		while (node)
 		{
-			Tree_Visit_Name(node);
+			this->Tree_Visit_Name(node);
 			Tree_Traverse_PreOrder(node->child_first);
 			node = node->sibling_next;
 		}
@@ -212,13 +213,13 @@ public:
 			for (NodeType* child = node->child_first; child; child = child->sibling_next)
 				Tree_Traverse_PostOrder(child);
 		}
-		Tree_Visit_Name(node);
+		this->Tree_Visit_Name(node);
 	}
 	//层次遍历
 	void Tree_Traverse_LevelOrder(NodeType* node)
 	{
 		std::queue<NodeType*> queue;
-		queue.push(root);
+		queue.push(this->root);
 		while (!queue.empty())
 		{
 			NodeType* child = queue.front()->child_first;
@@ -227,18 +228,18 @@ public:
 				queue.push(child);
 				child = child->sibling_next;
 			}
-			Tree_Visit_Name(queue.front());
+			this->Tree_Visit_Name(queue.front());
 			queue.pop();
 		}
 	}
 	//访问节点名
-	void Tree_Visit_Name(NodeType* node)
-	{
-		if (node)
-		{
-			std::cout << node->name << ' ';
-		}
-	}
+	//void Tree_Visit_Name(NodeType* node)
+	//{
+	//	if (node)
+	//	{
+	//		std::cout << node->name << ' ';
+	//	}
+	//}
 
 };
 
