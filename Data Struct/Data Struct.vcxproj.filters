@@ -60,9 +60,6 @@
     <ClInclude Include="C++\Set_Structure\Set_Hash_LinkAddress.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\B_Tree\Tree_Advanced_B.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Tree\Binary_Tree\Binary_Tree_Thread.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -129,10 +126,10 @@
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_ChildSibling\Tree_Advanced_ChildSibling.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_ChildSibling\Tree_HighOrder_ChildSibling.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_ChildSibling\Node_Tree_ChildSibling.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_ChildSibling\TreeNode_HighOrder_ChildSibling.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Tree\Tree.h">
@@ -141,21 +138,33 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Parent\Tree_Advanced_Parent.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Parent\Tree_HighOrder_Parent.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Child\Tree_Advanced_Child.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Child\Tree_HighOrder_Child.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Tree_Advanced_Child\TreeNode_Child.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Child\TreeNode_HighOrder_Child.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\Normal Tree.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Normal Tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Node.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\TreeNode_HighOrder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\Advanced_Tree\Normal Tree\main.cpp">
+    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
