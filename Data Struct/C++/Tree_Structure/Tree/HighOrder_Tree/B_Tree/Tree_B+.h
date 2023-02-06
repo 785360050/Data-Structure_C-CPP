@@ -20,88 +20,114 @@ template<typename KeyT, typename ValT>
 class Node 
 {
 public:
-    bool leaf;
+    bool leaf;      ///标记是否为叶节点
     Node* parent;   //for non-root only
-    Node* next;     //for leaf only
     std::vector<KeyT> key;
-    std::vector<Node*> ptr2node;    //for non-leaf only
-    std::vector<ValT*> ptr2val;     //for leaf only
-    Node(bool _leaf = false)
-        : leaf(_leaf), parent(nullptr), next(nullptr) {}
+    ///——————————
+    /// non-leaf
+    ///——————————
+    std::vector<Node*> ptr2node;   
+    ///——————————
+    /// leaf
+    ///——————————
+    Node* next;     
+    std::vector<ValT*> ptr2val;    
+    
+    Node(bool leaf = false)
+        : leaf(leaf), parent(nullptr), next(nullptr) {}
 };
 
 template<typename KeyT, typename ValT>
-class BPTree {
+class BPTree 
+{
 private:
     Node<KeyT, ValT>* root;
-    int keyIndex(Node<KeyT, ValT>* _node, KeyT _key)
-    {
-        /*
-        *    @brief Find the location of given _key in given _node.
-        *    @param _node: Given node
-        *    @param _key: Key we want to locate in _node
-        *    @return Index of _key in _node. If _key is not in _node, return the nearest and smaller index
-        */
+    
+public:
+    BPTree() : root(nullptr) {};
+
+private:
+    int keyIndex(Node<KeyT, ValT>* node, KeyT key)
+    {///定位key在节点中的下标，不存在时返回小值(找左孩子)
         int loc = -1;
-        int size = _node->key.size();
-        while (_node->key[loc + 1] <= _key) {
+        while (node->key[loc + 1] <= key) 
+        {
             loc++;
-            if (loc == size - 1) break;
+            if (loc == node->key.size() - 1) 
+                break;///找不到返回末尾下标值
         }
         return loc;
     }
-    std::pair<Node<KeyT, ValT>*, int> keyIndexInLeaf(KeyT _key)
+    //返回叶节点的父节点(叶节点？),并在叶节点中找key的下标，不存在时返回小值(找左孩子)
+    std::pair<Node<KeyT, ValT>*, int> keyIndexInLeaf(KeyT key)
     {
         /*
-*    @brief Find the location of given _key in leaf node.
-*    @param _key: Key we want to locate.
-*    @return A pair of leaf and index of given _key. If _key not in B+ tree, the index is the nearest and smaller key than given _key.
-*/
-        if (root == nullptr) {
+        *    @brief Find the location of given _key in leaf node.
+        *    @param _key: Key we want to locate.
+        *    @return A pair of leaf and index of given _key. If _key not in B+ tree, the index is the nearest and smaller key than given _key.
+        */
+        if (root == nullptr) ///不存在根时新建根节点
             return std::make_pair(nullptr, static_cast<ValT>(0));
-        }
         Node<KeyT, ValT>* node = root;
-        while (true) {
-            int loc = keyIndex(node, _key);
-            if (node->leaf) {
+
+        while (true) 
+        {
+            int loc = keyIndex(node, key);
+            if (node->leaf) 
                 return std::make_pair(node, loc);
-            }
-            else {
+            else ///向下层节点找
                 node = node->ptr2node[loc + 1];
-            }
         }
     }
-    Node<KeyT, ValT>* splitLeaf(Node<KeyT, ValT>* _leaf)
+    //分割容量不足的叶节点，返回新叶节点
+    Node<KeyT, ValT>* splitLeaf(Node<KeyT, ValT>* leaf)
     {
-        /*
-*    @brief Split leaf node when oversize.
-*    @param _leaf: Leaf we want to split.
-*    @return The new leaf we created after split.
-*/
         Node<KeyT, ValT>* new_leaf = new Node<KeyT, ValT>(LEAF);
-        new_leaf->next = _leaf->next;
-        _leaf->next = new_leaf;
-        new_leaf->parent = _leaf->parent;
-        int mid = _leaf->key.size() / 2;
-        new_leaf->key.assign(_leaf->key.begin() + mid, _leaf->key.end());
-        new_leaf->ptr2val.assign(_leaf->ptr2val.begin() + mid, _leaf->ptr2val.end());
-        _leaf->key.erase(_leaf->key.begin() + mid, _leaf->key.end());
-        _leaf->ptr2val.erase(_leaf->ptr2val.begin() + mid, _leaf->ptr2val.end());
+        new_leaf->next = leaf->next;
+        leaf->next = new_leaf;
+        new_leaf->parent = leaf->parent;
+        int mid = leaf->key.size() / 2;
+
+        ///移动后半部分元素到新节点
+        new_leaf->key.assign(leaf->key.begin() + mid, leaf->key.end());
+        leaf->key.erase(leaf->key.begin() + mid, leaf->key.end());
+        new_leaf->ptr2val.assign(leaf->ptr2val.begin() + mid, leaf->ptr2val.end());
+        leaf->ptr2val.erase(leaf->ptr2val.begin() + mid, leaf->ptr2val.end());
+        
         return new_leaf;
     }
-    void createIndex(Node<KeyT, ValT>* _new_node, KeyT _index)
+    //分割容量不足的索引节点，返回新索引节点
+    std::pair<Node<KeyT, ValT>*, KeyT> splitNode(Node<KeyT, ValT>* node)
+    {
+        Node<KeyT, ValT>* new_node = new Node<KeyT, ValT>();
+        new_node->parent = node->parent;
+        int mid = (node->key.size() + 1) / 2 - 1;
+        KeyT push_key = node->key[mid];     ///分割末尾节点元素提到上层
+
+        ///移动后半部分元素到新节点
+        new_node->key.assign(node->key.begin() + mid + 1, node->key.end());
+        node->key.erase(node->key.begin() + mid, node->key.end());
+        new_node->ptr2node.assign(node->ptr2node.begin() + mid + 1, node->ptr2node.end());
+        node->ptr2node.erase(node->ptr2node.begin() + mid + 1, node->ptr2node.end());
+        for (Node<KeyT, ValT>* each : new_node->ptr2node)
+            each->parent = new_node;
+
+        return std::make_pair(new_node, push_key);
+    }
+    void createIndex(Node<KeyT, ValT>* new_node, KeyT index)
     {
         /*
-        *    @brief Create index for given _new_node using _index as index. The index will be inserted to _new_node's parent.
+        *    @brief Create index for given new_node using index as index. The index will be inserted to new_node's parent.
         *    @param _new_node: Node we want to create index for.
         *    @param _index: Index of our new node. For leaf node, it should be the first key.
         *    @return void
         */
-        Node<KeyT, ValT>* node = _new_node->parent;
-        int loc = keyIndex(node, _index);
-        node->key.insert(node->key.begin() + loc + 1, _index);
-        node->ptr2node.insert(node->ptr2node.begin() + loc + 2, _new_node);
-        if (node->key.size() > order) {
+        Node<KeyT, ValT>* node = new_node->parent;
+        int loc = keyIndex(node, index);
+        node->key.insert(node->key.begin() + loc + 1, index);
+        node->ptr2node.insert(node->ptr2node.begin() + loc + 2, new_node);
+        if (node->key.size() > order) 
+        {
             std::pair<Node<KeyT, ValT>*, KeyT> pair = splitNode(node);
             Node<KeyT, ValT>* new_node = pair.first;
             KeyT push_key = pair.second;
@@ -119,56 +145,34 @@ private:
             }
         }
     }
-    std::pair<Node<KeyT, ValT>*, KeyT> splitNode(Node<KeyT, ValT>* _node)
-    {
-        /*
-        *    @brief Split non-leaf node when oversize.
-        *    @param _node: Node we want to split.
-        *    @return The new node we created after split.
-        */
-        Node<KeyT, ValT>* new_node = new Node<KeyT, ValT>();
-        new_node->parent = _node->parent;
-        int mid = (_node->key.size() + 1) / 2 - 1;
-        KeyT push_key = _node->key[mid];
-        new_node->key.assign(_node->key.begin() + mid + 1, _node->key.end());
-        new_node->ptr2node.assign(_node->ptr2node.begin() + mid + 1, _node->ptr2node.end());
-        _node->key.erase(_node->key.begin() + mid, _node->key.end());
-        _node->ptr2node.erase(_node->ptr2node.begin() + mid + 1, _node->ptr2node.end());
-        for (Node<KeyT, ValT>* each : new_node->ptr2node)
-            each->parent = new_node;
-        return std::make_pair(new_node, push_key);
-    }
 
 public:
-    BPTree() : root(nullptr) {};
-    void insert(KeyT _key, ValT _val)
+    void insert(KeyT key, ValT val)
     {
-        /*
-        *    @brief Insert (key, value) to B+ tree
-        *    @param _key: Key we want to insert
-        *    @param _val: Value we want to insert
-        *    @return void
-        */
-        if (root == nullptr) {
+        if (root == nullptr) 
+        {///树空时新建根节点
             root = new Node<KeyT, ValT>(LEAF);
-            root->key.push_back(_key);
-            root->ptr2val.emplace_back(new ValT(_val));
+            root->key.push_back(key);
+            root->ptr2val.emplace_back(new ValT(val));
             root->ptr2node.push_back(nullptr);
             return;
         }
-        std::pair<Node<KeyT, ValT>*, int> pair = keyIndexInLeaf(_key);
+        std::pair<Node<KeyT, ValT>*, int> pair = keyIndexInLeaf(key);
         Node<KeyT, ValT>* leaf = pair.first;
         int loc = pair.second;
-        if (loc != -1 && leaf->key[loc] == _key) {
-            std::cout << "Key " << _key << " with value " << *(leaf->ptr2val[loc]) << " is already in B+ tree, overwrite it with new val " << _val << std::endl;
-            *(leaf->ptr2val[loc]) = _val;
+        if (loc != -1 && leaf->key[loc] == key) 
+        {///K-V已存在
+            std::cout << "Key " << key << " with value " << *(leaf->ptr2val[loc]) << " is already in B+ tree, overwrite it with new val " << val << std::endl;
+            *(leaf->ptr2val[loc]) = val;
             return;
         }
-        leaf->key.insert(leaf->key.begin() + loc + 1, _key);
-        leaf->ptr2val.insert(leaf->ptr2val.begin() + loc + 1, new ValT(_val));
-        if (leaf->key.size() > order) {
+        leaf->key.insert(leaf->key.begin() + loc + 1, key);
+        leaf->ptr2val.insert(leaf->ptr2val.begin() + loc + 1, new ValT(val));
+        if (leaf->key.size() > order) 
+        {
             Node<KeyT, ValT>* new_leaf = splitLeaf(leaf);
-            if (leaf == root) {
+            if (leaf == root) 
+            {
                 Node<KeyT, ValT>* new_root = new Node<KeyT, ValT>();
                 new_root->key.push_back(new_leaf->key[0]);
                 new_root->ptr2node.push_back(leaf);
@@ -177,9 +181,8 @@ public:
                 leaf->parent = root;
                 new_leaf->parent = root;
             }
-            else {
+            else 
                 createIndex(new_leaf, new_leaf->key[0]);
-            }
         }
     }
     void erase(KeyT _key)
@@ -219,24 +222,29 @@ public:
 
     }
     void display()
-    {
-        if (root == nullptr) {
+    {///层次遍历
+        if (root == nullptr) 
+        {
             std::cout << "B+ tree is empty!" << std::endl;
             return;
         }
         std::queue<Node<KeyT, ValT>*> q;
         q.push(root);
-        while (!q.empty()) {
+        while (!q.empty()) 
+        {
             int q_size = q.size();
-            while (q_size--) {
+            while (q_size--) 
+            {
                 Node<KeyT, ValT>* node = q.front();
                 q.pop();
                 int key_size = node->key.size();
-                if (node->leaf) {
+                if (node->leaf) 
+                {
                     for (auto each : node->ptr2val)
                         std::cout << *each << " ";
                 }
-                else {
+                else 
+                {
                     for (auto each : node->key)
                         std::cout << each << " ";
                     for (auto each : node->ptr2node)

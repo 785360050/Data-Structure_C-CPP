@@ -1,47 +1,34 @@
 ﻿  main.cpp
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp(63,1): warning C4326: “main”的返回类型应为“int”而非“void”
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(228,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(220,1): message : 在编译 类 模板 成员函数“void BPTree<int,int>::display(void)”时
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp(57,15): message : 查看对正在编译的函数 模板 实例化“void BPTree<int,int>::display(void)”的引用
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp(53,47): message : 查看对正在编译的 类 模板 实例化“BPTree<int,int>”的引用
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(232,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(83,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(73,1): message : 在编译 类 模板 成员函数“Node<KeyT,ValT> *BPTree<KeyT,ValT>::splitLeaf(Node<KeyT,ValT> *)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\main.cpp(39,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(242,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(232,1): message : 在编译 类 模板 成员函数“void Tree_BPlus<int,int>::display(void)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\main.cpp(25,15): message : 查看对正在编译的函数 模板 实例化“void Tree_BPlus<int,int>::display(void)”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\main.cpp(21,55): message : 查看对正在编译的 类 模板 实例化“Tree_BPlus<int,int>”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(247,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(96,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(88,1): message : 在编译 类 模板 成员函数“Node_BPlus<KeyType,DataType> *Tree_BPlus<KeyType,DataType>::Leaf_Split(Node_BPlus<KeyType,DataType> *)”时
           with
           [
-              KeyT=int,
-              ValT=int
+              KeyType=int,
+              DataType=int
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(168,40): message : 查看对正在编译的函数 模板 实例化“Node<KeyT,ValT> *BPTree<KeyT,ValT>::splitLeaf(Node<KeyT,ValT> *)”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(184,61): message : 查看对正在编译的函数 模板 实例化“Node_BPlus<KeyType,DataType> *Tree_BPlus<KeyType,DataType>::Leaf_Split(Node_BPlus<KeyType,DataType> *)”的引用
           with
           [
-              KeyT=int,
-              ValT=int
+              KeyType=int,
+              DataType=int
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(129,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(121,1): message : 在编译 类 模板 成员函数“std::pair<Node<KeyT,ValT> *,int> BPTree<KeyT,ValT>::splitNode(Node<KeyT,ValT> *)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(112,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(108,1): message : 在编译 类 模板 成员函数“std::pair<Node_BPlus<KeyType,DataType> *,int> Tree_BPlus<KeyType,DataType>::IndexNode_Split(Node_BPlus<KeyType,DataType> *)”时
           with
           [
-              KeyT=int,
-              ValT=int
+              KeyType=int,
+              DataType=int
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(103,55): message : 查看对正在编译的函数 模板 实例化“std::pair<Node<KeyT,ValT> *,int> BPTree<KeyT,ValT>::splitNode(Node<KeyT,ValT> *)”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h(139,71): message : 查看对正在编译的函数 模板 实例化“std::pair<Node_BPlus<KeyType,DataType> *,int> Tree_BPlus<KeyType,DataType>::IndexNode_Split(Node_BPlus<KeyType,DataType> *)”的引用
           with
           [
-              KeyT=int,
-              ValT=int
-          ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(44,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(36,1): message : 在编译 类 模板 成员函数“int BPTree<int,int>::keyIndex(Node<KeyT,ValT> *,KeyT)”时
-          with
-          [
-              KeyT=int,
-              ValT=int
-          ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h(99,17): message : 查看对正在编译的函数 模板 实例化“int BPTree<int,int>::keyIndex(Node<KeyT,ValT> *,KeyT)”的引用
-          with
-          [
-              KeyT=int,
-              ValT=int
+              KeyType=int,
+              DataType=int
           ]
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

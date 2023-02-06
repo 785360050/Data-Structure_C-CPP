@@ -51,7 +51,7 @@ void Test_B_Tree()
 void Test_BPlus_Tree()
 {
 	BPTree<int, int>* tree = new BPTree<int, int>();
-	for (int i = 0; i < 50; ++i)
+	for (int i = 1; i <= 7; ++i)
 		tree->insert(i, i);
 	//tree->scan();
 	tree->display();

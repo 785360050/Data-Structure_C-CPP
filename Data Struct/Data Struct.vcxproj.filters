@@ -162,9 +162,15 @@
     <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\Node_BPlus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp">
+    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

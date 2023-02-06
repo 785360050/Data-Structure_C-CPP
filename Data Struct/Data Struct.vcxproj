@@ -45,6 +45,8 @@
     <ClInclude Include="C++\Set_Structure\Set_Hash_LinearDetection.h" />
     <ClInclude Include="C++\Set_Structure\Set_Hash_LinkAddress.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Node.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\Node_BPlus.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Normal Tree.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_ChildSibling\TreeNode_HighOrder_ChildSibling.h" />
@@ -70,7 +72,7 @@
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp" />
+    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
