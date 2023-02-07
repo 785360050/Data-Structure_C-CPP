@@ -14,13 +14,7 @@
 using KeyType = int;
 using DataType = int;
 
-//using Node = Node_BPlus<KeyType, DataType>;
-template
-<
-    typename KeyType, typename DataType
-//    typename NodeType_Index = Node_BPlus_Leaf<KeyType, DataType>,
-//    typename NodeType_Leaf= Node_BPlus_Leaf<KeyType, DataType>
->
+template<typename KeyType, typename DataType>
 class Tree_BPlus
 {
 private:
@@ -34,13 +28,12 @@ public:
     {
         if (node)
         {
-            for (auto each : node->index_ptr)
+            for(int i=0;i<node->length_index;++i)
             {
-                if (each)
-                    Destroy(each);
+                if (node->index_ptr[i])
+                    Destroy(node->index_ptr[i]);
             }
             delete node;
-            //count--;
         }
     }
     ~Tree_BPlus()
@@ -48,20 +41,15 @@ public:
         //std::cout << "删除B树节点个数:" << count << std::endl;
         if (root)
         {
-            for (auto each:root->index_ptr)
-                Destroy(each);
+            for (int i = 0; i < root->length_index; ++i)
+                Destroy(root->length_index[i]);
         }
         delete root;
     }
 private:
     //返回叶节点的父节点(叶节点？),并在叶节点中找key的下标，不存在时返回小值(找左孩子)
-    std::pair<Node_BPlus<KeyType, DataType>*, int> keyIndexInLeaf(KeyType key)
+    std::pair<Node_BPlus<KeyType, DataType>*, int> Index_Key_Leaf(KeyType key)
     {
-        /*
-        *    @brief Find the location of given _key in leaf Node_BPlus<KeyType, DataType>.
-        *    @param _key: Key we want to locate.
-        *    @return A pair of leaf and index of given _key. If _key not in B+ tree, the index is the nearest and smaller key than given _key.
-        */
         try
         {
             if (root == nullptr) ///树空时返回空
@@ -70,17 +58,17 @@ private:
         catch (const std::exception& e)
         {
             std::cout << e.what() << std::endl;
-                return std::make_pair(nullptr, 0);
+            return std::make_pair(nullptr, 0);
         }
 
         Node_BPlus<KeyType, DataType>* node = root;
         while (true)
         {
             int loc = node->Index_Key(key);
-            if (node->leaf)
-                return std::make_pair(node, loc);
-            else ///向下层节点找
+            if (!node->leaf) ///非叶节点向下层找
                 node = node->index_ptr[loc];
+            else ///此时为叶节点
+                return std::make_pair(node, loc);
         }
     }
     //分割容量不足的叶节点，返回新叶节点
@@ -93,13 +81,20 @@ private:
         leaf->next = new_leaf;
         new_leaf->parent = leaf->parent;
 
-        int mid = leaf->key.size() / 2;
+        int mid = leaf->length_data / 2;
 
-        ///移动后半部分元素到新节点
-        new_leaf->key.assign(leaf->key.begin() + mid, leaf->key.end());
-        leaf->key.erase(leaf->key.begin() + mid, leaf->key.end());
-        new_leaf->data.assign(leaf->data.begin() + mid, leaf->data.end());
-        leaf->data.erase(leaf->data.begin() + mid, leaf->data.end());
+        for (int i = mid, j = 0; i <= order; ++i)
+        {///移动后半部分元素到新节点
+            new_leaf->key[j] = leaf->key[i];
+            leaf->key[i] = NULL;
+            new_leaf->data[j] = leaf->data[j];
+            leaf->data[j] = NULL;
+        }
+
+        //new_leaf->key.assign(leaf->key.begin() + mid, leaf->key.end());
+        //leaf->key.erase(leaf->key.begin() + mid, leaf->key.end());
+        //new_leaf->data.assign(leaf->data.begin() + mid, leaf->data.end());
+        //leaf->data.erase(leaf->data.begin() + mid, leaf->data.end());
 
         return new_leaf;
     }
@@ -109,7 +104,7 @@ private:
         Node_BPlus<KeyType, DataType>* new_node = new Node_BPlus<KeyType, DataType>(false);
         new_node->parent = node->parent;
 
-        int mid = (node->key.size() + 1) / 2 - 1;
+        int mid = (node->length_index) / 2;
         KeyType push_key = node->key[mid];     ///分割末尾节点元素提到上层
 
         ///移动后半部分元素到新节点
@@ -197,6 +192,153 @@ public:
             }
         }
     }
+
+
+    void RestoreBTree(Node_BPlus<KeyType, DataType>* node)
+    {
+        ///父节点不存在，即无需调整根节点(B+树只有唯一一个节点，且为根节点)
+        if (!node->parent)
+            return;
+
+        Node_BPlus<KeyType, DataType>* parent, * brother_left, * brother_right;
+        {///初始化 brothers,parent
+            parent = node->parent;
+
+            int i_index;	///指向调整节点的索引指针
+            for (i_index = 0; i_index < parent->index_ptr.size(); ++i_index)
+            {///遍历父节点中的索引指针,以找到左右兄弟节点
+                if (parent->index_ptr[i_index] == node)
+                    break;
+            }///parent->index_ptr[i_index] 指向当前节点
+            brother_left = parent->index_ptr[i_index];
+            brother_right = parent->index_ptr[i_index + 1];
+        }
+
+        if (brother_left && brother_left->key.size() > order / 2)
+        {///左兄弟有多余元素，则从左兄弟借元素
+            /// 从左兄弟借元素 = 从父节点借小元素(逻辑前驱) + 父节点从左节点借最大的元素(逻辑前驱)
+
+            ///移动左叶兄弟的末尾元素到当前节点
+            node->key.insert(node->key.begin(), brother_left->key[brother_left->key.size() - 1]);
+            node->data.insert(node->data.begin(), brother_left->data[brother_left->data.size() - 1]);
+            brother_left->key.erase(brother_left->key.end() - 1);
+            brother_left->data.erase(brother_left->data.end() - 1);
+
+            ///更新父节点key为左兄的末尾元素
+            brother_left->parent->key[brother_left->parent->key.size() - 1] = brother_left->key[brother_left->key.size() - 1];
+        }
+        else if (brother_right && brother_right->key.size() > order / 2)
+        {///右兄弟有多余元素，则从右兄弟借
+            ///从右兄弟借元素 = 从父节点借大元素(逻辑后继) + 父节点从右兄弟借最小元素(逻辑后继)
+            ///移动右叶兄弟的首元素
+            node->key.insert(node->key.end() - 1, brother_right->key[0]);
+            node->data.insert(node->data.end(), brother_right->data[0]);
+            brother_right->key.erase(brother_right->key.begin());
+            brother_right->data.erase(brother_right->data.begin());
+
+            ///更新父节点
+            node->parent->key[brother_left->parent->key.size() - 1] = node->key[node->key.size() - 1];
+        }
+        else
+        {///左右兄弟都无法借元素，只能合并
+            if (brother_left)
+            {///调整节点与左兄弟合并
+                ///合并 = 从父节点移动分割元素到左兄弟 + 当前节点元素都移到左节点 
+
+                for (int i = 0; i < node->key.size(); ++i)
+                {///移动所有元素给左叶兄弟
+                    brother_left->key.push_back(node->key[i]);
+                    brother_left->data.push_back(node->data[i]);
+                }
+
+                for (int index = 0; index < parent->index_ptr.size(); ++index)
+                {///更新索引节点的索引指针
+                    if (parent->index_ptr[index] == node)
+                    {
+                        parent->index_ptr.erase(parent->index_ptr.begin() + index);
+                        break;
+                    }
+                }
+                delete node;
+
+                //
+                if (root == parent)
+                {/// 如果此时父节点为根，则当父节点没有关键字时才调整
+                    if (parent->key.empty())
+                    {
+                        root = node;
+                        delete node->parent;
+                    }
+                }
+                else
+                {/// 如果父节点不为根，则需要判断是否需要重新调整
+                    if (parent->key.size() < order / 2)
+                        RestoreBTree(parent);
+                }
+
+            }
+            else if (brother_right)
+            {///调整节点与右兄弟合并
+                ///合并 = 从父节点移动分割元素(逻辑后继)到左兄弟 + 右兄弟元素都移到调整节点 
+
+                for (int i = 0; i < brother_right->key.size(); ++i)
+                {///移动所有元素给当前兄弟
+                    node->key.push_back(node->key[i]);
+                    node->data.push_back(node->data[i]);
+                }
+
+                for (int index = 0; index < parent->index_ptr.size(); ++index)
+                {///更新索引节点的索引指针
+                    if (parent->index_ptr[index] == brother_right)
+                    {
+                        parent->index_ptr.erase(parent->index_ptr.begin() + index);
+                        break;
+                    }
+                }
+                delete brother_right;
+
+
+                if (root == parent)
+                {/// 如果此时父节点为根，则当父节点没有关键字时才调整
+                    if (parent->key.empty())
+                    {
+                        root = node;
+                        delete node->parent;
+                    }
+                }
+                else
+                {/// 如果父节点不为根，则需要判断是否需要重新调整
+                    if (parent->key.size() < order / 2)
+                        RestoreBTree(parent);
+                }
+            }
+            else
+            {
+                std::cout << "Error: 左右兄弟都不存在";
+            }
+        }
+    }
+    
+    void Delete(Node_BPlus<KeyType, DataType>* node, int position)
+    {///删除node节点中下标为Position的元素
+        node->key.erase(node->key.begin() + position);
+        node->data.erase(node->data.begin() + position);
+
+        if (node->key.size() < order / 2)	///阈值可自定义
+            RestoreBTree(node);///调整B树
+
+        if (position == node->key.size())
+        {///删除末尾元素时，更新上层索引节点key
+            //Update_Index();
+            for (int i = 0; i < node->parent->key.size(); ++i)
+            {
+                if (node->parent->index_ptr[i] == node)
+                    node->parent->key[i] = node->key[node->key.size() - 1];
+            }
+        }
+
+    }
+
     void erase(KeyType _key)
     {
         std::pair<Node_BPlus<KeyType, DataType>*, int> pair = keyIndexInLeaf(_key);
@@ -207,6 +349,10 @@ public:
             std::cout << "Key " << _key << " is not in B+ tree" << std::endl;
             return;
         }
+
+        Delete(leaf, loc);
+        //--count;
+        
 
     }
 

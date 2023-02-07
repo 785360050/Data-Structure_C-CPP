@@ -18,14 +18,16 @@ static bool  SetEncode(int EncodeId = 936)
 
 void Test_BPlus_Tree()
 {
-	Tree_BPlus<int, int>* tree = new Tree_BPlus<int, int>(4);
-	for (int i = 1; i <= 21; ++i)
+	Tree_BPlus<int, int>* tree = new Tree_BPlus<int, int>(5);
+	for (int i = 1; i <= 22; ++i)
 		tree->insert(i, i);
 	//tree->scan();
 	tree->display();
 
 	//tree->erase(4);
-	std::cout << tree->find(4) << std::endl;
+	//std::cout << tree->find(4) << std::endl;
+	//tree->display();
+
 	tree->display();
 
 	delete tree;
