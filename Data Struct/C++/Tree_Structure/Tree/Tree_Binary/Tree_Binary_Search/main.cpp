@@ -1,7 +1,7 @@
 
-#include "Tree_Binary_Search.h"
-#include "Tree_Binary_Search_AVL.h"
-#include "Tree_Binary_Search_BRT.h"
+#include "Binary_Tree_Search_Normal/Binary_Tree_Search_Normal.h"
+#include "Tree_Binary_Search_AVL/Tree_Binary_Search_AVL.h"
+#include "Tree_Binary_Search_BRT/Tree_Binary_Search_BRT.h"
 
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
@@ -20,10 +20,11 @@ static bool  SetEncode(int EncodeId = 936)
 
 void BinarySearch()
 {
-	Binary_Tree_Search<int> tree;
+	Binary_Tree_Search_Normal<int> tree;
 	Node_BinaryTree<int>* d = tree.Node_Create("4",4);
 
 	tree.Tree_Set_Root(d);
+
 	//tree.Tree_Element_Insert(2);
 	//tree.Tree_Element_Insert(1);
 	//tree.Tree_Element_Insert(3);
@@ -114,10 +115,43 @@ void BinarySearch_RBT()
 
 }
 
+void TestBinarySearch()
+{
+	Binary_Tree_Search_Normal<int> tree;
+	Node_BinaryTree<int>* d = tree.Node_Create("4", 4);
+
+	tree.Tree_Set_Root(d);
+
+	//tree.Tree_Element_Insert(2);
+	//tree.Tree_Element_Insert(1);
+	//tree.Tree_Element_Insert(3);
+	//tree.Tree_Element_Insert(6);
+	//tree.Tree_Element_Insert(5);
+	//tree.Tree_Element_Insert(7);
+
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
+
+	auto node = tree.Tree_Element_Locate("7");///查找测试
+	if (node)
+		std::cout << "Node Founded" << std::endl;
+	else
+		std::cout << "Node Not Found" << std::endl;
+
+	tree.Tree_Element_Delete(2);
+	std::cout << "After Delete 2" << std::endl;
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
+	tree.Tree_Element_Delete(4);
+	std::cout << "After Delete 4" << std::endl;
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
+
+}
+
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	BinarySearch();
-	BinarySearch_AVL();
-	BinarySearch_RBT();
+	//BinarySearch();
+	//BinarySearch_AVL();
+	//BinarySearch_RBT();
+	TestBinarySearch();
 }

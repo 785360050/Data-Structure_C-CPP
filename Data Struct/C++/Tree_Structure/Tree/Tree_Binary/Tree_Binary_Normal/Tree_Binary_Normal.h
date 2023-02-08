@@ -19,10 +19,6 @@
 template <typename DataType, typename NodeType = Node_BinaryTree<DataType>>
 class Tree_Binary_Normal:public Tree_Binary<DataType,NodeType>
 {
-protected:
-	//NodeType* root;
-	//int count;
-
 public:
 	//初始化树头节点信息，栈维护
 	Tree_Binary_Normal()
@@ -54,7 +50,7 @@ public:
 	}
 private:
 	//销毁子树
-	void Destroy_SubTree(NodeType* node)
+	void Destroy_SubTree(NodeType* node) override
 	{
 		if (!node)
 			return;

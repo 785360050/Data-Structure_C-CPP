@@ -1,31 +1,35 @@
 #pragma once
-#include "Tree_Binary_ADT.h"
-#include "../Tree_Binary_Normal/Tree_Binary_Normal.h"
 
-template <typename DataType,typename NodeType = Node_BinaryTree<DataType>>
-class Binary_Tree_Search :public Binary_Tree<DataType>
+
+
+
+template <typename DataType, typename NodeType>
+class Binary_Tree_Search
 {
+protected:
+	NodeType* root;
+	int count;
 public:
-	Binary_Tree_Search() :Binary_Tree<DataType>() {};
+	Binary_Tree_Search() :root(nullptr), count(0) {};
 	~Binary_Tree_Search() = default;
 protected:
 	//增加二叉搜索节点data
-	virtual Node_BinaryTree<DataType>* insertnode(Node_BinaryTree<DataType>* node,DataType data)
+	virtual NodeType* insertnode(NodeType* node, DataType data)
 	{
 		if (!node)
 		{
-			Node_BinaryTree<DataType>* p = this->Node_Create(std::to_string(data),data);
+			NodeType* p = this->Node_Create(std::to_string(data), data);
 			++this->count;
 			return p;
 		}
 		if (data < node->element)
 		{
-			Node_BinaryTree<DataType>* left = insertnode(node->left, data);
+			NodeType* left = insertnode(node->left, data);
 			node->left = left;
 		}
 		else if (data > node->element)
 		{
-			Node_BinaryTree<DataType>* right = insertnode(node->right, data);
+			NodeType* right = insertnode(node->right, data);
 			node->right = right;
 		}
 		else
@@ -33,7 +37,7 @@ protected:
 		return node;
 	}
 	//删除二叉搜索节点data
-	Node_BinaryTree<DataType>* deletenode(Node_BinaryTree<DataType>* tree, DataType data)
+	NodeType* deletenode(NodeType* tree, DataType data)
 	{///删除子树tree中值为data的节点
 		/// [此处用逻辑后继顶替]
 		if (tree == nullptr)///递归出口
@@ -58,19 +62,19 @@ protected:
 			}
 			if (tree->left == nullptr)
 			{
-				Node_BinaryTree<DataType>* temp = tree->right;
+				NodeType* temp = tree->right;
 				delete tree;
 				return temp;
 			}
 			if (tree->right == nullptr)
 			{
-				Node_BinaryTree<DataType>* temp = tree->left;
+				NodeType* temp = tree->left;
 				delete tree;
 				return temp;
 			}
 			else///左右子树都不为空
 			{///用右孩子的最小节点代替(逻辑后继)
-				Node_BinaryTree<DataType>* p = this->Element_Next(tree);
+				NodeType* p = this->Element_Next(tree);
 				tree->element = p->element;///直接用顶替的节点先覆盖
 				tree->name = p->name;
 				tree->right = deletenode(tree->right, p->element);///再删除顶替节点
@@ -79,10 +83,50 @@ protected:
 		}
 	}
 public:
-	//查找节点  O(Logn)
-	Node_BinaryTree<DataType>* Tree_Element_Locate(string name)
+	void Node_Visit_Name(NodeType* node)
 	{
-		Node_BinaryTree<DataType>* p = this->root;
+		if (node)
+		{
+			std::cout << node->name << ' ';
+		}
+	}
+	void Tree_Traverse_InOrder(NodeType* node)
+	{
+		if (node)
+		{
+			Tree_Traverse_InOrder(node->left);
+			this->Node_Visit_Name(node);
+			Tree_Traverse_InOrder(node->right);
+		}
+	}
+	NodeType* Tree_GetRoot()
+	{
+		return root;
+	}
+	void Tree_Set_Root(NodeType* node)
+	{
+		try
+		{
+			if (!node)
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Root Init Faild: node is not exists" << std::endl;
+			return;
+		}
+		root = node;
+		++count;
+	}
+	NodeType* Node_Create(std::string name, DataType element = NULL)
+	{
+		return new NodeType(name, element);
+	}
+
+	//查找节点  O(Logn)
+	NodeType* Tree_Element_Locate(string name)
+	{
+		NodeType* p = this->root;
 		while (p)
 		{
 			if (p->name == name)
@@ -99,7 +143,7 @@ public:
 	}
 	void Tree_Element_Insert_NonRecursive(DataType data)
 	{
-		Node_BinaryTree<DataType>* current = this->root, * precursor = nullptr;
+		NodeType* current = this->root, * precursor = nullptr;
 		while (current)
 		{
 			precursor = current;
@@ -113,13 +157,13 @@ public:
 			else
 				current = current->right;
 		}
-		Node_BinaryTree<DataType>* node = new Node_BinaryTree<DataType>(std::to_string(data), data);
+		NodeType* node = new NodeType(std::to_string(data), data);
 		++this->count;
-		if (precursor && data < precursor->element) 
+		if (precursor && data < precursor->element)
 			precursor->left = node;
-		else if (precursor && data > precursor->element) 
+		else if (precursor && data > precursor->element)
 			precursor->right = node;
-		if (!precursor) 
+		if (!precursor)
 			this->root = node;
 
 
@@ -127,13 +171,13 @@ public:
 	}
 
 	//删除二叉搜索子树tree中值为data的节点
-	Node_BinaryTree<DataType>* Tree_Element_Delete(DataType data)
+	NodeType* Tree_Element_Delete(DataType data)
 	{
 		return deletenode(this->root, data);
 	}
 
 	//定位逻辑后继节点，即右子树的中序首节点
-	Node_BinaryTree<DataType>* Element_Next(Node_BinaryTree<DataType>* node)
+	NodeType* Element_Next(NodeType* node)
 	{///不存在抛错
 		try
 		{
@@ -151,7 +195,7 @@ public:
 		return node;
 	}
 	//定位逻辑前驱节点，即左子树的中序末节点
-	Node_BinaryTree<DataType>* Element_Precursor(Node_BinaryTree<DataType>* node)
+	NodeType* Element_Precursor(NodeType* node)
 	{///不存在抛错
 		try
 		{
@@ -170,5 +214,3 @@ public:
 	}
 
 };
-
-

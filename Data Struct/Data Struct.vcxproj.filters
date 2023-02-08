@@ -72,13 +72,13 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Binary_Tree_Search_Normal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Tree_Binary_Search_AVL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Tree_Binary_Search_BRT.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h">
@@ -180,9 +180,18 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Node_Binary_Search_RB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Node_Binary_Search_Balance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp">
+    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

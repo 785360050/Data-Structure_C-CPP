@@ -9,9 +9,11 @@ class Tree_Binary
 {
 protected:
 	NodeType* root;
-	//int branch;			///分叉数量上限
 	int count;
 
+public:
+	Tree_Binary() :root(nullptr), count(0) {};
+	virtual ~Tree_Binary() = default;
 protected:
 	//重置子树所有元素为0
 	//virtual void Clear(NodeType* node);
@@ -41,10 +43,7 @@ protected:
 		if (node)
 		{std::cout << node->name << ' '; }
 	}
-public:
-	Tree_Binary()
-	{};
-	virtual ~Tree_Binary() = default;
+	virtual void Destroy_SubTree(NodeType* node) = 0;
 public:
 	void Tree_Set_Root(NodeType* node)
 	{

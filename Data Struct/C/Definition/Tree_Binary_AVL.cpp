@@ -68,7 +68,7 @@ static AVLNode* Rotate_Left(AVLNode* node)
 {
 	AVLNode* temp = node->right;
 	node->right = temp->left;
-	temp->right = node;
+	temp->left = node;
 	node->hight = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
 	temp->hight = maxnode(hightnode(temp->left), hightnode(node->right)) + 1;
 	return temp;

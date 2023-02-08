@@ -20,14 +20,14 @@ private:
 	bool thread;	///记录是否已线索化
 	NodeType* pre = NULL;///辅助指针，指向逻辑前驱,用于先序遍历
 private:
-	void Delete_Subtree(NodeType* node)
+	void Destroy_SubTree(NodeType* node) override
 	{
 		if (node)
 		{///屏蔽线索进入的删除节点递归
 			if (node->thread_left == false)
-				Delete_Subtree(node->left);
+				Destroy_SubTree(node->left);
 			if (node->thread_right == false)
-				Delete_Subtree(node->right);
+				Destroy_SubTree(node->right);
 			std::cout << node->name << " ";
 			delete node;
 			--this->count;
@@ -56,7 +56,7 @@ public:
 		if (this->root)
 		{
 			std::cout << "删除二叉树树节点个数:" << this->count << std::endl;
-			Delete_Subtree(this->root);
+			Destroy_SubTree(this->root);
 			this->root = nullptr;	///防止基类root指针悬空
 		}
 		std::cout << std::endl << "BinaryTree_Thread Destroyed" << std::endl;
@@ -108,11 +108,11 @@ public:
 		{
 			while (node->thread_left == false)
 				node = node->left;///定位到逻辑起点
-			this->Tree_Visit_Name(node);
+			this->Node_Visit_Name(node);
 			while (node->thread_right == true && node->right)
 			{///线索存在时直接向逻辑后继移动再访问
 				node = node->right;
-				this->Tree_Visit_Name(node);
+				this->Node_Visit_Name(node);
 			}
 			node = node->right;///线索不存在时向后移动视角
 		}

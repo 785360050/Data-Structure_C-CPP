@@ -63,9 +63,12 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_ADT.h" />
     <ClInclude Include="C++\Tree_Structure\Heap\Binary_Heap.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Binary_Tree_Search_Normal.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search.h" />
-    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL.h" />
-    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Node_Binary_Search_Balance.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Tree_Binary_Search_AVL.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Node_Binary_Search_RB.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Tree_Binary_Search_BRT.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h" />
     <ClInclude Include="C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h" />
@@ -76,7 +79,7 @@
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp" />
+    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
