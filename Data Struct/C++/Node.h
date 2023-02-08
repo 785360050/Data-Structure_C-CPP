@@ -13,4 +13,6 @@ public:
 	//virtual void Show() = 0;
 	//DataType Get_Element()
 	//{return element;}
+	void Element_Set(DataType element)
+	{this->element=element;}
 };

@@ -6,6 +6,8 @@
 
 #include "Tree_Node.h"
 
+using Direction = int;
+
 template <typename NodeType,typename DataType >
 class Tree
 {///孩子兄弟表示法
