@@ -3,38 +3,24 @@
 #include <iostream>
 
 #include "Node_Binary_Search_RB.h"
+#include "../Tree_Binary_Search.h"
 
-
-template <typename DataType>
-class Tree_Binary_Search_RBT
+template <typename DataType, typename NodeType = Node_Binary_Search_RB<DataType>>
+class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, NodeType>
 {
+//public:
+//	Node_Binary_Search_RB<DataType>* root;
+//	int count;
 public:
-	Node_Binary_Search_RB<DataType>* root;
-	int count;
-public:
-	Tree_Binary_Search_RBT() :root(nullptr), count(0) {};
-	Tree_Binary_Search_RBT(Node_Binary_Search_RB<DataType>* node)
-	{
-		try
-		{
-			if (!node)
-				throw std::exception("Node is not exisit");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
-		this->root = node;
-		count = 1;
-	}
+	Tree_Binary_Search_RBT() :Tree_Binary_Search<DataType, NodeType>() {};
+	Tree_Binary_Search_RBT(NodeType* root) :Tree_Binary_Search<DataType, NodeType>(root) {};
 
 	~Tree_Binary_Search_RBT()
 	{///自下而上递归销毁节点
-		std::cout << "\n删除红黑树节点个数:" << count << std::endl;
+		std::cout << "\n删除红黑树节点个数:" << this->count << std::endl;
 		std::cout << "删除顺序为: ";
-		if (root)
-			DeleteNode(root);
+		if (this->root)
+			DeleteNode(this->root);
 	}
 private:
 	//左旋
@@ -49,7 +35,7 @@ private:
 			node->parent->left == node ?
 			node->parent->left = temp : node->parent->right = temp;
 		else
-			root = temp;
+			this->root = temp;
 		temp->left = node;
 		node->parent = temp;
 	}
@@ -65,7 +51,7 @@ private:
 			node->parent->right == node ?
 			node->parent->right = temp : node->parent->left = temp;
 		else
-			root = temp;
+			this->root = temp;
 		temp->right = node;
 		node->parent = temp;
 	}
@@ -86,6 +72,8 @@ private:
 		while (parent && (parent->colour == red))
 		{///父节点为红
 			ancestor = parent->parent;
+			if (!ancestor)
+				return;///祖先不存在时最高两层，不需要调整
 			parent == ancestor->left ?///定位uncle节点位置
 				uncle = ancestor->right : uncle = ancestor->left;
 			if (uncle && uncle->colour == red)
@@ -128,17 +116,17 @@ private:
 			}
 		}
 		///插入为根时，跳过所有条件判断变色根节点
-		root->colour = black;
+		this->root->colour = black;
 	}
 	void RBTree_Adjust_Delete(Node_Binary_Search_RB<DataType>* instead, Node_Binary_Search_RB<DataType>* parent)
 	{
 		Node_Binary_Search_RB<DataType>* brother;
 		while
-			(
-				root != instead			///instead非根
-				&&
-				(!instead || instead->colour == black)	///instead为黑
-				)///instead为黑
+		(
+			this->root != instead			///instead非根
+			&&
+			(!instead || instead->colour == black)	///instead为黑
+		)///instead为黑
 		{///instead非根节点，且为红色时
 			if (parent->left == instead)
 			{///instead为左孩子,则brother为右孩子
@@ -146,8 +134,6 @@ private:
 				if (brother->colour == red)
 				{///兄弟节点为红色时
 					/// 父、兄变色，旋转 转为兄黑处理
-					//Colour_Switch(brother);
-					//Colour_Switch(parent);
 					brother->colour = black;
 					parent->colour = red;
 					Rotate_Left(parent);
@@ -243,52 +229,99 @@ private:
 			DeleteNode(node->right);
 			std::cout << node->element << " ";
 			delete node;
-			--count;
+			--this->count;
 		}
 	}
 	//显示节点
-	void Node_Visit(const Node_Binary_Search_RB<DataType>* const node)
+	void Node_Visit_Name(NodeType* node) override
 	{
 		if (node)
 			std::cout << '[' << node->element << ':' << (node->colour == black ? 'B' : 'R') << "] ";
 	}
 public:
-	//创建红黑节点(默认为红色)
-	Node_Binary_Search_RB<DataType>* RBNode_Create(int element, Colour colour = red)
-	{
-		return new Node_Binary_Search_RB<DataType>(std::to_string(element), element, colour);
-	}
 	//插入node节点
-	void RBTree_RBNode_Insert(Node_Binary_Search_RB<DataType>* node)
+	//void Element_Insert(Node_Binary_Search_RB<DataType>* node)
+	//{
+	//	int element = node->element;
+	//	Node_Binary_Search_RB<DataType>* current = this->root, * precursor = nullptr;
+	//	while (current)
+	//	{
+	//		precursor = current;
+	//		if (element < current->element)
+	//			current = current->left;
+	//		else if (element > current->element)
+	//			current = current->right;
+	//		else
+	//		{
+	//			std::cout << "Node element is existed" << std::endl;
+	//			return;
+	//		}
+	//	}
+	//	node->parent = precursor;
+	//	if (!precursor)///根节点插入
+	//		this->root = node;
+	//	else
+	//		element < precursor->element ?///判断插入左右位置
+	//		precursor->left = node : precursor->right = node;
+	//	RBTree_Adjust_Insert(node);
+	//	++this->count;
+	//}
+
+	void Element_Insert(DataType element)
 	{
-		int element = node->element;
-		Node_Binary_Search_RB<DataType>* current = root, * precursor = nullptr;
+		//try
+		//{///判断元素重复
+		//	Node_Binary_Search_RB<DataType>
+		//		* current = this->root,
+		//		* precursor = nullptr;
+		//	while (current)
+		//	{
+		//		precursor = current;
+		//		if (element < current->element)
+		//			current = current->left;
+		//		else if (element > current->element)
+		//			current = current->right;
+		//		else
+		//			throw std::exception("element is existed");
+		//		{
+		//		}
+		//	}
+		//}
+		//catch (const std::exception& e)
+		//{
+		//	std::cout << e.what() << std::endl;
+		//	return;
+		//}
+		
+		NodeType* node = this->Node_Create(std::to_string(element), element);
+		Node_Binary_Search_RB<DataType>
+			* current = this->root,
+			* precursor = nullptr;
+
+
 		while (current)
-		{
+		{///定位待插入的节点precursor
 			precursor = current;
-			if (element < current->element)
-				current = current->left;
-			else if (element > current->element)
-				current = current->right;
-			else
-			{
-				std::cout << "Node element is existed" << std::endl;
-				return;
-			}
+			current = (element < current->element) ? 
+				current->left : current->right;
 		}
-		node->parent = precursor;
+
 		if (!precursor)///根节点插入
-			root = node;
+			this->root = node;
 		else
+		{
 			element < precursor->element ?///判断插入左右位置
-			precursor->left = node : precursor->right = node;
+				precursor->left = node : precursor->right = node;
+			node->parent = precursor;
+		}
 		RBTree_Adjust_Insert(node);
-		++count;
+		++this->count;
 	}
 
-	void RBTree_RBNode_Delete(int key)
+	//void Element_Delete(DataType data)
+	void Element_Delete(DataType data)
 	{
-		Node_Binary_Search_RB<DataType>* node = RBTree_Search(key);
+		Node_Binary_Search_RB<DataType>* node = this->Node_Search(std::to_string(data));
 		if (!node)///删除节点不存在
 			return;
 
@@ -323,7 +356,7 @@ public:
 		if (instead)
 			instead->parent = parent;
 		if (del->parent == nullptr)	///del为根时
-			root = instead;		///替换根节点
+			this->root = instead;		///替换根节点
 		//else if (del->partent->left == del)
 		//	del->partent->left = instead;
 		//else
@@ -340,7 +373,10 @@ public:
 		/// 删除del完毕，更新instead值
 		///————————————————————————
 		if (del != node)
+		{
 			node->element = del->element;
+			node->name = del->name;
+		}
 
 		///————————————————————————
 		///删除红色节点不调整
@@ -348,43 +384,10 @@ public:
 		if (del->colour == black)	///删除黑色节点时(删除并替换后)
 			RBTree_Adjust_Delete(instead, parent);
 		delete del;
-		--count;
-	}
-	//搜索红黑树tree中键值为key的节点
-	Node_Binary_Search_RB<DataType>* RBTree_Search(int element)
-	{
-		Node_Binary_Search_RB<DataType>* node = root;
-		while (node)
-		{
-			if (element < node->element)
-				node = node->left;
-			else if (element > node->element)
-				node = node->right;
-			else
-				return node;
-
-		}
-		return nullptr;
-	}
+		--this->count;
 
 
-	void RBTree_Traverse_Inorder(Node_Binary_Search_RB<DataType>* node)
-	{
-		if (node)
-		{
-			RBTree_Traverse_Inorder(node->left);//L
-			Node_Visit(node);//D
-			RBTree_Traverse_Inorder(node->right);//R
-		}
 	}
-	void RBTree_Traverse_Preorder(Node_Binary_Search_RB<DataType>* node)
-	{
-		if (node)
-		{
-			Node_Visit(node);//D
-			RBTree_Traverse_Preorder(node->left);//L
-			RBTree_Traverse_Preorder(node->right);//R
-		}
-	}
+
 };
 

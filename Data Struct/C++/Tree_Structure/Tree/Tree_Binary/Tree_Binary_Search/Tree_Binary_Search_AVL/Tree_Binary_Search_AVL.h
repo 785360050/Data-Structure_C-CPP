@@ -6,31 +6,32 @@
 
 
 
-template <typename DataType>
-class Tree_Binary_Search_AVL
+template <typename DataType, typename NodeType = Node_Binary_Search_Balance<DataType>>
+class Tree_Binary_Search_AVL:public Tree_Binary_Search<DataType,NodeType>
 {
 public:
-	Node_Binary_Search_Balance<DataType>* root;
-	int count;
+	//Node_Binary_Search_Balance<DataType>* root;
+	//int count;
 public:
-	Tree_Binary_Search_AVL() :root{ nullptr }, count{ 0 } {};
+	Tree_Binary_Search_AVL() :Tree_Binary_Search<DataType, NodeType>() {};
+	Tree_Binary_Search_AVL(NodeType* root) :Tree_Binary_Search<DataType, NodeType>(root) {};
 	~Tree_Binary_Search_AVL()
 	{///自下而上递归销毁节点
-		std::cout << "删除二叉树树节点个数:" << count << std::endl;
-		if (root)
-			DeleteNode(root);
+		std::cout << "删除二叉树树节点个数:" << this->count << std::endl;
+		if (this->root)
+			Destroy_SubTree(this->root);
 	}
 
 private:
-	void DeleteNode(Node_Binary_Search_Balance<DataType>* node)
+	void Destroy_SubTree(Node_Binary_Search_Balance<DataType>* node)
 	{
 		if (node)
 		{
-			DeleteNode(node->left);
-			DeleteNode(node->right);
+			Destroy_SubTree(node->left);
+			Destroy_SubTree(node->right);
 			std::cout << node->element << " ";
 			delete node;
-			count--;
+			this->count--;
 		}
 	}
 	int maxnode(int a, int b)
@@ -84,8 +85,8 @@ private:
 	{
 		if (!node)
 		{///出口1，找到位置并创建节点插入树
-			count++;
-			return BinaryTree_CreateNode_AVL(element);
+			this->count++;
+			return this->Node_Create(std::to_string(element), element);
 		}
 		else///递
 		{///寻找插入节点的空位置
@@ -142,42 +143,6 @@ private:
 		replace_target->name = replace_source->name;
 		replace_target->element = replace_source->element;
 	}
-public:
-	//创建AVL节点，元素值为data,默认高度从1开始
-	Node_Binary_Search_Balance<DataType>* BinaryTree_CreateNode_AVL(DataType element)
-	{
-		return new Node_Binary_Search_Balance<DataType>(std::to_string(element),element);
-	}
-	// 插入AVL节点，在平衡二叉树tree中，双亲为parenr的[左/右]位置,递归过程中同步实现平衡化
-	void BinaryTree_Insert_AVL(DataType data)
-	{
-		root = node_insert(root, data);
-	}
-
-	//访问AVL节点名
-	void BinaryTree_Visit_AVL(Node_Binary_Search_Balance<DataType>* node)
-	{
-		if (node)
-		{
-			std::cout << node->name << " ";
-		}
-		else
-		{
-			std::cout << "TreeNode is not exist" << std::endl;
-			return;
-		}
-	}
-	// 中序遍历平衡二叉树
-	void BinaryTree_Traversal_Inorder_AVL(Node_Binary_Search_Balance<DataType>* node)
-	{
-		if (node)
-		{
-			BinaryTree_Traversal_Inorder_AVL(node->left);//L
-			BinaryTree_Visit_AVL(node);//D
-			BinaryTree_Traversal_Inorder_AVL(node->right);//R
-		}
-	}
-	//删除平衡二叉树tree中元素值为data的节点，同步平衡
 	Node_Binary_Search_Balance<DataType>* BinaryTree_AVL_Delete(Node_Binary_Search_Balance<DataType>* node, DataType data)
 	{
 		/// <summary>
@@ -194,7 +159,7 @@ public:
 		/// 递 寻找目标节点
 		if (data < node->element)
 			node->left = BinaryTree_AVL_Delete(node->left, data);
-		if (data > node->element)
+		else if (data > node->element)
 			node->right = BinaryTree_AVL_Delete(node->right, data);
 		else
 		{///找到目标节点，删除并调整
@@ -215,7 +180,7 @@ public:
 					node->height = temp->height;
 				}
 				delete temp;
-				count--;
+				this->count--;
 			}
 			else
 			{///删除节点左右孩子都存在,用逻辑前驱代替
@@ -248,6 +213,19 @@ public:
 		}
 		return node;///出口2
 	}
+public:
+	// 插入AVL节点，在平衡二叉树tree中，双亲为parenr的[左/右]位置,递归过程中同步实现平衡化
+	void Element_Insert(DataType data)
+	{
+		this->root = node_insert(this->root, data);
+	}
+
+	//删除平衡二叉树tree中元素值为data的节点，同步平衡
+	void Element_Delete(DataType data)
+	{
+		BinaryTree_AVL_Delete(this->Tree_GetRoot(), data);
+	}
+
 };
 
 

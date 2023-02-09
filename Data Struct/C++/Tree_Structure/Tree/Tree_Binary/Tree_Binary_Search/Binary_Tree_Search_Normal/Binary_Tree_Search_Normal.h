@@ -1,15 +1,14 @@
 #pragma once
+
 #include "../../Tree_Binary_Normal/Tree_Binary_Normal.h"
+#include "../Tree_Binary_Search.h"
 
 template <typename DataType,typename NodeType = Node_BinaryTree<DataType>>
-class Binary_Tree_Search_Normal 
+class Tree_Binary_Search_Normal:public Tree_Binary_Search<DataType,NodeType>
 {
-protected:
-	NodeType* root;
-	int count;
 public:
-	Binary_Tree_Search_Normal() :root(nullptr),count(0){};
-	~Binary_Tree_Search_Normal() = default;
+	Tree_Binary_Search_Normal() :Tree_Binary_Search<DataType, NodeType>() {};
+	~Tree_Binary_Search_Normal() = default;
 protected:
 	//增加二叉搜索节点data
 	virtual Node_BinaryTree<DataType>* insertnode(Node_BinaryTree<DataType>* node,DataType data)
@@ -81,63 +80,11 @@ protected:
 		}
 	}
 public:
-	void Node_Visit_Name(NodeType* node)
+	void Element_Insert(DataType data)
 	{
-		if (node)
-		{
-			std::cout << node->name << ' ';
-		}
+		this->root = insertnode(this->root, data);
 	}
-	void Tree_Traverse_InOrder(NodeType* node)
-	{
-		if (node)
-		{
-			Tree_Traverse_InOrder(node->left);
-			this->Node_Visit_Name(node);
-			Tree_Traverse_InOrder(node->right);
-		}
-	}
-	NodeType* Tree_GetRoot()
-	{return root;}
-	void Tree_Set_Root(NodeType* node)
-	{
-		try
-		{
-			if (!node)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Root Init Faild: node is not exists" << std::endl;
-			return;
-		}
-		root = node;
-		++count;
-	}
-	NodeType* Node_Create(std::string name, DataType element = NULL)
-	{
-		return new NodeType(name, element);
-	}
-
-	//查找节点  O(Logn)
-	Node_BinaryTree<DataType>* Tree_Element_Locate(string name)
-	{
-		Node_BinaryTree<DataType>* p = this->root;
-		while (p)
-		{
-			if (p->name == name)
-				return p;
-			else
-				p = (name < p->name) ? p->left : p->right;
-		}
-		return nullptr;
-	}
-
-	void Tree_Element_Insert(DataType data)
-	{
-		insertnode(this->root, data);
-	}
-	void Tree_Element_Insert_NonRecursive(DataType data)
+	void Element_Insert_NonRecursive(DataType data)
 	{
 		Node_BinaryTree<DataType>* current = this->root, * precursor = nullptr;
 		while (current)
@@ -167,48 +114,12 @@ public:
 	}
 
 	//删除二叉搜索子树tree中值为data的节点
-	Node_BinaryTree<DataType>* Tree_Element_Delete(DataType data)
+	void Element_Delete(DataType data)
 	{
-		return deletenode(this->root, data);
+		deletenode(this->root, data);
 	}
 
-	//定位逻辑后继节点，即右子树的中序首节点
-	Node_BinaryTree<DataType>* Element_Next(Node_BinaryTree<DataType>* node)
-	{///不存在抛错
-		try
-		{
-			if (!node->right)
-				throw std::exception("No Next Node");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return nullptr;
-		}
-		node = node->right;
-		while (node && node->left)
-			node = node->left;
-		return node;
-	}
-	//定位逻辑前驱节点，即左子树的中序末节点
-	Node_BinaryTree<DataType>* Element_Precursor(Node_BinaryTree<DataType>* node)
-	{///不存在抛错
-		try
-		{
-			if (!node->left)
-				throw std::exception("No Precursor Node");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return nullptr;
-		}
-		node = node->left;
-		while (node && node->right)
-			node = node->right;
-		return node;
-	}
-
+	
 };
 
 

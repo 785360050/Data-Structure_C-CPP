@@ -300,18 +300,58 @@ void BinarySearch_AVL()
 	BinaryTree_Traversal_Inorder_AVL(Tree->root);
 	BinaryTree_Destory(Tree);
 }
+//void BinarySearch_RBT()
+//{
+//	RBTree* tree = BRT_Init();
+//
+//	RBNode* a = RBNode_Create(8);
+//	RBNode* b = RBNode_Create(5);
+//	RBNode* c = RBNode_Create(15);
+//	RBNode* d = RBNode_Create(12);
+//	RBNode* e = RBNode_Create(19);
+//	RBNode* f = RBNode_Create(9);
+//	RBNode* g = RBNode_Create(13);
+//	RBNode* h = RBNode_Create(23);
+//
+//	RBTree_RBNode_Insert(tree, a);
+//	RBTree_RBNode_Insert(tree, b);
+//	RBTree_RBNode_Insert(tree, c);
+//	RBTree_RBNode_Insert(tree, d);///叔红 变色父、祖父、叔节点
+//	RBTree_RBNode_Insert(tree, e);
+//	RBTree_RBNode_Insert(tree, f);///叔红 变色父、祖父、叔节点
+//	RBTree_RBNode_Insert(tree, g);
+//	RBTree_RBNode_Insert(tree, h);
+//	/////叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
+//
+//	RBTree_RBNode_Delete(tree, 15);
+//	RBTree_RBNode_Delete(tree, 19);
+//	RBTree_RBNode_Delete(tree, 13);
+//	RBTree_RBNode_Delete(tree, 23);
+//
+//	
+//
+//	std::cout << "\nDLR:";
+//	RBTree_Traverse_Preorder(tree->root);
+//	std::cout << "\nLDR:";
+//	RBTree_Traverse_Inorder(tree->root);
+//
+//	std::cout <<std::endl<<"\n搜索节点9：目标节点值为" << RBTree_Search(tree, 9)->key;
+//
+//	RBTree_Destroy(tree);
+//}
+
 void BinarySearch_RBT()
 {
 	RBTree* tree = BRT_Init();
 
-	RBNode* a = RBNode_Create(8);
-	RBNode* b = RBNode_Create(5);
-	RBNode* c = RBNode_Create(15);
-	RBNode* d = RBNode_Create(12);
-	RBNode* e = RBNode_Create(19);
-	RBNode* f = RBNode_Create(9);
-	RBNode* g = RBNode_Create(13);
-	RBNode* h = RBNode_Create(23);
+	RBNode* a = RBNode_Create(4);
+	RBNode* b = RBNode_Create(2);
+	RBNode* c = RBNode_Create(1);
+	RBNode* d = RBNode_Create(3);
+	RBNode* e = RBNode_Create(6);
+	RBNode* f = RBNode_Create(5);
+	RBNode* g = RBNode_Create(7);
+	//RBNode* h = RBNode_Create(23);
 
 	RBTree_RBNode_Insert(tree, a);
 	RBTree_RBNode_Insert(tree, b);
@@ -320,24 +360,41 @@ void BinarySearch_RBT()
 	RBTree_RBNode_Insert(tree, e);
 	RBTree_RBNode_Insert(tree, f);///叔红 变色父、祖父、叔节点
 	RBTree_RBNode_Insert(tree, g);
-	RBTree_RBNode_Insert(tree, h);
+	//RBTree_RBNode_Insert(tree, h);
 	/////叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
 
-	RBTree_RBNode_Delete(tree, 15);
-	RBTree_RBNode_Delete(tree, 19);
-	RBTree_RBNode_Delete(tree, 13);
-	RBTree_RBNode_Delete(tree, 23);
+	RBTree_RBNode_Delete(tree, 2);
+	RBTree_RBNode_Delete(tree, 4);
+	//RBTree_RBNode_Delete(tree, 13);
+	//RBTree_RBNode_Delete(tree, 23);
 
-	
 
-	std::cout << "\nDLR:";
-	RBTree_Traverse_Preorder(tree->root);
-	std::cout << "\nLDR:";
-	RBTree_Traverse_Inorder(tree->root);
 
-	std::cout <<std::endl<<"\n搜索节点9：目标节点值为" << RBTree_Search(tree, 9)->key;
+	//std::cout << "\nDLR:";
+	//RBTree_Traverse_Preorder(tree->root);
+	//std::cout << "\nLDR:";
+	//RBTree_Traverse_Inorder(tree->root);
+
+	//std::cout << std::endl << "\n搜索节点9：目标节点值为" << RBTree_Search(tree, 9)->key;
 
 	RBTree_Destroy(tree);
+
+
+
+
+	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+
+	//std::cout << std::endl << "Search node: name == \"7\"" << std::endl;
+	//auto node = tree->Node_Search("7");///查找测试
+	//std::cout << ((node->name == "7") ? "Node Founded" : "Node Not Found") << std::endl;
+
+	//tree->Element_Delete(2);
+	//std::cout << "After Delete 2" << std::endl;
+	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+	//tree->Element_Delete(4);
+	//std::cout << std::endl;
+	//std::cout << "After Delete 4" << std::endl;
+	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 }
 
 void Binary_Heap()
@@ -396,9 +453,9 @@ void TestBinaryTree()
 {
 	//BinaryTree();
 	//BinaryThreadTree();
-	BinarySearch();
+	//BinarySearch();
 	//BinarySearch_AVL();
-	//BinarySearch_RBT();
+	BinarySearch_RBT();
 	//Binary_Heap();
 }
 
@@ -728,11 +785,11 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	//TestBinaryTree();//完毕
+	TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
-	TestEdgeSetGraph();
+	//TestEdgeSetGraph();
 	//TestMininumSpanningTree();//完毕
 	//TestShortestPath();//完毕
 	//TestTopoSort();//完毕
