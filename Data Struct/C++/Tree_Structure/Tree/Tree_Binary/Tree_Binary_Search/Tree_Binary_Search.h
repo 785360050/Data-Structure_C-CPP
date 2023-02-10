@@ -12,7 +12,7 @@ public:
 	int count;
 public:
 	Tree_Binary_Search() :root(nullptr), count(0) {};
-	~Tree_Binary_Search() = default;
+	virtual ~Tree_Binary_Search() = default;
 
 protected:
 	//新建树所需的节点

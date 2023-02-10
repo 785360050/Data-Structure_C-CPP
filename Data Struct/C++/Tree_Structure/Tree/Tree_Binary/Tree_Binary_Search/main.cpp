@@ -115,52 +115,79 @@ static bool  SetEncode(int EncodeId = 936)
 //
 //}
 
+//void TestBinarySearch()
+//{
+//	//Tree_Binary_Search<int, int, Node_Binary_Search_Normal<int, int>>* tree = new Tree_Binary_Search_Normal<int, int, Node_Binary_Search_Normal<int, int>>();
+//	//Tree_Binary_Search<int, int, Node_Binary_Search_Balance<int, int>>* tree = new Tree_Binary_Search_AVL<int, int>();
+//	Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
+//
+//	
+//	//tree->Element_Insert(4);
+//	//tree->Element_Insert(2);
+//	//tree->Element_Insert(1);
+//	//tree->Element_Insert(3);
+//	//tree->Element_Insert(6);
+//	//tree->Element_Insert(5);
+//	//tree->Element_Insert(7);
+//
+//	tree->Element_Insert(8);
+//	tree->Element_Insert(5);
+//	tree->Element_Insert(15);
+//	tree->Element_Insert(12);
+//	tree->Element_Insert(19);
+//	tree->Element_Insert(9);
+//	tree->Element_Insert(13);
+//	tree->Element_Insert(23);
+//
+//	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+//
+//	//std::cout << std::endl << "Search node: name == \"7\"" << std::endl;
+//	//auto node = tree->Node_Search(7);///查找测试
+//	//std::cout << ((node->key == 7) ? "Node Founded" : "Node Not Found") << std::endl;
+//
+//	tree->Element_Delete(15);
+//	tree->Element_Delete(19);
+//	tree->Element_Delete(13);
+//	tree->Element_Delete(23);
+//						 
+//	//std::cout << std::endl;
+//	//tree->Element_Delete(2);
+//	//std::cout << "After Delete 2" << std::endl;
+//	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+//	//tree->Element_Delete(4);
+//	std::cout << std::endl;
+//	//std::cout << "After Delete 4" << std::endl;
+//	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+//
+//}
+
 void TestBinarySearch()
 {
 	//Tree_Binary_Search<int, int, Node_Binary_Search_Normal<int, int>>* tree = new Tree_Binary_Search_Normal<int, int, Node_Binary_Search_Normal<int, int>>();
-	//Tree_Binary_Search<int, int, Node_Binary_Search_Balance<int, int>>* tree = new Tree_Binary_Search_AVL<int, int>();
-	Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
+	Tree_Binary_Search<int, int, Node_Binary_Search_Balance<int, int>>* tree = new Tree_Binary_Search_AVL<int, int>();
+	//Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
 
-	
-	//tree->Element_Insert(4);
-	//tree->Element_Insert(2);
-	//tree->Element_Insert(1);
-	//tree->Element_Insert(3);
-	//tree->Element_Insert(6);
-	//tree->Element_Insert(5);
-	//tree->Element_Insert(7);
 
-	tree->Element_Insert(8);
-	tree->Element_Insert(5);
-	tree->Element_Insert(15);
-	tree->Element_Insert(12);
-	tree->Element_Insert(19);
-	tree->Element_Insert(9);
-	tree->Element_Insert(13);
-	tree->Element_Insert(23);
-
+	for (int i = 1; i <= 18; ++i)
+		tree->Element_Insert(i, i);
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 
-	//std::cout << std::endl << "Search node: name == \"7\"" << std::endl;
-	//auto node = tree->Node_Search(7);///查找测试
-	//std::cout << ((node->key == 7) ? "Node Founded" : "Node Not Found") << std::endl;
-
-	tree->Element_Delete(15);
-	tree->Element_Delete(19);
-	tree->Element_Delete(13);
-	tree->Element_Delete(23);
-						 
-	//std::cout << std::endl;
-	//tree->Element_Delete(2);
-	//std::cout << "After Delete 2" << std::endl;
-	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
-	//tree->Element_Delete(4);
 	std::cout << std::endl;
-	//std::cout << "After Delete 4" << std::endl;
+	auto node = tree->Node_Search(15);
+	if(node)
+		std::cout<< ((node->key == 15) ? "Node Founded" : "Node Not Found") << std::endl;
+
+	for (int i = 10; i > 5; --i)
+		tree->Element_Delete(i);
+	std::cout << std::endl;
+	//tree->Tree_Traverse_PreOrder(tree->Tree_GetRoot());
+	std::cout << std::endl;
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+	std::cout << std::endl;
+	//tree->Tree_Traverse_PostOrder(tree->Tree_GetRoot());
 
+	delete tree;
 }
-
 
 void main()
 {

@@ -10,7 +10,7 @@ class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, KeyType, NodeT
 {
 public:
 	Tree_Binary_Search_RBT() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
-	~Tree_Binary_Search_RBT()
+	~Tree_Binary_Search_RBT() override
 	{///自下而上递归销毁节点
 		std::cout << "\n删除红黑树节点个数:" << this->count << std::endl;
 		std::cout << "删除顺序为: ";
