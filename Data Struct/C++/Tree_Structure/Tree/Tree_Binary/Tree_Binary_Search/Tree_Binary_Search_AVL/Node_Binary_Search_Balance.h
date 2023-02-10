@@ -3,20 +3,25 @@
 
 #include <string>
 
-#include "../../../Tree_Node.h"
+#include "../Node_Binary_Search.h"
 
-template <typename DataType>
-class Node_Binary_Search_Balance:public TreeNode<DataType>
+template <typename DataType, typename KeyType>
+class Node_Binary_Search_Balance :public Node_Binary_Search<DataType, KeyType>
 {
 public:
-	//DataType element;
-	//std::string name;
-	Node_Binary_Search_Balance<DataType>* left;
-	Node_Binary_Search_Balance<DataType>* right;
 	//当前子树高度
 	int height;///节点的平衡因子=左子树高度-右子树高度
+	Node_Binary_Search_Balance<DataType, KeyType>* left;
+	Node_Binary_Search_Balance<DataType, KeyType>* right;
 public:
-	Node_Binary_Search_Balance(std::string name, DataType element = 0)
-		:TreeNode<DataType>(name,element), left(nullptr), right(nullptr), height(1) {};
-
+	Node_Binary_Search_Balance(KeyType key, std::string name, DataType element = 0)
+		:Node_Binary_Search<DataType, KeyType>(key, name, element), left(nullptr), right(nullptr), height(1) {};
+public:
+	void replace_by(Node_Binary_Search_Balance<DataType, KeyType>* other)
+	{
+		this->element = other->element;
+		this->name = other->name;
+		this->key = other->key;
+		this->height = other->height;
+	}
 };

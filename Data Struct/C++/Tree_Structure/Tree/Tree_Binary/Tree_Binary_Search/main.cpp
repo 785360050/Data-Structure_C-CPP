@@ -117,9 +117,9 @@ static bool  SetEncode(int EncodeId = 936)
 
 void TestBinarySearch()
 {
-	//Tree_Binary_Search<int, Node_BinaryTree<int>>* tree = new Tree_Binary_Search_Normal<int>();
-	//Tree_Binary_Search<int, Node_Binary_Search_Balance<int>>* tree = new Tree_Binary_Search_AVL<int>();
-	Tree_Binary_Search<int, Node_Binary_Search_RB<int>>* tree = new Tree_Binary_Search_RBT<int>();
+	//Tree_Binary_Search<int, int, Node_Binary_Search_Normal<int, int>>* tree = new Tree_Binary_Search_Normal<int, int, Node_Binary_Search_Normal<int, int>>();
+	//Tree_Binary_Search<int, int, Node_Binary_Search_Balance<int, int>>* tree = new Tree_Binary_Search_AVL<int, int>();
+	Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
 
 	
 	//tree->Element_Insert(4);
@@ -142,20 +142,20 @@ void TestBinarySearch()
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 
 	//std::cout << std::endl << "Search node: name == \"7\"" << std::endl;
-	//auto node = tree->Node_Search("7");///查找测试
-	//std::cout << ((node->name == "7") ? "Node Founded" : "Node Not Found") << std::endl;
+	//auto node = tree->Node_Search(7);///查找测试
+	//std::cout << ((node->key == 7) ? "Node Founded" : "Node Not Found") << std::endl;
 
 	tree->Element_Delete(15);
 	tree->Element_Delete(19);
 	tree->Element_Delete(13);
 	tree->Element_Delete(23);
 						 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 	//tree->Element_Delete(2);
 	//std::cout << "After Delete 2" << std::endl;
 	//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 	//tree->Element_Delete(4);
-	//std::cout << std::endl;
+	std::cout << std::endl;
 	//std::cout << "After Delete 4" << std::endl;
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 

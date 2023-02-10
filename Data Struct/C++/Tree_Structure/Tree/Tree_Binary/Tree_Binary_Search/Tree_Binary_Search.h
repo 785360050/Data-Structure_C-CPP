@@ -3,10 +3,10 @@
 
 #include <string>
 
-template <typename DataType, typename NodeType>
+///
+template <typename DataType, typename KeyType, typename NodeType>
 class Tree_Binary_Search
 {
-//protected:
 public:
 	NodeType* root;
 	int count;
@@ -15,13 +15,21 @@ public:
 	~Tree_Binary_Search() = default;
 
 protected:
-	virtual NodeType* Node_Create(std::string name, DataType element = NULL)
-	{return new NodeType(name, element);}
+	//新建树所需的节点
+	virtual NodeType* Node_Create(KeyType key,std::string name, DataType element = NULL)
+	{return new NodeType(key, name, element);}
 	virtual void Node_Visit_Name(NodeType* node)
 	{
 		if (node)
 		{
 			std::cout << node->name << ' ';
+		}
+	}
+	virtual void Node_Visit_Key(NodeType* node)
+	{
+		if (node)
+		{
+			std::cout << node->key << ' ';
 		}
 	}
 	//定位逻辑后继节点，即右子树的中序首节点
@@ -64,64 +72,67 @@ protected:
 public:
 	NodeType* Tree_GetRoot()
 	{return root;}
-	
-	virtual void Element_Insert(DataType data) = 0;
-	virtual void Element_Delete(DataType data) = 0;
-	NodeType* Node_Search(string name)
+	//插入关键字为key,数据为element的元素
+	virtual void Element_Insert(KeyType key, DataType element = NULL) = 0;
+	//删除树中关键字为key的元素(同时删除节点)
+	virtual void Element_Delete(KeyType key) = 0;
+	//查找关键字为key的节点
+	NodeType* Node_Search(KeyType key)
 	{
 		NodeType* p = root;
 		while (p)
 		{
-			if (p->name == name)
+			if (p->key == key)
 				return p;
 			else
-				p = (name < p->name) ? p->left : p->right;
+				p = (key < p->key) ? p->left : p->right;
 		}
 		return nullptr;
 	}
 
-	DataType Element_Get(NodeType* node)
-	{
-		try
-		{
-			if (!node)
-				throw std::exception("Node is not exisit");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return NULL;
-		}
-		return node->element;
+	//DataType Element_Get(NodeType* node)
+	//{
+	//	try
+	//	{
+	//		if (!node)
+	//			throw std::exception("Node is not exisit");
+	//	}
+	//	catch (const std::exception& e)
+	//	{
+	//		std::cout << e.what() << std::endl;
+	//		return NULL;
+	//	}
+	//	return node->element;
+	//}
 
-	}
-
-	//virtual void Tree_Traverse_InOrder(NodeType* node) = 0;
+	//先序遍历二叉搜索子树
 	void Tree_Traverse_PreOrder(NodeType* node)
 	{
 		if (node)
 		{
-			this->Node_Visit_Name(node);			///D
+			this->Node_Visit_Key(node);			///D
 			Tree_Traverse_PreOrder(node->left);		///L
 			Tree_Traverse_PreOrder(node->right);	///R
 		}
 	}
+	//中序遍历二叉搜索子树
 	void Tree_Traverse_InOrder(NodeType* node)
 	{
 		if (node)
 		{
 			Tree_Traverse_InOrder(node->left);		///L
-			this->Node_Visit_Name(node);			///D
+			this->Node_Visit_Key(node);				///D
 			Tree_Traverse_InOrder(node->right);		///R
 		}
 	}
+	//后序遍历二叉搜索子树
 	void Tree_Traverse_PostOrder(NodeType* node)
 	{
 		if (node)
 		{
 			Tree_Traverse_PostOrder(node->left);		///L
 			Tree_Traverse_PostOrder(node->right);		///R
-			this->Node_Visit_Name(node);				///D
+			this->Node_Visit_Key(node);				///D
 		}
 	}
 };

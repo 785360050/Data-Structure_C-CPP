@@ -5,16 +5,11 @@
 #include "Node_Binary_Search_RB.h"
 #include "../Tree_Binary_Search.h"
 
-template <typename DataType, typename NodeType = Node_Binary_Search_RB<DataType>>
-class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, NodeType>
+template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_RB<DataType, KeyType>>
+class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, KeyType, NodeType>
 {
-//public:
-//	Node_Binary_Search_RB<DataType>* root;
-//	int count;
 public:
-	Tree_Binary_Search_RBT() :Tree_Binary_Search<DataType, NodeType>() {};
-	Tree_Binary_Search_RBT(NodeType* root) :Tree_Binary_Search<DataType, NodeType>(root) {};
-
+	Tree_Binary_Search_RBT() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
 	~Tree_Binary_Search_RBT()
 	{///自下而上递归销毁节点
 		std::cout << "\n删除红黑树节点个数:" << this->count << std::endl;
@@ -24,9 +19,9 @@ public:
 	}
 private:
 	//左旋
-	void Rotate_Left(Node_Binary_Search_RB<DataType>* node)
+	void Rotate_Left(NodeType* node)
 	{
-		Node_Binary_Search_RB<DataType>* temp = node->right;
+		NodeType* temp = node->right;
 		node->right = temp->left;
 		if (temp->left)
 			temp->left->parent = node;
@@ -40,9 +35,9 @@ private:
 		node->parent = temp;
 	}
 	//右旋
-	void Rotate_Right(Node_Binary_Search_RB<DataType>* node)
+	void Rotate_Right(NodeType* node)
 	{
-		Node_Binary_Search_RB<DataType>* temp = node->left;
+		NodeType* temp = node->left;
 		node->left = temp->right;
 		if (temp->right)
 			temp->right->parent = node;
@@ -56,7 +51,7 @@ private:
 		node->parent = temp;
 	}
 	//节点颜色切换
-	void Colour_Switch(Node_Binary_Search_RB<DataType>* const node)
+	void Colour_Switch(NodeType* const node)
 	{
 		node->colour = (node->colour == red) ? black : red;
 		//if (node->colour == red)
@@ -65,9 +60,9 @@ private:
 		//	node->colour = red;
 	}
 	//调整
-	void RBTree_Adjust_Insert(Node_Binary_Search_RB<DataType>* node)
+	void RBTree_Adjust_Insert(NodeType* node)
 	{
-		Node_Binary_Search_RB<DataType>* parent, * ancestor, * uncle, * temp;//ancestor=GrandParent
+		NodeType* parent, * ancestor, * uncle, * temp;//ancestor=GrandParent
 		parent = node->parent;
 		while (parent && (parent->colour == red))
 		{///父节点为红
@@ -118,15 +113,15 @@ private:
 		///插入为根时，跳过所有条件判断变色根节点
 		this->root->colour = black;
 	}
-	void RBTree_Adjust_Delete(Node_Binary_Search_RB<DataType>* instead, Node_Binary_Search_RB<DataType>* parent)
+	void RBTree_Adjust_Delete(NodeType* instead, NodeType* parent)
 	{
-		Node_Binary_Search_RB<DataType>* brother;
+		NodeType* brother;
 		while
 		(
 			this->root != instead			///instead非根
 			&&
 			(!instead || instead->colour == black)	///instead为黑
-		)///instead为黑
+		)
 		{///instead非根节点，且为红色时
 			if (parent->left == instead)
 			{///instead为左孩子,则brother为右孩子
@@ -139,9 +134,9 @@ private:
 					Rotate_Left(parent);
 					brother = parent->right;
 				}
-				if ((!brother->left && brother->left->colour == black)
+				if ((!brother->left || brother->left->colour == black)	///brother左孩为黑
 					&&
-					(!brother || brother->right->colour == black))
+					(!brother->right || brother->right->colour == black))		///brother右孩为黑
 				{///兄弟两孩子都为黑色
 					///兄弟变红，while执行向上递推处理
 					//Colour_Switch(brother);
@@ -221,7 +216,7 @@ private:
 			instead->colour = black;
 	}
 	//删除节点
-	void DeleteNode(Node_Binary_Search_RB<DataType>* node)
+	void DeleteNode(NodeType* node)
 	{
 		if (node)
 		{
@@ -233,17 +228,17 @@ private:
 		}
 	}
 	//显示节点
-	void Node_Visit_Name(NodeType* node) override
+	void Node_Visit_Key(NodeType* node) override
 	{
 		if (node)
-			std::cout << '[' << node->element << ':' << (node->colour == black ? 'B' : 'R') << "] ";
+			std::cout << '[' << node->key << ':' << (node->colour == black ? 'B' : 'R') << "] ";
 	}
 public:
 	//插入node节点
-	//void Element_Insert(Node_Binary_Search_RB<DataType>* node)
+	//void Element_Insert(NodeType* node)
 	//{
 	//	int element = node->element;
-	//	Node_Binary_Search_RB<DataType>* current = this->root, * precursor = nullptr;
+	//	NodeType* current = this->root, * precursor = nullptr;
 	//	while (current)
 	//	{
 	//		precursor = current;
@@ -267,11 +262,11 @@ public:
 	//	++this->count;
 	//}
 
-	void Element_Insert(DataType element)
+	void Element_Insert(KeyType key, DataType element = NULL)
 	{
 		//try
 		//{///判断元素重复
-		//	Node_Binary_Search_RB<DataType>
+		//	NodeType
 		//		* current = this->root,
 		//		* precursor = nullptr;
 		//	while (current)
@@ -293,8 +288,8 @@ public:
 		//	return;
 		//}
 		
-		NodeType* node = this->Node_Create(std::to_string(element), element);
-		Node_Binary_Search_RB<DataType>
+		NodeType* node = this->Node_Create(key, std::to_string(key), element);
+		NodeType
 			* current = this->root,
 			* precursor = nullptr;
 
@@ -302,7 +297,7 @@ public:
 		while (current)
 		{///定位待插入的节点precursor
 			precursor = current;
-			current = (element < current->element) ? 
+			current = (key < current->key) ?
 				current->left : current->right;
 		}
 
@@ -310,7 +305,7 @@ public:
 			this->root = node;
 		else
 		{
-			element < precursor->element ?///判断插入左右位置
+			key < precursor->key ?///判断插入左右位置
 				precursor->left = node : precursor->right = node;
 			node->parent = precursor;
 		}
@@ -319,67 +314,77 @@ public:
 	}
 
 	//void Element_Delete(DataType data)
-	void Element_Delete(DataType data)
+	void Element_Delete(KeyType key)
 	{
-		Node_Binary_Search_RB<DataType>* node = this->Node_Search(std::to_string(data));
-		if (!node)///删除节点不存在
+		///———————————————————————————————————————————————
+		/// 1.平衡树删除节点
+		/// 
+		/// 2.调整红黑树
+		///———————————————————————————————————————————————
+		NodeType* node = this->Node_Search(key);
+		try
+		{
+			if (!node)///删除节点不存在
+				throw std::exception("Delete Failed: Node is not exsist");
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
 			return;
+		}
 
-		Node_Binary_Search_RB<DataType>
-			* del,		///删除的节点
-			* instead,	///替换的节点，覆盖删除的节点del
-			* parent;	///父节点
+		NodeType
+			* del,		///删除目标节点，用逻辑前驱instead替换
+			* instead,	///实际删除的节点(逻辑前驱),替换后删除
+			* parent;	///instead的父节点
 
 		///————————————————————————
-		///定位删除节点
+		///定位del
 		///————————————————————————
-		if (node->left == nullptr || node->right == nullptr)
-			del = node;
+		if (!node->left || !node->right)	///防止Element_Precursor()抛出异常
+			del = node;	///左右子树至少有一个为空，直接用孩子代替
 		else
 		{///del度为2时
-			//del = node->right;
-			//while (del->left)
-			//	del = del->left;
-			del = node->left;
-			while (del->right)///逻辑前驱
-				del = del->right;
+			del = this->Element_Precursor(node);///逻辑前驱
 		}
+
+
 		///————————————————————————
-		///定位替换节点(逻辑前驱)
+		///定位instead
 		///————————————————————————
 		instead = del->left ? del->left : del->right;
 		parent = del->parent;
 
 		///————————————————————————
-		///开始删除
+		///开始移除节点del,替换为instead
 		///————————————————————————
 		if (instead)
 			instead->parent = parent;
-		if (del->parent == nullptr)	///del为根时
-			this->root = instead;		///替换根节点
+		if (!del->parent)	///del为根时,instead替换根节点
+			this->root = instead;		
 		//else if (del->partent->left == del)
 		//	del->partent->left = instead;
 		//else
 		//	instead->partent->right = instead;
 		else
-		{
-			if (del->parent->left == del)
-				del->parent->left = instead;
+		{///del非根节点，instead替换到对应分叉
+		 ///叶节点相当于，用NULL的instead替换
+			if (del->parent->left == del)	
+				del->parent->left = instead;	
 			else
 				del->parent->right = instead;
 		}
 
-		///————————————————————————
-		/// 删除del完毕，更新instead值
-		///————————————————————————
 		if (del != node)
-		{
-			node->element = del->element;
-			node->name = del->name;
+		{///若删除的对象与目标节点不同，即del被替换过，则更新值，不更新颜色
+			node->replace_by(del);
 		}
+		///————————————————————————
+		/// 移除节点del完毕，更新为instead节点
+		///————————————————————————
 
 		///————————————————————————
-		///删除红色节点不调整
+		/// 判断del颜色，删除红色节点不调整
 		///————————————————————————
 		if (del->colour == black)	///删除黑色节点时(删除并替换后)
 			RBTree_Adjust_Delete(instead, parent);

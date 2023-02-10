@@ -6,15 +6,11 @@
 
 
 
-template <typename DataType, typename NodeType = Node_Binary_Search_Balance<DataType>>
-class Tree_Binary_Search_AVL:public Tree_Binary_Search<DataType,NodeType>
+template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_Balance<DataType, KeyType>>
+class Tree_Binary_Search_AVL :public Tree_Binary_Search<DataType, KeyType, NodeType>
 {
 public:
-	//Node_Binary_Search_Balance<DataType>* root;
-	//int count;
-public:
-	Tree_Binary_Search_AVL() :Tree_Binary_Search<DataType, NodeType>() {};
-	Tree_Binary_Search_AVL(NodeType* root) :Tree_Binary_Search<DataType, NodeType>(root) {};
+	Tree_Binary_Search_AVL() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
 	~Tree_Binary_Search_AVL()
 	{///自下而上递归销毁节点
 		std::cout << "删除二叉树树节点个数:" << this->count << std::endl;
@@ -23,13 +19,13 @@ public:
 	}
 
 private:
-	void Destroy_SubTree(Node_Binary_Search_Balance<DataType>* node)
+	void Destroy_SubTree(NodeType* node)
 	{
 		if (node)
 		{
 			Destroy_SubTree(node->left);
 			Destroy_SubTree(node->right);
-			std::cout << node->element << " ";
+			std::cout << node->key << " ";
 			delete node;
 			this->count--;
 		}
@@ -38,13 +34,13 @@ private:
 	{
 		return (a > b) ? a : b;
 	}
-	int hightnode(Node_Binary_Search_Balance<DataType>* node)
+	int hightnode(NodeType* node)
 	{
 		if (node == NULL)
 			return 0;
 		return node->height;
 	}
-	int getbalance(Node_Binary_Search_Balance<DataType>* node)
+	int getbalance(NodeType* node)
 	{
 		if (!node)
 			return 0;
@@ -56,15 +52,15 @@ private:
 		}
 	}
 	//左旋(以当前节点为子树根)
-	Node_Binary_Search_Balance<DataType>* Rotate_Left(Node_Binary_Search_Balance<DataType>* node)
+	NodeType* Rotate_Left(NodeType* node)
 	{
-		//Node_Binary_Search_Balance<DataType>* temp = node->right;
+		//NodeType* temp = node->right;
 		//node->right = temp->left;
 		//temp->right = node;
 		//node->height = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
 		//temp->height = maxnode(hightnode(temp->left), hightnode(node->right)) + 1;
 		//return temp;
-		Node_Binary_Search_Balance<DataType>* temp = node->right;
+		NodeType* temp = node->right;
 		node->right = temp->left;
 		temp->left = node;
 		node->height = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
@@ -72,28 +68,28 @@ private:
 		return temp;
 	}
 	//右旋(以当前节点为子树根)
-	Node_Binary_Search_Balance<DataType>* Rotate_Right(Node_Binary_Search_Balance<DataType>* node)
+	NodeType* Rotate_Right(NodeType* node)
 	{
-		Node_Binary_Search_Balance<DataType>* temp = node->left;
+		NodeType* temp = node->left;
 		node->left = temp->right;
 		temp->right = node;
 		temp->height = maxnode(hightnode(temp->left), hightnode(node->right)) + 1;
 		node->height = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
 		return temp;
 	}
-	Node_Binary_Search_Balance<DataType>* node_insert(Node_Binary_Search_Balance<DataType>* node, DataType element)
+	NodeType* node_insert(NodeType* node, KeyType key, DataType data = NULL)
 	{
 		if (!node)
 		{///出口1，找到位置并创建节点插入树
 			this->count++;
-			return this->Node_Create(std::to_string(element), element);
+			return this->Node_Create(key, std::to_string(key), data);
 		}
 		else///递
 		{///寻找插入节点的空位置
-			if (element < node->element)
-				node->left = node_insert(node->left, element);
-			if (element > node->element)
-				node->right = node_insert(node->right, element);
+			if (key < node->key)
+				node->left = node_insert(node->left, key, data);
+			if (key > node->key)
+				node->right = node_insert(node->right, key, data);
 		}
 	
 
@@ -108,9 +104,9 @@ private:
 		int balance = getbalance(node);///计算平衡因子，调整子树(递归实现从下至上)
 		if (balance>1)
 		{//L重
-			if (element < node->left->element)//L重
+			if (key < node->left->key)//L重
 				return Rotate_Right(node);//LL右旋
-			if (element > node->left->element)//R重
+			if (key > node->left->key)//R重
 			{//LR
 				node->left = Rotate_Left(node->left);//先左旋子树
 				return Rotate_Right(node);//再整体右旋
@@ -118,9 +114,9 @@ private:
 		}
 		if (balance < -1)
 		{//R重
-			if (element > node->right->element)//R重
+			if (key > node->right->key)//R重
 				return Rotate_Left(node);//RR左旋
-			if (element < node->right->element)//L重
+			if (key < node->right->key)//L重
 			{//RL
 				node->right = Rotate_Right(node->left);//先右旋子树
 				return Rotate_Left(node);//再整体左旋
@@ -128,22 +124,7 @@ private:
 		}
 		return node;///出口2，元素已存在，或平衡完毕后
 	}
-	void node_replace(Node_Binary_Search_Balance<DataType>* replace_target, Node_Binary_Search_Balance<DataType>* replace_source)
-	{
-		try
-		{
-			if (!replace_target || !replace_source)
-				throw std::exception("Node is not exist");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
-		replace_target->name = replace_source->name;
-		replace_target->element = replace_source->element;
-	}
-	Node_Binary_Search_Balance<DataType>* BinaryTree_AVL_Delete(Node_Binary_Search_Balance<DataType>* node, DataType data)
+	NodeType* node_delete(NodeType* node, KeyType key)
 	{
 		/// <summary>
 		/// 删除同二叉搜索树，用逻辑前驱或后继代替，
@@ -153,14 +134,14 @@ private:
 		/// <param name="node"></param>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		Node_Binary_Search_Balance<DataType>* temp;
+		NodeType* temp;
 		if (!node)///递归出口，目标节点不存在，直接回归退出
 			return node;
 		/// 递 寻找目标节点
-		if (data < node->element)
-			node->left = BinaryTree_AVL_Delete(node->left, data);
-		else if (data > node->element)
-			node->right = BinaryTree_AVL_Delete(node->right, data);
+		if (key < node->key)
+			node->left = node_delete(node->left, key);
+		else if (key > node->key)
+			node->right = node_delete(node->right, key);
 		else
 		{///找到目标节点，删除并调整
 			if (node->left==NULL || node->right==NULL)
@@ -174,10 +155,11 @@ private:
 				}
 				else
 				{//temp复制给node
-					node->element = temp->element;
+					node->replace_by(temp);
+					//node->element = temp->element;
+					//node->height = temp->height;
 					node->left = temp->left;
 					node->right = temp->right;
-					node->height = temp->height;
 				}
 				delete temp;
 				this->count--;
@@ -187,8 +169,8 @@ private:
 				temp = node->left;
 				while (temp->right)
 					temp = temp->right;//找到逻辑前驱
-				node_replace(node, temp);//用逻辑后继替换
-				node->left = BinaryTree_AVL_Delete( node->left, temp->element);//替换后删除替换的节点
+				node->replace_by(temp);//用逻辑后继替换
+				node->left = node_delete(node->left, temp->key);//替换后删除替换的节点
 			}
 		}
 
@@ -215,15 +197,17 @@ private:
 	}
 public:
 	// 插入AVL节点，在平衡二叉树tree中，双亲为parenr的[左/右]位置,递归过程中同步实现平衡化
-	void Element_Insert(DataType data)
+	//void Element_Insert(DataType data)
+	void Element_Insert(KeyType key, DataType element = NULL)
 	{
-		this->root = node_insert(this->root, data);
+		this->root = node_insert(this->root, key, element);
 	}
 
 	//删除平衡二叉树tree中元素值为data的节点，同步平衡
-	void Element_Delete(DataType data)
+	//void Element_Delete(DataType data)
+	void Element_Delete(KeyType key)
 	{
-		BinaryTree_AVL_Delete(this->Tree_GetRoot(), data);
+		node_delete(this->root, key);
 	}
 
 };

@@ -64,6 +64,8 @@
     <ClInclude Include="C++\Tree_Structure\Heap\Binary_Heap.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Binary_Tree_Search_Normal.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Node_Binary_Search_Normal.h" />
+    <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Node_Binary_Search.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Node_Binary_Search_Balance.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Tree_Binary_Search_AVL.h" />

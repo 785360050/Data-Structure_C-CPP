@@ -2,21 +2,29 @@
 
 #include <string>
 
-#include "../../../Tree_Node.h"
+#include "../Node_Binary_Search.h"
 
 enum Colour { red = 0, black = 1 };
 
-template <typename DataType>
-struct Node_Binary_Search_RB:public TreeNode<DataType>
+template <typename DataType, typename KeyType = int>
+struct Node_Binary_Search_RB :public Node_Binary_Search<DataType, KeyType>
 {
 	enum Colour colour;
-	//std::string name;
-	//DataType element;
 	Node_Binary_Search_RB<DataType>* parent;
 	Node_Binary_Search_RB<DataType>* left;
 	Node_Binary_Search_RB<DataType>* right;
 public:
-	Node_Binary_Search_RB(std::string name, DataType element = 0, Colour colour = red)
-		:TreeNode<DataType>(name,element), left(nullptr), right(nullptr), colour(colour), parent(nullptr) {};
-
+	Node_Binary_Search_RB(KeyType key, std::string name, DataType element = NULL, Colour colour = red)
+		:Node_Binary_Search<DataType, KeyType>(key, name, element), 
+		left(nullptr), right(nullptr), colour(colour), parent(nullptr) {};
+public:
+	void replace_by(Node_Binary_Search_RB<DataType, KeyType>* other)
+	{
+		this->element = other->element;
+		this->name = other->name;
+		this->key = other->key;
+		//this->colour = other->colour;	///?
+	}
 };
+
+
