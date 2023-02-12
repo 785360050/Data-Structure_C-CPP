@@ -24,16 +24,18 @@ private:
 	//重置子树所有元素为0
 	void Clear(NodeType* node)
 	{
-
+		std::cout << "Not Implemented yet" << std::endl;
 	}
 	int Deep(NodeType* node)
 	{
+		std::cout << "Not Implemented yet" << std::endl;
 		return NULL;
 	}
 	//返回节点名为name的父节点
 	NodeType* Parent(NodeType* node, std::string name)
 	{
-
+		std::cout << "Not Implemented yet" << std::endl;
+		return nullptr;
 	}
 	//返回节点在vertex中的下标
 	int Index(NodeType* node)

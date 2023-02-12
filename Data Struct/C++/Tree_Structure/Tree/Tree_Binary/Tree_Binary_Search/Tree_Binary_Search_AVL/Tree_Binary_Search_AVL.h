@@ -11,25 +11,8 @@ class Tree_Binary_Search_AVL :public Tree_Binary_Search<DataType, KeyType, NodeT
 {
 public:
 	Tree_Binary_Search_AVL() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
-	~Tree_Binary_Search_AVL()
-	{///自下而上递归销毁节点
-		std::cout << "删除二叉树树节点个数:" << this->count << std::endl;
-		if (this->root)
-			Destroy_SubTree(this->root);
-	}
-
+	~Tree_Binary_Search_AVL() = default;
 private:
-	void Destroy_SubTree(NodeType* node)
-	{
-		if (node)
-		{
-			Destroy_SubTree(node->left);
-			Destroy_SubTree(node->right);
-			std::cout << node->key << " ";
-			delete node;
-			this->count--;
-		}
-	}
 	int maxnode(int a, int b)
 	{
 		return (a > b) ? a : b;
@@ -157,7 +140,7 @@ private:
 				{//temp复制给node
 					node->replace_by(temp);
 					//node->element = temp->element;
-					//node->height = temp->height;
+					node->height = temp->height;
 					node->left = temp->left;
 					node->right = temp->right;
 				}
@@ -166,10 +149,8 @@ private:
 			}
 			else
 			{///删除节点左右孩子都存在,用逻辑前驱代替
-				temp = node->left;
-				while (temp->right)
-					temp = temp->right;//找到逻辑前驱
-				node->replace_by(temp);//用逻辑后继替换
+				temp = this->Element_Precursor(node);//找到逻辑前驱
+				node->replace_by(temp);//用逻辑前驱替换
 				node->left = node_delete(node->left, temp->key);//替换后删除替换的节点
 			}
 		}
@@ -190,26 +171,23 @@ private:
 		if (balance < -1)
 		{//R重
 			if (getbalance(node->right) > 0)
-				node->left = Rotate_Left(node->right);
+				node->right = Rotate_Left(node->right);
 			return Rotate_Left(node);
 		}
 		return node;///出口2
 	}
 public:
 	// 插入AVL节点，在平衡二叉树tree中，双亲为parenr的[左/右]位置,递归过程中同步实现平衡化
-	//void Element_Insert(DataType data)
 	void Element_Insert(KeyType key, DataType element = NULL)
 	{
 		this->root = node_insert(this->root, key, element);
 	}
 
 	//删除平衡二叉树tree中元素值为data的节点，同步平衡
-	//void Element_Delete(DataType data)
 	void Element_Delete(KeyType key)
 	{
 		node_delete(this->root, key);
 	}
-
 };
 
 

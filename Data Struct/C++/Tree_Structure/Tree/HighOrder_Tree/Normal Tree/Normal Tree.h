@@ -26,7 +26,9 @@ protected:
 		if (node)
 			std::cout << node->name << ' ';
 	}
-
+	virtual void Clear(NodeType* node) = 0;
+	virtual int Deep(NodeType* node) = 0;
+	virtual NodeType* Parent(NodeType* node, std::string name) = 0;
 public:
 	virtual NodeType* Tree_GetRoot() = 0;
 	virtual NodeType* Node_Create(std::string name, DataType element = 0)

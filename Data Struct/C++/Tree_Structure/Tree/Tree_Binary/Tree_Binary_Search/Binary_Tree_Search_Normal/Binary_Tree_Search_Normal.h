@@ -10,6 +10,7 @@ class Tree_Binary_Search_Normal :public Tree_Binary_Search<DataType, KeyType, No
 public:
 	Tree_Binary_Search_Normal() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
 	~Tree_Binary_Search_Normal() = default;
+
 protected:
 	NodeType* insertnode(NodeType* node, KeyType key, DataType data = NULL)
 	{

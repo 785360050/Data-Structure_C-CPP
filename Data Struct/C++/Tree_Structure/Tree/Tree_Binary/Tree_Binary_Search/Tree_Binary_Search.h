@@ -3,16 +3,34 @@
 
 #include <string>
 
-///
+///根据key排序，插入，删除，搜索
 template <typename DataType, typename KeyType, typename NodeType>
 class Tree_Binary_Search
 {
 public:
 	NodeType* root;
 	int count;
+private:
+	void Destroy_SubTree(NodeType* node)
+	{
+		if (node)
+		{
+			Destroy_SubTree(node->left);
+			Destroy_SubTree(node->right);
+			std::cout << node->key << " ";
+			delete node;
+			--this->count;
+		}
+	}
 public:
 	Tree_Binary_Search() :root(nullptr), count(0) {};
-	virtual ~Tree_Binary_Search() = default;
+	~Tree_Binary_Search()
+	{///自下而上递归销毁节点
+		std::cout << "删除二叉树树节点个数:" << this->count << std::endl
+			<< "删除顺序为: ";
+		if (this->root)
+			Destroy_SubTree(this->root);
+	}
 
 protected:
 	//新建树所需的节点
@@ -90,20 +108,20 @@ public:
 		return nullptr;
 	}
 
-	//DataType Element_Get(NodeType* node)
-	//{
-	//	try
-	//	{
-	//		if (!node)
-	//			throw std::exception("Node is not exisit");
-	//	}
-	//	catch (const std::exception& e)
-	//	{
-	//		std::cout << e.what() << std::endl;
-	//		return NULL;
-	//	}
-	//	return node->element;
-	//}
+	DataType Element_Get(NodeType* node)
+	{
+		try
+		{
+			if (!node)
+				throw std::exception("Node is not exisit");
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+			return NULL;
+		}
+		return node->element;
+	}
 
 	//先序遍历二叉搜索子树
 	void Tree_Traverse_PreOrder(NodeType* node)

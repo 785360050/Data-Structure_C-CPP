@@ -24,9 +24,10 @@ static bool  SetEncode(int EncodeId = 936)
 
 void Test_Queue()
 {
-	//Queue<int>* q = new Sequence_Queue<int>(5);
-	//Queue<int>* q = new Sequence_Queue_Tag<int>(5);
-	Queue<int>* q = new Link_Queue<List_Node_SingleWay<int>, int>(5);
+	Queue<int>* q = new Sequence_Queue<int>(5);			///顺序队列
+	//Queue<int>* q = new Sequence_Queue_Tag<int>(5);	///顺序队列-标记实现
+	//Queue<int>* q = new Link_Queue<int, List_Node_SingleWay<int>>(5);	///链式队列
+
 	q->Queue_Show("初始化5个队列空间后");
 	for (int i = 10; i < 15; i++)
 		q->Element_Enqueue(i);

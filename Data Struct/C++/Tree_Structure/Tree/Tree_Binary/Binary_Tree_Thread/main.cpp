@@ -45,9 +45,14 @@ void Test_Binary_Thread_Tree()
 	///线索化
 	tree.ThreadTree_Modify(tree.Tree_GetRoot());
 
+	std::cout << "DLR: " << std::endl;
+	tree.Tree_Traverse_PreOrder(tree.Tree_GetRoot());
+	std::cout << "LDR: " << std::endl;
 	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
-	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());	///线索化优化过
+	std::cout << "LRD: " << std::endl;
 	tree.Tree_Traverse_PostOrder(tree.Tree_GetRoot());
+	std::cout << "Level Traverse: " << std::endl;
+	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());	///线索化优化过
 
 	std::cout << std::endl;
 }

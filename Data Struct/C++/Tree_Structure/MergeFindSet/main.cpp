@@ -23,10 +23,15 @@ void TestMergeFindSet()
 
 	//MergeFindSet_QuickFind<int> set(data, 5);
 	MergeFindSet_QuickMerge<int> set(data, 5);
+	std::cout << "初始化5个元素后" << std::endl;
+	set.Show();
+
 	set.Merge(0, 2);
 	set.Merge(4, 2);
-	std::cout << std::boolalpha << set.Find(0, 2) << std::endl;
-	std::cout << std::boolalpha << set.Find(1, 2) << std::endl;
+	std::cout << "合并0,2和4,2后" << std::endl;
+	set.Show();
+	std::cout << "判断0和2是否在同一组: " << std::boolalpha << set.Find(0, 2) << std::endl;
+	std::cout << "判断1和2是否在同一组: " << std::boolalpha << set.Find(1, 2) << std::endl;
 	set.Show();
 
 	//std::cout << "RootIndex(2)= " << set.RootIndex(2) << std::endl;

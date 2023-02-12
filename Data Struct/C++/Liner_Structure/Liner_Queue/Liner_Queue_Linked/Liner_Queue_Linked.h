@@ -9,7 +9,7 @@
 
 
 
-template<typename DataType, typename NodeType = List_Node_SingleWay<int>>
+template<typename DataType, typename NodeType = List_Node_SingleWay<DataType>>
 class Link_Queue:public Queue<DataType>
 {///循环队列
 private:

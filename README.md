@@ -20,7 +20,7 @@ It's a normalized coding style project that might be mied by c++ grammer in C pr
 ### Using Tool: Visual Studio 2022
 
 Files in Github 
-> Non Visual Studio Users can get started by main.cpp and C or C++  
+> Non Visual Studio Users can take Source Files in C or C++ Folder
 
 |File/Folder name | describtion|Path|
 |:-:|:-:|:-:|

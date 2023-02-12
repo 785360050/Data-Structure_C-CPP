@@ -5,7 +5,7 @@
 #include "../../Liner_Structure/Liner_Stack/Liner_Stack.h"
 #include "../../Liner_Structure/Liner_Stack/Liner_Stack_Linked/Liner_Stack_Linked.h"
 
-#include "MergeFindSet_ADT.h"
+#include "MergeFindSet.h"
 
 //#define Standard_Stack
 #define Individual_Stack

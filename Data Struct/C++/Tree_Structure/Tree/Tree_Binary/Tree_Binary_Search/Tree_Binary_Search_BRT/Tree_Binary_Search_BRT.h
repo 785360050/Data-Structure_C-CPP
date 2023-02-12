@@ -10,13 +10,8 @@ class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, KeyType, NodeT
 {
 public:
 	Tree_Binary_Search_RBT() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
-	~Tree_Binary_Search_RBT() override
-	{///自下而上递归销毁节点
-		std::cout << "\n删除红黑树节点个数:" << this->count << std::endl;
-		std::cout << "删除顺序为: ";
-		if (this->root)
-			DeleteNode(this->root);
-	}
+	~Tree_Binary_Search_RBT() = default;
+
 private:
 	//左旋
 	void Rotate_Left(NodeType* node)
@@ -215,18 +210,7 @@ private:
 		if (instead)
 			instead->colour = black;
 	}
-	//删除节点
-	void DeleteNode(NodeType* node)
-	{
-		if (node)
-		{
-			DeleteNode(node->left);
-			DeleteNode(node->right);
-			std::cout << node->element << " ";
-			delete node;
-			--this->count;
-		}
-	}
+
 	//显示节点
 	void Node_Visit_Key(NodeType* node) override
 	{
@@ -234,35 +218,7 @@ private:
 			std::cout << '[' << node->key << ':' << (node->colour == black ? 'B' : 'R') << "] ";
 	}
 public:
-	//插入node节点
-	//void Element_Insert(NodeType* node)
-	//{
-	//	int element = node->element;
-	//	NodeType* current = this->root, * precursor = nullptr;
-	//	while (current)
-	//	{
-	//		precursor = current;
-	//		if (element < current->element)
-	//			current = current->left;
-	//		else if (element > current->element)
-	//			current = current->right;
-	//		else
-	//		{
-	//			std::cout << "Node element is existed" << std::endl;
-	//			return;
-	//		}
-	//	}
-	//	node->parent = precursor;
-	//	if (!precursor)///根节点插入
-	//		this->root = node;
-	//	else
-	//		element < precursor->element ?///判断插入左右位置
-	//		precursor->left = node : precursor->right = node;
-	//	RBTree_Adjust_Insert(node);
-	//	++this->count;
-	//}
-
-	void Element_Insert(KeyType key, DataType element = NULL)
+	void Element_Insert(KeyType key, DataType element = NULL) override
 	{
 		//try
 		//{///判断元素重复
@@ -313,8 +269,7 @@ public:
 		++this->count;
 	}
 
-	//void Element_Delete(DataType data)
-	void Element_Delete(KeyType key)
+	void Element_Delete(KeyType key) override
 	{
 		///———————————————————————————————————————————————
 		/// 1.平衡树删除节点

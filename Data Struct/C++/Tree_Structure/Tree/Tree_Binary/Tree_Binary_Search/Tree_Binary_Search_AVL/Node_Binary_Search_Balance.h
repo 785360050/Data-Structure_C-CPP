@@ -22,6 +22,6 @@ public:
 		this->element = other->element;
 		this->name = other->name;
 		this->key = other->key;
-		this->height = other->height;
+		//this->height = other->height;
 	}
 };

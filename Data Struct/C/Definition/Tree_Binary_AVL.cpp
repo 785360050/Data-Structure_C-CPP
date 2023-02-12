@@ -226,7 +226,7 @@ AVLNode* BinaryTree_AVL_Delete(BTree_AVL* tree, AVLNode* node, DataType data)
 	if (balance < -1)
 	{//R重
 		if (getbalance(node->right) > 0)
-			node->left = Rotate_Left(node->right);
+			node->right = Rotate_Left(node->right);
 		return Rotate_Left(node);
 	}
 	return node;///出口2
