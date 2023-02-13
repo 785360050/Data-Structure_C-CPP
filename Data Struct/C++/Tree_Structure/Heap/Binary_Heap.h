@@ -10,12 +10,13 @@
 /// </summary>
 /// <typeparam name="DataType"></typeparam>
 
+enum Property { large = 1, small };
+
 template <typename DataType>
 class Binary_Heap
 {///顺序数组存储，父子节点满足	child:[i]->[2i+1,2i+2],parent:[i]->[(i-1)/2]
 protected:
 	enum Direction { left = 1, right = 2 };
-	enum Property { large = 1, small };
 public:
 	int* data;//存放排序关键值的数组
 	int length;
@@ -90,7 +91,7 @@ private:
 			{///若子节点比父节点小，交换父子节点
 				Element_Swap(index_parent, index);
 				index = index_parent;
-				index_parent = Index_Parent(index);
+				index_parent = index_parent == 0 ? 0 : Index_Parent(index);		///循环到index为根节点时，避免抛出异常
 			}
 		}
 		else
@@ -99,7 +100,7 @@ private:
 			{///若子节点比父节点小，交换父子节点
 				Element_Swap(index_parent, index);
 				index = index_parent;
-				index_parent = Index_Parent(index);
+				index_parent = index_parent == 0 ? 0 : Index_Parent(index);		///循环到index为根节点时，避免抛出异常
 			}
 		}
 	}
@@ -135,18 +136,20 @@ private:
 		}
 		while (index < length)
 		{
-			int index_child = Index_Child(index,left);///假设索引设为左孩子
-			///定位比父节点小的索引
+			int index_child = Index_Child(index,left);///先假设索引设为左孩子
+
+			///定位与父节点替换的索引
 			if (property == small)
 			{///小根堆
-				if (index_child + 1 < length && data[index_child + 1] < data[index])
-					++index_child;///右孩子比父节点小
+				if (index_child + 1 < length && data[index_child + 1] < data[index_child])
+					++index_child;///右孩子比父节点小,且比左孩子小
 				if (data[index_child] >= data[index])
 					break;///父节点比所有子节点小，阻止交换
+
 			}
 			else
 			{///大根堆
-				if (index_child + 1 < length && data[index_child + 1] > data[index])
+				if (index_child + 1 < length && data[index_child + 1] > data[index_child])
 					index_child += 1;///右孩子比父节点大
 				if (data[index_child] <= data[index])
 					break;///父节点比所有子节点大，阻止交换
@@ -161,7 +164,7 @@ private:
 	{
 		try
 		{
-			if (index < 1)
+			if (index < 1)	
 				throw std::exception("Parent is not exsist");
 		}
 		catch (const std::exception& e)

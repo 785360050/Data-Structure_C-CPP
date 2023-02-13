@@ -19,24 +19,23 @@ static bool  SetEncode(int EncodeId = 936)
 
 void TestHeap()
 {
-	Binary_Heap<int> heap(5);
+	Binary_Heap<int> heap(10, large);
 	heap.Heap_Show();
-	heap.Heap_Push(1);
-	//heap.Heap_Show();
-	heap.Heap_Push(2);
-	//heap.Heap_Show();
-	heap.Heap_Push(3);
-	//heap.Heap_Show();
-	heap.Heap_Push(4);
-	//heap.Heap_Show();
-	heap.Heap_Push(5);
-	//heap.Heap_Push(6);
+	
+	for (int i = 1; i <= 10; ++i)
+		heap.Heap_Push(i);
 
 	heap.Heap_Show();
 	
 	std::cout << "TOP = " << heap.Heap_Top() << std::endl;
-	heap.Heap_Pop();
-	heap.Heap_Show();
+
+	for (int i = 0; i < 5; ++i)
+	{
+		heap.Heap_Pop();
+		std::cout << "After Pop top" << std::endl;
+		heap.Heap_Show();
+	}
+
 
 }
 

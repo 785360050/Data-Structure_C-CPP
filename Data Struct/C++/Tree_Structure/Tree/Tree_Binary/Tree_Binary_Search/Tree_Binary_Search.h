@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <queue>
 #include <string>
 
 ///根据key排序，插入，删除，搜索
@@ -151,6 +151,23 @@ public:
 			Tree_Traverse_PostOrder(node->left);		///L
 			Tree_Traverse_PostOrder(node->right);		///R
 			this->Node_Visit_Key(node);				///D
+		}
+	}
+
+	void Tree_Traverse_LevelOrder(NodeType* node)
+	{
+		std::queue<NodeType* > q;
+		q.push(this->root);
+		NodeType* v;
+		while (!q.empty())
+		{
+			v = q.front();
+			q.pop();
+			this->Node_Visit_Key(v);
+			if (v->left)
+				q.push(v->left);
+			if (v->right)
+				q.push(v->right);
 		}
 	}
 };

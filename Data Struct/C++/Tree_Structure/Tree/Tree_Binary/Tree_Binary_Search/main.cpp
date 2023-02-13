@@ -163,12 +163,12 @@ static bool  SetEncode(int EncodeId = 936)
 
 void TestBinarySearch()
 {
-	//Tree_Binary_Search<int, int, Node_Binary_Search_Normal<int, int>>* tree = new Tree_Binary_Search_Normal<int, int, Node_Binary_Search_Normal<int, int>>();
+	Tree_Binary_Search<int, int, Node_Binary_Search_Normal<int, int>>* tree = new Tree_Binary_Search_Normal<int, int, Node_Binary_Search_Normal<int, int>>();
 	//Tree_Binary_Search<int, int, Node_Binary_Search_Balance<int, int>>* tree = new Tree_Binary_Search_AVL<int, int>();
-	Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
+	//Tree_Binary_Search<int, int, Node_Binary_Search_RB<int, int>>* tree = new Tree_Binary_Search_RBT<int, int>();
 
 
-	for (int i = 1; i <= 18; ++i)
+	for (int i = 1; i <= 5; ++i)
 		tree->Element_Insert(i, i);
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 
@@ -179,7 +179,12 @@ void TestBinarySearch()
 	std::cout <<"Node 7 has element: " << tree->Element_Get(tree->Node_Search(7));
 
 	for (int i = 10; i > 5; --i)
+	{
 		tree->Element_Delete(i);
+		//std::cout << std::endl << "InOrder Traverse" << std::endl;
+		//tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
+
+	}
 
 	std::cout << std::endl;
 	std::cout << "After delete 6-10" << std::endl;
@@ -189,7 +194,8 @@ void TestBinarySearch()
 	tree->Tree_Traverse_InOrder(tree->Tree_GetRoot());
 	std::cout << std::endl << "PostOrder Traverse" << std::endl;
 	tree->Tree_Traverse_PostOrder(tree->Tree_GetRoot());
-	//todo Traverse_Level
+	std::cout << std::endl << "LevelOrder Traverse" << std::endl;
+	tree->Tree_Traverse_LevelOrder(tree->Tree_GetRoot());
 
 	std::cout << std::endl;
 	delete tree;

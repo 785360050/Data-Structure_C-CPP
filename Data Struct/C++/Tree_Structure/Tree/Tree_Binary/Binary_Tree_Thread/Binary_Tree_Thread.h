@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-
+#include <queue>
 
 /// <summary>
 /// 将二叉树线索化后，
@@ -17,7 +17,7 @@ template <typename DataType, typename NodeType = Node_BinaryThreadTree<DataType>
 class BinaryTree_Thread:public Tree_Binary<DataType,NodeType>
 {
 private:
-	bool thread;	///记录是否已线索化
+	bool thread;	///记录是否已线索化(空的和已经线索化的都为true,否则为false)
 	NodeType* pre = NULL;///辅助指针，指向逻辑前驱,用于先序遍历
 private:
 	void Destroy_SubTree(NodeType* node) override
@@ -77,15 +77,17 @@ public:
 	}
 
 	void Tree_Traverse_PreOrder(NodeType* node) override
-	{
-		std::cout << "Not Implemented yet" << std::endl;
+	{///node->thread_left == false仅处理非线索指针
+		if (node)
+		{
+			this->Node_Visit_Name(node);
+			if (node->thread_left == false && node->left)	
+				Tree_Traverse_PreOrder(node->left);
+			if (node->thread_right == false && node->right)
+				Tree_Traverse_PreOrder(node->right);
+		}
 	}
 	void Tree_Traverse_InOrder(NodeType* node) override
-	{
-		std::cout << "Not Implemented yet" << std::endl;
-	}
-	// 中序遍历线索化树(优化开销)
-	void Tree_Traverse_LevelOrder(NodeType* node) override
 	{	/// <summary>
 	/// 线索化后优化遍历开销
 	/// 先找到逻辑起点，开始循环向后遍历(关键思路)
@@ -117,9 +119,33 @@ public:
 			node = node->right;///线索不存在时向后移动视角
 		}
 	}
+	// 中序遍历线索化树(优化开销)
 	void Tree_Traverse_PostOrder(NodeType* node) override
 	{
-		std::cout << "Not Implemented yet" << std::endl;
+		if (node)
+		{
+			if (node->thread_left == false && node->left)
+				Tree_Traverse_PostOrder(node->left);
+			if (node->thread_right == false && node->right)
+				Tree_Traverse_PostOrder(node->right);
+			this->Node_Visit_Name(node);
+		}
+	}
+	void Tree_Traverse_LevelOrder(NodeType* node) override
+	{
+		std::queue<NodeType* > q;
+		q.push(this->root);
+		NodeType* v;
+		while (!q.empty())
+		{
+			v = q.front();
+			q.pop();
+			this->Node_Visit_Name(v);
+			if (v->thread_left == false && v->left)
+				q.push(v->left);
+			if (v->thread_right == false && v->right)
+				q.push(v->right);
+		}
 	}
 	void Tree_Show()
 	{

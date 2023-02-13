@@ -30,7 +30,6 @@ void Test_Binary_Thread_Tree()
 	Node_BinaryThreadTree<int>* k = tree.Node_Create("K");
 
 	///指定a节点为树根
-	//BinaryTree_Thread<int> tree(a);
 	tree.Tree_Set_Root(a);
 
 	tree.Node_Insert(b, a, left);
@@ -45,14 +44,14 @@ void Test_Binary_Thread_Tree()
 	///线索化
 	tree.ThreadTree_Modify(tree.Tree_GetRoot());
 
-	std::cout << "DLR: " << std::endl;
+	std::cout << std::endl << "DLR: ";
 	tree.Tree_Traverse_PreOrder(tree.Tree_GetRoot());
-	std::cout << "LDR: " << std::endl;
-	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
-	std::cout << "LRD: " << std::endl;
+	std::cout << std::endl << "LDR: ";
+	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());	///线索化优化过
+	std::cout << std::endl << "LRD: ";
 	tree.Tree_Traverse_PostOrder(tree.Tree_GetRoot());
-	std::cout << "Level Traverse: " << std::endl;
-	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());	///线索化优化过
+	std::cout << std::endl << "Level Traverse: ";
+	tree.Tree_Traverse_LevelOrder(tree.Tree_GetRoot());	
 
 	std::cout << std::endl;
 }
