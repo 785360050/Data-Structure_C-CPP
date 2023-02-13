@@ -219,15 +219,15 @@ AVLNode* BinaryTree_AVL_Delete(BTree_AVL* tree, AVLNode* node, DataType data)
 	int balance = getbalance(node);///计算平衡因子，调整子树(递归实现从下至上)
 	if (balance > 1)
 	{//L重
-		if (getbalance(node->left) < 0)
-			node->left = Rotate_Left(node->left);
-		return Rotate_Right(node);
+		if (getbalance(node->left) < 0)		//LR
+			node->left = Rotate_Left(node->left); 
+		return Rotate_Right(node);	//LL
 	}
 	if (balance < -1)
 	{//R重
-		if (getbalance(node->right) > 0)
-			node->right = Rotate_Left(node->right);
-		return Rotate_Left(node);
+		if (getbalance(node->right) > 0)	//RL
+			node->right = Rotate_Right(node->right);
+		return Rotate_Left(node);	//RR
 	}
 	return node;///出口2
 }

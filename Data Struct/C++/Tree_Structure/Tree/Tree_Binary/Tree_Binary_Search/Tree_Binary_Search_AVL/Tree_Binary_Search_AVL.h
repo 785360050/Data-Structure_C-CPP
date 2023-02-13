@@ -13,27 +13,8 @@ public:
 	Tree_Binary_Search_AVL() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
 	~Tree_Binary_Search_AVL() = default;
 private:
-	int maxnode(int a, int b)
-	{
-		return (a > b) ? a : b;
-	}
-	int hightnode(NodeType* node)
-	{
-		if (node == NULL)
-			return 0;
-		return node->height;
-	}
-	int getbalance(NodeType* node)
-	{
-		if (!node)
-			return 0;
-		else
-		{
-			int l = hightnode(node->left);
-			int r = hightnode(node->right);
-			return l - r;
-		}
-	}
+	int MaxHeight(int a, int b)
+	{return (a > b) ? a : b;}
 	//左旋(以当前节点为子树根)
 	NodeType* Rotate_Left(NodeType* node)
 	{
@@ -46,8 +27,8 @@ private:
 		NodeType* temp = node->right;
 		node->right = temp->left;
 		temp->left = node;
-		node->height = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
-		temp->height = maxnode(hightnode(temp->left), hightnode(node->right)) + 1;
+		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+		temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
 		return temp;
 	}
 	//右旋(以当前节点为子树根)
@@ -56,8 +37,8 @@ private:
 		NodeType* temp = node->left;
 		node->left = temp->right;
 		temp->right = node;
-		temp->height = maxnode(hightnode(temp->left), hightnode(node->right)) + 1;
-		node->height = maxnode(hightnode(node->left), hightnode(node->right)) + 1;
+		temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
+		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
 		return temp;
 	}
 	NodeType* node_insert(NodeType* node, KeyType key, DataType data = NULL)
@@ -77,14 +58,14 @@ private:
 	
 
 		///回归时同步更新子树根高度(上一层的节点高度)
-		node->height = 1 + maxnode(hightnode(node->left), hightnode(node->right));
+		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
 		///	根据平衡因子旋转
 		/// 从上到下[第一个失衡节点][第二个失衡节点]
 		///	LL->R
 		///	RR->L
 		///	LR->LR
 		///	RL->RL
-		int balance = getbalance(node);///计算平衡因子，调整子树(递归实现从下至上)
+		int balance = node->Balance();///计算平衡因子，调整子树(递归实现从下至上)
 		if (balance>1)
 		{//L重
 			if (key < node->left->key)//L重
@@ -160,19 +141,19 @@ private:
 			return node;
 
 		///
-		node->height = 1 + maxnode(hightnode(node->left), hightnode(node->right));
-		int balance = getbalance(node);///计算平衡因子，调整子树(递归实现从下至上)
+		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+		int balance = node->Balance();///计算平衡因子，调整子树(递归实现从下至上)
 		if (balance > 1)
-		{//L重
-			if (getbalance(node->left) < 0)
+		{///L重
+			if (node->left->Balance() < 0)		///LR = Rotate_Left + Rotate_Right
 				node->left = Rotate_Left(node->left);
-			return Rotate_Right(node);
+			return Rotate_Right(node);			///LL = Rotate_Right
 		}
 		if (balance < -1)
-		{//R重
-			if (getbalance(node->right) > 0)
-				node->right = Rotate_Left(node->right);
-			return Rotate_Left(node);
+		{///R重
+			if (node->right->Balance() > 0)		///RL = Rotate_Right + Rotate_Left
+				node->right = Rotate_Right(node->right);
+			return Rotate_Left(node);			///RR = Rotate_Left
 		}
 		return node;///出口2
 	}

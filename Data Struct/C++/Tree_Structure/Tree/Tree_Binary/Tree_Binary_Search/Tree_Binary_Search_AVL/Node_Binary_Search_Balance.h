@@ -24,4 +24,8 @@ public:
 		this->key = other->key;
 		//this->height = other->height;
 	}
+	int Height()
+	{return (this == nullptr) ? 0 : height;}
+	int Balance()
+	{return (this == nullptr) ? left->Height() - right->Height() : 0;}
 };

@@ -161,10 +161,10 @@ void TestPolymorphic()
 
 # In Progress
 - Developing C++ codes by using Object-Oriented
-- Memory Digrames for each structure.
-- Digrames storage by Edge-Set
+- Still thinking about how to combine Algorithms with classes
 - Using namespace instead of long function name in CPP project
 - ***NEED MORE TEST CASE***
+- B+ Tree Delete is not Implemented, need some help
 
 
 # Test Case
@@ -202,17 +202,37 @@ void TestPolymorphic()
 # Class Diagram
 ## Liner_Structur
 ### Liner_List
-![Liner_List](https://i.imgur.com/UVIxKAA.png)
+![Liner_List](https://i.imgur.com/3qB3G1w.png)
 
 ### Liner_Queue
-![Liner_Queue](https://i.imgur.com/9yiNPsk.png)
+![Liner_Queue](https://i.imgur.com/8pwLjS8.png)
 
 ### Liner_Stack
-![Liner_Stack](https://i.imgur.com/V1iK5XL.png)
+![Liner_Stack](https://i.imgur.com/uuTEcJl.png)
 
 ## Tree_Structur
+### Tree_Heap
+![Heap](https://i.imgur.com/7Vi1W5z.png)
 ### Tree_MergeFindSet
-![Tree_MergeFindSet](https://i.imgur.com/P53EBAu.png)
+![MergeFindSet](https://i.imgur.com/c1xeRQn.png)
+### Tree
+![Tree](https://i.imgur.com/MDHHLDW.png)
+#### Binary Tree
+![Binary_Tree.drawio](https://i.imgur.com/fsU1xHP.png)
+##### Binary_Search_Tree
+![Binary Search Tree](https://i.imgur.com/1JoO5GQ.png)
+#### HighOrder_Tree
+![HighOrder Tree](https://i.imgur.com/15Rmynm.png)
+##### Tree_Normal
+![Tree_Normal](https://i.imgur.com/3XT7sdD.png)
+##### Tree_B
+![Tree_B](https://i.imgur.com/SW1Mp1H.png)
+
+## Link Node
+![Node](https://i.imgur.com/1bKdU8f.png)
+
+
+
 # [Top](#executable-data-structure-code-for-cc)
 
 
