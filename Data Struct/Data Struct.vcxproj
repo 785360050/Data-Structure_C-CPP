@@ -81,7 +81,7 @@
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\main.cpp" />
+    <ClCompile Include="C++\Liner_Structure\Liner_Queue\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

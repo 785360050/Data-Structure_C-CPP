@@ -39,6 +39,19 @@ public:
 	//判断是否队空
 	bool Queue_CheckEmpty() override
 	{return this->length == 0 ? true : false;}
+	bool Queue_CheckFull() override
+	{
+		try
+		{
+			if (length > maxsize)
+				throw std::exception("Queue Overflowed");
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		return length == maxsize;
+	}
 	//返回队列长度(元素个数)
 	int Queue_Length() override
 	{return length;}

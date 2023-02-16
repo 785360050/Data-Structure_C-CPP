@@ -10,11 +10,9 @@ struct Sequence_Queue :public Queue<DataType>
 {///使用少存一个元素空间实现队列判断满
 protected:
 	int front;			///队头下标索引
-	int rear;			///队尾下标索引
+	int rear;			///队尾下标索引(队尾的后一个元素位置，即待插入位置索引)
 	DataType* element;	///队列数组
 protected:
-	virtual bool Queue_CheckFull()
-	{return (rear + 1) % (this->maxsize + 1) == front ? true : false; }
 	int Index(int x) const
 	{return x - 1;}
 public:///Redundancy
@@ -35,6 +33,10 @@ public:///Redundancy
 		}
 	}
 public:
+	virtual bool Queue_CheckFull() override
+	{
+		return (rear + 1) % (this->maxsize + 1) == front ? true : false;
+	}
 	void Queue_Clear() override
 	{
 		memset(element, 0, sizeof(DataType) * (this->maxsize));
@@ -54,7 +56,7 @@ public:
 		}
 		return element[front];
 	}
-	DataType Queue_GetRear() override
+	virtual DataType Queue_GetRear() override
 	{
 		try
 		{
@@ -66,13 +68,14 @@ public:
 			std::cout << "Queue is Empty" << std::endl;
 			return NULL;
 		}
-		return element[rear];
+		/// rear指向待插入位置索引，返回前一个元素索引
+		return element[(rear + this->maxsize) % (this->maxsize + 1)];	
 	}
 	virtual void Queue_Show(const std::string& string) override
 	{
 		std::cout << string << std::endl
 			<< "[Length/Maxsize]:" << " [" << this->length << '/' << this->maxsize << ']' << std::endl
-			<< "[Front/Rear/Redundancy]: [" << front << '/' << rear << '/' << rear + this->maxsize << ']' << std::endl
+			<< "[Front/Rear/Redundancy]: [" << front << '/' << rear << '/' << this->maxsize << ']' << std::endl
 			<< "Queue-";
 		for (int index = 0; index < this->maxsize + 1; index++)
 			std::cout << '[' << index << ':' << element[index] << "]-";
@@ -94,7 +97,7 @@ public:
 			return;
 		}
 		this->element[rear] = element;
-		rear = (rear + 1) % this->maxsize;
+		rear = (rear + 1) % (this->maxsize + 1);
 		this->length++;
 	}
 	virtual void Element_Dequeue() override
@@ -111,7 +114,7 @@ public:
 		}
 		DataType x = element[front];
 		element[front] = 0;
-		front = (front + 1) % Index(this->maxsize);
+		front = (front + 1) % (this->maxsize + 1);
 		--this->length;
 	}
 };
@@ -119,7 +122,7 @@ public:
 
 template<typename DataType>
 struct Sequence_Queue_Tag :public Sequence_Queue<DataType>
-{///使用少存一个元素空间实现队列判断满
+{///使用bool标志实现队列判断满
 private:
 	bool full;
 private:
@@ -191,7 +194,7 @@ public:
 		this->rear = (this->rear + 1) % this->maxsize;
 		this->length++;
 
-		if (Queue_CheckFull())
+		if (this->front == this->rear)
 			full = true;
 	}
 	void Element_Dequeue() override
@@ -207,12 +210,27 @@ public:
 			return ;
 		}
 		DataType x = this->element[this->front];
-		this->element[this->front] = 0;
+		this->element[this->front] = NULL;
 		this->front = (this->front + 1) % this->maxsize;
 		this->length--;
 		
-		if (!Queue_CheckFull())
+		if (this->front == this->rear)
 			full = false;
+	}
+	virtual DataType Queue_GetRear() override
+	{
+		try
+		{
+			if (this->Queue_CheckEmpty())
+				throw 1;
+		}
+		catch (...)
+		{
+			std::cout << "Queue is Empty" << std::endl;
+			return NULL;
+		}
+		/// rear指向待插入位置索引，返回前一个元素索引
+		return this->element[this->rear];
 	}
 };
 

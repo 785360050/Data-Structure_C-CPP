@@ -22,7 +22,7 @@ void Test_LinkQueue()
 	for (int i = 10; i < 15; i++)
 		q.Element_Enqueue(i);
 	q.Queue_Show("5个元素入队后");
-	std::cout << "当前队头元素为: " << q.Queue_GetFront()<< std::endl;
+	std::cout << "当前队头元素为: " << q.Queue_GetFront().element<< std::endl;
 	std::cout << "当前队列长度为: " << q.Queue_Length() << std::endl;
 	q.Element_Dequeue();
 	q.Element_Dequeue();

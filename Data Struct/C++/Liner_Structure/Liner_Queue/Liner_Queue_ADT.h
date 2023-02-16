@@ -13,6 +13,8 @@ public:
 	virtual void Queue_Clear() = 0;
 	//判断是否队空
 	virtual bool Queue_CheckEmpty() = 0;
+	//判断是否队满
+	virtual bool Queue_CheckFull() = 0;
 	//返回队列长度(元素个数)
 	virtual int Queue_Length() = 0;
 	//返回队头
