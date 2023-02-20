@@ -63,6 +63,6 @@ void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	
-	//TestHashList_LinearDetection();
-	TestHashList_LinkAddress();
+	TestHashList_LinearDetection();
+	//TestHashList_LinkAddress();
 }

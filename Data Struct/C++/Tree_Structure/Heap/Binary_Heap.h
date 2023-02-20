@@ -111,9 +111,9 @@ private:
 	#ifdef Sort///用于排序时不抛出异常
 		if (index < 1 || index > length)
 			return;
-		while (2 * index <= length)
+		while (Index_Child(index, left) <= length)
 		{
-			int i = 2 * index;///初始索引设为左孩子
+			int i = Index_Child(index, left);///初始索引设为左孩子
 			///定位比父节点小的索引
 			if (i + 1 <= length && data[i + 1] < data[i])
 				i += 1;///右孩子比父节点小
@@ -134,10 +134,9 @@ private:
 			std::cout << "Element_Sink Failed: index illegal" << std::endl;
 			return;
 		}
-		while (index < length)
+		while (Index_Child(index, left) < length)
 		{
 			int index_child = Index_Child(index,left);///先假设索引设为左孩子
-
 			///定位与父节点替换的索引
 			if (property == small)
 			{///小根堆
