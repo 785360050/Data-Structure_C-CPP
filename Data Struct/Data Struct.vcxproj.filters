@@ -195,9 +195,39 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Node_Binary_Search_Normal.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Graph_TopoSort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_Insert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_Merge.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_Swap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C\Algorithm\Sort_TestCase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C++\Tree_Structure\Heap\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="C++\Graph_Structure\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

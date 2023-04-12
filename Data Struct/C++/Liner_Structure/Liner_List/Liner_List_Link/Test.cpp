@@ -67,6 +67,6 @@ void Test_Link_List_Double()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	//Test_Forward_List();
-	Test_Link_List_Double();
+	Test_Forward_List();
+	//Test_Link_List_Double();
 }

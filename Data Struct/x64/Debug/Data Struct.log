@@ -1,3 +1,4 @@
 ﻿  main.cpp
-C:\Users\thinkpad\Desktop\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Heap\main.cpp(44,1): warning C4326: “main”的返回类型应为“int”而非“void”
-  Data Struct.vcxproj -> C:\Users\thinkpad\Desktop\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Heap\main.cpp(51,17): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Heap\main.cpp(68,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

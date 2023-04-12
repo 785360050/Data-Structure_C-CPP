@@ -294,6 +294,20 @@ public:///元素操作
 	DataType Element_Delete(size_t pos) override
 	{
 		List_Node_DoubleWay<DataType>* node = Element_Locate(pos);
+		if (node->next == nullptr)
+		{//删除末尾
+			auto del = node;
+			DataType value = node->element;
+			if (node->pre)
+			{
+				node->pre->next = nullptr;
+				delete del;
+				--this->length;
+			}
+			else
+				this->List_Clear();
+			return value;
+		}
 		node->next->pre = node->pre;
 		node->pre->next = node->next;
 		DataType value = node->element;

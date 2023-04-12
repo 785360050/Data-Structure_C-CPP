@@ -79,8 +79,18 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree.h" />
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Node.h" />
     <ClInclude Include="C++\Tree_Structure\Tree_Structure_ADT.h" />
+    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h" />
+    <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h" />
+    <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h" />
+    <ClInclude Include="C\Algorithm\Graph_TopoSort.h" />
+    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h" />
+    <ClInclude Include="C\Algorithm\Sort_Insert.h" />
+    <ClInclude Include="C\Algorithm\Sort_Merge.h" />
+    <ClInclude Include="C\Algorithm\Sort_Swap.h" />
+    <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C++\Graph_Structure\main.cpp" />
     <ClCompile Include="C++\Tree_Structure\Heap\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

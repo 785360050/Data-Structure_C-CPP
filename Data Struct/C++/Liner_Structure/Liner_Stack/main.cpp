@@ -25,8 +25,8 @@ static bool  SetEncode(int EncodeId = 936)
 
 void TestStack()
 {
-	Stack<char>* stack=new Sequence_Stack<char>(5);						///空增栈
-	//Stack<char>* stack=new Sequence_Stack_Empty_Decending<char>(5);	///空减栈
+	//Stack<char>* stack=new Sequence_Stack<char>(5);						///空增栈
+	Stack<char>* stack=new Sequence_Stack_Empty_Decending<char>(5);	///空减栈
 	//Stack<char>* stack=new Sequence_Stack_Full_Ascending<char>(5);	///满增栈
 	//Stack<char>* stack=new Sequence_Stack_Full_Decending<char>(5);	///满减栈
 	//Stack<char>* stack=new Link_Stack<char>(5);						///链栈

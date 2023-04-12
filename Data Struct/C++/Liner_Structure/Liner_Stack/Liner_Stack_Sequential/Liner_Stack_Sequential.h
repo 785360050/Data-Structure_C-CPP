@@ -295,6 +295,16 @@ public:///元素操作
 		++this->top;
 	}
 
+	void Stack_Show(const std::string& string) override
+	{
+		std::cout << string << std::endl
+			<< "[Length/Maxsize]:\n"
+			<< " [" << Stack_GetLength() << '/' << this->maxsize << ']' << std::endl
+			<< "TOP[" << this->top << "]-";
+		for (int index = 0; index < this->maxsize; ++index)
+			std::cout << '[' << index << ':' << this->element[index] << "]-";
+		std::cout << "Bottom" << std::endl;
+	}
 };
 
 template <typename DataType>
@@ -375,6 +385,16 @@ public:///元素操作
 		++this->top;
 	}
 
+	void Stack_Show(const std::string& string) override
+	{
+		std::cout << string << std::endl
+			<< "[Length/Maxsize]:\n"
+			<< " [" << Stack_GetLength() << '/' << this->maxsize << ']' << std::endl
+			<< "TOP[" << this->top << "]-";
+		for (int index = 0; index < this->maxsize; ++index)
+			std::cout << '[' << index << ':' << this->element[index] << "]-";
+		std::cout << "Bottom" << std::endl;
+	}
 };
 
 

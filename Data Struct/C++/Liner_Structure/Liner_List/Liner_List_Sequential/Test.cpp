@@ -101,7 +101,7 @@ void Test_SeqList_Vector()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	Test_SeqList_Array();
+	//Test_SeqList_Array();
 	Test_SeqList_Vector();
 }
 
