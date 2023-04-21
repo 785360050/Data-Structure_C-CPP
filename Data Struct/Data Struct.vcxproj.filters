@@ -222,12 +222,12 @@
     <ClInclude Include="C\Algorithm\Sort_TestCase.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C++\Liner_Structure\String\String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Heap\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C++\Graph_Structure\main.cpp">
+    <ClCompile Include="C++\Liner_Structure\String\String.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

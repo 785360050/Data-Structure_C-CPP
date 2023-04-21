@@ -39,6 +39,7 @@
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Linked\Liner_Stack_Linked.h" />
     <ClInclude Include="C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h" />
     <ClInclude Include="C++\Liner_Structure\List_Node.h" />
+    <ClInclude Include="C++\Liner_Structure\String\String.h" />
     <ClInclude Include="C++\Monitor.h" />
     <ClInclude Include="C++\Node.h" />
     <ClInclude Include="C++\Object.h" />
@@ -90,8 +91,7 @@
     <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Graph_Structure\main.cpp" />
-    <ClCompile Include="C++\Tree_Structure\Heap\main.cpp" />
+    <ClCompile Include="C++\Liner_Structure\String\String.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
