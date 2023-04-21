@@ -2,28 +2,6 @@
 
 
 
-
-
-int String_Fetch_Brute_Force(const String& string, const String& Sub_String)
-{
-	int i_fetch = 1;
-	for (; i_fetch <= string.length; ++i_fetch)
-	{
-		int i_sub = 1;
-		for (; i_sub <= Sub_String.length; ++i_sub)
-			if (
-				string.string_[i_fetch + i_sub] 
-				!= 
-				Sub_String.string_[i_sub]
-			   )
-				break;
-		if (i_sub >= Sub_String.length)
-			return i_fetch + 1;
-	}
-	return 1;
-}
-
-
 void main()
 {
 	String x("aabaabaaf");///3
