@@ -1,5 +1,5 @@
 ﻿  String.cpp
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Liner_Structure\String\String.cpp(1,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Liner_Structure\String\String.h(19,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Liner_Structure\String\String.h(20,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Liner_Structure\String\String.cpp(28,1): warning C4326: “main”的返回类型应为“int”而非“void”
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe

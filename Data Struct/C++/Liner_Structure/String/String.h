@@ -14,8 +14,8 @@ public:
     {//重载运算符[]
         return string_[i];
     }
-public:
-//初始化
+public://初始化
+
 	String(const char* string):length(strlen(string))
 	{
 		if (!string)
@@ -34,61 +34,98 @@ public:
 		if (string_)
 			delete[] string_;
 	}
+private:///KMP函数
+    // 查前缀表，获取匹配失败时回退到的下标位置
+    int Index_Get(int* prefix_array, int index) const
+    {
+        return prefix_array[index - 1];
+    }
+
+    // 生成并返回子串的前缀表next数组(此处等价于prefix数组，未作处理)
+    int* Prefix_Array(const String& s)
+    {
+        int* prefix = new int[s.length];
+        prefix[0] = 0; // 单个字符不可能有匹配的前后缀
+
+        // 跳过单个字符的处理
+        // end_suffix同时也是最长相同前后缀的个数,作为结果存入next数组
+        for (int end_suffix = 1, end_prefix = 0; end_suffix < s.length; ++end_suffix)
+        { // 每轮找到最长的相同前后缀长度
+
+            /// 字符不同，匹配失败，前缀回退
+            while (end_prefix > 0 && s[end_prefix] != s[end_suffix])
+                end_prefix = Index_Get(prefix, end_prefix); // 查next数组中的回退位置
+
+            /// 字符相同，匹配成功，前缀增加(前缀增加也代表相同前后缀的长度增加)
+            if (s[end_prefix] == s[end_suffix])
+                end_prefix++; // 最长相等前后缀的长度+1，同时向后查找更长的相同前后缀长度
+
+            /// 已得到本轮最长相同前后缀的长度，更新到next数组
+            prefix[end_suffix] = end_prefix;
+        }
+
+        return prefix;
+    }
+public:
+    // 实现前提
+       // 1.next数组此处等价于Prefix前缀表，未加工处理(如右移或全部加1)
+       // 遇到不匹配字符时，找next数组对应元素的前一位，确定回退的位置(下标)
+    // 注：不能调整前后缀判定顺序，此处时先判定不同，再判定相同，否则会出错(可能需要修改才行)
+    int String_Fetch_KMP(const String& Substring)
+    {
+        if (Substring.length == 0)
+            return 0;
+
+        // next数组存放最长相同的前后缀长度，
+        //  若发生失配，则回退到，next数组中对应最长前后缀长度的下一个位置(也就是避免重复匹配)
+        int* next = Prefix_Array(Substring); // 初始化next数组
+        /// 显示next数组
+        for (int i = 0; i < Substring.length; ++i)
+            std::cout << next[i] << ' ';
+        std::cout << std::endl;
+
+        // 遍历主串，找目标子串
+        for (int i_main = 0, i_sub = 0; i_main < this->length; ++i_main)
+        {
+            // 失配：查找next数组中前一个位置的元素值(回退到的目的下标)
+            while (i_sub > 0 && this->string_[i_main] != Substring[i_sub])
+                i_sub = Index_Get(next, i_sub);
+
+            // 成功配对字符：匹配下一个字符
+            if (this->string_[i_main] == Substring[i_sub])
+                ++i_sub;
+
+            // 全部匹配完成
+            if (i_sub == Substring.length)
+                // 当前主串匹配位置(成功匹配子串的末尾字符)-子串长度+1(转到第一个成功匹配子串的字符)
+                return (i_main - Substring.length + 1);
+        }
+        return -1; // 匹配失败，返回-1
+    }
+public:
+    ////朴素匹配算法(返回下标,失败返回-1)
+    int String_Fetch_Brute_Force(const String& Sub_String)
+    {
+        if (this->length < Sub_String.length)
+            return -1;
+        int i_fetch = 0;
+        for (; i_fetch <= length; ++i_fetch)
+        {
+            int i_sub = 0;
+            for (; i_sub < Sub_String.length; ++i_sub)
+                if (this->string_[i_fetch + i_sub]!=Sub_String[i_sub])
+                    break;
+            if (i_sub >= Sub_String.length)
+                return i_fetch;
+        }
+        return -1;
+    }
 };
 
 
-////朴素匹配算法(返回下标,失败返回-1)
-//int String_Fetch_Brute_Force(const String& string, const String& Sub_String);
-//
 
 
-///KMP匹配算法(返回下标,失败返回-1)
-/// 实现前提
-/// 1.next数组此处等价于Prefix前缀表，未加工处理(如右移或全部加1)
-/// 遇到不匹配字符时，找next数组对应元素的前一位，确定回退的位置(下标)
-int* Prefix_Array(const String& s)
-{ /// 生成并返回前缀表next数组
-    int* next = new int[s.length];
-    int prefix_end = 0;                                           // 同时也是最长相同前后缀的长度
-    next[0] = 0;                                                  // 初始位置为0，非-1
-    for (int suffix_end = 1; suffix_end < s.length; suffix_end++) // 因为单字符必为0，所以从1开始(长度2)计算最长相同前后缀
-    {                                                             // 后缀末尾从1开始(后缀不包含首元素)，计算最长相同前后缀不是用字符串比较，而是遍历计数
-        // 前后缀不同时
-        while (prefix_end > 0 && s[suffix_end] != s[prefix_end]) // 无相同前后缀时，后缀末尾收缩(向右回退)，prefix_end > 0控制回退的终点限制
-            prefix_end = next[prefix_end - 1];                   // 通过查前一位的next数组中元素的值，确定回退的位置(难)
-        // 字符相同时，匹配
-        if (s[suffix_end] == s[prefix_end])
-            prefix_end++;
 
-
-        // 更新next数组
-        next[suffix_end] = prefix_end;
-    }
-    return next;
-}
-///用KMP算法查找Sub_String在string中的匹配的下标位置，不存在时返回-1下标
-int String_Fetch_KMP(const String& string, const String& Sub_String)
-{ /// 有点动态规划的味道，KMP相比朴素比较算法可以减少相同子串重复比较的次数
-    if (Sub_String.length == 0)
-        return 0;
-
-    int* next = Prefix_Array(Sub_String); // 初始化next数组
-    for (int i = 0; i < Sub_String.length; ++i)
-        std::cout << next[i] << ' ';
-    std::cout << std::endl;
-
-    for (int i = 0, j = 0; i < string.length; i++)
-    { // 利用next数组(前缀表)，在遍历的时候匹配
-        while (j > 0 && string[i] != Sub_String[j])
-            j = next[j - 1]; // 找前缀表中相应元素的前一个元素值(最长相同前后缀)
-        if (string[i] == Sub_String[j]) // 字符相同时
-            j++;
-
-        if (j == Sub_String.length)
-            return (i - Sub_String.length + 1);
-    }
-    return -1;
-}
 
 
 
