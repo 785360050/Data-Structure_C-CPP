@@ -227,7 +227,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\String\String.cpp">
+    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

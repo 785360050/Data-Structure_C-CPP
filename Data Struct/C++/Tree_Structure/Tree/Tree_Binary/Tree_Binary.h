@@ -1,6 +1,7 @@
 #pragma once
 
 //#include "../Tree.h"
+#include <vector>
 
 enum Direction { left = 1, right = 2 };
 
@@ -88,5 +89,123 @@ public:
 	//层次遍历二叉树
 	virtual void Tree_Traverse_LevelOrder(NodeType* node) = 0;
 
+private: ///构造二叉树[先序+中序/后续+中序]
+	//先序+中序构造子树
+	NodeType* Build_Preorder
+	(
+		const std::vector<int>& preorder, const int& begin_preorder, const int& end_preorder,
+		const std::vector<int>& inorder, const int& begin_inorder, const int& end_inorder
+	)
+	{ // 切割区间维持左闭右开[)
+		if (begin_inorder > end_inorder || begin_preorder > end_preorder)
+			throw std::exception("Index Illigal");
+		if (begin_inorder == end_inorder)
+			return nullptr;
+
+		if (end_inorder - begin_inorder == 1)
+			return Node_Create(std::to_string(preorder[begin_preorder]));
+
+		NodeType* root = Node_Create(std::to_string(preorder[begin_preorder]));// 注意用begin_preorder 不要用0
+
+		int index_root;
+		for (index_root = begin_inorder; index_root < end_inorder; index_root++)
+		{
+			if (inorder[index_root] == preorder[begin_preorder])
+				break;
+		}
+
+		///构造左子树
+		// 切割中序数组
+		int begin_inorder_left = begin_inorder;
+		int end_inorder_left = index_root;
+		// 切割前序数组
+		int begin_preorder_left = begin_preorder + 1;
+		int end_preorder_left = begin_preorder + 1 + index_root - begin_inorder; // 终止位置是起始位置加上中序左区间的大小size
+		root->left = Build_Preorder(preorder, begin_preorder_left, end_preorder_left,
+			inorder, begin_inorder_left, end_inorder_left);
+
+		/// 构造右子树
+		// 切割前序数组
+		int begin_preorder_right = begin_preorder + 1 + (index_root - begin_inorder);
+		int end_preorder_right = end_preorder;
+		// 切割中序数组
+		int begin_inorder_right = index_root + 1;
+		int end_inorder_right = end_inorder;
+
+		root->right = Build_Preorder(preorder, begin_preorder_right, end_preorder_right,
+			inorder, begin_inorder_right, end_inorder_right);
+
+		return root;
+	}
+
+	//后序+中序构造子树
+	NodeType* Build_Postorder
+	(
+		const std::vector<DataType>& postorder, const int& begin_postorder, const int& end_postorder,
+		const std::vector<DataType>& inorder, const int& begin_inorder, const int& end_inorder
+	)
+	{ // 坚持左开右闭：注意LRD时-1
+		if (begin_inorder > end_inorder || begin_postorder > end_postorder)
+			throw std::exception("Index Illigal");
+		if (begin_inorder == end_inorder)
+			return nullptr;
+
+		if (end_inorder - begin_inorder == 1)
+			return Node_Create(std::to_string(postorder[end_postorder - 1]));
+
+		NodeType* root = Node_Create(std::to_string(postorder[end_postorder - 1]));
+
+		int index_root;
+		for (index_root = begin_inorder; index_root < end_inorder; ++index_root)
+			if (inorder[index_root] == postorder[end_postorder - 1])
+				break;
+
+		// 构造左子树
+		int begin_postorder_left = begin_postorder;
+		int end_postorder_left = begin_postorder + index_root - begin_inorder;
+		int begin_inorder_left = begin_inorder;
+		int end_inorder_left = index_root;
+
+		root->left = Build_Postorder(postorder, begin_postorder_left, end_postorder_left,
+			inorder, begin_inorder_left, end_inorder_left);
+
+		// 构造右子树
+		int begin_postorder_right = end_postorder_left;
+		int end_postorder_right = end_postorder - 1;
+		int begin_inorder_right = index_root + 1;
+		int end_inorder_right = end_inorder;
+
+		root->right = Build_Postorder(postorder, begin_postorder_right, end_postorder_right,
+			inorder, begin_inorder_right, end_inorder_right);
+
+		return root;
+	}
+
+public:
+	//Preorder_or_Postorder指定pre_post_order为先序还是后续，true为先序
+	void Tree_Build(const std::vector<DataType>& pre_post_order, const std::vector<DataType>& inorder,bool Preorder_or_Postorder)
+	{
+		try
+		{
+			if (inorder.size()!= pre_post_order.size())
+				throw std::exception("Traversal Vector Size Unequal");
+			if (inorder.empty() || pre_post_order.empty())
+				throw std::exception("Traversal Vector Empty");
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+
+		this->count = inorder.size();
+		// 维持左开又闭
+		if (Preorder_or_Postorder)
+			this->root = Build_Preorder(pre_post_order, 0, pre_post_order.size(),
+				inorder, 0, inorder.size());
+		else
+			this->root = Build_Postorder(pre_post_order, 0, pre_post_order.size(),
+				inorder, 0, inorder.size());
+		
+	}
 };
 

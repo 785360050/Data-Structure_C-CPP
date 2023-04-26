@@ -91,7 +91,7 @@
     <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Liner_Structure\String\String.cpp" />
+    <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

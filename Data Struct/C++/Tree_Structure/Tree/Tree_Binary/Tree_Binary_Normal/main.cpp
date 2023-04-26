@@ -70,8 +70,17 @@ void Test_Binary_Tree()
 	//tree.Tree_Clear();
 }
 
+void Test_Tree_Build()
+{
+	Tree_Binary_Normal<int> tree;
+	tree.Tree_Build({ 3,9,20,15,7 }, { 9,3,15,20,7 },true);
+	//tree.Tree_Build( { 9,15,7,20,3 }, { 9,3,15,20,7 },false);
+	tree.Tree_Show();
+}
+
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	Test_Binary_Tree();
+	//Test_Binary_Tree();
+	Test_Tree_Build();
 }
