@@ -27,6 +27,7 @@
 #include "C/Algorithm/Graph_CriticalPath.h"
 #include "C/API/Tree_Binary_Heap.h"
 #include "C/API/Tree_Advanced_B_Tree.h"
+#include "C/API/Tree_Advanced_B+_Tree.h"
 #include "C/API/String.h"
 
 ///C function
@@ -449,6 +450,35 @@ void Test_B_Tree()
 	B_Tree_Destroy(tree);
 }
 
+int Test_BPlus_Tree()
+{
+	BPlus_Tree* tree= BPlus_Tree_Init();
+	for (int i = 0; i < 30; i++)
+		BPlus_Tree_Insert(tree, i, 1);
+	
+	BPlus_Tree_Show(tree);
+
+	printf("\n删除元素\n");
+
+	BPlus_Tree_Delete(tree, 1);
+	BPlus_Tree_Delete(tree, 2);
+	BPlus_Tree_Delete(tree, 3);
+	BPlus_Tree_Delete(tree, 4);
+	BPlus_Tree_Delete(tree, 5);
+	BPlus_Tree_Delete(tree, 6);
+	BPlus_Tree_Delete(tree, 7);
+	BPlus_Tree_Delete(tree, 8);
+	BPlus_Tree_Delete(tree, 9);
+	BPlus_Tree_Delete(tree, 10);
+	BPlus_Tree_Delete(tree, 11);
+	BPlus_Tree_Delete(tree, 12);
+	BPlus_Tree_Delete(tree, 26);
+	BPlus_Tree_Delete(tree, 25);
+	BPlus_Tree_Delete(tree, 23);
+	BPlus_Tree_Show(tree);
+
+}
+
 void TestBinaryTree()
 {
 	//BinaryTree();
@@ -785,7 +815,7 @@ void Test_C()
 	//TestLinkStack();//完毕
 	//TestSeqQueue();//完毕
 	//TestLinkQueue();//完毕
-	TestBinaryTree();//完毕
+	//TestBinaryTree();//完毕
 	//TestMergeFindSet();//完毕
 	//TestMatrixGraph();//完毕
 	//TestAdjacencyListGraph();//完毕
@@ -798,6 +828,7 @@ void Test_C()
 	//TestCost_Sort();//完毕
 	//TestSearch();//完毕
 	//Test_B_Tree();
+	Test_BPlus_Tree();
 	//Test_String();//KMP_BUG
 }
 

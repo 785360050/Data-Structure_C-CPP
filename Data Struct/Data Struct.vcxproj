@@ -89,9 +89,12 @@
     <ClInclude Include="C\Algorithm\Sort_Merge.h" />
     <ClInclude Include="C\Algorithm\Sort_Swap.h" />
     <ClInclude Include="C\Algorithm\Sort_TestCase.h" />
+    <ClInclude Include="C\API\Tree_Advanced_B+_Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp" />
+    <ClCompile Include="C\Definition\Tree_Advanced_B+_Tree.cpp" />
+    <ClCompile Include="main .cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

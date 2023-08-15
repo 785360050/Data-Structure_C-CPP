@@ -1,19 +1,19 @@
 ﻿  main.cpp
 D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp(82,1): warning C4326: “main”的返回类型应为“int”而非“void”
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(200,1): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(187,1): message : 在编译 类 模板 成员函数“void Tree_Binary<DataType,NodeType>::Tree_Build(const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,bool)”时
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(200,29): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(186,7): message : 在编译 类 模板 成员函数“void Tree_Binary<DataType,NodeType>::Tree_Build(const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,bool)”时
           with
           [
               DataType=int,
               NodeType=Node_BinaryTree<int>
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp(76,17): message : 查看对正在编译的函数 模板 实例化“void Tree_Binary<DataType,NodeType>::Tree_Build(const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,bool)”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\main.cpp(76,17): message : 请参阅 "Test_Tree_Build" 中对 "Tree_Binary<DataType,NodeType>::Tree_Build" 的第一个引用
           with
           [
               DataType=int,
               NodeType=Node_BinaryTree<int>
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h(21,1): message : 查看对正在编译的 类 模板 实例化“Tree_Binary<DataType,NodeType>”的引用
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h(20,33): message : 查看对正在编译的 类 模板 实例化“Tree_Binary<DataType,NodeType>”的引用
           with
           [
               DataType=int,
@@ -24,6 +24,10 @@ D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\T
           [
               DataType=int
           ]
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(204,1): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
-D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(207,1): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(204,29): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(203,70): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(207,29): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
+D:\GitHub\Data-Structure_C-CPP\Data Struct\C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h(206,71): warning C4267: “参数”: 从“size_t”转换到“const int”，可能丢失数据
+  Tree_Advanced_B+_Tree.cpp
+  正在生成代码...
   Data Struct.vcxproj -> D:\GitHub\Data-Structure_C-CPP\x64\Debug\Data Structure.exe
