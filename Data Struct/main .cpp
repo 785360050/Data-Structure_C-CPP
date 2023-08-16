@@ -450,9 +450,9 @@ void Test_B_Tree()
 	B_Tree_Destroy(tree);
 }
 
-int Test_BPlus_Tree()
+void Test_BPlus_Tree()
 {
-	BPlus_Tree* tree= BPlus_Tree_Init();
+	BPlus_Tree* tree= BPlus_Tree_Init(5);
 	for (int i = 0; i < 30; i++)
 		BPlus_Tree_Insert(tree, i, 1);
 	
