@@ -453,27 +453,46 @@ void Test_B_Tree()
 void Test_BPlus_Tree()
 {
 	BPlus_Tree* tree= BPlus_Tree_Init(5);
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 8; i++)
+	{
 		BPlus_Tree_Insert(tree, i, 1);
+		std::cout << std::endl;
+		BPlus_Tree_Show(tree);
+	}
 	
-	BPlus_Tree_Show(tree);
+	//BPlus_Tree_Show(tree);
 
 	printf("\n删除元素\n");
 
+	///删4有问题
 	BPlus_Tree_Delete(tree, 1);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 2);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 3);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 4);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 5);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 6);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 7);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 8);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 9);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 10);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 11);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 12);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 26);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 25);
+	BPlus_Tree_Show(tree);
 	BPlus_Tree_Delete(tree, 23);
 	BPlus_Tree_Show(tree);
 
