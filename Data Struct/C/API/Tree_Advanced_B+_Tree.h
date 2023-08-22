@@ -18,6 +18,7 @@ struct BPlus_Node
 };
 
 
+///索引节点元素，取该元素右子树的最小元素(即分割元素)
 struct BPlus_Tree
 {
 	BPlus_Node* root;

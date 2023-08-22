@@ -248,13 +248,15 @@ void _bplus_leaf_left_rotate(BPlus_Node* node, int index)
 	left->data[left->count] = right->data[0];
 	left->count++;
 
-	node->keys[index] = right->keys[0];
 	// 对右节点进行移位
 	for (int i = 0; i < right->count - 1; i++)
 	{
 		right->keys[i] = right->keys[i + 1];
 		right->data[i] = right->data[i + 1];
 	}
+
+	//覆盖完成后才能设置父节点值，否则是原来的值，可能变成左兄弟的末尾元素
+	node->keys[index] = right->keys[0];
 
 	right->count--;
 
@@ -437,10 +439,14 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 		parent = node->parent;
 	}
 
+	///如果根节点的两个孩子合并，将合并后的孩子节点作为新的根节点
 	if (tree->root->count == 0 && tree->root->child != nullptr)
 	{
 		node = tree->root;
 		tree->root = node->child[0];
+		
+		///删除头节点后清空孩子的父节点
+		node->child[0]->parent = nullptr;
 		free(node->keys);
 		free(node->data);
 		free(node->child);
@@ -459,7 +465,7 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 	{
 		found = binary_search(node->keys, key, 0, node->count - 1, &index);
 		if (found)
-			index++;
+			index++;///定位到右孩子(索引节点存分割节点，分割节点给右孩子)
 		node = node->child[index];
 	}
 	found = binary_search(node->keys, key, 0, node->count - 1, &index);
@@ -473,9 +479,7 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 }
 
 
-
-
-static void BPlus_Node_printfnode(BPlus_Node* node)
+static void Node_Print(BPlus_Node* node)
 {
 	std::cout << '{';
 	///深度遍历输出元素
@@ -488,6 +492,40 @@ static void BPlus_Node_printfnode(BPlus_Node* node)
 	std::cout << '}';
 }
 
+static void Traver(BPlus_Node* node)
+{
+	std::cout << '{';
+	///深度遍历输出元素
+	for (int i = 0; i < node->count; i++)
+	{
+		if (i != 0)
+			std::cout << ',';
+		std::cout << node->keys[i];
+	}
+	std::cout << '}';
+}
+
+#include <vector>
+//static void BPlus_Level_Show(BPlus_Node* node, int h)
+//{
+//	if (node == nullptr)
+//		return;
+//	if (node->child != nullptr)
+//		;	//BPlus_Node_Show(node->child[0], h + 1);
+//
+//	auto node_current = node;
+//	while (node_current->child)
+//		node_current = node_current->child[0];
+//	while (node_current)
+//	{
+//		BPlus_Node_printfnode(node_current);
+//		std::cout << (node_current->next ? "--->" : "\n");
+//		node_current = node_current->next;
+//	}
+//
+//
+//
+//}
 static void BPlus_Level_Show(BPlus_Node* node, int h)
 {
 	if (node == nullptr)
@@ -495,21 +533,86 @@ static void BPlus_Level_Show(BPlus_Node* node, int h)
 	if (node->child != nullptr)
 		;	//BPlus_Node_Show(node->child[0], h + 1);
 
-	auto node_current = node;
-	while (node_current->child)
-		node_current = node_current->child[0];
-	while (node_current)
+	std::vector<std::vector<BPlus_Node*>> buffer;
+
+	int level = 1;
+	buffer.push_back({ node });
+	//for (int i = 0; i < node->count; ++i)
+	//	level
+
+
+}
+
+
+std::vector<std::vector<BPlus_Node*>> buffer;
+int level = 0;
+
+static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
+{
+	if (!node)
+		return;
+
+	buffer[level].push_back(node);
+	if (!node->child)
+		return;
+
+	for (int i = 0; i < node->count; ++i)
 	{
-		BPlus_Node_printfnode(node_current);
-		std::cout << (node_current->next ? '\t' : '\n');
-		node_current = node_current->next;
+		level++;
+		BackTrace_Traverse(buffer, node->child[i], level);
+		level--;
+	}
+}
+
+void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
+{
+	///以行为单位显示每一层的节点
+	for (int i = 0; i < level-1; ++i)
+	{
+		///索引节点稍微居中一些显示
+		for (int j = 0; j < (level - i); ++j)
+			std::cout << '\t';
+
+		for (const auto& node : buffer[i])
+			Node_Print(node);
+		std::cout << std::endl;
 	}
 
+	///显示最底层的叶子节点
 
+	auto node = buffer[level - 1][0];
+	while (node)
+	{
+		Node_Print(node);
+		if (node->next)
+		{
+			std::cout << "->";
+			node = node->next;
+		}
+		else
+		{
+			std::cout << "\n";
+			return;
+		}
+	}
 
 }
 
 void BPlus_Tree_Show(BPlus_Tree* tree)
 {
-	BPlus_Level_Show(tree->root, 0);
+	//BPlus_Level_Show(tree->root, 0);
+
+	auto node = tree->root;
+	int level = 1;
+	while (node->child)
+	{//所有叶子节点深度相同
+		++level;
+		node = node->child[0];
+	}
+
+	std::vector<BPlus_Node*>* buffer = new std::vector<BPlus_Node*>[level];
+	BackTrace_Traverse(buffer, tree->root, 0);
+
+	Print_Tree(buffer, level);
+	delete[] buffer;
 }

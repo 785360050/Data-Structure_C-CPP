@@ -457,8 +457,9 @@ void Test_BPlus_Tree()
 	{
 		BPlus_Tree_Insert(tree, i, 1);
 		std::cout << std::endl;
-		BPlus_Tree_Show(tree);
+		//BPlus_Tree_Show(tree);
 	}
+		BPlus_Tree_Show(tree);
 	
 	//BPlus_Tree_Show(tree);
 
