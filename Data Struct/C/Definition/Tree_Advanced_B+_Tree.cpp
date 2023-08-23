@@ -18,8 +18,8 @@ BPlus_Node* BPlus_Node_Create_Leaf(int m)
 	node->parent = nullptr;
 	node->next = nullptr;
 	node->count = 0;
-	node->keys = new int[m + 1];
-	node->data = new int[m + 1];
+	node->keys = new int[m + 1] {};
+	node->data = new int[m + 1] {};
 	if (node->keys == nullptr || node->data == nullptr)
 	{
 		delete node->keys;
@@ -40,7 +40,7 @@ BPlus_Node* BPlus_Node_Create_Branch(int m)
 	node->parent = nullptr;
 	node->next = nullptr;
 	node->count = 0;
-	node->keys = new int[m + 1];
+	node->keys = new int[m + 1] {};
 	node->data = nullptr;//索引节点不存数据
 	if (node->keys == nullptr)
 	{
@@ -49,7 +49,7 @@ BPlus_Node* BPlus_Node_Create_Branch(int m)
 		delete node;
 		return nullptr;
 	}
-	node->child = new BPlus_Node * [m + 2];///为什么要+2
+	node->child = new BPlus_Node * [m + 2] {};///为什么要+2
 	return node;
 }
 
@@ -147,14 +147,23 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 		else//索引节点
 		{
 
-			sibling->count = node->count - mid - 1;
+			sibling->count = node->count - mid;
 
-			memcpy(sibling->keys, node->keys + mid + 1, sizeof(int) * (sibling->count));
-			memcpy(sibling->child, node->child + mid + 1, sizeof(BPlus_Node*) * (node->count - mid));
-
-			// 重新设置父指针
-			for (int i = 0; i <= sibling->count; i++)
+			//memcpy(sibling->keys, node->keys + mid + 1, sizeof(int) * (sibling->count));
+			//memcpy(sibling->child, node->child + mid + 1, sizeof(BPlus_Node*) * (node->count - mid));
+			
+			/// 将分割出去的孩子转交给新分裂的兄弟节点
+			for (int i = 0; i < sibling->count; ++i)
+			{//拷贝元素和数据
+				sibling->keys[i] = node->keys[mid + i];
+				sibling->child[i] = node->child[mid + i + 1];
 				sibling->child[i]->parent = sibling;
+
+				node->keys[mid + i]  = 0;//置空
+				node->child[mid + i + 1] = nullptr;
+			}
+
+			
 		}
 
 		node->count = mid;
@@ -220,6 +229,8 @@ void BPlus_Tree_Insert(BPlus_Tree* tree, int key, int value)
 		found = binary_search(node->keys, key, 0, node->count - 1, &index);
 		if (found)
 			index++;
+		else if (!node->child[index])
+			--index;
 		node = node->child[index];
 	}
 
@@ -546,7 +557,7 @@ static void BPlus_Level_Show(BPlus_Node* node, int h)
 
 std::vector<std::vector<BPlus_Node*>> buffer;
 int level = 0;
-
+///回溯实现遍历生成所有树中的节点信息，存入数组
 static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
 {
 	if (!node)
@@ -556,9 +567,12 @@ static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* no
 	if (!node->child)
 		return;
 
-	for (int i = 0; i < node->count; ++i)
-	{
+	for (int i = 0; i <= node->count; ++i)
+	{//遍历所有孩子节点，加入对应层的数组中
 		level++;
+		//if(i==node->count && !node->child[i])
+
+
 		BackTrace_Traverse(buffer, node->child[i], level);
 		level--;
 	}
@@ -566,6 +580,7 @@ static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* no
 
 void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 {
+	
 	///以行为单位显示每一层的节点
 	for (int i = 0; i < level-1; ++i)
 	{
@@ -573,13 +588,15 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 		for (int j = 0; j < (level - i); ++j)
 			std::cout << '\t';
 
-		for (const auto& node : buffer[i])
+		for (const auto& node : buffer[i])//索引节点格式化
+		{
 			Node_Print(node);
+			std::cout << '\t';
+		}
 		std::cout << std::endl;
 	}
 
 	///显示最底层的叶子节点
-
 	auto node = buffer[level - 1][0];
 	while (node)
 	{
@@ -595,6 +612,7 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 			return;
 		}
 	}
+	
 
 }
 
@@ -613,6 +631,8 @@ void BPlus_Tree_Show(BPlus_Tree* tree)
 	std::vector<BPlus_Node*>* buffer = new std::vector<BPlus_Node*>[level];
 	BackTrace_Traverse(buffer, tree->root, 0);
 
+	std::cout << "Tree=======================================" << std::endl;
 	Print_Tree(buffer, level);
+	std::cout << "===========================================" << std::endl;
 	delete[] buffer;
 }
