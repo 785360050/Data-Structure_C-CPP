@@ -453,7 +453,8 @@ void Test_B_Tree()
 void Test_BPlus_Tree()
 {
 	BPlus_Tree* tree= BPlus_Tree_Init(5);
-	for (int i = 0; i < 30; i++)
+	//for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		BPlus_Tree_Insert(tree, i, 1);///插入16有bug
 		std::cout << std::endl;

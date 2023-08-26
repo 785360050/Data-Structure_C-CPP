@@ -1,7 +1,7 @@
 #include "../API/Tree_Advanced_B+_Tree.h"
 
 #include <iostream>
-#include <format>
+#include <string>
 
 static bool Element_Greater(int a, int b)
 {
@@ -89,6 +89,50 @@ static bool binary_search(int* keys, int key, int left, int right, int* index)
 	return false;
 }
 
+///返回找目标key时下一个路径孩子节点
+static BPlus_Node* Locate_Child(BPlus_Node* node, int key)
+{
+	if (!node)
+		throw std::runtime_error("Node Unexists");
+	for (int i = 0; i < node->count; i++)
+	{
+		if (node->keys[i] < key)
+			continue;
+		if (key <= node->keys[i])
+			return node->child[i];
+	}
+	return node->child[node->count];
+}
+///返回key在叶子节点插入的位置索引，已经存在时返回-1
+static int Locate_Key(BPlus_Node* node, int key)
+{
+	if (!node)
+		throw std::runtime_error("Node Unexists");
+	
+	for (int i = 0; i < node->count; ++i)
+	{
+		if (node->keys[i] < key)
+			continue;
+		if (key == node->keys[i])
+			return -1;
+		if (key < node->keys[i])
+			return i - 1;
+	}
+	return 0;
+}
+static int Locate_Key_Delete(BPlus_Node* node, int key)
+{
+	if (!node)
+		throw std::runtime_error("Node Unexists");
+
+	for (int i = 0; i < node->count; ++i)
+	{
+		if (key == node->keys[i])
+			return i;
+	}
+	return -1;
+}
+
 //元素的插入以及分裂操作
 static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int value)
 {
@@ -114,24 +158,14 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 	while (node->count >= tree->max)
 	{
 		BPlus_Node* sibling;
-		/*分裂结点*/
-		if (!node->child)// 叶子结点分裂
-			sibling = BPlus_Node_Create_Leaf(tree->max);
-		else// 内部结点分裂
-			sibling = BPlus_Node_Create_Branch(tree->max);
-
-		if (!sibling)
-			throw std::exception("Node is nullptr");
 		// 拷贝数据
 		mid = node->count / 2;//中间位置索引
 		temp = node->keys[mid];//中间元素
-		if (!node->child)//叶子节点
+		/*分裂结点*/
+		if (!node->child)// 叶子结点分裂
 		{
+			sibling = BPlus_Node_Create_Leaf(tree->max);
 			sibling->count = node->count - mid;
-			//memcpy(sibling->keys, node->keys + mid, sizeof(int) * (sibling->count));
-			//memcpy(sibling->data, node->data + mid, sizeof(int) * (sibling->count));
-			//memset(node->keys+mid, 0, sizeof(int) * (node->count-mid));
-			//memset(node->data +mid, 0, sizeof(int) * (node->count-mid));
 
 			for (int i = 0; i < sibling->count; ++i)
 			{//拷贝元素和数据
@@ -144,28 +178,26 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 			sibling->next = node->next;
 			node->next = sibling;
 		}
-		else//索引节点
-		{
+		else// 索引结点分裂
+		{///注意：索引节点的分裂会把分裂节点向上移动，而不是像子节点一样存右子树的第一个元素
+			sibling = BPlus_Node_Create_Branch(tree->max);
+			sibling->count = node->count - mid - 1;//分裂元素不给兄弟节点
 
-			sibling->count = node->count - mid;
-
-			//memcpy(sibling->keys, node->keys + mid + 1, sizeof(int) * (sibling->count));
-			//memcpy(sibling->child, node->child + mid + 1, sizeof(BPlus_Node*) * (node->count - mid));
-			
 			/// 将分割出去的孩子转交给新分裂的兄弟节点
 			for (int i = 0; i < sibling->count; ++i)
 			{//拷贝元素和数据
-				sibling->keys[i] = node->keys[mid + i];
+				sibling->keys[i] = node->keys[mid + i + 1];
 				sibling->child[i] = node->child[mid + i + 1];
 				sibling->child[i]->parent = sibling;
 
-				node->keys[mid + i]  = 0;//置空
+				node->keys[mid + i + 1] = 0;//置空
 				node->child[mid + i + 1] = nullptr;
 			}
+			//sibling->child[sibling->count] = node->child[node->count];
+			sibling->child[sibling->count] = node->child[node->count];
+			sibling->child[sibling->count]->parent = sibling;
 
-			
 		}
-
 		node->count = mid;
 
 		///被分裂的元素插入父节点
@@ -188,9 +220,11 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 			parent->keys[i] = parent->keys[i - 1];
 			parent->child[i + 1] = parent->child[i];
 		}
-
+		
 		parent->keys[i] = temp;
-		parent->child[i + 1] = sibling;
+		if (parent->child[0]->child)//若子节点为索引节点
+			node->keys[mid] = 0;
+		parent->child[i+1] = sibling;
 		parent->count++;
 
 		sibling->parent = parent;
@@ -222,26 +256,37 @@ void BPlus_Tree_Insert(BPlus_Tree* tree, int key, int value)
 	/// 先找到插入的叶子节点，再再叶子节点中找插入位置索引
 	///————————————————————————————————————————————————————————
 
-	//先查找索引节点
-	bool found;
+	////先查找索引节点
+	//bool found;
+	//while (node->child)
+	//{
+	//	found = binary_search(node->keys, key, 0, node->count - 1, &index);
+	//	if (found)
+	//		index++;
+	//	else if (!node->child[index])
+	//		--index;
+	//	node = node->child[index];
+	//}
+
+	////再定位叶子节点中元素的插入位置(数组位置)
+	//found = binary_search(node->keys, key, 0, node->count - 1, &index);
+	//if (found)/// 插入元素已经存在了
+	//{
+	//	//throw std::exception("Element Already Existed");
+	//	std::cout << "Element Already Existed" << std::endl;
+	//	return;
+	//}
+
 	while (node->child)
 	{
-		found = binary_search(node->keys, key, 0, node->count - 1, &index);
-		if (found)
-			index++;
-		else if (!node->child[index])
-			--index;
-		node = node->child[index];
+		node = Locate_Child(node, key);
+		if (!node)
+			throw std::runtime_error("Node Unexists");
 	}
 
-	//再定位叶子节点中元素的插入位置(数组位置)
-	found = binary_search(node->keys, key, 0, node->count - 1, &index);
-	if (found)/// 插入元素已经存在了
-	{
-		//throw std::exception("Element Already Existed");
-		std::cout << "Element Already Existed" << std::endl;
-		return;
-	}
+	index = Locate_Key(node, key);
+	if (index == -1)
+		return;//已经存在元素了
 
 
 	///找到插入位置后插入元素
@@ -302,12 +347,9 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 	BPlus_Node* left, * right;
 	left = node->child[index];
 	right = node->child[index + 1];
-	if (!left->child)
-	{
-		/*修改左子节点*/
-		//left->keys[left->count] = node->keys[index];
-		//memcpy(left->keys + left->count + 1, right->keys, sizeof(int) * (right->count));
-		//left->count++;
+	if (!left->child)///合并叶子节点
+	{//合并到左子节点
+		
 		for (int i = 0; i < right->count; ++i)
 			left->keys[left->count + i] = right->keys[i];
 
@@ -320,27 +362,57 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 			}
 		}
 
-		//left->count = left->count + right->count + 1;
-		left->count = left->count + right->count;
-	}
-	else
-	{
-		memcpy(left->keys + left->count, right->keys, sizeof(int) * (right->count));
-		memcpy(left->data + left->count, right->data, sizeof(int) * (right->count));
+		left->count += right->count;
 
-		left->count = left->count + right->count;
+		///修改索引节点
+		//删除移动下来的key
+		for (int i = index; i < node->count - 1; i++)
+			node->keys[i] = node->keys[i + 1];
+		node->keys[node->count - 1] = 0;
+
+		//删除左节点的索引(直接覆盖)
+		for (int i = index; i <= node->count - 1; i++)
+			node->child[i] = node->child[i + 1];
+		node->child[node->count] = nullptr;
+		node->count--;
+
+		left->next = right->next;
+	}
+	else///合并索引节点
+	{
+		//从父节点把分割元素移下来
+		left->keys[left->count] = node->keys[index];
+		left->child[left->count + 1] = node->child[index];
+		left->count++;
+
+
+		//把右边元素合并到左边
+		for (int i = 0; i < right->count; ++i)
+		{
+			left->keys[left->count + i] = right->keys[i];
+			right->keys[i] = 0;
+		}
+
+		left->count += right->count;
+		right->count = 0;
+
+		///修改父索引节点
+		//删除移动下来的key
+		for (int i = index; i < node->count - 1; i++)
+			node->keys[i] = node->keys[i + 1];
+		node->keys[node->count - 1] = 0;
+
+		//删除左节点的索引(直接覆盖)
+		for (int i = index; i <= node->count - 1; i++)
+			node->child[i] = node->child[i + 1];
+		node->child[node->count] = nullptr;
+		node->count--;
+
+		left->next = right->next;
 	}
 
 	/*修改父节点*/
-	///删除左节点的索引(直接覆盖)
-	for (int i = index; i < node->count - 1; i++)
-		node->keys[i] = node->keys[i + 1];
-
-	for (int i = index + 1; i < node->count; i++)
-		node->child[i] = node->child[i + 1];
-	node->count--;
-
-	left->next = right->next;
+	
 
 	/*释放右节点*/
 	free(right->keys);
@@ -404,6 +476,7 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 		node->data[i] = node->data[i + 1];
 	}
 	node->count--;
+	node->keys[node->count] = 0;
 
 	parent = node->parent;
 	while (node->count < tree->min && parent)
@@ -455,7 +528,7 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 	{
 		node = tree->root;
 		tree->root = node->child[0];
-		
+
 		///删除头节点后清空孩子的父节点
 		node->child[0]->parent = nullptr;
 		free(node->keys);
@@ -471,23 +544,36 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 	BPlus_Node* node = tree->root;
 	int index;
 	/*先查找到叶子*/
-	bool found = false;
+	//bool found = false;
+	//while (node->child)
+	//{
+	//	found = binary_search(node->keys, key, 0, node->count - 1, &index);
+	//	if (found)
+	//		index++;///定位到右孩子(索引节点存分割节点，分割节点给右孩子)
+	//	node = node->child[index];
+	//}
+	//found = binary_search(node->keys, key, 0, node->count - 1, &index);
+	//if (!found)///找不到直接返回
+	//	return;
+
+
 	while (node->child)
 	{
-		found = binary_search(node->keys, key, 0, node->count - 1, &index);
-		if (found)
-			index++;///定位到右孩子(索引节点存分割节点，分割节点给右孩子)
-		node = node->child[index];
+		node = Locate_Child(node, key);
+		if (!node)
+			throw std::runtime_error("Node Unexists");
 	}
-	found = binary_search(node->keys, key, 0, node->count - 1, &index);
-	if (!found)///找不到直接返回
-		return;
+
+	index = Locate_Key_Delete(node, key);
+	if (index == -1)
+		return;//不存在该元素
 
 	///找到删除位置后删除目标元素
 	_BPlus_Tree_delete(tree, node, index);
 
 	return;
 }
+
 
 
 static void Node_Print(BPlus_Node* node)
@@ -501,6 +587,24 @@ static void Node_Print(BPlus_Node* node)
 		std::cout << node->keys[i];
 	}
 	std::cout << '}';
+	std::cout << '[';
+	if (!node->child)
+		goto END;
+	///深度遍历输出元素
+	for (int i = 0; i < node->count; i++)
+	{
+		//if (!node->child)
+		//	break;
+		if (i != 0)
+			std::cout << ',';
+		std::cout << node->child[i]->keys[0];
+	}
+	std::cout << (node->child[node->count] ? ","+std::to_string(node->child[node->count]->keys[0]) : "");
+END:	
+	std::cout << ']';
+	std::cout << '('
+		<< (!node->parent ? ")" : std::to_string(node->parent->keys[0]) + ")");
+	
 }
 
 static void Traver(BPlus_Node* node)
@@ -580,9 +684,9 @@ static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* no
 
 void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 {
-	
+
 	///以行为单位显示每一层的节点
-	for (int i = 0; i < level-1; ++i)
+	for (int i = 0; i < level - 1; ++i)
 	{
 		///索引节点稍微居中一些显示
 		for (int j = 0; j < (level - i); ++j)
@@ -612,7 +716,7 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 			return;
 		}
 	}
-	
+
 
 }
 
