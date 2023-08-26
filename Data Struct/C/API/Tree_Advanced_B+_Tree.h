@@ -36,7 +36,7 @@ struct BPlus_Tree
 ///初始化orders阶的B+树，默认每个节点最少为orders/2   (n阶节点最多有n-1个元素)
 BPlus_Tree* BPlus_Tree_Init(int orders);
 
-
+void BPlus_Tree_Destroy(BPlus_Tree* tree);
 
 
 //创建新的叶子结点
