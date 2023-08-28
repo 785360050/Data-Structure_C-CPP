@@ -328,6 +328,7 @@ void _bplus_internal_left_rotate(BPlus_Node* node, int index)
 
 	left->keys[left->count] = node->keys[index];
 	left->child[left->count + 1] = right->child[0];
+	left->child[left->count + 1]->parent = left;
 	left->count++;
 
 	node->keys[index] = right->keys[0];
@@ -342,7 +343,7 @@ void _bplus_internal_left_rotate(BPlus_Node* node, int index)
 	right->count--;
 }
 
-//合并结点元素的左右两个子节点
+//合并结点元素的左右两个子节点,index左孩子的索引值
 void _BPlus_Node_merge(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
@@ -357,12 +358,12 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 		left->count += right->count;
 
 		///修改索引元素
-		for (int i = index; i < node->count - 1; i++)
+		for (int i = index; i < node->count - 1 ; i++)
 			node->keys[i] = node->keys[i + 1];
 		node->keys[node->count - 1] = 0;
-
-		//删除左节点的索引(直接覆盖)
-		for (int i = index + 1; i <= node->count; i++)
+		//(合并到左节点不应该删右边的索引吗？)
+		//删除左节点的索引(直接覆盖) (int i = index是否+1有bug)
+		for (int i = index + 1; i <= node->count-1; i++)
 			node->child[i] = node->child[i + 1];
 		node->child[node->count] = nullptr;
 		node->count--;
@@ -373,8 +374,8 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 	{
 		//从父节点把分割元素移下来(这里不需要考虑孩子指针移动)
 		left->keys[left->count] = node->keys[index];
-		//for (int i = index+1; i <= node->count; ++i)
-		//	node->child[i] = node->child[i + 1];
+		if (node->count == 1)//归还被分割索引节点为叶子节点的父节点指向
+			right->child[0]->parent = left;
 		left->count++;
 
 
@@ -428,7 +429,7 @@ void _bplus_leaf_right_rotate(BPlus_Node* node, int index)
 	right = node->child[index + 1];
 
 	for (int i = right->count; i > 0; i--)
-	{
+	{//向后移动，留出插入位置
 		right->keys[i] = right->keys[i - 1];
 		right->data[i] = right->data[i - 1];
 	}
@@ -438,7 +439,7 @@ void _bplus_leaf_right_rotate(BPlus_Node* node, int index)
 
 	left->count--;
 	//node->keys[index] = right->keys[0];
-	node->keys[index] = left->keys[left->count - 1];///parent索引节点改为移动的前一个元素
+	node->keys[index] = right->keys[0];///parent索引节点改为移动的前一个元素
 }
 
 //内部结点的右旋转 左节点的最后一个值到父节点 父节点对应的值到右节点
@@ -454,6 +455,7 @@ void _bplus_internal_right_rotate(BPlus_Node* node, int index)
 	for (int i = right->count + 1; i > 0; i--)
 		right->child[i] = right->child[i - 1];
 	right->child[0] = left->child[left->count];
+	right->child[0]->parent = right;
 	right->count++;
 
 	node->keys[index] = left->keys[left->count - 1];
@@ -466,8 +468,19 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 {
 	BPlus_Node* parent, * sibling;
 
-	///先删除叶子结点的指定的值
 
+
+	///若叶子节点删除第一个元素，则修改对应索引节点的索引值
+	if (index == 0 && !node->child && node->parent)
+	{
+		int i = 0;
+		for (; i < node->parent->count; ++i)
+			if (node->parent->keys[i] == node->keys[index])
+				break;
+		node->parent->keys[i] = node->keys[1];
+	}
+
+	///删除叶子结点的指定的值
 	//从后往前覆盖
 	for (int i = index; i < node->count - 1; i++)
 	{
@@ -523,6 +536,9 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 		parent = node->parent;
 	}
 
+
+		
+
 	///如果根节点的两个孩子合并，将合并后的孩子节点作为新的根节点
 	if (tree->root->count == 0 && tree->root->child != nullptr)
 	{
@@ -577,7 +593,10 @@ static void Node_Print(BPlus_Node* node)
 	std::cout << '}';
 	std::cout << '[';
 	if (!node->child)
+	{
+		std::cout << "Leaf";
 		goto END;
+	}
 	///深度遍历输出元素
 	for (int i = 0; i < node->count; i++)
 	{
@@ -590,8 +609,7 @@ static void Node_Print(BPlus_Node* node)
 	std::cout << (node->child[node->count] ? "," + std::to_string(node->child[node->count]->keys[0]) : "");
 END:
 	std::cout << ']';
-	std::cout << '('
-		<< (!node->parent ? ")" : std::to_string(node->parent->keys[0]) + ")");
+	std::cout << '('<< (!node->parent ? "Root)" : std::to_string(node->parent->keys[0]) + ")");
 
 }
 
