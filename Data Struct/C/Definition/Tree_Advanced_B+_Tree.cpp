@@ -142,6 +142,7 @@ static int Locate_Key(BPlus_Node* node, int key)
 	}
 	return 0;
 }
+///返回key在node中的下标，不存在返回-1
 static int Locate_Key_Delete(BPlus_Node* node, int key)
 {
 	if (!node)
@@ -473,11 +474,17 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 	///若叶子节点删除第一个元素，则修改对应索引节点的索引值
 	if (index == 0 && !node->child && node->parent)
 	{
-		int i = 0;
-		for (; i < node->parent->count; ++i)
-			if (node->parent->keys[i] == node->keys[index])
-				break;
-		node->parent->keys[i] = node->keys[1];
+		BPlus_Node* node_index=node->parent;
+		int key_target = node->keys[index];
+		int i = Locate_Key_Delete(node_index, key_target);
+		while (i>=node_index->count||i==-1)
+		{//一直向上层找key所在的节点
+			node_index = node_index->parent;
+			i= Locate_Key_Delete(node_index, key_target);
+		}
+		//找到后覆盖数据
+		node_index->keys[i] = node->keys[1];
+		
 	}
 
 	///删除叶子结点的指定的值
@@ -514,6 +521,7 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 			}
 			else///兄弟俩节点都没有富余元素时，合并兄弟为一个
 				_BPlus_Node_merge(parent, 0);
+
 		}
 		else///只有左兄弟、或两边都有兄弟，向左边兄弟拿元素
 		{
@@ -582,6 +590,7 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 
 static void Node_Print(BPlus_Node* node)
 {
+	std::vector<int> temp;
 	std::cout << '{';
 	///深度遍历输出元素
 	for (int i = 0; i < node->count; i++)
@@ -589,27 +598,35 @@ static void Node_Print(BPlus_Node* node)
 		if (i != 0)
 			std::cout << ',';
 		std::cout << node->keys[i];
+		temp.push_back(node->keys[i]);
 	}
 	std::cout << '}';
-	std::cout << '[';
-	if (!node->child)
-	{
-		std::cout << "Leaf";
-		goto END;
-	}
-	///深度遍历输出元素
-	for (int i = 0; i < node->count; i++)
-	{
-		//if (!node->child)
-		//	break;
-		if (i != 0)
-			std::cout << ',';
-		std::cout << node->child[i]->keys[0];
-	}
-	std::cout << (node->child[node->count] ? "," + std::to_string(node->child[node->count]->keys[0]) : "");
-END:
-	std::cout << ']';
-	std::cout << '('<< (!node->parent ? "Root)" : std::to_string(node->parent->keys[0]) + ")");
+
+	///Details to Debug
+//	std::cout << '[';
+//	if (!node->child)
+//	{
+//		std::cout << "Leaf";
+//		goto END;
+//	}
+//	///深度遍历输出元素
+//	for (int i = 0; i < node->count; i++)
+//	{
+//		//if (!node->child)
+//		//	break;
+//		if (i != 0)
+//			std::cout << ',';
+//		std::cout << node->child[i]->keys[0];
+//		
+//		//if (i == 0)
+//		//	continue;
+//		//if (temp[i-1] != node->child[i]->keys[0])
+//		//	throw std::logic_error("Errors Occured");
+//	}
+//	std::cout << (node->child[node->count] ? "," + std::to_string(node->child[node->count]->keys[0]) : "");
+//END:
+//	std::cout << ']';
+//	std::cout << '('<< (!node->parent ? "Root)" : std::to_string(node->parent->keys[0]) + ")");
 
 }
 
