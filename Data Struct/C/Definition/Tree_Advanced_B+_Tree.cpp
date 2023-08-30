@@ -87,27 +87,27 @@ void BPlus_Tree_Destroy(BPlus_Tree* tree)
 
 
 
-//二分查找 找到数组中指定的key的位置 如果存在返回1 否则返回0
-//如果找到索引为该值的位置 否则返回右邻的值的位置(child的位置)
-static bool binary_search(int* keys, int key, int left, int right, int* index)
-{
-	int mid;
-	while (left <= right)
-	{
-		mid = (left + right) / 2;
-		if (keys[mid] == key)
-		{
-			*index = mid;
-			return true;
-		}
-		if (Element_Greater(keys[mid], key))
-			right = mid - 1;
-		else
-			left = mid + 1;
-	}
-	*index = left;
-	return false;
-}
+////二分查找 找到数组中指定的key的位置 如果存在返回1 否则返回0
+////如果找到索引为该值的位置 否则返回右邻的值的位置(child的位置)
+//static bool binary_search(int* keys, int key, int left, int right, int* index)
+//{
+//	int mid;
+//	while (left <= right)
+//	{
+//		mid = (left + right) / 2;
+//		if (keys[mid] == key)
+//		{
+//			*index = mid;
+//			return true;
+//		}
+//		if (Element_Greater(keys[mid], key))
+//			right = mid - 1;
+//		else
+//			left = mid + 1;
+//	}
+//	*index = left;
+//	return false;
+//}
 
 ///返回找目标key时下一个路径孩子节点
 static BPlus_Node* Locate_Child(BPlus_Node* node, int key)
@@ -354,7 +354,10 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 	{//合并到左子节点
 
 		for (int i = 0; i < right->count; ++i)
+		{
 			left->keys[left->count + i] = right->keys[i];
+			left->data[left->count + i] = right->data[i];
+		}
 
 		left->count += right->count;
 
@@ -628,6 +631,18 @@ static void Node_Print(BPlus_Node* node)
 //	std::cout << ']';
 //	std::cout << '('<< (!node->parent ? "Root)" : std::to_string(node->parent->keys[0]) + ")");
 
+	if (node->child)
+		return;
+	std::cout << '<';
+	///深度遍历输出元素
+	for (int i = 0; i < node->count; i++)
+	{
+		if (i != 0)
+			std::cout << ',';
+		std::cout << node->data[i];
+			
+	}
+	std::cout << '>';
 }
 
 static void Traver(BPlus_Node* node)
@@ -741,6 +756,27 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 	}
 
 
+}
+
+int BPlus_Tree_Search(BPlus_Tree* tree, int key)
+{
+	if (!tree)
+		throw std::exception("tree is nullptr");
+
+	auto node = tree->root;
+	while (node->child)
+	{
+		node = Locate_Child(node, key);
+		if (!node)
+			throw std::runtime_error("Node Unexists");
+	}
+
+	//这个函数命名不友好，晚点改一下
+	int index = Locate_Key_Delete(node, key);
+	if (index != -1)
+		return node->data[index];
+	else
+		return -1;
 }
 
 void BPlus_Tree_Show(BPlus_Tree* tree)

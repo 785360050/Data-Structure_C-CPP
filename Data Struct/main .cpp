@@ -528,6 +528,9 @@ void Test_BPlus_Tree()
 	//BPlus_Tree_Delete(tree, 21);
 	//BPlus_Tree_Show(tree);
 
+	for(int i=0;i<60;++i)
+		std::cout<<"Key "<<i<<':'<<BPlus_Tree_Search(tree, i)<<std::endl;
+
 	BPlus_Tree_Destroy(tree);
 }
 

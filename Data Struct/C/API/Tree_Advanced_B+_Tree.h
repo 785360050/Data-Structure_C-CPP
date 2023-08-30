@@ -66,5 +66,7 @@ void BPlus_Tree_Insert(BPlus_Tree* tree, int key, int value);
 
 void BPlus_Tree_Delete(BPlus_Tree* tree, int key);
 
+///搜索叶子中key所对应的元素数据
+int BPlus_Tree_Search(BPlus_Tree* tree, int key);
 
 void BPlus_Tree_Show(BPlus_Tree* tree);
