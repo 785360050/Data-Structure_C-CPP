@@ -1,0 +1,914 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Graph_EdgeSet&lt;DataType&gt;" Collapsed="true">
+    <Position X="30" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQIAIAAAAABAAIAAAABAVAAAAAQAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_EdgeSetList\Graph_EdgeSetList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph_Matrix&lt;DataType, ElementType&gt;" Collapsed="true">
+    <Position X="32.25" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAABAAQUAQIAAAAQAABAAAAABAUAAAAAQAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_Matrix\Graph_Matrix.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph_Structure&lt;ElementType, DataType&gt;" Collapsed="true">
+    <Position X="30" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAARAQIAIAAAAAEAAAAgBAEAAAAAQAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_Structure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Liner_List&lt;ElementType, DataType&gt;" Collapsed="true">
+    <Position X="30" Y="29" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAAADAAAAAAgECAAAIAAgAAAAAAAAIAAAABIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Liner_List_ADT&lt;ElementType, DataType&gt;" Collapsed="true">
+    <Position X="30" Y="27.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAAAAAAAAAAAACAAAIAAgAAAAABAAMAAAABIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_ADT.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Link_List&lt;NodeType, DataType&gt;" Collapsed="true">
+    <Position X="27.75" Y="30.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABACAAAKAAAAAAAAACAAAIAAgAAAAAAEAIAAAABIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Link\Link_List.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Link_List_Forward&lt;DataType&gt;" Collapsed="true">
+    <Position X="26.75" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABACAgACAAAAAAAAACAAgIAAgAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Link\Link_List.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Link_List_Double&lt;DataType&gt;" Collapsed="true">
+    <Position X="29" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABACAAACAAAAAAAAACAAAIAAkAAAABAAAAAAAAAIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Link\Link_List.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequential_List&lt;DataType&gt;" Collapsed="true">
+    <Position X="32.25" Y="30.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAIAAAACEAAJAAgAAAAAAAgMAAAABIAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequential_List_Array&lt;DataType&gt;" Collapsed="true">
+    <Position X="31.25" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequential_List_Vector&lt;DataType&gt;" Collapsed="true">
+    <Position X="33.5" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBAAAAAAABAAAAAAACAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_List\Liner_List_Sequential\Liner_List_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Link_Queue&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="21.5" Y="30.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAEABBAAAAAAAAACAEAAAAAAAAAAAAgABAAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Queue\Liner_Queue_Linked\Liner_Queue_Linked.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Link_Stack&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="13.75" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAgCAAEAAAAgABAAAAAAAABhAAAACAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_Linked\Liner_Stack_Linked.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequence_Stack&lt;DataType&gt;" Collapsed="true">
+    <Position X="18.25" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAACAAAgAAAhIBAAAAEAAABgAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequence_Stack_Full_Ascending&lt;DataType&gt;" Collapsed="true">
+    <Position X="16" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAACAAAAAAABABAAAAAQAABAAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequence_Stack_Empty_Decending&lt;DataType&gt;" Collapsed="true">
+    <Position X="18.25" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAACAAAAAAADABAAAAAAAABgAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sequence_Stack_Full_Decending&lt;DataType&gt;" Collapsed="true">
+    <Position X="20.5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAQCAAAAAAABABAAAAAAAABgAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_Sequential\Liner_Stack_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="List_Node_SingleWay&lt;DataType&gt;">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\List_Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="List_Node_DoubleWay&lt;DataType&gt;">
+    <Position X="19.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAEAQAAAAAAAAIAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\List_Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="String" Collapsed="true">
+    <Position X="43.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAQEAAAAAAEAEAAAEAIQAAAAAAgAA=</HashCode>
+      <FileName>C++\Liner_Structure\String\String.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Monitor" Collapsed="true">
+    <Position X="40" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Monitor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node&lt;DataType&gt;">
+    <Position X="12.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAIAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>C++\Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataStructure" Collapsed="true">
+    <Position X="43.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Liner_List&lt;DataType&gt;" Collapsed="true">
+    <Position X="48.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAAAACAAAAAAAAACAAAIAAgAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>C++\Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Structure&lt;NodeType, DataType&gt;" Collapsed="true">
+    <Position X="48.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIIBCAAAAgACABggAAIAAAAAEAAACAAAAQAAAEA=</HashCode>
+      <FileName>C++\Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph" Collapsed="true">
+    <Position X="45.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAAAAAAAAAIAAAAAAAACKQAAAgQBAEABAAQACA=</HashCode>
+      <FileName>C++\Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HashList&lt;DataType&gt;" Collapsed="true">
+    <Position X="47" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABEAAAACAAAAABAAAAgARBAQAAAA=</HashCode>
+      <FileName>C++\Set_Structure\Set_Hash_LinearDetection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="14.75" Y="29.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAEAAMACAAAIAAABAAgAAAAQCAAFAAACARAAACBAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node_BinaryThreadTree&lt;DataType&gt;">
+    <Position X="12.75" Y="6.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAIAAAAAAAAAAAAAAAIAAAAQAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Binary_Tree_Thread\Node_BinaryThreadTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node_BinaryTree&lt;DataType&gt;">
+    <Position X="15.25" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Node_BinaryTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node_BPlus&lt;KeyType, DataType&gt;" Collapsed="true">
+    <Position X="41.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAABAQAAEAAAAQAAAIAoQCAAQAAIAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\Node_BPlus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_BPlus&lt;KeyType, DataType&gt;" Collapsed="true">
+    <Position X="47" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAABAABAAAAAAAgoABAAAAFAAAAACAQAAAQFABA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Plus\B_Plus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="B_Plus&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="40" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgCFAAAAEAAAAAAgAgAAAAAAAAgAgAAAAAAQAgA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\encapsulation\encapsulation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Normal&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="16" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAIBCAAAIAAABAAgQAAASAEAEAAACIBgAADAAIA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Normal Tree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeNode_HighOrder_ChildSibling&lt;DataType&gt;">
+    <Position X="3.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIBAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_ChildSibling\TreeNode_HighOrder_ChildSibling.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeNode_HighOrder_Child&lt;DataType&gt;">
+    <Position X="5.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAEAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Child\TreeNode_HighOrder_Child.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Advanced_Child&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="13.75" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAIBAAAAIAAABRAgQAAAQAAAEAgACIFAAADAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Child\Tree_HighOrder_Child.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_HighOrder_Parent&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="16" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAAAIBAAAAIAACARAgQAAASAAAEAAACIFAAABAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_Parent\Tree_HighOrder_Parent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_HighOrder_ChildSibling&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="18.25" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIAIBAAAAIAAAABAgQAAAQAAAEAAACIBQAABAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\Normal Tree\Tree_HighOrder_ChildSibling\Tree_HighOrder_ChildSibling.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BinaryTree_Thread&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="15.75" Y="31" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAQIAAAAAIAEAAAIAAAAAACAAEQAAAABAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Binary_Tree_Thread\Binary_Tree_Thread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Binary_Heap&lt;DataType&gt;" Collapsed="true">
+    <Position X="41.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQgAAAAiAAAwAEAAgAAAQAAAAACAAgEQAAABAQE=</HashCode>
+      <FileName>C++\Tree_Structure\Heap\Binary_Heap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary_Normal&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="13.5" Y="31" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAAIBAAAAIBAABAAAQAABACACECAAAIBAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Normal\Tree_Binary_Normal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary_Search_Normal&lt;DataType, KeyType, NodeType&gt;" Collapsed="true">
+    <Position X="23.75" Y="26" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAAAAAAAABAAAgACDAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Binary_Tree_Search_Normal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary_Search&lt;DataType, KeyType, NodeType&gt;" Collapsed="true">
+    <Position X="26" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABEAAAACAAAIECABACwAAAAAKAAAAAACARgAACAAgA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node_Binary_Search_Balance&lt;DataType, KeyType&gt;">
+    <Position X="10" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAQAQAAAgAAAAAAAAIAAAgAAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Node_Binary_Search_Balance.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary_Search_AVL&lt;DataType, KeyType, NodeType&gt;" Collapsed="true">
+    <Position X="26" Y="26" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAECAAAAIAAAAAAgAABAAAAAIEAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_AVL\Tree_Binary_Search_AVL.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree_Binary_Search_RBT&lt;DataType, KeyType, NodeType&gt;" Collapsed="true">
+    <Position X="28.25" Y="26" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgABAAAAAEAEBAAICAAAAAAAAAAAgAAAAAAAQAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Tree_Binary_Search_BRT.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MergeFindSet&lt;DataType&gt;" Collapsed="true">
+    <Position X="24.75" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAACQAIAAAMAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\MergeFindSet\MergeFindSet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MergeFindSet_ADT&lt;DataType&gt;" Collapsed="true">
+    <Position X="24.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAMAQAAAAAAAACAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\MergeFindSet\MergeFindSet_ADT.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MergeFindSet_QuickMerge&lt;DataType&gt;" Collapsed="true">
+    <Position X="25.75" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAEAAAAAACAAAIAAACAAAAAMAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickMerge.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeNode_HighOrder&lt;DataType&gt;">
+    <Position X="4.25" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAIAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\TreeNode_HighOrder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree&lt;NodeType, DataType&gt;" Collapsed="true">
+    <Position X="45.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAAIACACAIAAABAAgQAAACAAAEAAACARAQADAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeNode&lt;DataType&gt;">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAABAAAAAEAACAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Result" Collapsed="true">
+    <Position X="41.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>C\Definition\Tree_Advanced_B_Tree.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TQueue" Collapsed="true">
+    <Position X="41.75" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAACAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\Definition\Tree_Binary.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TStack" Collapsed="true">
+    <Position X="45.25" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\Definition\Tree_Binary.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Edge_AdjacencyList" Collapsed="true">
+    <Position X="47" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAABAAAAAAAAAAAAAAAAAAgAAAAAAIAAAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_AdjacencyList\Edge_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graph_AdjacencyList&lt;DataType, ElementType&gt;" Collapsed="true">
+    <Position X="27.75" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAEAAAQAAIAAAAACABAAAAABAEAAAAAQAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_AdjacencyList\Graph_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vertex_AdjacencyList&lt;DataType&gt;" Collapsed="true">
+    <Position X="47" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAIAAQAAAAAAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_AdjacencyList\Vertex_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vertex_Matrix&lt;DataType&gt;" Collapsed="true">
+    <Position X="48.75" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C++\Graph_Structure\Graph_Matrix\Vertex_Matrix.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Queue&lt;DataType&gt;" Collapsed="true">
+    <Position X="22.75" Y="29" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAEACBAAAAAAEAACAAAQAAAAAAABgAIABAAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Queue\Liner_Queue.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Queue_ADT&lt;DataType&gt;" Collapsed="true">
+    <Position X="22.75" Y="27.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAEAABAAAAAAAAACAAAAAAAAAAABAAIABAIAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Queue\Liner_Queue_ADT.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Sequence_Queue&lt;DataType&gt;" Collapsed="true">
+    <Position X="23.75" Y="30.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAABEABBAAAAAAAAACAAIAAAAAAAAAAEAABAAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Liner_Queue_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Sequence_Queue_Tag&lt;DataType&gt;" Collapsed="true">
+    <Position X="23.75" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAEAAAAAAAAAAAACAAAAAAiAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Queue\Liner_Queue_Sequential\Liner_Queue_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Stack&lt;DataType&gt;" Collapsed="true">
+    <Position X="17" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAACACAAAAAAAhAAAAAAAAhgAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Stack_ADT&lt;DataType&gt;" Collapsed="true">
+    <Position X="17" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAACAAAAAAAAABAAAACAAABgAAAAAAAg=</HashCode>
+      <FileName>C++\Liner_Structure\Liner_Stack\Liner_Stack_ADT.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HashNode&lt;DataType&gt;" Collapsed="true">
+    <Position X="41.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAEAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C++\Set_Structure\Set_Hash_LinkAddress.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HashList_Link&lt;DataType&gt;" Collapsed="true">
+    <Position X="48.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAABEAACACAAAAgBAAAAAAQBAAAAAA=</HashCode>
+      <FileName>C++\Set_Structure\Set_Hash_LinkAddress.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="B_Node&lt;DataType&gt;" Collapsed="true">
+    <Position X="48.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAABAAEAEAAAAAAAAAABAAAAAAAABAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B_Node.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Tree_Advanced_B&lt;DataType, NodeType&gt;" Collapsed="true">
+    <Position X="43.5" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAIBABAAAAEAAABMAgAhAAABlAAAAAgAAAAAAQAgA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node_Binary_Search_Normal&lt;DataType, KeyType&gt;">
+    <Position X="7.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Node_Binary_Search_Normal.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node_Binary_Search&lt;DataType, KeyType&gt;">
+    <Position X="9.75" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAEAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Node_Binary_Search.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node_Binary_Search_RB&lt;DataType, KeyType&gt;">
+    <Position X="12.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAABCAAAAAAAAAAAIAAAgAAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Node_Binary_Search_RB.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MergeFindSet_QuickFind&lt;DataType&gt;" Collapsed="true">
+    <Position X="23.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAABAAAAAAAAAAAAAMAQAAAAAAAAAEAAA=</HashCode>
+      <FileName>C++\Tree_Structure\MergeFindSet\MergeFindSet_QuickFind.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SearchList" Collapsed="true">
+    <Position X="43.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAQAAAAAAA=</HashCode>
+      <FileName>C\Algorithm\Search_Static_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Element" Collapsed="true">
+    <Position X="48.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\Algorithm\Sort_TestCase.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SortList" Collapsed="true">
+    <Position X="48.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\Algorithm\Sort_TestCase.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AcrossList_Edge" Collapsed="true">
+    <Position X="37.5" Y="28.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAIAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AcrossLinker.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AcrossList_Vertex" Collapsed="true">
+    <Position X="14.5" Y="40.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAYAAABAAA=</HashCode>
+      <FileName>C\API\Graph_AcrossLinker.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AcrossList" Collapsed="true">
+    <Position X="40" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AcrossLinker.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AdjacencyList_Edge" Collapsed="true">
+    <Position X="36.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAAAAIAAAA=</HashCode>
+      <FileName>C\API\Graph_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AdjacencyList_Vertex" Collapsed="true">
+    <Position X="43.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAIAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AdjacencyList" Collapsed="true">
+    <Position X="41.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAQAAIAAAAAFAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graph_EdgeSet_Edge" Collapsed="true">
+    <Position X="41.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAECAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_EdgeSetList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graph_EdgeSet" Collapsed="true">
+    <Position X="40" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAQAAIAAAAAEAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_EdgeSetList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graph_matrix_Vertex" Collapsed="true">
+    <Position X="45.25" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_matrix.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graph_matrix" Collapsed="true">
+    <Position X="43.5" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAQAAIAAAAAFAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_matrix.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HashList" Collapsed="true">
+    <Position X="47" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAQAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Hash.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HashNode" Collapsed="true">
+    <Position X="43.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Hash.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HashList_Link" Collapsed="true">
+    <Position X="40" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Hash.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node" Collapsed="true">
+    <Position X="18.5" Y="38.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Link.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="head" Collapsed="true">
+    <Position X="34.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Link.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SequentialList" Collapsed="true">
+    <Position X="34.5" Y="27.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAQAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SeqQueue" Collapsed="true">
+    <Position X="45.25" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAACAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_Queue.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="QueNode" Collapsed="true">
+    <Position X="48.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C\API\Liner_Queue.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LinkQueue" Collapsed="true">
+    <Position X="45.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAEAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_Queue.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SeqStack" Collapsed="true">
+    <Position X="47" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_Stack.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LinkStack" Collapsed="true">
+    <Position X="47" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C\API\Liner_Stack.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BPlus_Node" Collapsed="true">
+    <Position X="43.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAABABACAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>C\API\Tree_Advanced_B+_Tree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BPlus_Tree" Collapsed="true">
+    <Position X="45.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Advanced_B+_Tree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="B_Node" Collapsed="true">
+    <Position X="47" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAEAEAAAAAAAAAAAAAgAAAAABAAA=</HashCode>
+      <FileName>C\API\Tree_Advanced_B_Tree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="B_Tree" Collapsed="true">
+    <Position X="40" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Advanced_B_Tree.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TreeNode" Collapsed="true">
+    <Position X="34.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>C\API\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BinaryTree" Collapsed="true">
+    <Position X="30.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AVLNode" Collapsed="true">
+    <Position X="45.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>C\API\Tree_Binary_AVL.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BinaryTree_AVL" Collapsed="true">
+    <Position X="26.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_AVL.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RBNode" Collapsed="true">
+    <Position X="40" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAEAAAAAABIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>C\API\Tree_Binary_BRT.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Tree_Binary_BRT" Collapsed="true">
+    <Position X="22.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_BRT.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BinaryHeap" Collapsed="true">
+    <Position X="41.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAQAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_Heap.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ThreadNode" Collapsed="true">
+    <Position X="40" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAMAAAAAAASAAAAgAA=</HashCode>
+      <FileName>C\API\Tree_Binary_Thread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BinaryTree_Thread" Collapsed="true">
+    <Position X="18.5" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_Thread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MergeFind_Set_QuickFind" Collapsed="true">
+    <Position X="14.5" Y="35.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_MergeFind_Set.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MergeFind_Set_QuickMerge" Collapsed="true">
+    <Position X="30.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_MergeFind_Set.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="DataType" Collapsed="true">
+    <Position X="40" Y="23.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Global Variables.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Edge_AcrossList" Collapsed="true">
+    <Position X="37.5" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AcrossLinker.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vertex_AcrossList" Collapsed="true">
+    <Position X="14.5" Y="38.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AcrossLinker.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Edge_Adj" Collapsed="true">
+    <Position X="36.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Graph_AdjacencyList.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ListNode" Collapsed="true">
+    <Position X="18.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Link.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LinkList" Collapsed="true">
+    <Position X="34.5" Y="34.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Link.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SeqList" Collapsed="true">
+    <Position X="34.5" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Liner_List_Sequential.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TNode" Collapsed="true">
+    <Position X="34.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BTree" Collapsed="true">
+    <Position X="30.5" Y="34.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BTree_AVL" Collapsed="true">
+    <Position X="26.5" Y="34.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_AVL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="RBTree" Collapsed="true">
+    <Position X="22.5" Y="34.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_BRT.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BTree_Thread" Collapsed="true">
+    <Position X="18.5" Y="33.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_Binary_Thread.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MFSet_QuickFind" Collapsed="true">
+    <Position X="14.5" Y="33.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_MergeFind_Set.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MFSet_QuickMerge" Collapsed="true">
+    <Position X="30.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C\API\Tree_MergeFind_Set.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="41.75" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Property" Collapsed="true">
+    <Position X="43.5" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C++\Tree_Structure\Heap\Binary_Heap.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Colour" Collapsed="true">
+    <Position X="40" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Tree_Binary_Search_BRT\Node_Binary_Search_RB.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

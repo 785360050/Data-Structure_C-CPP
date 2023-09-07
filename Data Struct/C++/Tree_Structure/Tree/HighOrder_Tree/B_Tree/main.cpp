@@ -62,7 +62,7 @@ void Test_BPlus_Tree()
 void main()
 {
 	SetEncode(65001);//设置控制台为utf-8编码格式
-	//Test_B_Tree();
-	Test_BPlus_Tree();
+	Test_B_Tree();
+	//Test_BPlus_Tree();
 }
 
