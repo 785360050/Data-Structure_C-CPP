@@ -16,56 +16,350 @@
 ///		非最底层的索引节点分割元素时，不同于最底层索引节点，需要像B-树一样将分割元素移到上层
 ///		(这样效果是高层索引元素也一一对应叶子的右孩子首元素key)
 ///		
-/// 
+/// 注：key在同一个实例的叶子节点中中唯一，插入已存在的key无效
 /// </summary>
 
-template <typename KeyType,typename DataType>
-struct BPlus_Node
-{
-	KeyType* keys;			  // 主键 最大max个 最小min个
-	DataType* data;		  // 真实数据  最大max个 最小min个 对于内部结点 data是nullptr
-	BPlus_Node** child; // 子节点 最大max+1个 最小min+1个
-	BPlus_Node* next;	  // 指向兄弟结点 仅仅是叶子结点的时候才有值
-	BPlus_Node* parent;
-	int count;			  // 当前元素个数
-};
+#include <vector>
+#include <optional>
 
+#include "B+_Node.hpp"
 
 ///索引节点元素，取该元素右子树的最小元素(即分割元素)
-template <typename KeyType, typename DataType,size_t Order>
+template
+<
+	typename DataType,
+	typename KeyType = int,
+	int orders = 5
+>
 class BPlus_Tree
 {
 private:
-	BPlus_Node* root;
-	size_t max;///最大阶数
-	constexpr size_t min{ max / 2 };///最小阶数(默认写死为 max / 2)
+	BPlus_Node* root;	///根节点
+	constexpr int element_max{ orders };///最大元素个数(平衡后为orders-1，多余的一个用于插入时预留给已经满的节点)
+	constexpr int element_min{ orders / 2 };///最少元素个数(默认写死为 orders / 2)
 
 public:
 	///初始化orders阶的B+树，默认每个节点最少为orders/2   (n阶节点最多有n-1个元素)
-	BPlus_Tree() = default;
-	~BPlus_Tree() = default;
+	BPlus_Tree()
+	{
+		if(orders<=2)
+			throw std::logic_error("Invalid Tree Orders: orders <= 2")
+	}
+	~BPlus_Tree()
+	{///层次遍历释放节点
+		std::queue<BPlus_Node*> queue;
+		int i = 0;
+		queue.push(tree->root);
+		while (!queue.empty())
+		{
+			auto node = queue.front();
+			if (node->child)
+				for (int i = 0; i <= node->count; ++i)
+					queue.push(node->child[i]);
+			queue.pop();
+			delete node;
+			++i;
+		}
+		std::cout << "Node Deleted Count: " << i << std::endl;
+
+	}
 	//BPlus_Tree* BPlus_Tree_Init(int orders);
 	//void BPlus_Tree_Destroy(BPlus_Tree* tree);
 
-private:
+private: ///Utilities
 	//创建新的内部结点
-	BPlus_Node* Create_Branch();
+	BPlus_Node_Branch* Create_Branch()
+	{
+		return new BPlus_Node_Branch(element_max);
+	}
 	//创建新的叶子结点
-	BPlus_Node* Create_Leaf();
+	BPlus_Node_Leaf* Create_Leaf()
+	{
+		return new BPlus_Node_Leaf(element_max);
+	}
+	//比较两个key的大小，a>b=true
+	bool Key_Greater(const KeyType a,const KeyType b)
+	{
+		return a > b;
+	}
+
+
+
+	/// 向下层找key所在的节点，返回key所在的下层节点
+	BPlus_Node* Locate_Child(BPlus_Node* node, int key)
+	{
+		if (!node)
+			throw std::runtime_error("Node Unexists");
+		for (int i = 0; i < node->count; i++)
+		{
+			if (node->keys[i] < key)
+				continue;
+			if (key < node->keys[i])
+				return node->child[i];
+			else
+				return node->child[i + 1];
+		}
+		return node->child[node->count];
+	}
+	///返回key在叶子节点插入的位置索引，已经存在时返回-1
+	std::optional<int> Locate_Index_KeyInsert(BPlus_Node* node, int key)
+	{
+		if (!node)
+			throw std::runtime_error("Node Unexists");
+
+		for (int i = 0; i < node->count; ++i)
+		{
+			if (node->keys[i] < key)
+				continue;
+			if (key == node->keys[i])
+				return -1;
+			if (key < node->keys[i])
+				return i - 1;
+		}
+		return 0;
+	}
+	///返回key在node中的下标，不存在返回-1
+	std::optional<int> Locate_IndexOfKey(BPlus_Node* node, int key)
+	{
+		if (!node)
+			throw std::runtime_error("Node Unexists");
+
+		for (int i = 0; i < node->count; ++i)
+		{
+			if (key == node->keys[i])
+				return i;
+		}
+		return std::nullopt;
+	}
+
+
+private:///元素插入相关
+	//元素的插入以及分裂操作逻辑
+
+	/// <summary>
+	/// 将元素key-value插入到叶子节点node中
+	/// </summary>
+	/// <param name="node">一定是叶子节点</param>
+	void _BPlus_Tree_Insert( BPlus_Node* node, KeyType key, DataType value)
+	{
+		BPlus_Node* parent;
+		int mid;
+		int temp;
+		int i;
+
+		///先插入到叶子节点
+		//向后移动元素
+		for (i = node->count; i > 0 && Key_Greater(node->keys[i - 1], key); i--)
+		{
+			node->keys[i] = node->keys[i - 1];
+			node->data[i] = node->data[i - 1];
+		}
+		//插入新元素
+		node->keys[i] = key;
+		node->data[i] = value;
+		node->count++;
+
+
+		///节点过载时分裂
+		while (node->count >= element_max)
+		{
+			BPlus_Node* sibling;
+			// 拷贝数据
+			mid = node->count / 2;//中间位置索引
+			temp = node->keys[mid];//中间元素
+			/*分裂结点*/
+			if (!node->child)// 叶子结点分裂
+			{
+				sibling = Create_Leaf();
+				sibling->count = node->count - mid;
+
+				for (int i = 0; i < sibling->count; ++i)
+				{//拷贝元素和数据
+					sibling->keys[i] = node->keys[mid + i];
+					sibling->data[i] = node->data[mid + i];
+					node->keys[mid + i] = node->data[mid + i] = 0;//置空
+				}
+
+				//插入叶子的链式节点
+				sibling->next = node->next;
+				node->next = sibling;
+			}
+			else// 索引结点分裂
+			{///注意：索引节点的分裂会把分裂节点向上移动，而不是像子节点一样存右子树的第一个元素
+				sibling = Create_Branch();
+				sibling->count = node->count - mid - 1;//分裂元素不给兄弟节点
+
+				/// 将分割出去的孩子转交给新分裂的兄弟节点
+				for (int i = 0; i < sibling->count; ++i)
+				{//拷贝元素和数据
+					sibling->keys[i] = node->keys[mid + i + 1];
+					sibling->child[i] = node->child[mid + i + 1];
+					sibling->child[i]->parent = sibling;
+
+					node->keys[mid + i + 1] = 0;//置空
+					node->child[mid + i + 1] = nullptr;
+				}
+				//sibling->child[sibling->count] = node->child[node->count];
+				sibling->child[sibling->count] = node->child[node->count];
+				sibling->child[sibling->count]->parent = sibling;
+
+			}
+			node->count = mid;
+
+			///被分裂的元素插入父节点
+			parent = node->parent;
+			if (!parent)//父节点不存在，生成新索引节点(该索引节点为新根节点)
+			{
+				parent = BPlus_Node_Create_Branch(tree->max);
+				if (!parent)
+					throw std::runtime_error("Parent Create Failed");
+				parent->child[0] = node;
+				node->parent = parent;
+				tree->root = parent;
+			}
+
+			///索引元素插入父节点
+
+			//先一边往后移动元素，一边定位插入位置
+			for (i = parent->count; i > 0 && Element_Greater(parent->keys[i - 1], temp); i--)
+			{
+				parent->keys[i] = parent->keys[i - 1];
+				parent->child[i + 1] = parent->child[i];
+			}
+
+			parent->keys[i] = temp;
+			if (parent->child[0]->child)//若子节点为索引节点
+				node->keys[mid] = 0;
+			parent->child[i + 1] = sibling;
+			parent->count++;
+
+			sibling->parent = parent;
+
+			// 向上继续判断是否父节点需要分裂
+			node = parent;
+		}
+	}
+
+
+	
+
+private:///辅助显示的操作
+	//std::vector<std::vector<BPlus_Node*>> buffer;
+	///经典回溯实现遍历生成所有树中的节点信息，存入数组
+	void _BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
+	{
+		static int level = 0;
+		if (!node)
+			return;
+
+		buffer[level].push_back(node);
+		if (!node->child)
+			return;
+
+		for (int i = 0; i <= node->count; ++i)
+		{//遍历所有孩子节点，加入对应层的数组中
+			level++;
+			BackTrace_Traverse(buffer, node->child[i], level);
+			level--;
+		}
+	}
+	///将BackTrace_Traverse生成的buffer格式化输出
+	void _Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
+	{
+
+		///以行为单位显示每一层的节点
+		for (int i = 0; i < level - 1; ++i)
+		{
+			///索引节点稍微居中一些显示
+			for (int j = 0; j < (level - i); ++j)
+				std::cout << '\t';
+
+			for (const auto& node : buffer[i])//索引节点格式化
+			{
+				Node_Print(node);
+				std::cout << '\t';
+			}
+			std::cout << std::endl;
+		}
+
+		///显示最底层的叶子节点
+		auto node = buffer[level - 1][0];
+		while (node)
+		{
+			Node_Print(node);
+			if (node->next)
+			{
+				std::cout << "->";
+				node = node->next;
+			}
+			else
+			{
+				std::cout << "\n";
+				return;
+			}
+		}
+
+
+	}
 
 public:
-	void Element_Insert(KeyType key, DataType element);
+	//插入元素
+	void Element_Insert(KeyType key, DataType element)
+	{
+		///空树创建根(叶子)节点
+		if (!root)
+		{
+			root = Create_Leaf(element_max);
+			if (root)
+				throw std::exception("Root Create Failed");
+		}
 
+		BPlus_Node* node = root;
+		int index;
+
+		///————————————————————————————————————————————————————————
+		/// 定位插入元素的位置
+		/// 先找到插入的叶子节点，再再叶子节点中找插入位置索引
+		///————————————————————————————————————————————————————————
+
+		while (node->child)
+		{
+			node = Locate_Child(node, key);///修改node到下层节点
+			if (!node)
+				throw std::runtime_error("Node Unexists");
+		}
+
+		
+		if (Locate_IndexOfKey(node, key))
+			return;//已经存在元素了，直接取消插入操作
+
+
+		///找到插入位置后插入元素
+		_BPlus_Tree_Insert(node, key, value);
+	}
+	//删除元素
 	void Element_Delete(KeyType key);
 
-	///搜索叶子中key所对应的元素数据
-	DataType Search(KeyType key);
+	//搜索叶子中key所对应的元素数据
+	std::optional<DataType> Search(KeyType key)
+	{
+		auto node = root;
+		while (node->child)
+		{
+			node = Locate_Child(node, key);
+			if (!node)
+				throw std::runtime_error("Node Unexists");
+		}
 
+		if (Locate_IndexOfKey(node, key))//std::optional支持与bool转换,有值时为true
+			return node->data[index];
+		else
+			return std::nullopt;
+	}
+	//显示整个树
 	void Show()
 	{
-		//BPlus_Level_Show(tree->root, 0);
-
-		auto node = tree->root;
+		auto node = root;
 		int level = 1;
 		while (node->child)
 		{//所有叶子节点深度相同
@@ -74,10 +368,10 @@ public:
 		}
 
 		std::vector<BPlus_Node*>* buffer = new std::vector<BPlus_Node*>[level];
-		BackTrace_Traverse(buffer, tree->root, 0);
+		_BackTrace_Traverse(buffer, node, 0);
 
 		std::cout << "Tree=======================================" << std::endl;
-		Print_Tree(buffer, level);
+		_Print_Tree(buffer, level);
 		std::cout << "===========================================" << std::endl;
 		delete[] buffer;
 	}
@@ -85,67 +379,6 @@ public:
 };
 
 
-#include <vector>
-std::vector<std::vector<BPlus_Node*>> buffer;
-int level = 0;
-///回溯实现遍历生成所有树中的节点信息，存入数组
-static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
-{
-	if (!node)
-		return;
-
-	buffer[level].push_back(node);
-	if (!node->child)
-		return;
-
-	for (int i = 0; i <= node->count; ++i)
-	{//遍历所有孩子节点，加入对应层的数组中
-		level++;
-		//if(i==node->count && !node->child[i])
-
-
-		BackTrace_Traverse(buffer, node->child[i], level);
-		level--;
-	}
-}
-
-void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
-{
-
-	///以行为单位显示每一层的节点
-	for (int i = 0; i < level - 1; ++i)
-	{
-		///索引节点稍微居中一些显示
-		for (int j = 0; j < (level - i); ++j)
-			std::cout << '\t';
-
-		for (const auto& node : buffer[i])//索引节点格式化
-		{
-			Node_Print(node);
-			std::cout << '\t';
-		}
-		std::cout << std::endl;
-	}
-
-	///显示最底层的叶子节点
-	auto node = buffer[level - 1][0];
-	while (node)
-	{
-		Node_Print(node);
-		if (node->next)
-		{
-			std::cout << "->";
-			node = node->next;
-		}
-		else
-		{
-			std::cout << "\n";
-			return;
-		}
-	}
-
-
-}
 
 
 

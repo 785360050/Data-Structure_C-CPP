@@ -195,160 +195,17 @@
     <ClInclude Include="C++\Tree_Structure\Tree\Tree_Binary\Tree_Binary_Search\Binary_Tree_Search_Normal\Node_Binary_Search_Normal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C\Algorithm\Graph_CriticalPath.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Graph_MininumSpanningTree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Graph_ShortestPath_Dijkstra.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Graph_TopoSort.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Search_Static_Sequential.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Sort_Insert.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Sort_Merge.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Sort_Swap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\Algorithm\Sort_TestCase.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="C++\Liner_Structure\String\String.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C\API\Tree_Advanced_B+_Tree.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\Tree_B+.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="C\API\Global Variables.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Graph_AcrossLinker.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Graph_AdjacencyList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Graph_EdgeSetList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Graph_matrix.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_List_Hash.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_List_Link.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_List_Sequential.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_Queue.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Liner_Stack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\String.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Advanced_B_Tree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_AVL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_BRT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_Heap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_Search.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_Binary_Thread.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="C\API\Tree_MergeFind_Set.h">
+    <ClInclude Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\B+_Node.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C\Definition\Tree_Advanced_B+_Tree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main .cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Graph_AcrossLinker.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Graph_AdjacencyList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Graph_EdgeSetList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Graph_matrix.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Hash.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Link.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_List_Sequential_Static.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Queue.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Stack_Link.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Liner_Stack_Sequential.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\String.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Advanced_B_Tree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_AVL.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_BRT.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_Heap.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_Search.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_Binary_Thread.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="C\Definition\Tree_MergeFind_Set.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
