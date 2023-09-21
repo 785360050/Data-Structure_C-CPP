@@ -20,6 +20,7 @@
 /// </summary>
 
 #include <vector>
+#include <queue>
 #include <optional>
 
 #include "B+_Node.hpp"
@@ -33,23 +34,25 @@ template
 >
 class BPlus_Tree
 {
+public:
+	using Node_Type = BPlus_Node<KeyType, DataType>;
 private:
-	BPlus_Node* root;	///根节点
-	constexpr int element_max{ orders };///最大元素个数(平衡后为orders-1，多余的一个用于插入时预留给已经满的节点)
-	constexpr int element_min{ orders / 2 };///最少元素个数(默认写死为 orders / 2)
+	Node_Type* root;	///根节点
+	const int element_max{ orders };///最大元素个数(平衡后为orders-1，多余的一个用于插入时预留给已经满的节点)
+	const int element_min{ orders / 2 };///最少元素个数(默认写死为 orders / 2)
 
 public:
 	///初始化orders阶的B+树，默认每个节点最少为orders/2   (n阶节点最多有n-1个元素)
-	BPlus_Tree()
-	{
-		if(orders<=2)
-			throw std::logic_error("Invalid Tree Orders: orders <= 2")
-	}
+	//BPlus_Tree()
+	//{
+	//	if(orders<=2)
+	//		throw std::logic_error("Invalid Tree Orders: orders <= 2")
+	//}
 	~BPlus_Tree()
 	{///层次遍历释放节点
-		std::queue<BPlus_Node*> queue;
+		std::queue<Node_Type*> queue;
 		int i = 0;
-		queue.push(tree->root);
+		queue.push(root);
 		while (!queue.empty())
 		{
 			auto node = queue.front();
@@ -63,17 +66,15 @@ public:
 		std::cout << "Node Deleted Count: " << i << std::endl;
 
 	}
-	//BPlus_Tree* BPlus_Tree_Init(int orders);
-	//void BPlus_Tree_Destroy(BPlus_Tree* tree);
-
+	 
 private: ///Utilities
 	//创建新的内部结点
-	BPlus_Node_Branch* Create_Branch()
+	BPlus_Node_Branch<KeyType,DataType>* Create_Branch()
 	{
 		return new BPlus_Node_Branch(element_max);
 	}
 	//创建新的叶子结点
-	BPlus_Node_Leaf* Create_Leaf()
+	BPlus_Node_Leaf<KeyType, DataType>* Create_Leaf()
 	{
 		return new BPlus_Node_Leaf(element_max);
 	}
@@ -86,7 +87,7 @@ private: ///Utilities
 
 
 	/// 向下层找key所在的节点，返回key所在的下层节点
-	BPlus_Node* Locate_Child(BPlus_Node* node, int key)
+	Node_Type* Locate_Child(Node_Type* node, int key)
 	{
 		if (!node)
 			throw std::runtime_error("Node Unexists");
@@ -102,7 +103,7 @@ private: ///Utilities
 		return node->child[node->count];
 	}
 	///返回key在叶子节点插入的位置索引，已经存在时返回-1
-	std::optional<int> Locate_Index_KeyInsert(BPlus_Node* node, int key)
+	std::optional<int> Locate_Index_KeyInsert(Node_Type* node, int key)
 	{
 		if (!node)
 			throw std::runtime_error("Node Unexists");
@@ -119,7 +120,7 @@ private: ///Utilities
 		return 0;
 	}
 	///返回key在node中的下标，不存在返回-1
-	std::optional<int> Locate_IndexOfKey(BPlus_Node* node, int key)
+	std::optional<int> Locate_IndexOfKey(Node_Type* node, int key)
 	{
 		if (!node)
 			throw std::runtime_error("Node Unexists");
@@ -140,9 +141,9 @@ private:///元素插入相关
 	/// 将元素key-value插入到叶子节点node中
 	/// </summary>
 	/// <param name="node">一定是叶子节点</param>
-	void _BPlus_Tree_Insert( BPlus_Node* node, KeyType key, DataType value)
+	void _BPlus_Tree_Insert(Node_Type* node, KeyType key, DataType value)
 	{
-		BPlus_Node* parent;
+		Node_Type* parent;
 		int mid;
 		int temp;
 		int i;
@@ -163,7 +164,7 @@ private:///元素插入相关
 		///节点过载时分裂
 		while (node->count >= element_max)
 		{
-			BPlus_Node* sibling;
+			Node_Type* sibling;
 			// 拷贝数据
 			mid = node->count / 2;//中间位置索引
 			temp = node->keys[mid];//中间元素
@@ -210,12 +211,12 @@ private:///元素插入相关
 			parent = node->parent;
 			if (!parent)//父节点不存在，生成新索引节点(该索引节点为新根节点)
 			{
-				parent = BPlus_Node_Create_Branch(tree->max);
+				parent = Create_Branch(element_max);
 				if (!parent)
 					throw std::runtime_error("Parent Create Failed");
 				parent->child[0] = node;
 				node->parent = parent;
-				tree->root = parent;
+				root = parent;
 			}
 
 			///索引元素插入父节点
@@ -246,7 +247,7 @@ private:///元素插入相关
 private:///辅助显示的操作
 	//std::vector<std::vector<BPlus_Node*>> buffer;
 	///经典回溯实现遍历生成所有树中的节点信息，存入数组
-	void _BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
+	void _BackTrace_Traverse(std::vector<Node_Type*>*& buffer, Node_Type* node, int level)
 	{
 		static int level = 0;
 		if (!node)
@@ -264,7 +265,7 @@ private:///辅助显示的操作
 		}
 	}
 	///将BackTrace_Traverse生成的buffer格式化输出
-	void _Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
+	void _Print_Tree(std::vector<Node_Type*>*& buffer, int level)
 	{
 
 		///以行为单位显示每一层的节点
@@ -314,7 +315,7 @@ public:
 				throw std::exception("Root Create Failed");
 		}
 
-		BPlus_Node* node = root;
+		Node_Type* node = root;
 		int index;
 
 		///————————————————————————————————————————————————————————
@@ -335,10 +336,13 @@ public:
 
 
 		///找到插入位置后插入元素
-		_BPlus_Tree_Insert(node, key, value);
+		_BPlus_Tree_Insert(node, key, element);
 	}
 	//删除元素
-	void Element_Delete(KeyType key);
+	void Element_Delete(KeyType key)
+	{
+
+	}
 
 	//搜索叶子中key所对应的元素数据
 	std::optional<DataType> Search(KeyType key)
@@ -351,23 +355,25 @@ public:
 				throw std::runtime_error("Node Unexists");
 		}
 
-		if (Locate_IndexOfKey(node, key))//std::optional支持与bool转换,有值时为true
+		auto index = Locate_IndexOfKey(node, key);//std::optional支持与bool转换,有值时为true
+		if(index.has_value())
 			return node->data[index];
 		else
 			return std::nullopt;
 	}
 	//显示整个树
-	void Show()
+	void Show(const std::string& info="")
 	{
 		auto node = root;
 		int level = 1;
-		while (node->child)
+		//while (node->child)
+		while (node->Is_Branch())
 		{//所有叶子节点深度相同
 			++level;
-			node = node->child[0];
+			node = dynamic_cast<BPlus_Node_Branch*>(node)->child[0];
 		}
 
-		std::vector<BPlus_Node*>* buffer = new std::vector<BPlus_Node*>[level];
+		std::vector<Node_Type*>* buffer = new std::vector<Node_Type*>[level];
 		_BackTrace_Traverse(buffer, node, 0);
 
 		std::cout << "Tree=======================================" << std::endl;

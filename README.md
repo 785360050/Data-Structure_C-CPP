@@ -160,11 +160,16 @@ void TestPolymorphic()
 [Data Structure Visualization](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html) helped me a lot in [Black-Red Tree](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)
 
 # In Progress
-- Developing C++ codes by using Object-Oriented
-- Still thinking about how to combine Algorithms with classes
+- Developing C++ codes by using Object-Oriented & Generic Programming
 - Using namespace instead of long function name in CPP project
 - ***NEED MORE TEST CASE***
-- B+ Tree Delete is not Implemented, need some help
+- Considering build project with cmake
+- B+ Tree with C++ Templates
+> More Data Structures  
+> 1. Monotonic Stack
+> 2. Skip List
+> 3. Double Ended Queue
+
 
 
 # Test Case
