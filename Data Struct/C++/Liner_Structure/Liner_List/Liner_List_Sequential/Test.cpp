@@ -6,7 +6,8 @@
 
 
 
-
+#ifndef __LINUX__
+#else
 #include <Windows.h>
 ///修改cmd编码方式
 static bool  SetEncode(int EncodeId = 936)
@@ -21,7 +22,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
-
+#endif
 
 void Test_SeqList_Array()
 {
