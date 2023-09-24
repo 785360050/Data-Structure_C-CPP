@@ -1,116 +1,56 @@
 #pragma once
 
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <random>
+#include <map>
+#include <vector>
 
+#include "Global.hpp"
 
-
-struct Element
+/// @tparam ElementType must be avaiable for std::uniform_int_distribution
+/// @tparam count random value count
+/// @tparam min random min value
+/// @tparam max random max value
+template <typename ElementType, size_t count, size_t min, size_t max>
+struct Test_Case
 {
-    int key;            // 查找表中每个数据元素的关键值
-    void* data;         // 数据的其他区域
-};
+    std::vector<size_t> values;
+    std::map<size_t, size_t> counter;
 
-struct SortList
-{
-    Element* data;      // 存放查找表中数据元素的首地址
-    int length;         // 表元素个数
-};
-
-
-
-
-
-void Element_Swap(Element* x, Element* y)
-{  
-    Element temp;
-    temp.key = x->key;
-    temp.data = x->data;
-
-    x->key = y->key;
-    x->data = y->data;
-
-    y->key = temp.key;
-    y->data = temp.data;
-}
-
-
-
-
-// 产生随机数范围[low,high]
-SortList* generateRandomArray(int num, int begin, int end)
-{
-    SortList* list = new SortList; //(SortList* )malloc(sizeof(SortList));
-    list->length = num;
-    list->data = new Element[num];//(Element* )malloc(sizeof(Element) * num);
-    srand(time(NULL) + 1);
-    for (int i = 0; i < num; ++i) {
-        list->data[i].key = (rand() % (end - begin + 1)) + begin;
-        list->data[i].data = NULL;
-    }
-    return list;
-}
-
-
-SortList* SortList_Copy(SortList* old)
-{
-    SortList* list = (SortList*)malloc(sizeof(SortList));
-    list->length = old->length;
-    list->data = (Element* )malloc(sizeof(Element) * old->length);
-    for (int i = 0; i < old->length; ++i) {
-        list->data[i].key = old->data[i].key;
-        list->data[i].data = old->data[i].data;
-    }
-    return list;
-}
-
-void SortList_Destroy(SortList* list)
-{
-    if (list) {
-        if (list->data) {
-            free(list->data);
-        }
-        free(list);
-    }
-}
-
-static bool Result_Check(SortList* table) 
-{
-    for (int i = 0; i < table->length - 1; ++i) 
+public:
+    Test_Case()
     {
-        if (table->data[i].key > table->data[i + 1].key) 
-            return false;
+        std::default_random_engine generator;
+        std::uniform_int_distribution<ElementType> distribution(min, max);
+
+        values.reserve(count);
+        for (int i = 0; i < count; ++i)
+        {
+            size_t value = distribution(generator);
+            values.emplace_back(value);
+            counter[value]++;
+        }
     }
-    return true;
-}
 
-
-//typedef void (*sort_fun)(SortList*);
-
-void testSort(const char* sortName, void sort_method(SortList*), SortList* table)
-{
-    clock_t start = clock();
-    sort_method(table);///函数作为参数传入实现排序方式的切换实现
-    clock_t end = clock();
-    if (Result_Check(table) == false) {
-        printf("%s failed!\n", sortName);
-        return;
+    // 拷贝待排序的数组给排序函数对象，处理完成后返回排序后的结果
+    template <Sort_Method Method>
+    std::vector<size_t> Sort() const
+    {                                                 //{}构造functor，()调用operator()
+        return Method{}(std::vector<size_t>(values)); // copy array
     }
-    printf("%s cost time: %fs.\n", sortName, (double)(end - start) / CLOCKS_PER_SEC);
-    //printf("%s cost time: %fs.\n", sortName, (double)(end - start));
-}
-
-//显示排序数据集合
-void SortList_Show(const SortList* const list)
-{
-    for (int i = 0; i < list->length; i++)
-        std::cout << list->data[i].key << ' ';
-    std::cout << std::endl;
-}
-
-
-
-
-
-
+    void Show() const
+    {
+        for (const auto &num : values)
+            std::cout << num << ' ';
+        std::cout << std::endl;
+        for (const auto &num : counter)
+            std::cout << num.first << " : " << num.second << std::endl;
+    }
+    void Show_Result(std::vector<size_t> list, const std::string &info = "") const
+    {
+        if (!info.empty())
+            std::cout << "[ " << info << " ]" << std::endl;
+        for (const auto &num : list)
+            std::cout << num << ' ';
+        std::cout << std::endl;
+    };
+};
