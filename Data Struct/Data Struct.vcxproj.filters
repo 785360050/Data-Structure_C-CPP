@@ -209,7 +209,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C++\Tree_Structure\Tree\HighOrder_Tree\B_Tree\main.cpp">
+    <ClCompile Include="C++\Algorithms\Sort\Random.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

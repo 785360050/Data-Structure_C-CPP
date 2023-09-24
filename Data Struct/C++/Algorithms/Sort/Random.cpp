@@ -3,16 +3,15 @@
 #include <random>
 #include <map>
 #include <vector>
-// #include <array>
 
-// #include <concepts>
-// #include <functional>
+ #include <concepts>
+ #include <functional>
 
-// template <typename Method, size_t count>
-// concept Sort_Method = requires(Method method, std::array<size_t, count> list) {
-//     // std::invocable<Method>;
-//     std::invoke(method, list);
-// };
+ template <typename Method,typename Compare=std::less<>>
+ concept Sort_Method = requires(Method method, std::vector<size_t> list) {
+     // std::invocable<Method>;
+     std::invoke(method, list,Compare{});
+ };
 
 void Swap(size_t& x,size_t& y)
 {
@@ -37,16 +36,16 @@ public:
         for (int i = 0; i < count; ++i)
         {
             size_t value = distribution(generator);
-            values[i] = value;
+            values.emplace_back(value);
             counter[value]++;
         }
     }
 
 // 拷贝待排序的数组给排序函数对象，处理完成后返回排序后的结果
-    template <typename Method>
+    template <typename ElementType,Sort_Method Method>
     std::vector<size_t> Sort() const
     {
-        Method method;
+		Method< ElementType> method{};
         return method(std::vector<size_t>(values));//copy array
     }
     void Show() const
@@ -71,19 +70,18 @@ public:
 
 namespace Sort
 {
-    
+    template <typename ElementType, typename Compare = std::less<>>
     struct Insert_Directly
     {
-        // template <size_t count>
-        std::vector<size_t> operator()(std::vector<size_t>& list)
+        std::vector<size_t> operator()(std::vector<size_t>& list,Compare compare=Compare{})
         {
             for (int i = 1; i < list.size(); i++)
                 for (int n = i; n > 0; --n)
-                    if (list[n - 1] > list[n])
+                    if (compare(list[n - 1], list[n]))
                         Swap(list[n - 1], list[n]);
             return list;
         };
-        std::vector<size_t> operator()(std::vector<size_t> &&list_move)
+        std::vector<size_t> operator()(std::vector<size_t> &&list_move, Compare compare = Compare{})
         {
             auto list = list_move;
             for (int i = 1; i < list.size(); i++)
@@ -108,7 +106,7 @@ namespace Sort
 int main(int argc, char const *argv[])
 {
     constexpr size_t min = 0, max = 10, count = 10;
-    // static_assert(Sort_Method<Sort::Insert_Directly,count>);
+     static_assert(Sort_Method<Sort::Insert_Directly<size_t>>);
 
     const Test_Case<count,min, max> list;
     list.Show();
@@ -119,9 +117,9 @@ int main(int argc, char const *argv[])
 
 
     // demo
-    std::vector<size_t> arr = {1, 2, 3, 4, 5, 6};
-    Sort::Insert_Directly method;
-    std::vector<size_t> result = method(std::vector<size_t>(arr));
+    std::vector<int> arr = {1, 2, 3, 4, 5, 6};
+    Sort::Insert_Directly<int> method;
+    std::vector<size_t> result = method(std::vector<int>(arr));
     for (const auto &x : result)
         std::cout << x << ' ';
     std::cout << std::endl;
