@@ -25,7 +25,6 @@ void Sort_Insert_Direct_Optimized(SortList* list)
 	}
 }
 
-
 void Sort_Insert_Shell(SortList* list)
 {///间距gap=2
 	for (int gap = list->length / 2; gap > 0; gap /= 2)
