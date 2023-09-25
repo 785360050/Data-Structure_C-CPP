@@ -7,12 +7,19 @@
 
 void Simple_Sort()
 {
-    std::vector<int> arr = {1, 2, 3, 4, 5, 6};
-    Sort::Insert_Directly<int, std::greater<>> method;
-    auto result = method(std::vector<int>(arr));
+    std::vector<int> arr{1, 2, 3, 4, 5, 6};
+
+    // 使用右值，有两个括号，第一个构造，第二个调用operator()
+    auto result = Sort::Insert_Directly<int, std::greater<>>()(std::vector<int>(arr));
     for (const auto &x : result)
         std::cout << x << ' ';
     std::cout << std::endl;
+
+    // // 如果使用左值对象时，排序算法会保存内部状态，
+    // // 但是一旦调用operator()排序完成后，内部状态就废弃了，
+    // // 所以没必要用左值，也就是说复用价值不高
+    // Sort::Insert_Directly<int,std::greater<>> method;
+    // auto result = method(std::vector<int>(arr));
 }
 
 struct Element
@@ -55,6 +62,7 @@ void Custom_Sort()
 
 int main(int argc, char const *argv[])
 {
+    Simple_Sort();
     Custom_Sort();
     return 0;
 }
