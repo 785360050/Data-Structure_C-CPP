@@ -2,8 +2,9 @@
 
 
 //#include "Object.h"
-#include "../Liner_List.h"
+#include "../Liner_List.hpp"
 #include <iostream>
+#include <cstring> //memcpy
 
 
 
@@ -41,20 +42,11 @@ public:
 		}
 	}
 protected:
+	/// @param pos 位序从1开始
 	size_t Index(size_t pos) const
 	{///位序转元素索引
-		try
-		{
-			if (pos == 0)
-				throw std::exception("size_t pos == 0");
-			if (pos == 0 - 1)
-				throw std::exception("size_t pos == max");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return NULL;
-		}
+		if (pos == 0)
+			throw std::underflow_error("size_t pos == 0");
 		return --pos;
 	}
 public:///链表操作
@@ -117,18 +109,10 @@ public:
 public:
 	void Element_Insert(size_t pos, DataType elem)
 	{///n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
-		try
-		{
-			if (pos<0 || pos>this->length + 1)
-				throw std::exception("List insert failed: Position out of range");
-			if (this->length>=this->maxsize)
-				throw std::exception("List insert failed: List is full");
-		}
-		catch (const std::exception& exception)
-		{
-			std::cout << exception.what()<<std::endl;
-			return;
-		}
+		if (pos < 0 || pos > this->length + 1)
+			throw std::out_of_range("List insert failed: Position out of range");
+		if (this->length >= this->maxsize)
+			throw std::runtime_error("List insert failed: List is full");
 
 		if (this->length == 0)
 			this->front[0] = elem;

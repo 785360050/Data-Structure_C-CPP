@@ -1,7 +1,7 @@
 #include <iostream>
 
 //#include "Liner_List_ADT.h"
-#include "Liner_List_Sequential.h"
+#include "Liner_List_Sequential.hpp"
 
 
 
@@ -27,6 +27,7 @@ static bool  SetEncode(int EncodeId = 936)
 void Test_SeqList_Array()
 {
 	using namespace std;
+	std::cout << "[Static Sequential List]" << std::endl;
 	Sequential_List_Array<int> L(5);
 	L.List_Show("初始化5个元素空间的顺序表后");
 
@@ -34,13 +35,29 @@ void Test_SeqList_Array()
 		L.Element_Insert(i, i);
 	L.List_Show("插入5个元素后");
 
-	L.Element_Insert(2, 9);
+	try
+	{
+		L.Element_Insert(2, 9);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	L.List_Show("第二个位置插入9后，检测到存储空间已满，报错");
 
 	std::cout << std::endl;
-	L.Element_Insert(20, 20);
-	L.List_Show("第20个非法位置插入20后");
+	try
+	{
+		L.Element_Insert(20, 20);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	L.List_Show("第20个非法位置插入20后，报错");
 
+	L.Element_Insert(20, 20);
 	std::cout << std::endl;
 	L.Element_Update(2, 999);
 	L.List_Show("第二个元素改为999后");
@@ -63,6 +80,7 @@ void Test_SeqList_Array()
 void Test_SeqList_Vector()
 {
 	using namespace std;
+	std::cout << "[Dynamic Sequential List]" << std::endl;
 	Sequential_List_Vector<int> L(5);
 	L.List_Show("初始化5个元素空间的顺序表后");
 
@@ -99,10 +117,10 @@ void Test_SeqList_Vector()
 
 }
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
-	//Test_SeqList_Array();
+	// SetEncode(65001);//设置控制台为utf-8编码格式
+	Test_SeqList_Array();
 	Test_SeqList_Vector();
 }
 
