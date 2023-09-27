@@ -34,20 +34,22 @@ public:
 	virtual void List_Show(const string& string="") = 0;
 };
 
+#if __cplusplus >= 202002L
+#include <concepts>
 
+namespace ADT
+{
+	template <typename StructureType, typename ElementType>
+	concept Liner_Sequential_List = requires(StructureType adt, ElementType element, std::size_t index) {
+		adt.Is_Empty();
+		adt.Get_Size();
+		adt.Get_Capcity();
+		adt.List_Clear();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		adt.Element_Insert(index, element);
+		adt.Element_Delete(index);
+		adt[index];
+		adt.Element_Update(index, element);
+	};
+};
+#endif

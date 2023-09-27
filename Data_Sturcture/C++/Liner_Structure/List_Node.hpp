@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "../Node.h"
+#include "../Node.hpp"
 using std::cout, std::endl;
 
 

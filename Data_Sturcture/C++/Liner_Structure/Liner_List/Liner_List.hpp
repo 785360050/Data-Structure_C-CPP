@@ -7,8 +7,11 @@ template <typename ElementType>
 class Liner_List //: public Liner_List_ADT<ElementType, DataType>
 {
 protected:
-	ElementType *storage{}; /// 指向存储结构
+	// ElementType *storage{}; /// 指向存储结构.
+	// 由于该类是通用的线性表抽象类，所以取消了NodeType的模板参数类型
+	// 链表和数组的存储元素类型不同，所以不能提取到父类
 	size_t size{};			/// 当前元素个数
+
 public:
 	virtual ~Liner_List() = default;
 

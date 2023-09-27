@@ -12,6 +12,7 @@ namespace Storage_Structure
 	class Sequential_List : public Liner_List<ElementType>
 	{
 	protected:
+		ElementType *storage{};
 		size_t capcity{}; /// 当前最大容量
 
 	protected:
@@ -109,6 +110,8 @@ public:
 		--this->size;
 	}
 };
+
+
 
 /// 动态数组
 template <typename ElementType>
@@ -244,3 +247,9 @@ public: /// 元素操作
 			Shrink();
 	}
 };
+
+#if __cplusplus >= 202002L
+#include "../Liner_List_ADT.hpp"
+static_assert(ADT::Liner_Sequential_List<Sequential_List_Static<int, 5>, int>);
+static_assert(ADT::Liner_Sequential_List<Sequential_List_Dynamic<int>, int>);
+#endif
