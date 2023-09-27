@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 // #include "Liner_List_ADT.h"
 #include "Liner_List_Sequential.hpp"
@@ -80,6 +80,7 @@ void Test_SeqList_Vector()
 	std::cout << "[Dynamic Sequential List]" << std::endl;
 	Sequential_List_Vector<int> L(5);
 	L.List_Show("初始化5个元素空间的顺序表后");
+//
 	std::cout << std::endl;
 
 	for (int i = 1; i <= 5; i++)
@@ -115,12 +116,13 @@ void Test_SeqList_Vector()
 	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 	L.List_Clear();
 	L.List_Show("清空后");
+	//
 	std::cout << "当前表长：" << L.List_GetLength() << std::endl;
 }
 
 int main()
 {
-	// SetEncode(65001);//设置控制台为utf-8编码格式
+	 SetEncode(65001);//设置控制台为utf-8编码格式
 	Test_SeqList_Array();
 	Test_SeqList_Vector();
 }

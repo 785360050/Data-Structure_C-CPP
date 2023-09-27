@@ -26,4 +26,15 @@ endif()
 message(STATUS "Build Type:	${CMAKE_BUILD_TYPE}")
 
 
+message(STATUS "—————————————————————————————————————————————————————————————————————————————————————")
+message(STATUS "					Visual Studio/MSVC Build Configures")
+message(STATUS "—————————————————————————————————————————————————————————————————————————————————————")
+# set(CMAKE_SUPPRESS_REGENERATION ON) 
+# 设置Vs使用 UTF-8 编码来解释源代码文件中的字符。
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+# 设置msvc编译器生成的可执行文件将使用 UTF-8 编码来处理字符串文字和字符数据。
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/execution-charset:utf-8>")
+
+
+ 
 add_subdirectory(Data_Sturcture)
