@@ -1,2 +1,6 @@
 
-add_subdirectory(Liner_Structure/Liner_List/Liner_List_Sequential)
+
+add_subdirectory(Liner_Structure)
+# add_subdirectory(Tree_Structure)
+# add_subdirectory(Graph_Structure)
+# add_subdirectory(Set_Structure)
