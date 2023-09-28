@@ -21,6 +21,7 @@ public:
 	virtual void List_Clear() = 0;
 	// 显示线性表所有内容
 	virtual void List_Show(const string &string) = 0;
+	size_t Get_Capcity() const{return this->Get_Size();}
 
 	// 定位节点
 	virtual ElementType &operator[](size_t pos) override
@@ -32,8 +33,8 @@ public:
 	virtual NodeType *Element_Locate(size_t pos)                     = 0;
 	virtual NodeType *Element_Prior(const NodeType *const node)      = 0;
 	virtual NodeType *Element_Next(const NodeType *const node) const = 0;
-	virtual void Element_Insert(size_t pos, ElementType element)        = 0;
-	virtual void Element_Delete(size_t pos)                      = 0;
+	virtual void Element_Insert(size_t pos, ElementType element)     = 0;
+	virtual void Element_Delete(size_t pos)                          = 0;
 	virtual void Element_Update(size_t pos, ElementType elem) { Element_Locate(pos)->element = elem; }
 };
 /// precursor node == prior node
@@ -109,11 +110,15 @@ public: /// 元素操作
 	{
 		if (this->size <= 1 || !this->front)
 			throw std::out_of_range("前驱节点不存在");
+		if(node==this->front)
+			return nullptr;
 		NodeType *t = this->front;
-		while (t->next != node)
+		while (t && t->next != node)
 		{ /// 定位前驱节点
 			t = t->next;
 		}
+		if(!t)
+			throw std::runtime_error("Prior Node Unexists: Can't Locate current Node");
 		return t;
 	}
 	// 定位并返回node节点的后继节点
@@ -125,7 +130,7 @@ public: /// 元素操作
 	// 在单链表第pos位置插入新建的元素element
 	void Element_Insert(size_t pos, ElementType element) override
 	{
-		if (pos < 1 || pos > this->size + 1)
+		if (pos < 1 || pos > this->size+1)
 			throw std::out_of_range("Insert Faild: Illegal position");
 		NodeType *p = new NodeType(element);
 		if (pos == 1)
@@ -146,13 +151,21 @@ public: /// 元素操作
 	// 删除链表L的第pos个元素节点
 	void Element_Delete(size_t pos) override
 	{
-		NodeType *node = Element_Locate(pos - 1);
-		NodeType *del = node->next;
-		node->next = del->next;
-		ElementType temp = del->element;
+		// NodeType *node = Element_Locate(pos - 1);
+		NodeType *node = this->Element_Prior(Element_Locate(pos));
+		NodeType *del{};
+		if(!node)//当前节点是首元节点
+		{
+			del=this->front;
+			this->front=del->next;
+		}
+		else [[likely]]
+		{
+			del = node->next;
+			node->next = del->next;
+		}
 		delete del;
 		--this->size;
-		// return temp;
 	}
 };
 
@@ -204,19 +217,11 @@ public: /// 链表操作
 	// 定位并返回单链表第pos个元素节点
 public: /// 元素操作
 	List_Node_DoubleWay<ElementType> *Element_Locate(size_t pos) override
-	{
-		try
-		{ // 判断非空且不超过l->size
-			if (pos <= 0)
-				throw std::out_of_range("LocateNode Faild: Position < 0");
-			if (pos > this->size + 1)
-				throw std::out_of_range("LocateNode Faild: Position > List size");
-		}
-		catch (const std::exception e)
-		{
-			std::cout << e.what() << std::endl;
-			return nullptr;
-		}
+	{ // 判断非空且不超过l->size
+		if (pos <= 0)
+			throw std::out_of_range("LocateNode Faild: Position < 0");
+		if (pos > this->size + 1)
+			throw std::out_of_range("LocateNode Faild: Position > List size");
 
 		List_Node_DoubleWay<ElementType> *p = this->front;
 		for (int i = 1; i < pos; i++)
@@ -228,16 +233,8 @@ public: /// 元素操作
 	// 定位并返回node节点的前驱节点(遍历链表)
 	List_Node_DoubleWay<ElementType> *Element_Prior(const List_Node_DoubleWay<ElementType> *const node) override
 	{
-		try
-		{
-			if (this->size <= 1 || !this->front)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "前驱节点不存在" << std::endl;
-			exit(0);
-		}
+		if (this->size <= 1 || !this->front)
+			throw std::runtime_error("前驱节点不存在");
 		return node->pre;
 	}
 	// 定位并返回node节点的后继节点
@@ -249,16 +246,8 @@ public: /// 元素操作
 	// 在单链表第pos位置插入新建的元素element
 	void Element_Insert(size_t pos, ElementType element) override
 	{
-		try
-		{
-			if (pos < 1 || pos > this->size + 1)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Insert Faild: Illegal position" << std::endl;
-			return;
-		}
+		if (pos < 1 || pos > this->size + 1)
+			throw std::runtime_error("Insert Faild: Illegal position");
 		if (pos == 1)
 		{ /// 头插
 			List_Node_DoubleWay<ElementType> *p = new List_Node_DoubleWay<ElementType>(element, nullptr, this->front);

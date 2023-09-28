@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstring> //memcpy
 
+
 namespace Storage_Structure
 {
 
@@ -12,24 +13,46 @@ namespace Storage_Structure
 	class Sequential_List : public Liner_List<ElementType>
 	{
 	protected:
-		ElementType *storage{};
-		size_t capcity{}; /// 当前最大容量
+		ElementType *storage{};  // 存储数组
+		size_t      capcity{};   // 当前最大容量
 
 	protected:
+		/// @breif 位序转元素索引
 		/// @param pos 位序从1开始
 		static size_t Index(size_t pos)
-		{ /// 位序转元素索引
+		{ 
 			if (pos == 0)
-				throw std::underflow_error("size_t pos == 0");
+				throw std::out_of_range("size_t pos == 0");
 			return --pos;
 		}
 
-	public: /// 链表操作
+	public: /// 操作
+		void _Destroy_NonPointerElements()
+		{
+			// std::cout << "_Destroy_NonPointerElements" << std::endl;
+			for (size_t i = 0; i < this->size; i++)
+				this->storage[i] = ElementType();
+		}
+		void _Destroy_PointerElements()
+		{
+			// std::cout << "_Destroy_PointerElements" << std::endl;
+			for (size_t i = 0; i < this->size; i++)
+			{
+				this->storage[i].~ElementType();
+				this->storage[i] = ElementType();
+			}
+		}
 		void List_Clear() override
 		{
 			if (!this->storage)
 				throw std::runtime_error("List is not exist");
-			memset(this->storage, ElementType{}, capcity * sizeof(capcity));
+			
+			// 如果存指针的话要delete的操作
+			if(std::is_pointer<ElementType>())
+				_Destroy_PointerElements();
+			else
+				_Destroy_NonPointerElements();
+
 			this->size = 0;
 		}
 		// 返回当前最大容量
@@ -37,6 +60,8 @@ namespace Storage_Structure
 		// 返回第pos个元素的元素值
 		ElementType &operator[](size_t pos) override
 		{
+			if(pos>this->size)//下溢Index检测，此处检测映射到下标前的pos是否上越界
+				throw std::out_of_range("Position is out of range");
 			return this->storage[Index(pos)];
 		}
 
@@ -48,8 +73,8 @@ namespace Storage_Structure
 		// 修改顺序表List第pos个位置上的元素为elem
 		void Element_Update(size_t pos, ElementType elem) override
 		{
-			// operator[](pos) = elem;//有点丑
-			this->storage[pos] = elem;
+			operator[](pos) = elem;//有点丑
+			// this->storage[pos] = elem;//不能这么写，这样调不到operator[]，使用的是数组的老式迭代器
 		}
 
 	public:
@@ -74,19 +99,16 @@ class Sequential_List_Static : public Storage_Structure::Sequential_List<Element
 	ElementType array[capcity]{}; // 栈上申请空间
 public:
 	Sequential_List_Static()
-		// : Storage_Structure::Sequential_List<ElementType>(){};
 	{
+		static_assert(	capcity > 0, "Capacity must be greater than 0");
 		this->storage = array;
 		this->capcity = capcity;
-		// this->storage=new ElementType[capcity]{};
 	}
-	// Sequential_List_Static(size_t capcity)
-	// 	: Storage_Structure::Sequential_List<ElementType>(capcity){};
 
 public:
 	void Element_Insert(size_t pos, ElementType elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
-		if (pos < 0 || pos > this->size + 1)
+		if (pos < 1 || pos > this->size+1)
 			throw std::out_of_range("List insert failed: Position out of range");
 		if (this->size >= this->capcity)
 			throw std::runtime_error("List insert failed: List is full");
@@ -106,7 +128,7 @@ public:
 		this->Index(pos); // Check pos is valid
 		for (size_t i = this->Index(pos); i <= this->Index(this->size) - 1; i++)
 			this->storage[i] = this->storage[i + 1];
-		this->storage[this->size - 1] = 0; /// 末尾补0
+		this->storage[this->size - 1] = ElementType{}; /// 末尾补0
 		--this->size;
 	}
 };
@@ -132,7 +154,7 @@ public:
 
 	Sequential_List_Dynamic(const Sequential_List_Dynamic &other)
 	{
-		if(this==other)
+		if(this==&other)
 			throw std::invalid_argument("Self copy is invalid");
 		this->size = other.size;
 		this->capcity = other.capcity;
@@ -140,21 +162,20 @@ public:
 		for(size_t i=0; i<other.size; i++)
 			this->storage[i]=other.storage[i];
 	}
-	Sequential_List_Dynamic operator=(const Sequential_List_Dynamic &other)
+	Sequential_List_Dynamic&operator=(const Sequential_List_Dynamic &other)
 	{
-		if (this == other)
+		if (this == &other)
 			throw std::invalid_argument("Self copy is invalid");
 		this->size = other.size;
 		this->capcity = other.capcity;
 		this->storage = new ElementType[this->capcity]{};
 		for (size_t i = 0; i < other.size; i++)
 			this->storage[i] = other.storage[i];
+		return *this;
 	}
-	
+
 	Sequential_List_Dynamic(Sequential_List_Dynamic &&other)
 	{
-		if (this == other)
-			throw std::invalid_argument("Self move Detected");
 		this->size    = other.size;
 		this->capcity = other.capcity;
 		this->storage = other.storage;
@@ -162,16 +183,15 @@ public:
 		other.capcity = 0;
 		other.size    = 0;
 	}
-	Sequential_List_Dynamic operator=(Sequential_List_Dynamic &&other)
+	Sequential_List_Dynamic& operator=(Sequential_List_Dynamic &&other)
 	{
-		if (this == other)
-			throw std::invalid_argument("Self move Detected");
 		this->size    = other.size;
 		this->capcity = other.capcity;
 		this->storage = other.storage;
 		other.storage = nullptr;
 		other.capcity = 0;
 		other.size    = 0;
+		return *this;
 	}
 
 	~Sequential_List_Dynamic()
@@ -188,40 +208,37 @@ protected:
 	// 以2倍为单位扩展收缩空间
 	void Expand()
 	{ /// 重新申请2倍的空间，移动原有数据至该空间
-		if (this->storage)
-		{
-			auto expand = new ElementType[this->capcity * 2]{};
-			memcpy(expand, this->storage, sizeof(ElementType) * this->capcity);
-			delete[] this->storage;
-			this->storage = expand;
-			this->capcity *= 2;
-		}
+		if (!this->storage)
+			throw std::runtime_error("storage space missing");
+		auto expand = new ElementType[this->capcity * 2]{};
+		//把所有元素移动过去
+		for (size_t i = 0; i < this->size; i++)
+			expand[i] = std::move(this->storage[i]);
+
+		delete[] this->storage;
+		this->storage = expand;
+		this->capcity *= 2;
 	}
 	void Shrink()
 	{
-		if (this->storage)
-		{
-			auto shrink = new ElementType[this->capcity / 2]{};
-			memcpy(shrink, this->storage, sizeof(ElementType) * this->size);
-			delete[] this->storage;
-			this->storage = shrink;
-			this->capcity /= 2;
-		}
+		if (!this->storage)
+			throw std::runtime_error("storage space missing");
+
+		auto shrink = new ElementType[this->capcity / 2]{};
+		// 把所有元素移动过去
+		for (size_t i = 0; i < this->size; i++)
+			shrink[i] = std::move(this->storage[i]);
+		delete[] this->storage;
+		this->storage = shrink;
+		this->capcity /= 2;
 	}
 
 public: /// 元素操作
 	void Element_Insert(size_t pos, ElementType elem)
 	{ /// n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
-		try
-		{
-			if (pos < 0 || pos > this->size + 1)
-				throw 2;
-		}
-		catch (...)
-		{
-			std::cout << "List insert failed: Position out of range" << std::endl;
-			return;
-		}
+		if (pos <= 0 || pos > this->size + 1)
+			throw std::out_of_range("List insert failed: Position out of range");
+
 		if (this->size >= this->capcity)
 			Expand(); /// 空间扩展为2倍
 		// this->List_Show(" ");
@@ -229,7 +246,7 @@ public: /// 元素操作
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
-			for (size_t index = this->Index(this->size); this->Index(pos) <= index; index--)
+			for (size_t index = this->Index(this->size); this->Index(pos) < index; index--)
 				this->storage[index + 1] = this->storage[index];
 			this->storage[this->Index(pos)] = elem;
 		}
@@ -240,7 +257,7 @@ public: /// 元素操作
 		this->Index(pos);//check pos valid
 		for (size_t i = this->Index(pos); i <= this->Index(this->size) - 1; i++)
 			this->storage[i] = this->storage[i + 1];
-		this->storage[this->size - 1] = 0;
+		this->storage[this->size - 1] = ElementType{};
 		--this->size;
 		/// 元素个数<=1/2最大容量 时收缩空间
 		if (this->size <= this->capcity / 2)
@@ -250,6 +267,6 @@ public: /// 元素操作
 
 #if __cplusplus >= 202002L
 #include "../Liner_List_ADT.hpp"
-static_assert(ADT::Liner_Sequential_List<Sequential_List_Static<int, 5>, int>);
-static_assert(ADT::Liner_Sequential_List<Sequential_List_Dynamic<int>, int>);
+static_assert(ADT::Liner_List<Sequential_List_Static<int, 5>, int>);
+static_assert(ADT::Liner_List<Sequential_List_Dynamic<int>, int>);
 #endif

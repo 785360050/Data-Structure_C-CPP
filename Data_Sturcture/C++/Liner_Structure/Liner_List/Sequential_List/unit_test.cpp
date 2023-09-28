@@ -4,33 +4,240 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
+#include <limits>
+#include <iostream>
+
 #include "Sequential_List.hpp"
 
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework
-BOOST_AUTO_TEST_CASE(Con_Destruct)
+template <typename DataType = int>
+struct Element
 {
-    Sequential_List_Array<int> array(5);
+public:
+    DataType value{};
+    DataType *pointer{new DataType()}; // 指针
+    // DataType *array{};//数组
+    // size_t size{};
 
-    BOOST_CHECK(array.List_GetLength() == 0);
-    BOOST_CHECK(array.List_Get_Maxsize() == 5);
-    BOOST_CHECK(array.List_CheckEmpty());
+public:
+    Element() = default;
+    Element(DataType value, DataType value_pointer) : value{value}, pointer{new DataType{value_pointer}}
+    {
+        // std::cout << "Default Constructed " << std::endl;
+    }
 
+    Element(const Element &other)
+    {
+        std::cout << "Copy Constructed " << std::endl;
+        if (this == &other)
+            // return *this;
+            throw std::logic_error("Self copy error");
+        value = other.value;
+        pointer = new DataType(*other.pointer); // copy
+    }
+    Element &operator=(const Element &other)
+    {
+        std::cout << "Copy Assignment " << std::endl;
+        if (this == &other)
+            // return *this;
+            throw std::logic_error("Self copy error");
+        value = other.value;
+        if (pointer && *pointer != *other.pointer)
+        {
+            delete pointer;
+            pointer = new DataType(*other.pointer); // copy
+        }
+        return *this;
+    }
+
+    Element(Element &&other)
+    {
+        std::cout << "Move Constructed " << std::endl;
+        if (this == &other)
+            // return *this;
+            throw std::logic_error("Self Movement error");
+        value = other.value;
+        pointer = other.pointer;
+        other.pointer = nullptr;
+    }
+    Element &operator=(Element &&other)
+    {
+        std::cout << "Move Assignment " << std::endl;
+        if (this == &other)
+            // return *this;
+            throw std::logic_error("Self Movement error");
+        value = other.value;
+        if (pointer && *pointer != *other.pointer)
+        {
+            delete pointer;
+            pointer = other.pointer;
+            other.pointer = nullptr;
+        }
+        return *this;
+    }
+
+    ~Element() noexcept
+    {
+        // std::cout << "Deconstructed " << std::endl;
+        if (pointer)
+            delete pointer;
+    }
+
+    bool operator==(const Element &other) const
+    {
+        return value == other.value && *pointer == *other.pointer;
+    }
+
+public:
+};
+template <typename T>
+std::ostream &operator<<(std::ostream &os, const Element<T> &element)
+{
+    os << element.value << ',' << *element.pointer;
+    return os;
 }
 
-#include <limits>
-BOOST_AUTO_TEST_CASE(Operations)
+// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework
+
+BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
+{
+    /// Sequential_List_Dynamic
+    Sequential_List_Static<int, 5> array_static;
+    BOOST_CHECK(array_static.Get_Size() == 0);
+    BOOST_CHECK(array_static.Get_Capcity() == 5);
+    BOOST_CHECK(array_static.Is_Empty());
+
+    /// Sequential_List_Dynamic
+    auto test = [](const Sequential_List_Dynamic<int> &array)
+    {
+        BOOST_CHECK(array.Get_Size() == 0);
+        BOOST_CHECK(array.Get_Capcity() == 0);
+        BOOST_CHECK(array.Is_Empty());
+    };
+
+    Sequential_List_Dynamic<int> array_dynamic;
+    test(array_dynamic);
+
+    auto array_copy_construct(array_dynamic);
+    test(array_copy_construct);
+    auto array_copy_assign = array_dynamic;
+    test(array_copy_assign);
+
+    auto array_move_construct(Sequential_List_Dynamic<int>{});
+    test(array_move_construct);
+    auto array_move_assign = std::move(array_dynamic);
+    test(array_move_assign);
+}
+
+#include <vector>
+BOOST_AUTO_TEST_CASE(Template_Parameter)
+{
+    Sequential_List_Static<char, 5> array;
+    Sequential_List_Static<const char *, 5> array1;
+    Sequential_List_Static<int *, 5> array2;
+    Sequential_List_Static<Element<int>, 5> array3;
+    Sequential_List_Static<Element<char *> *, 5> array4;
+    Sequential_List_Static<size_t, 5> array5;
+
+    array1.Element_Insert(1, "Hello");
+    array1.Element_Insert(2, "World");
+    array1.List_Clear();
+
+    ///以下是不是动态测试做的
+    
+    // static_assert(  capcity > 0, "Capacity must be greater than 0");
+    // Sequential_List_Static<Element<int>, 0> array0;
+
+    // 错误：narrowing conversion of ‘-1’ from ‘int’ to ‘long unsigned int’ [-Wnarrowing]
+    //  Sequential_List_Static<Element, -1> array1;
+}
+
+BOOST_AUTO_TEST_CASE(Operations_Static)
 {
     using ElementType = int;
-    Sequential_List_Array<ElementType> array(5);
 
-    array.Element_Insert(1, std::numeric_limits<ElementType>::max());
-    ElementType value = array.List_GetData(1);
-    BOOST_CHECK(value = std::numeric_limits<ElementType>::max());
+    Sequential_List_Static<int, 5> array_static;
+    BOOST_CHECK_THROW(array_static.Element_Insert(0, 0), std::out_of_range);
+    BOOST_CHECK_THROW(array_static.Element_Insert(2, 2), std::out_of_range);
+
+    for (size_t i = 1; i <= 5; i++)
+        array_static.Element_Insert(i, i);
+
+    BOOST_CHECK(array_static.Get_Size() == 5);
+    for (size_t i = 1; i <= 5; i++)
+        BOOST_CHECK(array_static[i] == i);
+    BOOST_CHECK_THROW(array_static[0], std::out_of_range);
+    BOOST_CHECK_THROW(array_static[6], std::out_of_range);
+    BOOST_CHECK_THROW(array_static.Element_Insert(1, 1), std::runtime_error);
+
+    array_static.Element_Update(1, 2);
+    BOOST_CHECK(array_static.Get_Size() == 5);
+    BOOST_CHECK(array_static[1] == 2);
+    array_static.Element_Delete(1);
+    BOOST_CHECK(array_static.Get_Size() == 4);
+    BOOST_CHECK(array_static.Get_Capcity() == 5);
+
+    array_static.List_Clear();
+    BOOST_CHECK(array_static.Get_Size() == 0);
+    BOOST_CHECK(array_static.Get_Capcity()==5);
 }
 
-// BOOST_AUTO_TEST_CASE(Con/Destruct)
-// {
-    
-// }
-// 
+BOOST_AUTO_TEST_CASE(Operations_Dynamic)
+{
 
+    Sequential_List_Dynamic<int> array_dynamic(1);//初始化时不分配空间
+    BOOST_CHECK_THROW(array_dynamic.Element_Insert(0, 0), std::out_of_range);
+    BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, 2), std::out_of_range);
+
+    for (size_t i = 1; i <= 5; i++)
+        array_dynamic.Element_Insert(i, i);
+    BOOST_CHECK(array_dynamic.Get_Capcity()==8);//1->2->4->8
+
+    BOOST_CHECK(array_dynamic.Get_Size() == 5);
+    for (size_t i = 1; i <= 5; i++)
+        BOOST_CHECK(array_dynamic[i] == i);
+    BOOST_CHECK_THROW(array_dynamic[0], std::out_of_range);
+    BOOST_CHECK_THROW(array_dynamic[6], std::out_of_range);
+    array_dynamic.Element_Insert(1, 1);
+
+
+    array_dynamic.Element_Update(1, 2);
+    BOOST_CHECK(array_dynamic.Get_Size() == 6);
+    BOOST_CHECK(array_dynamic[1] == 2);
+    array_dynamic.Element_Delete(1);
+    BOOST_CHECK(array_dynamic.Get_Size() == 5);
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 8);
+
+    array_dynamic.Element_Delete(array_dynamic.Get_Size());
+    BOOST_CHECK(array_dynamic.Get_Size() == 4);
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
+}
+
+BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
+{
+
+    Sequential_List_Dynamic<Element<size_t>> array_dynamic(1); // 初始化时不分配空间
+    BOOST_CHECK_THROW(array_dynamic.Element_Insert(0, {1,11}), std::out_of_range);
+    BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, {2,22}), std::out_of_range);
+
+    for (size_t i = 1; i <= 5; i++)
+        array_dynamic.Element_Insert(i, {i, 10 + i});
+    BOOST_CHECK(array_dynamic.Get_Capcity()==8);//1->2->4->8
+
+    BOOST_CHECK(array_dynamic.Get_Size() == 5);
+    for (size_t i = 1; i <= 5; i++)
+        BOOST_CHECK(array_dynamic[i] == Element<size_t>(i, 10 + i));
+    BOOST_CHECK_THROW(array_dynamic[0], std::out_of_range);
+    BOOST_CHECK_THROW(array_dynamic[6], std::out_of_range);
+    array_dynamic.Element_Insert(1, Element<size_t>(1, 10 + 1));
+
+    array_dynamic.Element_Update(1, Element<size_t>(2, 10 + 2));
+    BOOST_CHECK(array_dynamic.Get_Size() == 6);
+    BOOST_CHECK(array_dynamic[1] == Element<size_t>(2, 10 + 2));
+    array_dynamic.Element_Delete(1);
+    BOOST_CHECK(array_dynamic.Get_Size() == 5);
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 8);
+
+    array_dynamic.Element_Delete(array_dynamic.Get_Size());
+    BOOST_CHECK(array_dynamic.Get_Size() == 4);
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
+}

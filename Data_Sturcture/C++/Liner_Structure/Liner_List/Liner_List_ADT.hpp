@@ -40,7 +40,7 @@ public:
 namespace ADT
 {
 	template <typename StructureType, typename ElementType>
-	concept Liner_Sequential_List = requires(StructureType adt, ElementType element, std::size_t index) {
+	concept Liner_List = requires(StructureType adt, ElementType element, std::size_t index) {
 		adt.Is_Empty();
 		adt.Get_Size();
 		adt.Get_Capcity();

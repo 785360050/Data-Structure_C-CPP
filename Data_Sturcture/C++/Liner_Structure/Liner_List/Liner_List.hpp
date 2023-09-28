@@ -22,9 +22,7 @@ public: /// 表操作
 	bool Is_Empty() const { return size == 0; }
 	// 返回当前表长(元素个数)
 	size_t Get_Size() const { return size; }
-	// 返回第pos个元素的元素值
-	//  virtual DataType List_GetData(size_t pos) = 0;
-
+	
 	/// @brief 返回第pos个元素的引用
 	/// @param pos 位序[1,...]，不是从0开始的数组下标
 	virtual ElementType &operator[](size_t pos) = 0;
