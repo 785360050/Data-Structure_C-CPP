@@ -1,15 +1,15 @@
 #pragma once
 
 
-///Î´Íê³É
-/// Ë÷Òý½ÚµãºÍÒ¶×Ó½Úµãµ½µ×ÈçºÎÇø·Ö×î¼Ñ£¬´ý¿¼ÂÇ
+///Î´ï¿½ï¿½ï¿½
+/// ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ò¶ï¿½Ó½Úµãµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node
 {
 private:
-	KeyType* keys{ nullptr };			  // Ö÷¼ü ×î´ómax¸ö ×îÐ¡min¸ö
+	KeyType* keys{ nullptr };			  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½maxï¿½ï¿½ ï¿½ï¿½Ð¡minï¿½ï¿½
 	BPlus_Node<DataType>* parent{ nullptr };
-	int count{ 0 };			  // µ±Ç°ÔªËØ¸öÊý
+	int count{ 0 };			  // ï¿½ï¿½Ç°Ôªï¿½Ø¸ï¿½ï¿½ï¿½
 protected:
 	void Check_Order_Vaild(int orders)
 	{
@@ -22,9 +22,9 @@ public:
 	{
 		Check_Order_Vaild(orders);
 
-		keys = new KeyType[orders]{};///orders½×½ÚµãÓÐorders-1¸öÔªËØ
+		keys = new KeyType[orders]{};///ordersï¿½×½Úµï¿½ï¿½ï¿½orders-1ï¿½ï¿½Ôªï¿½ï¿½
 		if (!keys)
-			throw std::exception("Node Create Failed: keys allocated failed");
+			throw std::runtime_error("Node Create Failed: keys allocated failed");
 	}
 	~BPlus_Node()
 	{
@@ -39,7 +39,7 @@ template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node_Branch :public BPlus_Node<KeyType, DataType>
 {
 private:
-	BPlus_Node_Branch** child{ nullptr }; // ×Ó½Úµã ×î´ómax+1¸ö ×îÐ¡min+1¸ö
+	BPlus_Node_Branch** child{ nullptr }; // ï¿½Ó½Úµï¿½ ï¿½ï¿½ï¿½max+1ï¿½ï¿½ ï¿½ï¿½Ð¡min+1ï¿½ï¿½
 public:
 	bool Is_Branch() override final { return true; }
 public:
@@ -49,9 +49,9 @@ public:
 	{
 		this->Check_Order_Vaild(orders);
 
-		child = new BPlus_Node * [orders] {};///ÎªÊ²Ã´Òª+2,ÔÝ¸ÄÎª0
+		child = new BPlus_Node * [orders] {};///ÎªÊ²Ã´Òª+2,ï¿½Ý¸ï¿½Îª0
 		if (!child)
-			throw std::exception("Node Create Failed: keys allocated failed");
+			throw std::runtime_error("Node Create Failed: keys allocated failed");
 	}
 	~BPlus_Node_Branch()
 	{
@@ -63,8 +63,8 @@ public:
 template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node_Leaf :public BPlus_Node<KeyType, DataType>
 {
-	DataType* data{ nullptr };		  // ÕæÊµÊý¾Ý  ×î´ómax¸ö ×îÐ¡min¸ö ¶ÔÓÚÄÚ²¿½áµã dataÊÇnullptr
-	BPlus_Node<DataType>* next{ nullptr };	  // Ö¸ÏòÐÖµÜ½áµã ½ö½öÊÇÒ¶×Ó½áµãµÄÊ±ºò²ÅÓÐÖµ
+	DataType* data{ nullptr };		  // ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½maxï¿½ï¿½ ï¿½ï¿½Ð¡minï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½nullptr
+	BPlus_Node<DataType>* next{ nullptr };	  // Ö¸ï¿½ï¿½ï¿½ÖµÜ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 public:
 	bool Is_Child() override final { return false; }
 public:
@@ -76,7 +76,7 @@ public:
 
 		data = new DataType[orders]{};
 		if (!data)
-			throw std::exception("Node Create Failed: Leaf");
+			throw std::runtime_error("Node Create Failed: Leaf");
 	}
 	~BPlus_Node_Leaf()
 	{

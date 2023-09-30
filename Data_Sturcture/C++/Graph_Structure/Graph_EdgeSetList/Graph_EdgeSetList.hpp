@@ -56,10 +56,10 @@ public:
 			for (int i = 0; i < this->num_edge; ++i)
 			{
 				if (edge->no_source == no_origin && edge->no_destination == no_destination)
-					throw std::exception("Graph Edge Add Failed : Edge already exisited!");
+					throw std::runtime_error("Graph Edge Add Failed : Edge already exisited!");
 			}
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
@@ -78,10 +78,10 @@ public:
 		//	for (int i = 0; i < num_edge; ++i)
 		//	{
 		//		if (edge[i].no_source == no_origin && edge[i].no_destination == no_destination)
-		//			throw std::exception("Edge Delete Failed: Edge is not exist!");
+		//			throw std::runtime_error("Edge Delete Failed: Edge is not exist!");
 		//	}
 		//}
-		//catch (const std::exception& e)
+		//catch (const std::runtime_error& e)
 		//{
 		//	std::cout << e.what() << std::endl;
 		//	return;

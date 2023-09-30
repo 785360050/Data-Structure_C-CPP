@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Liner_Stack_ADT.h"
+#include "Liner_Stack_ADT.hpp"
 
 template <typename DataType>
 struct Stack:public Stack_ADT<DataType>

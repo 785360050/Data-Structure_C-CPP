@@ -2,7 +2,7 @@
 
 
 
-#include "Liner_Queue_ADT.h"
+#include "Liner_Queue_ADT.hpp"
 
 
 
@@ -41,15 +41,8 @@ public:
 	{return this->length == 0 ? true : false;}
 	bool Queue_CheckFull() override
 	{
-		try
-		{
-			if (length > maxsize)
-				throw std::exception("Queue Overflowed");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
+		if (length > maxsize)
+				throw std::runtime_error("Queue Overflowed");
 		return length == maxsize;
 	}
 	//返回队列长度(元素个数)

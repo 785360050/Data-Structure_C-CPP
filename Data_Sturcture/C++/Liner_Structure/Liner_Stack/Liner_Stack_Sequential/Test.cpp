@@ -1,5 +1,7 @@
-#include "Liner_Stack_Sequential.h"
+#include "Liner_Stack_Sequential.hpp"
 
+#ifdef _Win32 // ARM32/64, x86/x64
+// 详见 https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #include <Windows.h>
 ///修改cmd编码方式
 static bool  SetEncode(int EncodeId = 936)
@@ -14,6 +16,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 void TestSequenceStack()
 {
@@ -39,8 +42,10 @@ void TestSequenceStack()
 }
 
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	TestSequenceStack();
+
+	return EXIT_SUCCESS;
 }

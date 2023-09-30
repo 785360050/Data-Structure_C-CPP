@@ -129,20 +129,20 @@ public:
 		try
 		{
 			if (!node)
-				throw std::exception("Node_Insert Failed: node is not exsist");
+				throw std::runtime_error("Node_Insert Failed: node is not exsist");
 			if (!parent)
-				throw std::exception("Node_Insert Failed: parent is not exsist");
+				throw std::runtime_error("Node_Insert Failed: parent is not exsist");
 			if (position<1 || position>this->branch)
-				throw std::exception("Node_Insert Failed: position illegal");
+				throw std::runtime_error("Node_Insert Failed: position illegal");
 			for (const auto& n : vertex)
 			{
 				if (n.node == node)
-					throw std::exception("Node_Insert Failed: Node already exists");
+					throw std::runtime_error("Node_Insert Failed: Node already exists");
 				if (n.node == parent && n.node->length >= this->branch)
-					throw std::exception("Node_Insert Failed: Parent's Child is full");
+					throw std::runtime_error("Node_Insert Failed: Parent's Child is full");
 			}
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;

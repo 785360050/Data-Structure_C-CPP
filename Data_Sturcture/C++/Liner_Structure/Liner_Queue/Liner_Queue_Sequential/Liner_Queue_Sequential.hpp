@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../Liner_Queue.h"
+#include "../Liner_Queue.hpp"
 
 template<typename DataType>
 struct Sequence_Queue :public Queue<DataType>
@@ -39,7 +39,10 @@ public:
 	}
 	void Queue_Clear() override
 	{
-		memset(element, 0, sizeof(DataType) * (this->maxsize));
+		// memset(element, 0, sizeof(DataType) * (this->maxsize));
+		for (size_t i = 0; i < this->length; i++)
+			this->element[i]=DataType();
+		
 		this->length = front = rear = 0;
 	}
 	DataType Queue_GetFront() override
@@ -52,22 +55,14 @@ public:
 		catch (...)
 		{
 			std::cout << "Queue is Empty" << std::endl;
-			return NULL;
+			return DataType();
 		}
 		return element[front];
 	}
 	virtual DataType Queue_GetRear() override
 	{
-		try
-		{
-			if (this->Queue_CheckEmpty())
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Queue is Empty" << std::endl;
-			return NULL;
-		}
+		if (this->Queue_CheckEmpty())
+			throw std::runtime_error("Queue is Empty");
 		/// rear指向待插入位置索引，返回前一个元素索引
 		return element[(rear + this->maxsize) % (this->maxsize + 1)];	
 	}
@@ -84,18 +79,11 @@ public:
 public:
 	virtual void Element_Enqueue(DataType element) override
 	{
-		try
-		{
-			if (this->element==nullptr)
-				throw std::exception("SeqQueue is not exist");
-			if (Queue_CheckFull())
-				throw std::exception("Enqueue Failed: Queue is Full");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
+		if (this->element == nullptr)
+			throw std::runtime_error("SeqQueue is not exist");
+		if (Queue_CheckFull())
+			throw std::runtime_error("Enqueue Failed: Queue is Full");
+
 		this->element[rear] = element;
 		rear = (rear + 1) % (this->maxsize + 1);
 		this->length++;
@@ -178,18 +166,10 @@ public:
 public:
 	void Element_Enqueue(DataType element) override
 	{
-		try
-		{
-			if (this->element == nullptr)
-				throw std::exception("SeqQueue is not exist");
-			if (Queue_CheckFull())
-				throw std::exception("Enqueue Failed: Queue is Full");
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
+		if (this->element == nullptr)
+			throw std::runtime_error("SeqQueue is not exist");
+		if (Queue_CheckFull())
+			throw std::runtime_error("Enqueue Failed: Queue is Full");
 		this->element[this->rear] = element;
 		this->rear = (this->rear + 1) % this->maxsize;
 		this->length++;
@@ -199,18 +179,10 @@ public:
 	}
 	void Element_Dequeue() override
 	{
-		try
-		{
-			if (this->Queue_CheckEmpty())
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Dequeue Faild: Queue is empty" << std::endl;
-			return ;
-		}
+		if (this->Queue_CheckEmpty())
+			throw std::runtime_error("Dequeue Faild: Queue is empty");
 		DataType x = this->element[this->front];
-		this->element[this->front] = NULL;
+		this->element[this->front] = DataType();
 		this->front = (this->front + 1) % this->maxsize;
 		this->length--;
 		
@@ -219,16 +191,8 @@ public:
 	}
 	virtual DataType Queue_GetRear() override
 	{
-		try
-		{
-			if (this->Queue_CheckEmpty())
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Queue is Empty" << std::endl;
-			return NULL;
-		}
+		if (this->Queue_CheckEmpty())
+			throw std::runtime_error("Queue is Empty");
 		/// rear指向待插入位置索引，返回前一个元素索引
 		return this->element[this->rear];
 	}

@@ -8,95 +8,9 @@
 #include <iostream>
 
 #include "Link_List.hpp"
+#include "../../../Test/Unit_Test/Test_Element.hpp"
 
-template <typename DataType = int>
-struct Element
-{
-public:
-    DataType value{};
-    DataType *pointer{new DataType()}; // 指针
-    // DataType *list{};//数组
-    // size_t size{};
-
-public:
-    Element() = default;
-    Element(DataType value, DataType value_pointer) : value{value}, pointer{new DataType{value_pointer}}
-    {
-        // std::cout << "Default Constructed " << std::endl;
-    }
-
-    Element(const Element &other)
-    {
-        std::cout << "Copy Constructed " << std::endl;
-        if (this == &other)
-            // return *this;
-            throw std::logic_error("Self copy error");
-        value = other.value;
-        pointer = new DataType(*other.pointer); // copy
-    }
-    Element &operator=(const Element &other)
-    {
-        std::cout << "Copy Assignment " << std::endl;
-        if (this == &other)
-            // return *this;
-            throw std::logic_error("Self copy error");
-        value = other.value;
-        if (pointer && *pointer != *other.pointer)
-        {
-            delete pointer;
-            pointer = new DataType(*other.pointer); // copy
-        }
-        return *this;
-    }
-
-    Element(Element &&other)
-    {
-        std::cout << "Move Constructed " << std::endl;
-        if (this == &other)
-            // return *this;
-            throw std::logic_error("Self Movement error");
-        value = other.value;
-        pointer = other.pointer;
-        other.pointer = nullptr;
-    }
-    Element &operator=(Element &&other)
-    {
-        std::cout << "Move Assignment " << std::endl;
-        if (this == &other)
-            // return *this;
-            throw std::logic_error("Self Movement error");
-        value = other.value;
-        if (pointer && *pointer != *other.pointer)
-        {
-            delete pointer;
-            pointer = other.pointer;
-            other.pointer = nullptr;
-        }
-        return *this;
-    }
-
-    ~Element() noexcept
-    {
-        // std::cout << "Deconstructed " << std::endl;
-        if (pointer)
-            delete pointer;
-    }
-
-    bool operator==(const Element &other) const
-    {
-        return value == other.value && *pointer == *other.pointer;
-    }
-
-public:
-};
-template <typename T>
-std::ostream &operator<<(std::ostream &os, const Element<T> &element)
-{
-    os << element.value << ',' << *element.pointer;
-    return os;
-}
-
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework
+// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
 
 template <typename List>
 void test(const List &list)
@@ -194,7 +108,6 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic)
 
     for (size_t i = 1; i <= 5; i++)
         list.Element_Insert(i, i);
-    BOOST_CHECK(list.Get_Capcity()==8);//1->2->4->8
 
     BOOST_CHECK(list.Get_Size() == 5);
     for (size_t i = 1; i <= 5; i++)
@@ -203,17 +116,14 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic)
     BOOST_CHECK_THROW(list[6], std::out_of_range);
     list.Element_Insert(1, 1);
 
-
     list.Element_Update(1, 2);
     BOOST_CHECK(list.Get_Size() == 6);
     BOOST_CHECK(list[1] == 2);
     list.Element_Delete(1);
     BOOST_CHECK(list.Get_Size() == 5);
-    BOOST_CHECK(list.Get_Capcity() == 8);
 
     list.Element_Delete(list.Get_Size());
     BOOST_CHECK(list.Get_Size() == 4);
-    BOOST_CHECK(list.Get_Capcity() == 4);
 }
 
 BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
@@ -225,7 +135,6 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
 
     for (size_t i = 1; i <= 5; i++)
         list.Element_Insert(i, {i, 10 + i});
-    BOOST_CHECK(list.Get_Capcity()==8);//1->2->4->8
 
     BOOST_CHECK(list.Get_Size() == 5);
     for (size_t i = 1; i <= 5; i++)
@@ -239,9 +148,7 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
     BOOST_CHECK(list[1] == Element<size_t>(2, 10 + 2));
     list.Element_Delete(1);
     BOOST_CHECK(list.Get_Size() == 5);
-    BOOST_CHECK(list.Get_Capcity() == 8);
 
     list.Element_Delete(list.Get_Size());
     BOOST_CHECK(list.Get_Size() == 4);
-    BOOST_CHECK(list.Get_Capcity() == 4);
 }

@@ -2,8 +2,9 @@
 
 
 #include <iostream>
+#include <cstring> //memset
 
-#include "../Liner_Stack.h"
+#include "../Liner_Stack.hpp"
 
 /// <summary>
 /// 四种类型：满增栈、满减栈、空增栈、空减栈。
@@ -84,7 +85,7 @@ public:///栈操作
 		catch (...)
 		{
 			std::cout << "Stack is Empty" << std::endl;
-			return NULL;
+			return DataType();
 		}
 		return element[top - 1];//top不一定是栈顶索引,此处为满栈
 	}

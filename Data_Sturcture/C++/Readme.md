@@ -1,5 +1,10 @@
 # 杂谈
-
+1. 老版使用抽象类作为接口类，现在已经废弃，使用conecpt+static_assert检查接口规范，实现抽象数据类型
+使用抽象类需要很多的template 参数，一个变化点一个参数,实现复杂。concept更灵活
+所以取消了逻辑结构对接口类的继承，如：class Liner_List : public Liner_List_ADT<ElementType, DataType>
+2. Clear需要对不同特性的模板类进行元编程，这里还不熟悉，晚点再看。暂时先限制元素类型都是非指针类型
+3. 取消了逻辑结构的实例化，可以但意义不大，实际使用的应该是位于final的具体实现类
+所以用namespace Logic集中管理
 
 # 设计目标
 - 重点是数据结构，而不是STL

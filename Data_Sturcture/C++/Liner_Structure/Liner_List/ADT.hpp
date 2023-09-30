@@ -3,7 +3,7 @@
 #include <string>
 using std::string;
 
-
+// 废弃的接口类
 //线性表
 template <typename ElementType,typename DataType>
 class Liner_List_ADT
@@ -39,16 +39,27 @@ public:
 
 namespace ADT
 {
+	/// index从1开始，非数组下标从0开始
 	template <typename StructureType, typename ElementType>
 	concept Liner_List = requires(StructureType adt, ElementType element, std::size_t index) {
+
+		// 判断是否为空
 		adt.Is_Empty();
+
+		// 获取当前元素个数
 		adt.Get_Size();
-		adt.Get_Capcity();
+		// adt.Get_Capcity();//静态数组才有
+		
+		// 重置线性表为初始状态，清空所有元素(会析构所有元素)
 		adt.List_Clear();
 
+		// 在index位置插入element
 		adt.Element_Insert(index, element);
+		// 删除index位置的元素
 		adt.Element_Delete(index);
+		// 获取index位置的元素
 		adt[index];
+		// 设置index位置的元素为element
 		adt.Element_Update(index, element);
 	};
 };

@@ -3,9 +3,9 @@
 
 #include <iostream>
 
-#include "../Liner_Stack.h"
-#include "../../../Node.h"
-#include "../../List_Node.h"
+#include "../Liner_Stack.hpp"
+#include "../../../Node.hpp"
+#include "../../List_Node.hpp"
 
 
 template <typename DataType, typename NodeType = List_Node_SingleWay<DataType>>

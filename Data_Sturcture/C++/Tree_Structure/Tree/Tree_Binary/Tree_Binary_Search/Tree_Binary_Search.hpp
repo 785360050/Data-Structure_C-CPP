@@ -56,9 +56,9 @@ protected:
 		try
 		{
 			if (!node->right)
-				throw std::exception("No Next Node");
+				throw std::runtime_error("No Next Node");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return nullptr;
@@ -74,9 +74,9 @@ protected:
 		try
 		{
 			if (!node->left)
-				throw std::exception("No Precursor Node");
+				throw std::runtime_error("No Precursor Node");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return nullptr;
@@ -113,9 +113,9 @@ public:
 		try
 		{
 			if (!node)
-				throw std::exception("Node is not exisit");
+				throw std::runtime_error("Node is not exisit");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return NULL;

@@ -30,9 +30,9 @@ public:
 		try
 		{
 			if (maxsize < 1)
-				throw std::exception("Maxsize must be greater than 0");
+				throw std::runtime_error("Maxsize must be greater than 0");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
@@ -56,11 +56,11 @@ private:
 		try
 		{
 			if (index_x < 0 || index_x >= length)
-				throw std::exception("X illegal");
+				throw std::runtime_error("X illegal");
 			if (index_y < 0 || index_y >= length)
-				throw std::exception("Y illegal");
+				throw std::runtime_error("Y illegal");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
@@ -164,9 +164,9 @@ private:
 		try
 		{
 			if (index < 1)	
-				throw std::exception("Parent is not exsist");
+				throw std::runtime_error("Parent is not exsist");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return NULL;
@@ -178,9 +178,9 @@ private:
 		try
 		{
 			if (index < 0)
-				throw std::exception("Illegal index");
+				throw std::runtime_error("Illegal index");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return NULL;

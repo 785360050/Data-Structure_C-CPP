@@ -91,13 +91,13 @@ public:
 		try
 		{
 			if (no_origin < 0 || no_origin >= this->num_vertex)
-				throw std::exception("Index Origin is out of range!");
+				throw std::runtime_error("Index Origin is out of range!");
 			if (no_destination < 0 || no_destination > this->num_vertex)
-				throw std::exception("Index Destination is out of range!");
+				throw std::runtime_error("Index Destination is out of range!");
 			if (!CheckEdge_Infinit(edge[no_origin][no_destination]))//边存在时候不添加
-				throw std::exception("Edge already Existed");
+				throw std::runtime_error("Edge already Existed");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
@@ -113,13 +113,13 @@ public:
 		try
 		{
 			if (no_origin < 0 || no_origin >= this->num_vertex)
-				throw std::exception("Index Origin is out of range!");
+				throw std::runtime_error("Index Origin is out of range!");
 			if (no_destination < 0 || no_destination > this->num_vertex)
-				throw std::exception("Index Destination is out of range!");
+				throw std::runtime_error("Index Destination is out of range!");
 			if (CheckEdge_Infinit(edge[no_origin][no_destination]))//边存在时候不添加
-				throw std::exception("Edge is not Existed");
+				throw std::runtime_error("Edge is not Existed");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;

@@ -233,12 +233,12 @@ public:
 		//		else if (element > current->element)
 		//			current = current->right;
 		//		else
-		//			throw std::exception("element is existed");
+		//			throw std::runtime_error("element is existed");
 		//		{
 		//		}
 		//	}
 		//}
-		//catch (const std::exception& e)
+		//catch (const std::runtime_error& e)
 		//{
 		//	std::cout << e.what() << std::endl;
 		//	return;
@@ -280,9 +280,9 @@ public:
 		try
 		{
 			if (!node)///删除节点不存在
-				throw std::exception("Delete Failed: Node is not exsist");
+				throw std::runtime_error("Delete Failed: Node is not exsist");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;

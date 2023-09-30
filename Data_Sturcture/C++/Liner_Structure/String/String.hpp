@@ -2,6 +2,8 @@
 
 #include <iostream> 
 #include <string>
+#include <cstring>
+
 
 /// 从1开始存储，第一个空间不使用
 class String
@@ -19,7 +21,7 @@ public://初始化
 	String(const char* string):length(strlen(string))
 	{
 		if (!string)
-			throw std::exception("String is nullptr");
+			throw std::runtime_error("String is nullptr");
 
 		if (string_)
 			delete[] string_;

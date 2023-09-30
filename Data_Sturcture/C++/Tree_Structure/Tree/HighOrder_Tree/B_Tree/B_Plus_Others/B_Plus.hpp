@@ -53,9 +53,9 @@ private:
         try
         {
             if (root == nullptr) ///树空时返回空
-                throw std::exception("Root is not exsist");
+                throw std::runtime_error("Root is not exsist");
         }
-        catch (const std::exception& e)
+        catch (const std::runtime_error& e)
         {
             std::cout << e.what() << std::endl;
             return std::make_pair(nullptr, 0);

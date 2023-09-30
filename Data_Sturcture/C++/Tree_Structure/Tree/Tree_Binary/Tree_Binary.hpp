@@ -98,7 +98,7 @@ private: ///构造二叉树[先序+中序/后续+中序]
 	)
 	{ // 切割区间维持左闭右开[)
 		if (begin_inorder > end_inorder || begin_preorder > end_preorder)
-			throw std::exception("Index Illigal");
+			throw std::runtime_error("Index Illigal");
 		if (begin_inorder == end_inorder)
 			return nullptr;
 
@@ -146,7 +146,7 @@ private: ///构造二叉树[先序+中序/后续+中序]
 	)
 	{ // 坚持左开右闭：注意LRD时-1
 		if (begin_inorder > end_inorder || begin_postorder > end_postorder)
-			throw std::exception("Index Illigal");
+			throw std::runtime_error("Index Illigal");
 		if (begin_inorder == end_inorder)
 			return nullptr;
 
@@ -188,11 +188,11 @@ public:
 		try
 		{
 			if (inorder.size()!= pre_post_order.size())
-				throw std::exception("Traversal Vector Size Unequal");
+				throw std::runtime_error("Traversal Vector Size Unequal");
 			if (inorder.empty() || pre_post_order.empty())
-				throw std::exception("Traversal Vector Empty");
+				throw std::runtime_error("Traversal Vector Empty");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 		}

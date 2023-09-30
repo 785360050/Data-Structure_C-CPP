@@ -55,11 +55,11 @@ public:
 		try
 		{
 			if (no_origin < 0 || no_origin >= this->num_vertex)
-				throw std::exception("Index no_origin is out of range!");
+				throw std::runtime_error("Index no_origin is out of range!");
 			if (no_destination < 0 || no_destination >= this->num_vertex)
-				throw std::exception("Index no_destination is out of range!");
+				throw std::runtime_error("Index no_destination is out of range!");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 		}

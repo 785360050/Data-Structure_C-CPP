@@ -36,7 +36,7 @@ static bool SetEncode(int EncodeId = 936)
 // 	{
 // 		L.Element_Insert(2, 9);
 // 	}
-// 	catch (const std::exception &e)
+// 	catch (const std::runtime_error &e)
 // 	{
 // 		std::cerr << e.what() << '\n';
 // 	}
@@ -48,7 +48,7 @@ static bool SetEncode(int EncodeId = 936)
 // 	{
 // 		L.Element_Insert(20, 20);
 // 	}
-// 	catch (const std::exception &e)
+// 	catch (const std::runtime_error &e)
 // 	{
 // 		std::cerr << e.what() << '\n';
 // 	}
@@ -89,7 +89,7 @@ void Test_SeqList_Static()
 	{
 		L.Element_Insert(2, 9);
 	}
-	catch (const std::exception &e)
+	catch (const std::runtime_error &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -101,7 +101,7 @@ void Test_SeqList_Static()
 	{
 		L.Element_Insert(20, 20);
 	}
-	catch (const std::exception &e)
+	catch (const std::runtime_error &e)
 	{
 		std::cerr << e.what() << '\n';
 	}

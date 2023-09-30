@@ -40,9 +40,9 @@ public:
 		try
 		{
 			if (node==nullptr)
-				throw std::exception("Root Init Failed: Node is not exisit.");
+				throw std::runtime_error("Root Init Failed: Node is not exisit.");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
@@ -99,9 +99,9 @@ public:
 		try
 		{
 			if (!thread)
-				throw std::exception("UnModified yet,can't level traverse");
+				throw std::runtime_error("UnModified yet,can't level traverse");
 		}
-		catch (const std::exception& e)
+		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what() << std::endl;
 			return;
