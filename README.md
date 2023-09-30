@@ -2,7 +2,7 @@
 ## Introduction
 > Hi there! This is Jevon 
 > - I'm new to all these thing including 
->  **GitHub ,   Data Struct ,   Coding Language C and C++**  
+>  **GitHub ,   Data_Dtructure ,   Coding Language C and C++**  
 > * Since it's the second time for me to study Data Struct,
 I consider it a good time to code runnable code with C and C++.
 The reference book i use is **《Data Dtructure》 written by 严蔚敏**
@@ -12,27 +12,41 @@ which provide massive pseudocode. I can only try to understand the code
 in book without typing them in IDE to verify them. 
 >* Then this project occured to solve that obstacle, 
 **You can immediately use some parts or modify little codes to prove your thoughts**.
-- tips:
-It's a normalized coding style project that might be mied by c++ grammer in C programe 
+
+
 
 
 ## Guide
 ### Using Tool: Visual Studio 2022
+> Note: Changing Platform to vscode with gcc
 
 Files in Github 
-> Non Visual Studio Users can take Source Files in C or C++ Folder
+> Non Visual Studio Users can take Source 
+> Build by cmake(Still Processing)
+Files in C or C++ Folder
 
 |File/Folder name | describtion|Path|
 |:-:|:-:|:-:|
-|C| C style codes with c++ |Data Struct/C |
-|C++| C++ codes with features such as template |Data Struct/C++|
+|C| C style codes with c++ |Data_Structure/C |
+|C++| C++ codes with features such as template(rare STL) |Data_Structure/C++|
 |Alogorithm|Part of sort and search method|Data Struct/Alogorithm|
 |API| Declarations of Storage srtuctures |Data Struct/C/API|
 |Definition|Definitions for API |Data Struct/C/Definition
-|main.cpp|**Test Codes for C/C++** |Data Struct/main.cpp|
+|main.cpp|**Test Codes for C Only** |Data_Structure/main.cpp|
 |Structure.drawio|Structure Diagram for Test Cases|/res
-|Data Struct.sln| **VS Enterance** |/|
-
+|Data Struct.sln| **VS Enterance**(deprecated) |/|
+|Test| still working, only for c++ | Data_Structure/C++/Test |
+> - C Project is aim to be able to run while CPP Project is aim at refactoring all these  Structures.   
+> - C Project can be considered a draft.
+It's a normalized coding style project that might be mied by c++ grammer in C programe 
+> - CPP Projecet is design to to implement data structures with different storage structures while facilitating future extensions, hence the use of inheritance. Because it is primarily for learning, it does not rely on the STL (Standard Template Library), nor is it intended to be another STL library. It can be understood as having two separate parts: containers and algorithms. If used as a library, it may not be very convenient(i've tried once) because the interfaces are designed for ease of understanding rather than ease of use. The goal is to have full control over homemade containers.
+## Under constructions(TODO)
+2023.9.30
+- Switch VS_Build to cmake_Build
+- Adapt gcc
+- Add Unit_Test  
+Black-box testing as majority, with a small portion of critical APIs being white-box.
+- Considering the standard of c++,now prefering c++20
 
 ##  `Details`
 - [Test Case](#test-case)
@@ -62,6 +76,7 @@ static bool  SetEncode(int EncodeId = 936)
 
 void main()
 {
+	// For Visual Studios Only(Unicode Default)
 	SetEncode(65001);//设置控制台为utf-8编码格式
 	
 	Test_C();
@@ -144,7 +159,6 @@ void TestPolymorphic()
 ```
 ![Screenshot 2023-02-01 170409](https://i.imgur.com/eoSTCnB.jpg)
 ## Attention!
-- C Project is aim to work correctly when CPP Project is aim to clear up all these Structures.
 - //完毕 only refers functions are basically tested, it may well be something wrong when modifying them.
 - So I reccommend you commit in issues , even commit updates.
 - Hope it helps your study :D
@@ -205,6 +219,7 @@ void TestPolymorphic()
 
 
 # Class Diagram
+> This is the initial rough design, which may undergo revisions.
 ## Liner_Structur
 ### Liner_List
 ![Liner_List](https://i.imgur.com/3qB3G1w.png)
