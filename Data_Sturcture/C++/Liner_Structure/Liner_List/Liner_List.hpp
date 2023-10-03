@@ -33,7 +33,8 @@ namespace Logic
 
 	public: /// 元素操作
 		// 插入元素
-		virtual void Element_Insert(size_t pos, ElementType elem) = 0;
+		virtual void Element_Insert(size_t pos,const ElementType& elem) = 0;
+		virtual void Element_Insert(size_t pos, ElementType&& elem) = 0;
 		// 删除元素
 		virtual void Element_Delete(size_t pos) = 0;
 		// 更新元素

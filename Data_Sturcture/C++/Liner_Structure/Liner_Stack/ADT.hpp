@@ -26,7 +26,30 @@ public:
 	virtual void Stack_Show(const std::string& string = "") = 0;
 };
 
+#if __cplusplus >= 202002L
+#include <concepts>
 
+namespace ADT
+{
+	/// index从1开始，非数组下标从0开始
+	template <typename StructureType, typename ElementType>
+	concept Liner_Stack = requires(StructureType adt, ElementType element) {
+		// 判断是否为空
+		adt.Is_Empty();
 
+		// 获取当前元素个数
+		adt.Get_Size();
+		//获取栈顶元素
+		adt.Get_Top();
 
+		// 重置线性表为初始状态，清空所有元素(会析构所有元素)
+		adt.Stack_Clear();
 
+		// 在index位置插入element
+		adt.Element_Push(element);
+		// 删除index位置的元素
+		adt.Element_Pop();
+
+	};
+};
+#endif

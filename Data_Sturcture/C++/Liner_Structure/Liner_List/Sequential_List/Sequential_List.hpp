@@ -74,7 +74,8 @@ namespace Storage
 
 	public: /// 元素操作
 		// 插入元素
-		virtual void Element_Insert(size_t pos, ElementType elem) = 0;
+		virtual void Element_Insert(size_t pos, const ElementType& elem) = 0;
+		virtual void Element_Insert(size_t pos, ElementType&& elem) = 0;
 		// 删除元素
 		virtual void Element_Delete(size_t pos) = 0;
 		// 修改顺序表List第pos个位置上的元素为elem
@@ -113,7 +114,24 @@ public:
 	}
 
 public:
-	void Element_Insert(size_t pos, ElementType elem) override
+	void Element_Insert(size_t pos,const ElementType& elem) override
+	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
+		if (pos < 1 || pos > this->size + 1)
+			throw std::out_of_range("List insert failed: Position out of range");
+		if (this->size >= this->capcity)
+			throw std::runtime_error("List insert failed: List is full");
+
+		if (this->size == 0)
+			this->storage[0] = elem;
+		else
+		{ /// 从后往前，把当前索引向后搬
+			for (size_t index = this->Index(this->size); this->Index(pos) <= index; index--)
+				this->storage[index + 1] = this->storage[index];
+			this->storage[this->Index(pos)] = elem;
+		}
+		++this->size;
+	}
+	void Element_Insert(size_t pos, ElementType&& elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
 		if (pos < 1 || pos > this->size + 1)
 			throw std::out_of_range("List insert failed: Position out of range");
@@ -239,7 +257,7 @@ protected:
 	}
 
 public: /// 元素操作
-	void Element_Insert(size_t pos, ElementType elem)
+	void Element_Insert(size_t pos,const ElementType& elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
 		if (pos <= 0 || pos > this->size + 1)
 			throw std::out_of_range("List insert failed: Position out of range");
@@ -257,11 +275,30 @@ public: /// 元素操作
 		}
 		++this->size;
 	}
+	void Element_Insert(size_t pos, ElementType &&elem) override
+	{ /// n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
+		if (pos <= 0 || pos > this->size + 1)
+			throw std::out_of_range("List insert failed: Position out of range");
+
+		if (this->size >= this->capcity)
+			Expand(); /// 空间扩展为2倍
+		// this->List_Show(" ");
+		if (this->size == 0)
+			this->storage[0] = std::move(elem);
+		else
+		{ /// 从后往前，把当前索引向后搬
+			for (size_t index = this->Index(this->size); this->Index(pos) < index; index--)
+				this->storage[index + 1] = this->storage[index];
+			this->storage[this->Index(pos)] = std::move(elem);
+		}
+		++this->size;
+	}
 	void Element_Delete(size_t pos)
 	{
 		this->Index(pos); // check pos valid
 		for (size_t i = this->Index(pos); i <= this->Index(this->size) - 1; i++)
-			this->storage[i] = this->storage[i + 1];
+			// this->storage[i] = this->storage[i + 1];
+			this->storage[i] = std::move(this->storage[i + 1]);
 		this->storage[this->size - 1] = ElementType{};
 		--this->size;
 		/// 元素个数<=1/2最大容量 时收缩空间
