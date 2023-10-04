@@ -20,4 +20,7 @@ public:
 	{
 		other.element = ElementType{};
 	}
+
+	bool operator==(const Node &other) const { return element == other.element; }
+	auto operator<=>(const Node &other) const { return element <=> other.element; }
 };

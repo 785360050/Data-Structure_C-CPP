@@ -1,6 +1,6 @@
 
 
-#define BOOST_TEST_MODULE Stack
+#define BOOST_TEST_MODULE Link_List
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
@@ -13,11 +13,10 @@
 // g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
 
 template <typename List>
-void test(const List &list)
+void test(const List &array, size_t size = 0, bool empty = true)
 {
-    BOOST_CHECK(list.Get_Size() == 0);
-    BOOST_CHECK(list.Get_Capcity() == 0);
-    BOOST_CHECK(list.Is_Empty());
+    BOOST_CHECK(array.Get_Size() == size);
+    BOOST_CHECK(array.Is_Empty() == empty);
 };
 
 BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
@@ -27,6 +26,15 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
     BOOST_CHECK(list.Get_Size() ==0);
     BOOST_CHECK(list.Get_Capcity()== 0);
     BOOST_CHECK(list.Is_Empty());
+    std::initializer_list<int> initializer_list = {1, 2, 3, 4, 5};
+    Link_List_Forward<int> list_initial{initializer_list};
+    BOOST_CHECK(list_initial.Get_Size() == 5);
+    BOOST_CHECK(list_initial.Get_Capcity() == 5);
+    BOOST_CHECK(list_initial.Is_Empty() == false);
+    for (size_t i = 0; i < initializer_list.size(); i++)
+        list_initial[i + 1] = i;
+
+
 
     /// Link_List_Double
     
@@ -43,6 +51,11 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
     test<Link_List_Double<int>>(array_move_construct);
     auto array_move_assign = std::move(list_doublelinked);
     test<Link_List_Double<int>>(array_move_assign);
+
+    Link_List_Double<int> list_initial_doluble{initializer_list};
+    test(list_initial_doluble, 5, false);
+    for (size_t i = 0; i < initializer_list.size(); i++)
+        list_initial_doluble[i + 1] = i;
 }
 
 #include <vector>

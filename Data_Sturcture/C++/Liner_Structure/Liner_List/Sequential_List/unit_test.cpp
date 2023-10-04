@@ -1,6 +1,6 @@
 
 
-#define BOOST_TEST_MODULE Stack
+#define BOOST_TEST_MODULE Sequential_List
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
@@ -19,27 +19,39 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
     BOOST_CHECK(array_static.Get_Size() == 0);
     BOOST_CHECK(array_static.Get_Capcity() == 5);
     BOOST_CHECK(array_static.Is_Empty());
+    std::initializer_list<int> list = {1, 2, 3, 4, 5};
+    Sequential_List_Static<int, 5> array_initial{list};
+    BOOST_CHECK(array_initial.Get_Size() == 5);
+    BOOST_CHECK(array_initial.Get_Capcity() == 5);
+    BOOST_CHECK(array_initial.Is_Empty() == false);
+    for (size_t i = 0; i < list.size(); i++)
+        array_initial[i + 1] = i;
 
     /// Sequential_List_Dynamic
-    auto test = [](const Sequential_List_Dynamic<int> &array)
+    auto test = [](const Sequential_List_Dynamic<int> &array, size_t size = 0, size_t capcity = 0, bool empty = true)
     {
-        BOOST_CHECK(array.Get_Size() == 0);
-        BOOST_CHECK(array.Get_Capcity() == 0);
-        BOOST_CHECK(array.Is_Empty());
+        BOOST_CHECK(array.Get_Size() == size);
+        BOOST_CHECK(array.Get_Capcity() == capcity);
+        BOOST_CHECK(array.Is_Empty() == empty);
     };
 
     Sequential_List_Dynamic<int> array_dynamic;
-    test(array_dynamic);
+    test(array_dynamic, 0, 5);
 
     auto array_copy_construct(array_dynamic);
-    test(array_copy_construct);
+    test(array_copy_construct, 0, 5);
     auto array_copy_assign = array_dynamic;
-    test(array_copy_assign);
+    test(array_copy_assign, 0, 5);
 
     auto array_move_construct(Sequential_List_Dynamic<int>{});
-    test(array_move_construct);
+    test(array_move_construct, 0, 5);
     auto array_move_assign = std::move(array_dynamic);
-    test(array_move_assign);
+    test(array_move_assign, 0, 5);
+
+    Sequential_List_Dynamic<int> array_initial_dynamic{list};
+    test(array_initial_dynamic, 5, 7, false);
+    for (size_t i = 0; i < list.size(); i++)
+        array_initial[i + 1] = i;
 }
 
 BOOST_AUTO_TEST_CASE(Template_Parameter)
@@ -55,15 +67,15 @@ BOOST_AUTO_TEST_CASE(Template_Parameter)
     array1.Element_Insert(2, "World");
     array1.List_Clear();
 
-// //暂时先限制元素类型为非指针类型
-//     Sequential_List_Static<Element<int> *, 5> clear_pointer;
-//     for (int i = 1; i <= 5; i++)
-//         clear_pointer.Element_Insert(i, new Element(i,10+i));
+    // //暂时先限制元素类型为非指针类型
+    //     Sequential_List_Static<Element<int> *, 5> clear_pointer;
+    //     for (int i = 1; i <= 5; i++)
+    //         clear_pointer.Element_Insert(i, new Element(i,10+i));
 
-//     clear_pointer.List_Clear();
+    //     clear_pointer.List_Clear();
 
-    ///以下是不是动态测试做的
-    
+    /// 以下是不是动态测试做的
+
     // static_assert(  capcity > 0, "Capacity must be greater than 0");
     // Sequential_List_Static<Element<int>, 0> array0;
 
@@ -96,22 +108,22 @@ BOOST_AUTO_TEST_CASE(Operations_Static)
     BOOST_CHECK(array_static.Get_Size() == 4);
     BOOST_CHECK(array_static.Get_Capcity() == 5);
 
-    static_assert(std::is_pointer<int>::value==std::false_type());
+    static_assert(std::is_pointer<int>::value == std::false_type());
     array_static.List_Clear();
     BOOST_CHECK(array_static.Get_Size() == 0);
-    BOOST_CHECK(array_static.Get_Capcity()==5);
+    BOOST_CHECK(array_static.Get_Capcity() == 5);
 }
 
 BOOST_AUTO_TEST_CASE(Operations_Dynamic)
 {
 
-    Sequential_List_Dynamic<int> array_dynamic(1);//初始化时不分配空间
+    Sequential_List_Dynamic<int> array_dynamic(1); // 初始化时不分配空间
     BOOST_CHECK_THROW(array_dynamic.Element_Insert(0, 0), std::out_of_range);
     BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, 2), std::out_of_range);
 
     for (size_t i = 1; i <= 5; i++)
         array_dynamic.Element_Insert(i, i);
-    BOOST_CHECK(array_dynamic.Get_Capcity()==8);//1->2->4->8
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 8); // 1->2->4->8
 
     BOOST_CHECK(array_dynamic.Get_Size() == 5);
     for (size_t i = 1; i <= 5; i++)
@@ -119,7 +131,6 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic)
     BOOST_CHECK_THROW(array_dynamic[0], std::out_of_range);
     BOOST_CHECK_THROW(array_dynamic[6], std::out_of_range);
     array_dynamic.Element_Insert(1, 1);
-
 
     array_dynamic.Element_Update(1, 2);
     BOOST_CHECK(array_dynamic.Get_Size() == 6);
@@ -133,17 +144,16 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic)
     BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
 }
 
-
 BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
 {
     Sequential_List_Dynamic<Element<size_t>> array_dynamic(1); // 初始化时不分配空间
     // Sequential_List_Dynamic<Element<size_t>> array_dynamic(5); // 初始化时不分配空间
     BOOST_CHECK_THROW(array_dynamic.Element_Insert(0, {1, 11}), std::out_of_range);
-    BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, {2,22}), std::out_of_range);
+    BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, {2, 22}), std::out_of_range);
 
     for (size_t i = 1; i <= 5; i++)
         array_dynamic.Element_Insert(i, {i, 10 + i});
-    BOOST_CHECK(array_dynamic.Get_Capcity()==8);//1->2->4->8
+    BOOST_CHECK(array_dynamic.Get_Capcity() == 8); // 1->2->4->8
 
     BOOST_CHECK(array_dynamic.Get_Size() == 5);
     for (size_t i = 1; i <= 5; i++)
@@ -164,4 +174,3 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
     BOOST_CHECK(array_dynamic.Get_Size() == 4);
     BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
 }
-

@@ -17,6 +17,8 @@ namespace Logic
 		size_t size{}; /// 当前元素个数
 
 	public:
+		Liner_List() = default;
+		Liner_List(size_t size) : size{size} {};
 		virtual ~Liner_List() = default;
 
 	public: /// 表操作

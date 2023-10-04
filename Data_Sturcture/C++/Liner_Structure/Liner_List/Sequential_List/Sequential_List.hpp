@@ -15,6 +15,10 @@ namespace Storage
 		ElementType *storage{}; // 存储数组
 		size_t capcity{};		// 当前最大容量
 
+	public:
+		Sequential_List(size_t size, ElementType *storage, size_t capcity)
+			: Logic::Liner_List<ElementType>(size), storage{storage}, capcity{capcity} {};
+
 	protected:
 		/// @breif 位序转元素索引
 		/// @param pos 位序从1开始
@@ -27,11 +31,10 @@ namespace Storage
 
 	public: /// 操作
 		void _Destroy_NonPointerElements()
-		{//栈上的元素不要手动调用析构函数，退栈时系统会自动调用
+		{ // 栈上的元素不要手动调用析构函数，退栈时系统会自动调用
 			std::cout << "_Destroy_NonPointerElements" << std::endl;
 			for (size_t i = 0; i < this->size; i++)
 				this->storage[i] = ElementType();
-			
 		}
 		void _Destroy_PointerElements()
 		{
@@ -40,7 +43,7 @@ namespace Storage
 			for (size_t i = 0; i < this->size; i++)
 			{
 				this->storage[i].~ElementType();
-				
+
 				// if (!std::is_array<ElementType>::value)
 				// 	delete this->storage[i];
 				// else
@@ -54,7 +57,7 @@ namespace Storage
 				throw std::runtime_error("List is not exist");
 
 			// 如果存指针的话要delete的操作
-			if (std::is_pointer<ElementType>::value==std::true_type())
+			if (std::is_pointer<ElementType>::value == std::true_type())
 				// _Destroy_PointerElements();
 				std::cout << "Clear pointer Element Not Implemented yet" << std::endl;
 			else
@@ -74,15 +77,15 @@ namespace Storage
 
 	public: /// 元素操作
 		// 插入元素
-		virtual void Element_Insert(size_t pos, const ElementType& elem) = 0;
-		virtual void Element_Insert(size_t pos, ElementType&& elem) = 0;
+		virtual void Element_Insert(size_t pos, const ElementType &elem) = 0;
+		virtual void Element_Insert(size_t pos, ElementType &&elem) = 0;
 		// 删除元素
 		virtual void Element_Delete(size_t pos) = 0;
 		// 修改顺序表List第pos个位置上的元素为elem
 		void Element_Update(size_t pos, ElementType elem) override
 		{
 			operator[](pos) = elem; // 有点丑
-			// this->storage[pos] = elem;//不能这么写，这样调不到operator[]，使用的是数组的老式迭代器
+									// this->storage[pos] = elem;//不能这么写，这样调不到operator[]，使用的是数组的老式迭代器
 		}
 
 	public:
@@ -107,14 +110,28 @@ class Sequential_List_Static : public Storage::Sequential_List<ElementType>
 	ElementType array[capcity]{}; // 栈上申请空间
 public:
 	Sequential_List_Static()
+		: Storage::Sequential_List<ElementType>(0, array, capcity)
 	{
 		static_assert(capcity > 0, "Capacity must be greater than 0");
-		this->storage = array;
-		this->capcity = capcity;
+		// this->storage = array;
+		// this->capcity = capcity;
+	}
+	Sequential_List_Static(std::initializer_list<ElementType> list)
+		: Storage::Sequential_List<ElementType>(list.size(), array, capcity)
+	{
+		if (list.size() > capcity)
+			throw std::runtime_error("initializer_list Constructed Failed: no enough capcity");
+		// this->storage = array;
+		// this->capcity = capcity;
+		// for (size_t i = 0; i < list.size(); i++)
+		// 	this->storage[i] = std::move(list[i]);
+		size_t i{};
+		for (const auto &element : list)
+			this->storage[i++] = element;
 	}
 
 public:
-	void Element_Insert(size_t pos,const ElementType& elem) override
+	void Element_Insert(size_t pos, const ElementType &elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
 		if (pos < 1 || pos > this->size + 1)
 			throw std::out_of_range("List insert failed: Position out of range");
@@ -131,7 +148,7 @@ public:
 		}
 		++this->size;
 	}
-	void Element_Insert(size_t pos, ElementType&& elem) override
+	void Element_Insert(size_t pos, ElementType &&elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
 		if (pos < 1 || pos > this->size + 1)
 			throw std::out_of_range("List insert failed: Position out of range");
@@ -163,25 +180,23 @@ template <typename ElementType>
 class Sequential_List_Dynamic : public Storage::Sequential_List<ElementType>
 {
 public:
-	Sequential_List_Dynamic()
-		: Storage::Sequential_List<ElementType>(){};
-	Sequential_List_Dynamic(size_t capcity)
+	// Sequential_List_Dynamic()
+	// 	: Storage::Sequential_List<ElementType>(){};
+	Sequential_List_Dynamic(size_t capcity = 5)
+		: Storage::Sequential_List<ElementType>(0, new ElementType[capcity]{}, capcity)
 	{ // capcity必须>0
 		if (capcity < 1)
 			throw std::invalid_argument("List Init Failed: capcity must be greater than 1");
-		this->storage = new ElementType[capcity]{}; /// 每个元素初始化为ElementType默认初始值
-		this->capcity = capcity;
 		if (!this->storage)
 			throw std::bad_alloc();
 	}
 
 	Sequential_List_Dynamic(const Sequential_List_Dynamic &other)
+		: Storage::Sequential_List<ElementType>(other.size, new ElementType[other.capcity]{}, other.capcity)
 	{
 		if (this == &other)
 			throw std::invalid_argument("Self copy is invalid");
-		this->size = other.size;
-		this->capcity = other.capcity;
-		this->storage = new ElementType[this->capcity]{};
+
 		for (size_t i = 0; i < other.size; i++)
 			this->storage[i] = other.storage[i];
 	}
@@ -198,25 +213,32 @@ public:
 	}
 
 	Sequential_List_Dynamic(Sequential_List_Dynamic &&other)
+		: Storage::Sequential_List<ElementType>(other.size, other.storage, other.capcity)
 	{
-		this->size = other.size;
-		this->capcity = other.capcity;
-		this->storage = other.storage;
+		other.size = 0;
 		other.storage = nullptr;
 		other.capcity = 0;
-		other.size = 0;
 	}
 	Sequential_List_Dynamic &operator=(Sequential_List_Dynamic &&other)
 	{
-		this->size = other.size;
+		this->size    = other.size;
 		this->capcity = other.capcity;
 		this->storage = other.storage;
 		other.storage = nullptr;
 		other.capcity = 0;
-		other.size = 0;
+		other.size    = 0;
 		return *this;
 	}
 
+	//初始化列表构造时，默认分配1.5倍size空间
+	Sequential_List_Dynamic(std::initializer_list<ElementType> list)
+		: Storage::Sequential_List<ElementType>(list.size(), nullptr, list.size() * 1.5)
+	{
+		this->storage = new ElementType[static_cast<size_t>(list.size() * 1.5)];
+		size_t i{};
+		for (const auto &element : list)
+			this->storage[i++] = element;
+	}
 	~Sequential_List_Dynamic()
 	{
 		if (this->storage)
@@ -257,7 +279,7 @@ protected:
 	}
 
 public: /// 元素操作
-	void Element_Insert(size_t pos,const ElementType& elem) override
+	void Element_Insert(size_t pos, const ElementType &elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
 		if (pos <= 0 || pos > this->size + 1)
 			throw std::out_of_range("List insert failed: Position out of range");

@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Node",
+            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Liner_Structure/Liner_List/Link_List/unit_test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

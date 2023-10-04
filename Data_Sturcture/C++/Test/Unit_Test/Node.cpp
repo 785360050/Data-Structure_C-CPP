@@ -27,5 +27,18 @@ BOOST_AUTO_TEST_CASE(Node_Base)
         BOOST_CHECK(node5.element == Element{});
         BOOST_CHECK(node_move.element == Element(5, 5));
     }
+}
+
+BOOST_AUTO_TEST_CASE(Node_Compare)
+{
+    Node<int> a(1), b(2), c(a);
+    auto result = a <=> b;
+    BOOST_CHECK(result<0);
     
+    BOOST_CHECK(a < b);
+    BOOST_CHECK(b > a);
+    BOOST_CHECK(a == c);
+    BOOST_CHECK(a <= c);
+    BOOST_CHECK(a >= c);
+    BOOST_CHECK(b != c);
 }
