@@ -7,6 +7,7 @@
 所以用namespace Logic集中管理,Logic下的不同存储实现基类都在namespace Storage下，
 以上两个命名空间都是抽象类不可以被实例化，继承namespace Storage内的各种实现类才可以
 例： 
+(ADT::Liner_List 约束Logic::Liner_List ,static_assert(Logic::Liner_List)的接口规范)[c++20]
 Logic::Liner_List   线性表(逻辑结构) 
 ↓
 Storage::Sequential_List 顺序表(线性表的顺序存储) 

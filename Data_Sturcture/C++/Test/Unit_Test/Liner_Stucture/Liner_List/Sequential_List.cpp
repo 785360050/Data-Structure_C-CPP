@@ -7,19 +7,35 @@
 #include <limits>
 #include <iostream>
 
-#include "Sequential_List.hpp"
-#include "../../../Test/Unit_Test/Test_Element.hpp"
+#include "../../../../Liner_Structure/Liner_List/Sequential_List/Sequential_List.hpp"
+
+#include "../../../../Test/Unit_Test/Test_Element.hpp"
 
 // g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
 
-BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
+void test(const Sequential_List_Static<int,5> &array, size_t size = 0, size_t capcity = 0, bool empty = true)
+{
+    BOOST_CHECK(array.Get_Size() == size);
+    BOOST_CHECK(array.Get_Capcity() == capcity);
+    BOOST_CHECK(array.Is_Empty() == empty);
+};
+void test(const Sequential_List_Dynamic<int> &array, size_t size = 0, size_t capcity = 0, bool empty = true)
+{
+    BOOST_CHECK(array.Get_Size() == size);
+    BOOST_CHECK(array.Get_Capcity() == capcity);
+    BOOST_CHECK(array.Is_Empty() == empty);
+};
+
+std::initializer_list<int> list = {1, 2, 3, 4, 5};
+
+BOOST_AUTO_TEST_CASE(Con_Destruct)
 {
     /// Sequential_List_Dynamic
     Sequential_List_Static<int, 5> array_static;
     BOOST_CHECK(array_static.Get_Size() == 0);
     BOOST_CHECK(array_static.Get_Capcity() == 5);
     BOOST_CHECK(array_static.Is_Empty());
-    std::initializer_list<int> list = {1, 2, 3, 4, 5};
+
     Sequential_List_Static<int, 5> array_initial{list};
     BOOST_CHECK(array_initial.Get_Size() == 5);
     BOOST_CHECK(array_initial.Get_Capcity() == 5);
@@ -28,30 +44,11 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
         array_initial[i + 1] = i;
 
     /// Sequential_List_Dynamic
-    auto test = [](const Sequential_List_Dynamic<int> &array, size_t size = 0, size_t capcity = 0, bool empty = true)
-    {
-        BOOST_CHECK(array.Get_Size() == size);
-        BOOST_CHECK(array.Get_Capcity() == capcity);
-        BOOST_CHECK(array.Is_Empty() == empty);
-    };
+ 
 
-    Sequential_List_Dynamic<int> array_dynamic;
-    test(array_dynamic, 0, 5);
 
-    auto array_copy_construct(array_dynamic);
-    test(array_copy_construct, 0, 5);
-    auto array_copy_assign = array_dynamic;
-    test(array_copy_assign, 0, 5);
 
-    auto array_move_construct(Sequential_List_Dynamic<int>{});
-    test(array_move_construct, 0, 5);
-    auto array_move_assign = std::move(array_dynamic);
-    test(array_move_assign, 0, 5);
 
-    Sequential_List_Dynamic<int> array_initial_dynamic{list};
-    test(array_initial_dynamic, 5, 7, false);
-    for (size_t i = 0; i < list.size(); i++)
-        array_initial[i + 1] = i;
 }
 
 BOOST_AUTO_TEST_CASE(Template_Parameter)
@@ -173,4 +170,75 @@ BOOST_AUTO_TEST_CASE(Operations_Dynamic_Element)
     array_dynamic.Element_Delete(array_dynamic.Get_Size());
     BOOST_CHECK(array_dynamic.Get_Size() == 4);
     BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
+}
+
+template <typename ListType>
+void Prepare_Element(ListType &liner_list, std::initializer_list<int> list)
+{
+    for (size_t i = 0; i < list.size(); i++)
+        liner_list[i + 1] = i;
+};
+template <typename ListType>
+void Check_Element(ListType liner_list, std::initializer_list<int> list)
+{
+    size_t index{};
+    for (auto &e : list)
+        BOOST_CHECK(liner_list[++index] == e);
+};
+BOOST_AUTO_TEST_CASE(Copy_Control_and_initializer_list)
+{
+    { // Sequential_List_Static
+        Sequential_List_Static<int, 5> array_static(list);
+        test(array_static, 5, 5, false);
+        Check_Element<Sequential_List_Static<int, 5>>(array_static, list);
+
+        auto array_copy_construct(array_static);
+        test(array_copy_construct, 5, 5, false);
+        Check_Element<Sequential_List_Static<int, 5>>(array_copy_construct, list);
+        auto array_copy_assign = array_static;
+        test(array_copy_assign, 5, 5, false);
+        Check_Element<Sequential_List_Static<int, 5>>(array_copy_assign, list);
+
+        auto array_move_construct(std::move(array_static));
+        test(array_move_construct, 5, 5, false);
+        test(array_static, 0, 0);
+        Check_Element<Sequential_List_Static<int, 5>>(array_move_construct, list);
+        // ///由于无法访问底层数组，且[]有越界检查，所以不能检查被移动构造后的元素是否被重置
+        // for (size_t i = 0; i < array_static.Get_Capcity(); i++)
+        //     BOOST_CHECK(array_static[++i] == int{});
+
+        auto array_move_assign = std::move(array_move_construct);
+        test(array_move_assign, 5, 5, false);
+        test(array_move_construct, 0, 0);
+        Check_Element<Sequential_List_Static<int, 5>>(array_move_assign, list);
+        // for (size_t i = 0; i < array_move_construct.Get_Capcity(); i++)
+        //     BOOST_CHECK(array_move_construct[++i] == int{});
+    }
+    { // Sequential_List_Dynamic
+        constexpr size_t dynamic_capcity = 5 * 1.5;
+        Sequential_List_Dynamic<int> array_dynamic(list);
+        test(array_dynamic, 5, dynamic_capcity, false);
+        Check_Element<Sequential_List_Dynamic<int>>(array_dynamic, list);
+
+        auto array_copy_construct(array_dynamic);
+        test(array_copy_construct, 5, dynamic_capcity, false);
+        Check_Element<Sequential_List_Dynamic<int>>(array_copy_construct, list);
+        auto array_copy_assign = array_dynamic;
+        test(array_copy_assign, 5, dynamic_capcity, false);
+        Check_Element<Sequential_List_Dynamic<int>>(array_copy_assign, list);
+
+        auto array_move_construct(std::move(array_dynamic));
+        test(array_move_construct, 5, dynamic_capcity, false);
+        test(array_dynamic, 0, 0);//被移动后容量和大小都为0
+        Check_Element<Sequential_List_Dynamic<int>>(array_move_construct, list);
+        // for (size_t i = 0; i < array_dynamic.Get_Capcity(); i++)
+        //     BOOST_CHECK(array_dynamic[++i] == int{});
+
+        auto array_move_assign = std::move(array_move_construct);
+        test(array_move_assign, 5, dynamic_capcity, false);
+        test(array_move_construct, 0, 0);
+        Check_Element<Sequential_List_Dynamic<int>>(array_move_assign, list);
+        // for (size_t i = 0; i < array_move_construct.Get_Capcity(); i++)
+        //     BOOST_CHECK(array_move_construct[++i] == int{});
+    }
 }

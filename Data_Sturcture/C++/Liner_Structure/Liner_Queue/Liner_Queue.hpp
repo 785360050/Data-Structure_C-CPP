@@ -1,61 +1,47 @@
 #pragma once
 
+#include "ADT.hpp"
 
+namespace Logic
+{
+// =std::numeric_limits<size_t>::max()
+	template <typename ElementType>
+	struct Queue
+	{ /// 循环队列
+	protected:
+		size_t size{};
+		ElementType* storage{nullptr};
+		// size_t maxsize{};
 
-#include "Liner_Queue_ADT.hpp"
+	protected:
+		Queue() = default;
+		Queue(size_t size) : size{size}{}
+		virtual ~Queue() = default;
+	protected:
+		
+		virtual ElementType &Get_Rear()  = 0;
 
+	public:
+		// 清空队列
+		virtual void Clear() = 0;
+		// 判断是否队空
+		bool Is_Empty() const { return size==0; }
+		virtual bool Is_Full() const = 0;
 
+		// 返回队列长度(元素个数)
+		int Get_Size() const { return size; }
+		// 返回队头
+		virtual ElementType &Get_Front()  = 0;
+		// 元素入队
+		virtual void Element_Enqueue(const ElementType& element) = 0;
+		virtual void Element_Enqueue(ElementType&& element) = 0;
+		// 元素出队
+		virtual void Element_Dequeue() = 0;
+		// 显示整个队列信息
+		virtual void Queue_Show(const std::string &string="") = 0;
+	};
 
-
-
-template<typename DataType>
-struct Queue:public Queue_ADT<DataType>
-{///循环队列
-protected:
-	int length;
-	int maxsize;
-public:
-	Queue()
-		:length{ 0 }, maxsize{ 0 } {};
-	Queue(int maxsize)
-		:length{ 0 }
-	{
-		try
-		{
-			if (maxsize < 1)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Queue Init Failed: maxsize must be greater than 1" << std::endl;
-			return;
-		}
-		this->maxsize = maxsize;
-	}
-	virtual ~Queue() = default;
-public:
-	//清空队列
-	virtual void Queue_Clear() = 0;
-	//判断是否队空
-	bool Queue_CheckEmpty() override
-	{return this->length == 0 ? true : false;}
-	bool Queue_CheckFull() override
-	{
-		if (length > maxsize)
-				throw std::runtime_error("Queue Overflowed");
-		return length == maxsize;
-	}
-	//返回队列长度(元素个数)
-	int Queue_Length() override
-	{return length;}
-	//返回队头
-	virtual DataType Queue_GetFront() = 0;
-	//返回队尾
-	virtual DataType Queue_GetRear() = 0;
-	//元素入队
-	virtual void Element_Enqueue(DataType element) = 0;
-	//元素出队
-	virtual void Element_Dequeue() = 0;
-	//显示整个队列信息
-	virtual void Queue_Show(const std::string& string) = 0;
-};
+}
+#if __cplusplus >= 202002L
+static_assert(ADT::Liner_Queue<Logic::Queue<int>, int>);
+#endif

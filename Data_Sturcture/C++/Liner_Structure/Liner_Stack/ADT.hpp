@@ -43,7 +43,7 @@ namespace ADT
 		adt.Get_Top();
 
 		// 重置线性表为初始状态，清空所有元素(会析构所有元素)
-		adt.Stack_Clear();
+		adt.Clear();
 
 		// 在index位置插入element
 		adt.Element_Push(element);

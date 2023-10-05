@@ -17,15 +17,16 @@ namespace Logic
 	protected:
 		Stack(size_t maxsize = 5)
 		{
-			if (maxsize < 1)
-				throw std::invalid_argument("Stack Init Failed: maxsize must be greater than 1");
+			// if (maxsize < 1)
+			// 	throw std::invalid_argument("Stack Init Failed: maxsize must be greater than 1");
+			static_assert(maxsize < 1, "Stack Init Failed: maxsize must be greater than 1");
 			this->maxsize = maxsize;
 		}
 		virtual ~Stack() noexcept = default;
 
 	public: /// 栈操作
 		// 清空栈
-		virtual void Stack_Clear() = 0;
+		virtual void Clear() = 0;
 		// 判断是否栈空
 		virtual bool Is_Empty() const = 0;
 		// 返回栈长度(元素个数)
@@ -35,12 +36,13 @@ namespace Logic
 
 	public: /// 元素操作
 		// 元素入栈
-		virtual void Element_Push(ElementType& element) = 0;
+		virtual void Element_Push(const ElementType& element) = 0;
+		virtual void Element_Push(ElementType&& element) = 0;
 		// 元素出栈
 		virtual void Element_Pop() = 0;
 
 	public:
-		virtual void Stack_Show(const std::string &string) = 0;
+		virtual void Stack_Show(const std::string &string="") = 0;
 	};
 };
-static_assert(ADT::Liner_Stack<Logic::Stack<int>, int>, "Stack must meet the Liner_Stack concept");
+static_assert(ADT::Liner_Stack<Logic::Stack<int>, int>, "Stack must meet the Stack concept");

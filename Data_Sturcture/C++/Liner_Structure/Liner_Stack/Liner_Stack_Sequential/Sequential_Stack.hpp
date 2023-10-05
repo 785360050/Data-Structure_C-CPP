@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstring> //memset
 
-#include "../Liner_Stack.hpp"
+#include "../Stack.hpp"
 
 /// ============================================================================================================
 /// 		 四种类型：满增栈、满减栈、空增栈、空减栈。
@@ -17,6 +17,94 @@
 /// 递增堆栈(Ascending stack)：堆栈由低地址向高地址生长。
 /// 递减堆栈(Decending stack)：堆栈由高地址向低地址生长。
 /// ============================================================================================================
+
+namespace Storage
+{
+	template <typename DataType, size_t capcity>
+	class Sequence_Stack : public Logic::Stack<DataType>
+	{ /// 默认为空增栈：top=0,Push=top++
+	protected:
+		int top{};
+		DataType element[capcity]{};
+
+	protected:
+		virtual void Top_Reset()
+		{
+			top = 0;
+		}
+
+	public:
+		Sequence_Stack() = default;
+		:Logic::Stack(capcity)
+		{
+			Top_Reset();
+		}
+
+		// 销毁栈
+		~Sequence_Stack() override
+		{
+			// if (element)
+			// {
+			// 	delete[] element;
+			// 	Top_Reset();
+			// 	element = nullptr;
+			// }
+			Top_Reset();
+			// std::cout << "Sequence_Stack Destroyed" << std::endl;
+		}
+
+	public: /// 栈操作
+		// 清空栈
+		void Stack_Clear() override
+		{ /// 重置栈内存为0
+			// memset(element, 0, sizeof(DataType) * this->maxsize);
+			while (!Is_Empty())
+				this->Element_Pop();
+			this->Top_Reset();
+		}
+		// 判断是否栈空
+		virtual bool Is_Empty() { return top == 0 ? true : false; };
+		// 返回栈长度(元素个数)
+		virtual size_t Get_Size() override const { return top; }
+		size_t Get_Capcity() const { return capcity; }
+		// 返回栈顶元素
+		virtual DataType &Get_Top() override
+		{ /// 读取栈顶元素
+			if (Stack_CheckEmpty())
+				throw std::out_of_range("Stack is Empty");
+			return element[top - 1]; // top不一定是栈顶索引,此处为满栈
+		}
+
+	public: /// 元素操作
+		// 元素入栈
+		virtual void Element_Push(DataType element) override
+		{
+			if (top >= this->maxsize + 1)
+				throw std::runtime_error("Stack is full");
+			this->element[top++] = element;
+		}
+		// 元素出栈
+		virtual void Element_Pop() override
+		{
+			if (top < 1)
+				throw std::runtime_error("Stack is Empty");
+			--top;
+		}
+
+	public:
+		// 输出栈所有信息
+		virtual void Stack_Show(const std::string &string) override
+		{
+			std::cout << string << std::endl
+					  << "[Length/Maxsize]:\n"
+					  << " [" << Get_Size() << '/' << this->maxsize << ']' << std::endl
+					  << "Bottom-";
+			for (int index = 0; index < this->maxsize; index++)
+				std::cout << '[' << index << ':' << element[index] << "]-";
+			std::cout << "TOP[" << top << ']' << std::endl;
+		}
+	};
+}
 
 ///Sequence_Stack_Empty_Ascending
 template <typename DataType,size_t capcity>

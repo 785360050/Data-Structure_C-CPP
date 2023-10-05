@@ -116,6 +116,41 @@ public:
 		// this->storage = array;
 		// this->capcity = capcity;
 	}
+	Sequential_List_Static(const Sequential_List_Static<ElementType,capcity> &other)
+		: Storage::Sequential_List<ElementType>(0, array, capcity)
+	{
+		for (size_t i = 0; i < capcity; i++)
+			array[i] = other.array[i];
+		this->size = other.size;
+	}
+	Sequential_List_Static<ElementType, capcity>& operator=(const Sequential_List_Static<ElementType, capcity> &other)
+	{
+		this->List_Clear();
+		for (size_t i = 0; i < capcity; i++)
+			array[i] = other.array[i];
+		this->size = other.size;
+		return *this;
+	}
+	Sequential_List_Static(Sequential_List_Static<ElementType, capcity> &&other)
+		: Storage::Sequential_List<ElementType>(0, array, capcity)
+	{
+		for (size_t i = 0; i < capcity; i++)
+			array[i] = std::move(other.array[i]);
+		this->size = other.size;
+		other.List_Clear();
+		other.capcity = 0;//由于被移动的对象不应该再次被访问，所以保险起见重置
+	}
+	Sequential_List_Static<ElementType, capcity> &
+	operator=(Sequential_List_Static<ElementType, capcity> &&other)
+	{
+		this->List_Clear();
+		for (size_t i = 0; i < capcity; i++)
+			array[i] = std::move(other.array[i]);
+		this->size = other.size;
+		other.List_Clear();
+		other.capcity = 0;
+		return *this;
+	}
 	Sequential_List_Static(std::initializer_list<ElementType> list)
 		: Storage::Sequential_List<ElementType>(list.size(), array, capcity)
 	{
