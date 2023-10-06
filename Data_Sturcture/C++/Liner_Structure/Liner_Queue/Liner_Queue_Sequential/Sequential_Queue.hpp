@@ -229,6 +229,57 @@ public:
 	{
 		static_assert(maxsize > 0, "Queue Init Failed: maxsize must be greater than 0");
 	}
+	Sequential_Queue_Tag(const Sequential_Queue_Tag<ElementType, maxsize> &other)
+		: Storage::Sequential_Queue<ElementType, maxsize>(other.capcity, array, other.size)
+	{
+		this->front = other.front;
+		this->rear = other.rear;
+		full = other.full;
+		for (size_t i = 0; i < maxsize; i++)
+			array[i] = other.array[i];
+	}
+	Sequential_Queue_Tag(Sequential_Queue_Tag<ElementType, maxsize> &&other)
+		: Storage::Sequential_Queue<ElementType, maxsize>(other.capcity, array, other.size)
+	{
+		this->front = other.front;
+		this->rear = other.rear;
+		full = other.full;
+		other.full = false;
+		other.front = size_t{};
+		other.rear = size_t{};
+		other.size = size_t{};
+		for (size_t i = 0; i < maxsize; i++)
+		{
+			array[i] = std::move(other.array[i]);
+			other.array[i] = ElementType{};
+		}
+	}
+	Sequential_Queue_Tag<ElementType, maxsize> &operator=(const Sequential_Queue_Tag<ElementType, maxsize> &other)
+	{
+		this->front = other.front;
+		this->rear = other.rear;
+		full = other.full;
+		for (size_t i = 0; i < maxsize; i++)
+			array[i] = other.array[i];
+		return *this;
+	}
+
+	Sequential_Queue_Tag<ElementType, maxsize> &operator=(Sequential_Queue_Tag<ElementType, maxsize> &&other)
+	{
+		this->front = other.front;
+		this->rear = other.rear;
+		full = other.full;
+		other.full = false;
+		other.front = size_t{};
+		other.rear = size_t{};
+		other.size = size_t{};
+		for (size_t i = 0; i < maxsize; i++)
+		{
+			array[i] = std::move(other.array[i]);
+			other.array[i] = ElementType{};
+		}
+		return *this;
+	}
 
 	~Sequential_Queue_Tag() override
 	{
@@ -300,3 +351,8 @@ public:
 /// @brief 顺序队列默认使用标志实现判断满的实现版本
 template <typename ElementType, size_t maxsize>
 using Sequential_Queue = Sequential_Queue_Tag<ElementType, maxsize>;
+
+#if __cplusplus >= 202002L
+static_assert(ADT::Liner_Queue<Sequential_Queue_Redundancy<int,5>, int>);
+static_assert(ADT::Liner_Queue<Sequential_Queue_Tag<int,5>, int>);
+#endif

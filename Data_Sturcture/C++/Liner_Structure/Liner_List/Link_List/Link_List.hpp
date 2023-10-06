@@ -451,3 +451,9 @@ public: /// 元素操作
 		--this->size;
 	}
 };
+
+#if __cplusplus >= 202002L
+#include "../ADT.hpp"
+static_assert(ADT::Liner_List<Link_List_Forward<int>, int>);
+static_assert(ADT::Liner_List<Link_List_Double<int>, int>);
+#endif

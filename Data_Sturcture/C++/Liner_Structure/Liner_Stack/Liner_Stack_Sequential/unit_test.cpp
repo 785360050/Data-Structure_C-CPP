@@ -20,7 +20,7 @@ void test(const List &list)
 };
 
 
-BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
+BOOST_AUTO_TEST_CASE(Con_Destruct)
 {
     /// Link_List_Double
     Sequence_Stack<int,5> stack;
@@ -59,13 +59,7 @@ BOOST_AUTO_TEST_CASE(Template_Parameter)
     array1.Element_Insert(2, "World");
     array1.List_Clear();
 
-    ///以下是不是动态测试做的
-    
-    // static_assert(  capcity > 0, "Capacity must be greater than 0");
-    // listLink_List_Forward<Element<int>, 0> array0;
 
-    // 错误：narrowing conversion of ‘-1’ from ‘int’ to ‘long unsigned int’ [-Wnarrowing]
-    //  listLink_List_Forward<Element, -1> array1;
 }
 
 BOOST_AUTO_TEST_CASE(Operations_Static)

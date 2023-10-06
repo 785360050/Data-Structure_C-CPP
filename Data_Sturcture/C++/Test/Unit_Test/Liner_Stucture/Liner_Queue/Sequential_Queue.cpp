@@ -32,7 +32,6 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
 {
     { // Sequential_Queue_Redundancy
 
-
         Sequential_Queue_Redundancy<int, 5> queue;
         test(queue, 0, 6);
 
@@ -48,7 +47,6 @@ BOOST_AUTO_TEST_CASE(Con_Destruct_Copy)
     }
 
     { // Sequential_Queue_Tag
-        
 
         Sequential_Queue_Tag<int, 5> queue;
         test(queue, 0, 5);
@@ -140,36 +138,63 @@ BOOST_AUTO_TEST_CASE(Operations)
     BOOST_CHECK(queue_T.Get_Capcity() == 5);
 }
 
-// BOOST_AUTO_TEST_CASE(Operations_With_Element)
-// {
-//     Sequential_List_Dynamic<Element<size_t>> array_dynamic(1); // 初始化时不分配空间
-//     // Sequential_List_Dynamic<Element<size_t>> array_dynamic(5); // 初始化时不分配空间
-//     BOOST_CHECK_THROW(array_dynamic.Element_Insert(0, {1, 11}), std::out_of_range);
-//     BOOST_CHECK_THROW(array_dynamic.Element_Insert(2, {2, 22}), std::out_of_range);
+BOOST_AUTO_TEST_CASE(Operations_With_Element)
+{
+    using ElementType = Element<size_t>;
+    { // Sequential_Queue_Redundancy
 
-//     for (size_t i = 1; i <= 5; i++)
-//         array_dynamic.Element_Insert(i, {i, 10 + i});
-//     BOOST_CHECK(array_dynamic.Get_Capcity() == 8); // 1->2->4->8
+        Sequential_Queue_Redundancy<ElementType, 5> queue_R;
 
-//     BOOST_CHECK(array_dynamic.Get_Size() == 5);
-//     for (size_t i = 1; i <= 5; i++)
-//         BOOST_CHECK(array_dynamic[i] == Element<size_t>(i, 10 + i));
-//     BOOST_CHECK_THROW(array_dynamic[0], std::out_of_range);
-//     BOOST_CHECK_THROW(array_dynamic[6], std::out_of_range);
-//     array_dynamic.Element_Insert(1, Element<size_t>(1, 10 + 1));
+        for (size_t i = 1; i <= 5; i++)
+            queue_R.Element_Enqueue({i, i});
 
-//     array_dynamic.Element_Update(1, Element<size_t>(2, 10 + 2));
-//     BOOST_CHECK(array_dynamic.Get_Size() == 6);
-//     BOOST_CHECK(array_dynamic[1] == Element<size_t>(2, 10 + 2));
-//     // array_dynamic.List_Show("");
-//     array_dynamic.Element_Delete(1);
-//     BOOST_CHECK(array_dynamic.Get_Size() == 5);
-//     BOOST_CHECK(array_dynamic.Get_Capcity() == 8);
+        BOOST_CHECK(queue_R.Is_Full());
+        BOOST_CHECK_THROW(queue_R.Element_Enqueue({0, 0}), std::runtime_error);
+        BOOST_CHECK(queue_R.Get_Size() == 5);
+        BOOST_CHECK(queue_R.Get_Capcity() == 6);
 
-//     array_dynamic.Element_Delete(array_dynamic.Get_Size());
-//     BOOST_CHECK(array_dynamic.Get_Size() == 4);
-//     BOOST_CHECK(array_dynamic.Get_Capcity() == 4);
-// }
+        for (size_t i = 1; i <= 5; i++)
+        {
+            BOOST_CHECK(queue_R.Get_Front() == ElementType(i, i));
+            queue_R.Element_Dequeue();
+        }
+        BOOST_CHECK_THROW(queue_R.Element_Dequeue(), std::runtime_error);
+        BOOST_CHECK(queue_R.Get_Size() == 0);
+        BOOST_CHECK(queue_R.Is_Empty());
+
+        // static_assert(std::is_pointer<int>::value == std::false_type());
+        queue_R.Clear();
+        BOOST_CHECK(queue_R.Get_Size() == 0);
+        BOOST_CHECK(queue_R.Get_Capcity() == 6);
+    }
+
+    { // Tag
+
+        Sequential_Queue_Tag<ElementType, 5> queue_T;
+
+        for (size_t i = 1; i <= 5; i++)
+            queue_T.Element_Enqueue({i, i});
+
+        BOOST_CHECK(queue_T.Is_Full());
+        BOOST_CHECK_THROW(queue_T.Element_Enqueue({0, 0}), std::runtime_error);
+        BOOST_CHECK(queue_T.Get_Size() == 5);
+        BOOST_CHECK(queue_T.Get_Capcity() == 5);
+
+        for (size_t i = 1; i <= 5; i++)
+        {
+            BOOST_CHECK(queue_T.Get_Front() == ElementType(i, i));
+            queue_T.Element_Dequeue();
+        }
+        BOOST_CHECK_THROW(queue_T.Element_Dequeue(), std::runtime_error);
+        BOOST_CHECK(queue_T.Get_Size() == 0);
+        BOOST_CHECK(queue_T.Is_Empty());
+
+        // static_assert(std::is_pointer<int>::value == std::false_type());
+        queue_T.Clear();
+        BOOST_CHECK(queue_T.Get_Size() == 0);
+        BOOST_CHECK(queue_T.Get_Capcity() == 5);
+    }
+}
 
 template <typename QueueType>
 void Prepare_Element(QueueType &queue, std::initializer_list<int> list)
@@ -191,7 +216,7 @@ void Check_Element(QueueType queue, std::initializer_list<int> list)
 BOOST_AUTO_TEST_CASE(Copy_Control)
 {
 
-    {
+    { // Sequential_Queue_Redundancy
         Sequential_Queue_Redundancy<int, 5> queue;
         test(queue, 0, 6);
         std::initializer_list<int> list{1, 2, 3, 4, 5}; // 元素数量不要超过队列分配的空间，没有逻辑检查
@@ -199,19 +224,42 @@ BOOST_AUTO_TEST_CASE(Copy_Control)
         Check_Element<Sequential_Queue_Redundancy<int, 5>>(queue, list);
 
         auto queue_copy_construct(queue);
-        test(queue_copy_construct, 5, 6,false,true);
+        test(queue_copy_construct, 5, 6, false, true);
         Check_Element<Sequential_Queue_Redundancy<int, 5>>(queue_copy_construct, list);
         auto queue_copy_assign = queue;
         test(queue_copy_assign, 5, 6, false, true);
         Check_Element<Sequential_Queue_Redundancy<int, 5>>(queue_copy_assign, list);
 
         auto queue_move_construct(std::move(queue));
-        test(queue_move_construct, 5, 6,false,true);
+        test(queue_move_construct, 5, 6, false, true);
         test(queue, 0, 6);
         Check_Element<Sequential_Queue_Redundancy<int, 5>>(queue_move_construct, list);
         auto queue_move_assign = std::move(queue_move_construct);
         test(queue_move_assign, 5, 6, false, true);
         test(queue_move_construct, 0, 6);
         Check_Element<Sequential_Queue_Redundancy<int, 5>>(queue_move_assign, list);
+    }
+    { // Sequential_Queue_Tag
+        Sequential_Queue_Tag<int, 5> queue;
+        test(queue, 0, 5);
+        std::initializer_list<int> list{1, 2, 3, 4, 5}; // 元素数量不要超过队列分配的空间，没有逻辑检查
+        Prepare_Element<Sequential_Queue_Tag<int, 5>>(queue, list);
+        Check_Element<Sequential_Queue_Tag<int, 5>>(queue, list);
+
+        auto queue_copy_construct(queue);
+        test(queue_copy_construct, 5, 5, false, true);
+        Check_Element<Sequential_Queue_Tag<int, 5>>(queue_copy_construct, list);
+        auto queue_copy_assign = queue;
+        test(queue_copy_assign, 5, 5, false, true);
+        Check_Element<Sequential_Queue_Tag<int, 5>>(queue_copy_assign, list);
+
+        auto queue_move_construct(std::move(queue));
+        test(queue_move_construct, 5, 5, false, true);
+        test(queue, 0, 5);
+        Check_Element<Sequential_Queue_Tag<int, 5>>(queue_move_construct, list);
+        auto queue_move_assign = std::move(queue_move_construct);
+        test(queue_move_assign, 5, 5, false, true);
+        test(queue_move_construct, 0, 5);
+        Check_Element<Sequential_Queue_Tag<int, 5>>(queue_move_assign, list);
     }
 }

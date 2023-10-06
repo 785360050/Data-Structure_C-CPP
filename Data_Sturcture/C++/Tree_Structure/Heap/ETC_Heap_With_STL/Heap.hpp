@@ -45,7 +45,7 @@ public:
         std::cout << "Copy Constructed " << std::endl;
         heap=other.heap;
     }
-    Heap operator=(const Heap &other)
+    Heap& operator=(const Heap &other)
     {
         std::cout << "Copy Assignment " << std::endl;
         heap = other.heap;

@@ -12,27 +12,24 @@ namespace Logic
 	struct Stack
 	{
 	protected:
-		size_t maxsize{}; /// 元素上限
-		/// 注:若maxszie为size_t类时signed与unsigned类型比较会默认转为unsigned后再比较
+		size_t size{};
+		// size_t maxsize{}; /// 元素上限,仅为顺序实现的特性
+						  /// 注:若maxszie为size_t类时signed与unsigned类型比较会默认转为unsigned后再比较
 	protected:
-		Stack(size_t maxsize = 5)
-		{
-			// if (maxsize < 1)
-			// 	throw std::invalid_argument("Stack Init Failed: maxsize must be greater than 1");
-			static_assert(maxsize < 1, "Stack Init Failed: maxsize must be greater than 1");
-			this->maxsize = maxsize;
-		}
+		Stack() = default;
+		Stack(size_t size):size{size}{} 
+
 		virtual ~Stack() noexcept = default;
 
 	public: /// 栈操作
 		// 清空栈
 		virtual void Clear() = 0;
 		// 判断是否栈空
-		virtual bool Is_Empty() const = 0;
+		bool Is_Empty() const { return size == 0; }
 		// 返回栈长度(元素个数)
-		virtual size_t Get_Size() const = 0;
+		virtual size_t Get_Size() const { return size; }
 		// 返回栈顶元素
-		virtual ElementType& Get_Top() const = 0;
+		virtual ElementType& Get_Top() = 0;
 
 	public: /// 元素操作
 		// 元素入栈

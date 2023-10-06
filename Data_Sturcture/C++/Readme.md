@@ -13,6 +13,8 @@ Logic::Liner_List   线性表(逻辑结构)
 Storage::Sequential_List 顺序表(线性表的顺序存储) 
 ↓
 Sequential_List_Static(顺序表的具体实现)
+4. 各个数据结构的容器实现文件夹下单独放置Demo.cpp，删除了逻辑结构文件夹下的demo:main.cpp
+5. 线性结构的链式和顺序存储中，顺序存储默认存在元素上限，而链式没有。
 
 # 设计目标
 - 重点是数据结构，而不是STL

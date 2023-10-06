@@ -10,7 +10,7 @@
             "request": "launch",
             "program": 
             // "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Liner_Stucture/Liner_Queue/unit_test",
-            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Liner_Stucture/Liner_List/Sequential_List",
+            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Liner_Structure/Liner_Stack/Liner_Stack_Sequential/Demo",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

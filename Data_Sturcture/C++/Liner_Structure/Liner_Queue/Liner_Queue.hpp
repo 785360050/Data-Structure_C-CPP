@@ -10,8 +10,6 @@ namespace Logic
 	{ /// 循环队列
 	protected:
 		size_t size{};
-		ElementType* storage{nullptr};
-		// size_t maxsize{};
 
 	protected:
 		Queue() = default;
@@ -26,7 +24,7 @@ namespace Logic
 		virtual void Clear() = 0;
 		// 判断是否队空
 		bool Is_Empty() const { return size==0; }
-		virtual bool Is_Full() const = 0;
+		// virtual bool Is_Full() const = 0;
 
 		// 返回队列长度(元素个数)
 		int Get_Size() const { return size; }

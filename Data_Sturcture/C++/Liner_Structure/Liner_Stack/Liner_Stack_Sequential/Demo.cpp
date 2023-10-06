@@ -20,7 +20,7 @@ static bool  SetEncode(int EncodeId = 936)
 
 void TestSequenceStack()
 {
-	Sequence_Stack<char,5> s;///空增栈
+	Sequential_Stack<char,5> s;///空增栈
 	//Sequence_Stack_Full_Ascending<char> s(5);///满增栈
 	//Sequence_Stack_Empty_Decending<char> s(5);///空减栈
 	//Sequence_Stack_Full_Decending<char> s(5);///满减栈
