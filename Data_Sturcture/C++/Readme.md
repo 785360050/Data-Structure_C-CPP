@@ -16,6 +16,12 @@ Sequential_List_Static(顺序表的具体实现)
 4. 各个数据结构的容器实现文件夹下单独放置Demo.cpp，删除了逻辑结构文件夹下的demo:main.cpp
 5. 线性结构的链式和顺序存储中，顺序存储默认存在元素上限，而链式没有。
 
+# 实现细节
+1. ElementType仅对非指针类型做处理，若ElementType为指针类型，
+如Int* 则用户手动管理元素的释放，可参考std::array<int*,5>,如果析构前不delete所有元素，则会导致内存泄漏
+2. Clear的接口与stl的clear有小部分区别，自制的Clear将所有容器内的元素都重置，但不释放内存
+一个容器调用一次Clear后等价于初始化后的容器，使用 = ElementType{}实现，ElementType需要负责管理持有的动态内存
+
 # 设计目标
 - 重点是数据结构，而不是STL
 STL使用了容器、迭代器、算法三个组件实现了容器和算法的隔离，这样是有代价的

@@ -41,7 +41,7 @@ namespace Storage
 			return top->element;
 		}
 		// 输出栈所有信息
-		void Stack_Show(const std::string &string) override
+		void Stack_Show(const std::string &string="") override
 		{
 			NodeType *node = top;
 			std::cout << string << std::endl
@@ -95,19 +95,22 @@ public:
 		if (other.size == 0)
 			return;
 		else if (other.size == 1)
-			Element_Push(other.top->element);
+			this->Element_Push(other.top->element);
 		else
 		{
+			//处理首元节点
 			this->top = new NodeType(other.top->element);
-			NodeType* node = other.top, self;
-			self = this->top;
-			while (node)
+			++this->size;
+			NodeType *node = other.top, *self = this->top;
+			//统一处理后续节点
+			while (node->next)
 			{
-				self->next = new NodeType(node->element);
+				self->next = new NodeType(node->next->element);
 				self = self->next;
 				node = node->next;
 				++this->size;
 			}
+
 		}
 	}
 	Link_Stack &operator=(const Link_Stack &other)
@@ -121,17 +124,20 @@ public:
 			Element_Push(other.top->element);
 		else
 		{
+			// 处理首元节点
 			this->top = new NodeType(other.top->element);
-			NodeType *node = other.top, self{};
-			self = this->top;
-			while (node)
+			++this->size;
+			NodeType *node = other.top, *self = this->top;
+			// 统一处理后续节点
+			while (node->next)
 			{
-				self->next = new NodeType(node->element);
+				self->next = new NodeType(node->next->element);
 				self = self->next;
 				node = node->next;
 				++this->size;
 			}
 		}
+		
 		return *this;
 	}
 
