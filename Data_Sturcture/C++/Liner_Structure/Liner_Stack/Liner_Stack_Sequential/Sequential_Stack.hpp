@@ -29,18 +29,18 @@ namespace Storage
 	protected:
 		size_t top{};				   // 注意是unsigned 类型
 		const size_t top_min{};		   // top_min<=top
-		ElementType *storage{nullptr}; // 指向派生类的数组
+		ElementType *const storage{nullptr}; // 指向派生类的数组
 
 	protected:
 		virtual void _Top_Reset() { top = top_min; }
 
 	public:
 		Sequential_Stack(ElementType *storage, size_t top_min)
-			: storage{storage}, top_min{top_min}, top{top_min} {}
+			: top{top_min}, top_min{top_min},storage{storage} {}
 		Sequential_Stack(const Storage::Sequential_Stack<ElementType> &other)
-			: Logic::Stack<ElementType>(other.size), top_min{other.top_min}, top{other.top} {}
+			: Logic::Stack<ElementType>(other.size), top{other.top}, top_min{other.top_min} {}
 		Sequential_Stack(Sequential_Stack<ElementType> &&other)
-			: Logic::Stack<ElementType>(other.size), top_min{other.top_min}, top{other.top}
+			: Logic::Stack<ElementType>(other.size), top{other.top}, top_min{other.top_min}
 		{
 			other.size = 0;
 			other._Top_Reset();
@@ -202,7 +202,7 @@ public:
 				  << "[Size/Maxsize]:\n"
 				  << " [" << this->Get_Size() << '/' << maxsize << ']' << std::endl
 				  << "Bottom-";
-		for (int index = 0; index < maxsize; index++)
+		for (size_t index = 0; index < maxsize; index++)
 			std::cout << '[' << index << ':' << array[index] << "]-";
 		std::cout << "TOP[" << this->top << ']' << std::endl;
 	}
