@@ -89,7 +89,7 @@ void Test_SeqList_Static()
 	{
 		L.Element_Insert(2, 9);
 	}
-	catch (const std::runtime_error &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -101,7 +101,7 @@ void Test_SeqList_Static()
 	{
 		L.Element_Insert(20, 20);
 	}
-	catch (const std::runtime_error &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -145,7 +145,16 @@ void Test_SeqList_Dynamic()
 	std::cout << std::endl;
 
 	std::cout << std::endl;
-	L.Element_Insert(20, 20);
+	try
+	{
+		L.Element_Insert(20, 20);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+	
 	L.List_Show("第20个非法位置插入20后");
 	std::cout << std::endl;
 	L.Element_Update(2, 999);

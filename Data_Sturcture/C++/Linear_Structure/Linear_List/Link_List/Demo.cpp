@@ -30,6 +30,7 @@ void Test_Forward_List()
 	for (int i = 1; i <= 10; i++)
 		L.Element_Insert(i,i);
 	L.List_Show("头插法插入10个节点后：");
+	// std::cout << "第5个元素的前驱元素为: " << L.Element_Prior(5) << std::endl;
 	List_Node_SingleWay<int> *pri = L.Element_Prior(L.Element_Locate(5));
 	std::cout << "第5个元素的前驱节点为: " << pri->element << std::endl;
 	List_Node_SingleWay<int>* next = L.Element_Next(L.Element_Locate(5));

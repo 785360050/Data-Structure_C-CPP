@@ -101,6 +101,7 @@ namespace Storage
 				delete del;
 			}
 			front = rear = nullptr;
+			this->size = 0;
 		}
 		ElementType &Get_Front() override
 		{
