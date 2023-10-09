@@ -31,7 +31,7 @@ public:
 	}
 
 	//冲突函数：开放定址法-线性探测法
-	int CollisionFuction_OpenAddressing_LinerProbing(int index, int key) const
+	int CollisionFuction_OpenAddressing_LinearProbing(int index, int key) const
 	{
 		return (index + 1) % maxsize;
 	}
@@ -51,7 +51,7 @@ public:
 		int index = HashFunction_Remain(maxsize, key);
 		while (data[index] != NULL)
 		{
-			index = CollisionFuction_OpenAddressing_LinerProbing(index, key);
+			index = CollisionFuction_OpenAddressing_LinearProbing(index, key);
 		}
 		data[index] = key;
 		length++;
@@ -63,7 +63,7 @@ public:
 		int t = 1;
 		while (data[index] != key && t < length)
 		{
-			index = CollisionFuction_OpenAddressing_LinerProbing(index, key);
+			index = CollisionFuction_OpenAddressing_LinearProbing(index, key);
 			t++;
 		}
 		return (data[index] == key) ? index : NULL;
@@ -88,7 +88,7 @@ public:
 //int HashFunction_Remain(int size, int key);
 //
 ////冲突函数：开放定址法-线性探测法
-//int CollisionFuction_OpenAddressing_LinerProbing(const HashList* list, int index, int key);
+//int CollisionFuction_OpenAddressing_LinearProbing(const HashList* list, int index, int key);
 //
 //void HashList_Insert(HashList* list, int key);
 //

@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <stack>
-#include "../../Liner_Structure/Liner_Stack/Liner_Stack.h"
-#include "../../Liner_Structure/Liner_Stack/Liner_Stack_Linked/Liner_Stack_Linked.h"
+#include "../../Linear_Structure/Linear_Stack/Linear_Stack.h"
+#include "../../Linear_Structure/Linear_Stack/Linear_Stack_Linked/Linear_Stack_Linked.h"
 
 #include "MergeFindSet.h"
 

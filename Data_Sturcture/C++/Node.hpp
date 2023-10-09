@@ -13,12 +13,25 @@ public:
 
 public:
 	Node() = default;
-	Node(const ElementType& element): element(element){};
-	Node(ElementType &&element)     : element(std::move(element)){};
+	Node(const ElementType &element) : element(element){};
+	Node(ElementType &&element) : element(std::move(element)){};
 	Node(const Node &other)         : element{other.element} {};
 	Node(Node &&other)              : element{std::move(other.element)}
 	{
 		other.element = ElementType{};
+	}
+	Node &operator=(const Node &other)
+	{
+		if(this == &other)
+			throw std::runtime_error("Self assignment");
+		element = other.element;
+		return *this;
+	}
+	Node &operator=(Node &&other)
+	{
+		element = std::move(other.element);
+		other.element = ElementType{};
+		return *this;
 	}
 
 	bool operator==(const Node &other) const { return element == other.element; }

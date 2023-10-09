@@ -9,8 +9,8 @@
             "type": "cppdbg",
             "request": "launch",
             "program": 
-            // "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Liner_Stucture/Liner_Queue/unit_test",
-            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Liner_Stucture/Liner_Stack/unit_test",
+            // "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Linear_Stucture/Linear_Queue/unit_test",
+            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Linear_Stucture/Linear_Queue/Sequential_Queue",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

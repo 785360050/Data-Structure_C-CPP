@@ -4,7 +4,7 @@
 
 #include "../B_Node.h"
 #include "../Tree_B.h"
-#include "../../../../../Liner_Structure/Liner_List/Liner_List_Link/Link_List.h"
+#include "../../../../../Linear_Structure/Linear_List/Linear_List_Link/Link_List.h"
 
 template <typename DataType, typename NodeType = B_Node<DataType>>
 class B_Plus

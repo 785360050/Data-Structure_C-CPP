@@ -6,13 +6,13 @@ class DataStructure
 {
 public:
 private:
-	//Liner_Structure;
+	//Linear_Structure;
 	//Tree;
 	//Graph;
 };
 
 template <typename DataType>
-class Liner_List
+class Linear_List
 {///ADT 
 	//初始化线性表
 	virtual void List_Init(int maxsize) = 0;

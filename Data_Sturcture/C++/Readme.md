@@ -1,14 +1,14 @@
 # 杂谈
 1. 老版使用抽象类作为接口类，现在已经废弃，使用conecpt+static_assert检查接口规范，实现抽象数据类型
 使用抽象类需要很多的template 参数，一个变化点一个参数,实现复杂。concept更灵活
-所以取消了逻辑结构对接口类的继承，如：class Liner_List : public Liner_List_ADT<ElementType, DataType>
+所以取消了逻辑结构对接口类的继承，如：class Linear_List : public Linear_List_ADT<ElementType, DataType>
 2. Clear需要对不同特性的模板类进行元编程，这里还不熟悉，晚点再看。暂时先限制元素类型都是非指针类型
 3. 取消了逻辑结构的实例化，可以但意义不大，实际使用的应该是位于final的具体实现类
 所以用namespace Logic集中管理,Logic下的不同存储实现基类都在namespace Storage下，
 以上两个命名空间都是抽象类不可以被实例化，继承namespace Storage内的各种实现类才可以
 例： 
-(ADT::Liner_List 约束Logic::Liner_List ,static_assert(Logic::Liner_List)的接口规范)[c++20]
-Logic::Liner_List   线性表(逻辑结构) 
+(ADT::Linear_List 约束Logic::Linear_List ,static_assert(Logic::Linear_List)的接口规范)[c++20]
+Logic::Linear_List   线性表(逻辑结构) 
 ↓
 Storage::Sequential_List 顺序表(线性表的顺序存储) 
 ↓
