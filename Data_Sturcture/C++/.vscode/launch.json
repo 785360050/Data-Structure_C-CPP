@@ -10,7 +10,7 @@
             "request": "launch",
             "program": 
             // "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Linear_Stucture/Linear_Queue/unit_test",
-            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Linear_Structure/Linear_Queue/Liner_Queue_Linked/Demo",
+            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Tree_Structure/Heap/unit_test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

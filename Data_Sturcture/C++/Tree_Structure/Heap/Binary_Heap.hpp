@@ -1,244 +1,149 @@
 #pragma once
 
 #include <iostream>
-//enum direction { left = 1, right = 2 };
+enum Direction { left = 1, right = 2 };
 
 
 /// <summary>
 /// https://www.cnblogs.com/sybil-hxl/p/15088324.html
 /// 二叉堆父子下标关系推导(0开始)
 /// </summary>
-/// <typeparam name="DataType"></typeparam>
+/// <typeparam name="ElementType"></typeparam>
 
-enum Property { large = 1, small };
+// enum Property { large = 1, small };
 
-template <typename DataType>
+
+/// @brief 仅实现顺序堆
+/// @tparam ElementType 
+/// @tparam CompareMethod 元素比较的函数对象。以根所为比较：如greater表示大根堆，less表示小根堆
+template <typename ElementType,size_t maxsize,typename CompareMethod=std::less<>>
 class Binary_Heap
 {///顺序数组存储，父子节点满足	child:[i]->[2i+1,2i+2],parent:[i]->[(i-1)/2]
 protected:
-	enum Direction { left = 1, right = 2 };
+	// enum Direction bool { left,right };
+
 public:
-	int* data;//存放排序关键值的数组
-	int length;
-	int maxsize;
-	Property property;	///[大/小]根堆
+	ElementType storage[maxsize]{}; // 存放排序关键值的数组
+	size_t size{};
 public:
 	//初始化有maxsize个元素空间的二叉堆
-	Binary_Heap(int maxsize, Property property = small)
-		:length(0), maxsize(maxsize), data{ nullptr },property{property}
-	{///顺序数组的首个元素留空不使用,申请固定的maxsize+1容量大小的数组
-		try
-		{
-			if (maxsize < 1)
-				throw std::runtime_error("Maxsize must be greater than 0");
-		}
-		catch (const std::runtime_error& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
-		data = new int[maxsize]{};
-	}
-	~Binary_Heap()
-{
-	if(data)
-		delete[] data;
-}
-private:
-	//下标转位序
-	int Position(int index) const
-	{return index + 1;}
-	int Index(int index) const
-	{return index - 1;}
-	//交换堆中元素
-	void Element_Swap(int index_x, int index_y)
+	Binary_Heap()
 	{
-		try
-		{
-			if (index_x < 0 || index_x >= length)
-				throw std::runtime_error("X illegal");
-			if (index_y < 0 || index_y >= length)
-				throw std::runtime_error("Y illegal");
-		}
-		catch (const std::runtime_error& e)
-		{
-			std::cout << e.what() << std::endl;
-			return;
-		}
-		int temp = data[index_x];
-		data[index_x] = data[index_y];
-		data[index_y] = temp;
+		static_assert(maxsize > 0, "Maxsize must be greater than 0");
 	}
-	//元素上浮
-	void Element_Upflow(int index)
+
+private:
+	// 下标->位序
+	constexpr size_t _Position(size_t index) { return ++index; }
+	// 位序->下标
+	constexpr size_t _Index(size_t index) {return --index;}
+	
+	/// @brief 传入下标，交换堆中两个元素
+	void _Element_Swap(size_t index_x, size_t index_y)
+	{
+		if (index_x < 0 || index_x >= size)
+			throw std::runtime_error("X illegal");
+		if (index_y < 0 || index_y >= size)
+			throw std::runtime_error("Y illegal");
+
+		size_t temp = std::move(storage[index_x]);
+		storage[index_x] = std::move(storage[index_y]);
+		storage[index_y] = std::move(temp);
+	}
+	// 将下标为index的元素上浮
+	void _Element_Upflow(size_t index)
 	{
 		if (index == 0)
 			return;
-		try
-		{
-			if (index < 0 || index >= length)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Element_Upflow Failed: index illegal" << std::endl;
-			return;
-		}
-		int index_parent = Index_Parent(index);
-		if (property == small)
-		{///小根堆
-			while (index > 0 && data[index_parent] > data[index])
-			{///若子节点比父节点小，交换父子节点
-				Element_Swap(index_parent, index);
-				index = index_parent;
-				index_parent = index_parent == 0 ? 0 : Index_Parent(index);		///循环到index为根节点时，避免抛出异常
-			}
-		}
-		else
-		{///大根堆
-			while (index > 0 && data[index_parent] < data[index])
-			{///若子节点比父节点小，交换父子节点
-				Element_Swap(index_parent, index);
-				index = index_parent;
-				index_parent = index_parent == 0 ? 0 : Index_Parent(index);		///循环到index为根节点时，避免抛出异常
-			}
+		if (index < 0 || index >= size)
+			throw std::runtime_error("Element_Upflow Failed: index illegal");
+		size_t index_parent = _Index_Parent(index);
+		while (index > 0 && CompareMethod{}(storage[index], storage[index_parent]))
+		{///若子节点比父节点权重高，交换父子节点
+			_Element_Swap(index_parent, index);
+			index = index_parent;
+			index_parent = index_parent == 0 ? 0 : _Index_Parent(index); /// 循环到index为根节点时，避免抛出异常
 		}
 	}
-	//元素下潜
-	void Element_Sink(int index)
+	// 将下标为index的元素下潜
+	void _Element_Sink(size_t index)
 	{
-	//#define Sort
-	#ifdef Sort///用于排序时不抛出异常
-		if (index < 1 || index > length)
-			return;
-		while (Index_Child(index, left) <= length)
+		if (index < 0 || index >= size)
+			throw std::runtime_error("Element_Sink Failed: index illegal");
+		while (_Index_Child(index, left) < size)
 		{
-			int i = Index_Child(index, left);///初始索引设为左孩子
-			///定位比父节点小的索引
-			if (i + 1 <= length && data[i + 1] < data[i])
-				i += 1;///右孩子比父节点小
-			if (data[i] >= data[index])
-				break;///父节点比所有子节点小，阻止交换
-			Element_Swap(i, index);
-			index = i;
-		}
-	#endif // Sort
-	#ifndef Sort
-		try
-		{
-			if (index < 0 || index >= length)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Element_Sink Failed: index illegal" << std::endl;
-			return;
-		}
-		while (Index_Child(index, left) < length)
-		{
-			int index_child = Index_Child(index,left);///先假设索引设为左孩子
-			///定位与父节点替换的索引
-			if (property == small)
-			{///小根堆
-				if (index_child + 1 < length && data[index_child + 1] < data[index_child])
-					++index_child;///右孩子比父节点小,且比左孩子小
-				if (data[index_child] >= data[index])
-					break;///父节点比所有子节点小，阻止交换
+			size_t index_child = _Index_Child(index, left); /// 先假设索引设为左孩子
 
-			}
-			else
-			{///大根堆
-				if (index_child + 1 < length && data[index_child + 1] > data[index_child])
-					index_child += 1;///右孩子比父节点大
-				if (data[index_child] <= data[index])
-					break;///父节点比所有子节点大，阻止交换
-			}
-			Element_Swap(index_child, index);
+			if (index_child + 1 < size&&CompareMethod{}(storage[index_child + 1], storage[index_child]))
+				++index_child; /// 俩孩子中选出一个权重最高的与父节点比较
+			if (CompareMethod{}(storage[index_child], storage[index]))
+				break; /// 父节点比所有孩子权重高，取消交换
+			_Element_Swap(index_child, index);
 			index = index_child;
 		}
-	#endif // !Sort
 	}
 
-	int Index_Parent(int index)
+	/// @brief 返回下标为index的元素的父节点下标
+	size_t _Index_Parent(size_t index)
 	{
-		try
-		{
-			if (index < 1)	
-				throw std::runtime_error("Parent is not exsist");
-		}
-		catch (const std::runtime_error& e)
-		{
-			std::cout << e.what() << std::endl;
-			return NULL;
-		}
+		if (index < 1)
+			throw std::runtime_error("Parent is not exsist");
 		return (index - 1) / 2;
 	}
-	int Index_Child(int index,Direction direction)
+	/// @brief 返回下标为index的元素的孩子下标
+	/// @param direction 左/右孩子
+	size_t _Index_Child(size_t index,Direction direction)
 	{
-		try
-		{
-			if (index < 0)
-				throw std::runtime_error("Illegal index");
-		}
-		catch (const std::runtime_error& e)
-		{
-			std::cout << e.what() << std::endl;
-			return NULL;
-		}
+		if (index < 0)
+			throw std::runtime_error("Illegal index");
 		return (direction == left) ? index * 2 + 1 : index * 2 + 2;
 	}
 
 public:
 	//返回堆顶元素
-	DataType Heap_Top()
-	{return data[0]; }
+	constexpr ElementType& Get_Top() {return storage[0]; }
 	//在二叉堆中插入元素key
-	void Heap_Push(int data)
+	void Push(const ElementType &element)
 	{
-		try
-		{
-			if (length >= maxsize)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Insert Failed: Heap is full" << std::endl;
-			return;
-		}
-		length++;
-		this->data[Index(length)] = data;
-		Element_Upflow(Index(length));
+		if (size >= maxsize)
+			throw std::runtime_error("Insert Failed: Heap is full");
+		size++;
+		this->storage[_Index(size)] = element;
+		_Element_Upflow(_Index(size));
 	}
-	//删除堆顶元素
-	void Heap_Pop()
+	void Push(ElementType &&element)
 	{
-		try
-		{
-			if (length < 1)
-				throw 1;
-		}
-		catch (...)
-		{
-			std::cout << "Extract Failed: Heap is empty" << std::endl;
-			return;
-		}
-		DataType root = Heap_Top();
-		Element_Swap(0, Index(length));///首位互换，再下沉
-		data[Index(length)] = NULL;
-		--length;///堆长度-1代替删除
-		Element_Sink(0);///被交换的根节点下沉
+		if (size >= maxsize)
+			throw std::runtime_error("Insert Failed: Heap is full");
+		size++;
+		this->storage[_Index(size)] = std::move(element);
+		_Element_Upflow(_Index(size));
+	}
+
+	//删除堆顶元素
+	void Pop()
+	{
+		if (size < 1)
+			throw std::runtime_error("Extract Failed: Heap is empty");
+		// Element_Swap(0, Index(size));///首位互换，再下沉
+		Get_Top() = std::move(storage[_Index(size)]); // 直接覆盖
+		storage[_Index(size)] = ElementType{};
+		--size;///堆长度-1代替删除
+		_Element_Sink(0);///被交换的根节点下沉
 		return ;
 	}
 	void Heap_Show()
 	{
 		std::cout
-			<< "Length:" << length << std::endl
-			<< "index end:" << length << std::endl
+			<< "Length:" << size << std::endl
+			<< "index end:" << size << std::endl
 			<< "Maxsize:" << maxsize << std::endl;
-		for (int i = 0; i < maxsize; i++)
-			std::cout << "[" << i << ':' << data[i] << "] ";
+		for (size_t i = 0; i < maxsize; i++)
+			std::cout << "[" << i << ':' << storage[i] << "] ";
 		std::cout << std::endl;
 	}
+	constexpr size_t Size() { return size; }
+	constexpr size_t Is_Empty() { return size==0; }
 };
 
 

@@ -48,4 +48,7 @@ namespace Logic
 	};
 
 };
+
+#if __cplusplus >= 202002L
 static_assert(ADT::Linear_List<Logic::Linear_List<int>, int>, "Linear_List must meet the Linear_List concept");
+#endif

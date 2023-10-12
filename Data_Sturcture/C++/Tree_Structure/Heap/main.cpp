@@ -1,7 +1,10 @@
 
 
-#include "Binary_Heap.h"
+#include "Binary_Heap.hpp"
 
+
+#ifdef _Win32 // ARM32/64, x86/x64
+// 详见 https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -15,6 +18,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 
 void TestHeap()
@@ -41,8 +45,10 @@ void TestHeap()
 
 
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	TestHeap();
+
+	return EXIT_SUCCESS;
 }
