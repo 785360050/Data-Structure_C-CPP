@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-enum Direction { left = 1, right = 2 };
+enum Direction:bool { left , right };
 
 
 /// <summary>
@@ -31,7 +31,68 @@ public:
 	{
 		static_assert(maxsize > 0, "Maxsize must be greater than 0");
 	}
+	Binary_Heap(const Binary_Heap<ElementType,maxsize,CompareMethod>& other)
+		:size(other.size)
+	{
+		for (size_t i = 0; i < size; i++)
+			storage[i] = other.storage[i];
+	}
+	Binary_Heap<ElementType, maxsize, CompareMethod> &
+	operator=(const Binary_Heap<ElementType, maxsize, CompareMethod>& other)
+	{
+		if (this == &other)
+			throw std::logic_error("Slef Copied");
+		size = other.size;
+		for (size_t i = 0; i < size; i++)
+			storage[i] = other.storage[i];
+		return *this;
+	}
+	Binary_Heap(Binary_Heap<ElementType, maxsize, CompareMethod> &&other)
+		: size(other.size)
+	{
+		for (size_t i = 0; i < size; i++)
+		{
+			storage[i] = std::move(other.storage[i]);
+			other.storage[i] = ElementType{};
+		}
+		other.size = 0;
+	}
+	Binary_Heap<ElementType, maxsize, CompareMethod> &
+	operator=(Binary_Heap<ElementType, maxsize, CompareMethod> &&other)
+	{
+		if (this == &other)
+			throw std::logic_error("Slef Copied");
+		size = other.size;
+		for (size_t i = 0; i < size; i++)
+		{
+			storage[i] = std::move(other.storage[i]);
+			other.storage[i] = ElementType{};
+		}
+		return *this;
+	}
 
+	Binary_Heap(std::initializer_list<ElementType> list)
+	{
+		if(list.size()>maxsize)
+			throw std::invalid_argument("No Enough Space");
+
+		// for (const auto &element : list)
+		// 	Push(element);
+		
+		/// ============================================================================================================
+		// 以上是最简单的实现方式，可以直接进行堆排序，然后再赋值给数组,如下
+		/// ============================================================================================================
+		
+		for (size_t i = list.size(); i > 0;--i)
+			_Element_Upflow(_Index(i));
+		size_t i = 0;
+		for (const auto &element : list)
+		{
+			storage[i] = std::move(element);
+			i++;
+		}
+		
+	}
 private:
 	// 下标->位序
 	constexpr size_t _Position(size_t index) { return ++index; }
@@ -68,7 +129,8 @@ private:
 	// 将下标为index的元素下潜
 	void _Element_Sink(size_t index)
 	{
-		if (index < 0 || index >= size)
+
+		if (index < 0 || index > size)
 			throw std::runtime_error("Element_Sink Failed: index illegal");
 		while (_Index_Child(index, left) < size)
 		{
@@ -77,9 +139,12 @@ private:
 			if (index_child + 1 < size&&CompareMethod{}(storage[index_child + 1], storage[index_child]))
 				++index_child; /// 俩孩子中选出一个权重最高的与父节点比较
 			if (CompareMethod{}(storage[index_child], storage[index]))
-				break; /// 父节点比所有孩子权重高，取消交换
-			_Element_Swap(index_child, index);
-			index = index_child;
+			{
+				_Element_Swap(index_child, index);
+				index = index_child;
+			}
+			else
+				break;
 		}
 	}
 
@@ -128,8 +193,9 @@ public:
 		// Element_Swap(0, Index(size));///首位互换，再下沉
 		Get_Top() = std::move(storage[_Index(size)]); // 直接覆盖
 		storage[_Index(size)] = ElementType{};
-		--size;///堆长度-1代替删除
-		_Element_Sink(0);///被交换的根节点下沉
+		--size;//先下沉，再减少size
+		if (size!=0)
+			_Element_Sink(0);///被交换的根节点下沉
 		return ;
 	}
 	void Heap_Show()
@@ -142,8 +208,8 @@ public:
 			std::cout << "[" << i << ':' << storage[i] << "] ";
 		std::cout << std::endl;
 	}
-	constexpr size_t Size() { return size; }
-	constexpr size_t Is_Empty() { return size==0; }
+	constexpr size_t Get_Size() const { return size; }
+	constexpr size_t Is_Empty() const { return size == 0; }
 };
 
 
