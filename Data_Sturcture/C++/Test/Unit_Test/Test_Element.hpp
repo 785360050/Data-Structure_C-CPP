@@ -210,6 +210,20 @@ public:
     }
 
 public:
+    auto operator<=>(const Element &other) const
+    {//比较原则同operator==
+        auto compare_value = value <=> other.value;
+
+        if (compare_value != std::strong_ordering::equal)
+            return compare_value;
+
+        if (!pointer)
+            return other.pointer ? std::strong_ordering::less : std::strong_ordering::equal;
+        else if (!other.pointer)
+            return std::strong_ordering::greater;
+        else
+            return *pointer <=> *other.pointer;
+    }
 };
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const Element<T> &element)
