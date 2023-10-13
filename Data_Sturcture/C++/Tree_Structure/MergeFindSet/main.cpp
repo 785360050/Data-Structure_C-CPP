@@ -13,9 +13,9 @@ static bool  SetEncode(int EncodeId = 936)
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
 
-#include "MergeFindSet.h"
-#include "MergeFindSet_QuickFind.h"
-#include "MergeFindSet_QuickMerge.h"
+#include "MergeFindSet.hpp"
+#include "MergeFindSet_QuickFind.hpp"
+#include "MergeFindSet_QuickMerge.hpp"
 
 void TestMergeFindSet()
 {
