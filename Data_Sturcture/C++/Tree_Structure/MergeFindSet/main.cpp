@@ -1,4 +1,7 @@
 
+
+#ifdef _Win32 // ARM32/64, x86/x64
+// 详见 https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -12,17 +15,18 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 #include "MergeFindSet.hpp"
 #include "MergeFindSet_QuickFind.hpp"
-#include "MergeFindSet_QuickMerge.hpp"
+// #include "MergeFindSet_QuickMerge.hpp"
 
 void TestMergeFindSet()
 {
 	int* data = new int[5] {0, 1, 2, 3, 4};		///仅支持堆空间的数组，Set析构时释放
 
-	//MergeFindSet_QuickFind<int> set(data, 5);
-	MergeFindSet_QuickMerge<int> set(data, 5);
+	MergeFindSet_QuickFind<int> set(data, 5);
+	// MergeFindSet_QuickMerge<int> set(data, 5);
 	std::cout << "初始化5个元素后" << std::endl;
 	set.Show();
 
@@ -40,9 +44,10 @@ void TestMergeFindSet()
 
 
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	TestMergeFindSet();
-}
 
+	return EXIT_SUCCESS;
+}

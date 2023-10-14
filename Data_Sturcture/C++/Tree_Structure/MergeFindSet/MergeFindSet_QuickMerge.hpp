@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include <stack>
-#include "../../Linear_Structure/Linear_Stack/Linear_Stack.h"
-#include "../../Linear_Structure/Linear_Stack/Linear_Stack_Linked/Linear_Stack_Linked.h"
+#include "../../Linear_Structure/Linear_Stack/Linear_Stack.hpp"
+#include "../../Linear_Structure/Linear_Stack/Linear_Stack_Linked/Linear_Stack_Linked.hpp"
 
-#include "MergeFindSet.h"
+#include "MergeFindSet.hpp"
 
 //#define Standard_Stack
 #define Individual_Stack

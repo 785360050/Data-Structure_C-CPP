@@ -5,8 +5,8 @@
 #include <vector>
 
 
-#include "../Graph_Structure.h"
-#include "Vertex_Matrix.h"
+#include "../Graph_Structure.hpp"
+#include "Vertex_Matrix.hpp"
 
 //template <typename DataType>
 //struct  Graph_Matrix<DataType>::Vertex_Matrix;

@@ -6,12 +6,12 @@
 #include <iostream>
 #include <queue>
 #include <stack>
-#include "../Tree_Binary_ADT.h"
+#include "../Tree_Binary_ADT.hpp"
 //#include "Linear_Queue_Sequential.h"
 //#include "Linear_Stack_Sequential.h"
 
-#include "../Node_BinaryTree.h"
-#include "../Tree_Binary.h"
+#include "../Node_BinaryTree.hpp"
+#include "../Tree_Binary.hpp"
 
 
 

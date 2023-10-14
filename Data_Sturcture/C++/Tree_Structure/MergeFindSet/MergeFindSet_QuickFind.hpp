@@ -1,20 +1,21 @@
 #pragma once
 
 #include <iostream>
+#include <cstring>
 
-#include "MergeFindSet.h"
+#include "MergeFindSet.hpp"
 
 template <typename DataType>
-struct MergeFindSet_QuickFind:public MergeFindSet<DataType>
+struct MergeFindSet_QuickFind:public Logic::MergeFindSet<DataType>
 {
 private:
 	DataType* group_id;//集合中元素对应的组ID
 
 public:
 	MergeFindSet_QuickFind(int maxsize)
-		:MergeFindSet<DataType>(maxsize), group_id{ new int[maxsize] {} } {};
-	MergeFindSet_QuickFind(int* element_array, int maxsize)
-		:MergeFindSet<DataType>(element_array, maxsize)
+		: Logic::MergeFindSet<DataType>(maxsize), group_id{new int[maxsize]{}} {};
+	MergeFindSet_QuickFind(int *element_array, int maxsize)
+		: Logic::MergeFindSet<DataType>(element_array, maxsize)
 	{///group_id初始group_id为自己
 		group_id = new int[maxsize] {};
 		memcpy(group_id, element_array, sizeof(DataType) * maxsize);

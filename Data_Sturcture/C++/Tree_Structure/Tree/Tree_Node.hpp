@@ -2,13 +2,13 @@
 
 #include <string>
 
-#include "../../Node.h"
+#include "../../Node.hpp"
 
 template <typename DataType>
 class TreeNode :public Node<DataType>
 {
 public:
-	std::string name;
+	std::string name{"Undefined"};
 public:
 	TreeNode(std::string name, DataType element = NULL)
 		:Node<DataType>(element), name(name) {};

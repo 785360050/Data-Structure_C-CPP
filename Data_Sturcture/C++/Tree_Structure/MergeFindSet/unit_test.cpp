@@ -1,35 +1,42 @@
-
 #include <iostream>
-
+#include <vector>
+#include <map>
 #include <boost/pending/disjoint_sets.hpp>
 
 int main()
 {
-    int numElements = 5;
-    std::vector<int> parent(numElements);  // 用于表示每个元素的父节点
-    std::vector<int> rank(numElements, 0); // 用于表示每个集合的秩
+    // 创建一组元素，例如：{0, 1, 2, 3, 4, 5}
+    std::vector<int> elements(6);
+    for (int i = 0; i < 6; ++i)
+    {
+        elements[i] = i;
+    }
 
-    boost::disjoint_sets<int *, int *,boost::find_with_full_path_compression> ds(&parent[0], &rank[0]);
+    // 创建并查集对象
+    boost::disjoint_sets<
+        boost::associative_property_map<std::map<int, int>>,
+        boost::associative_property_map<std::map<int, int>>>
+        ds(elements.begin(), elements.end());
 
     // 初始化并查集
-    for (int i = 0; i < numElements; i++)
-        parent[i] = i;
-
-    // 合并元素 1 和 2
-    ds.union_set(1, 2);
-
-    // 查找元素所属的集合
-    int set1 = ds.find_set(1);
-    int set2 = ds.find_set(2);
-
-    // 检查元素 1 和 2 是否在同一集合
-    if (set1 == set2)
+    for (int i = 0; i < 6; ++i)
     {
-        std::cout << "Element 1 and 2 are in the same set." << std::endl;
+        ds.make_set(i);
     }
-    else
+
+    // 合并元素的集合
+    ds.union_set(0, 1);
+    ds.union_set(2, 3);
+    ds.union_set(4, 5);
+    ds.union_set(1, 3); // 这将连接整个集合 {0, 1, 2, 3, 4, 5}
+
+    // 查找元素所在的集合的代表元素
+    int representative = ds.find_set(4); // 代表元素应为0或1
+
+    // 输出每个元素的代表元素
+    for (int i = 0; i < 6; ++i)
     {
-        std::cout << "Element 1 and 2 are in different sets." << std::endl;
+        std::cout << "Element " << i << " is in the set with representative " << ds.find_set(i) << std::endl;
     }
 
     return 0;

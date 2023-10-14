@@ -3,8 +3,8 @@
 #include <string>
 using std::string;
 
-#include "../Tree_Node.h"
-#include "Tree_Binary_Normal/Tree_Binary_Normal.h"
+#include "../Tree_Node.hpp"
+#include "Tree_Binary_Normal/Tree_Binary_Normal.hpp"
 
 
 ///友元模板类声明

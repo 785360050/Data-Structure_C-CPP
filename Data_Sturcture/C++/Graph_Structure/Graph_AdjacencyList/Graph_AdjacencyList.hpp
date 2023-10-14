@@ -5,8 +5,8 @@
 #include <string>
 
 
-#include "../Graph_Structure.h"
-#include "Vertex_AdjacencyList.h"
+#include "../Graph_Structure.hpp"
+#include "Vertex_AdjacencyList.hpp"
 
 
 
