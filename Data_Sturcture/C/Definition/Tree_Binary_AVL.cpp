@@ -1,6 +1,6 @@
 #include "../API/Tree_Binary_AVL.h"
 
-
+#include <cstring>
 
 BTree_AVL* BinaryTree_Init_Root_AVL()
 {

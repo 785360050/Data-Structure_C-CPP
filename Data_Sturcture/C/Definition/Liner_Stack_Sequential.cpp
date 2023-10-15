@@ -1,7 +1,7 @@
 #include "../API/Liner_Stack.h"
 #include <iostream>
 
-
+#include <cstring>
 
 SeqStack* SeqStack_Init(int stacksize)
 {

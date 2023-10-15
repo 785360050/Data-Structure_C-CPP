@@ -1,6 +1,7 @@
 
-#include "Tree_Binary_Search_AVL.h"
+#include "Tree_Binary_Search_AVL.hpp"
 
+#ifdef _WIN32
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -14,6 +15,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 
 void BinarySearch_AVL()
@@ -27,29 +29,33 @@ void BinarySearch_AVL()
 	//std::cout << Tree->num << std::endl;
 
 	for (int i = 1; i <= 7; ++i)
-		tree.BinaryTree_Insert_AVL(i);
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
-	//tree.BinaryTree_AVL_Delete(tree.root, 8);
+		tree.Element_Insert(i);
+	// tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Tree_Traverse_InOrder(tree.root);
+
+
 	std::cout << std::endl;
-	tree.BinaryTree_AVL_Delete(tree.root, 8);
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Element_Delete(8);
+	tree.Tree_Traverse_InOrder(tree.root);
 	std::cout << std::endl;
-	tree.BinaryTree_AVL_Delete(tree.root, 4);
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Element_Delete(4);
+	tree.Tree_Traverse_InOrder(tree.root);
 	std::cout << std::endl;
-	tree.BinaryTree_AVL_Delete(tree.root, 6);
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Element_Delete(6);
+	tree.Tree_Traverse_InOrder(tree.root);
 	std::cout << std::endl;
-	tree.BinaryTree_AVL_Delete(tree.root, 7);
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Element_Delete(7);
+	tree.Tree_Traverse_InOrder(tree.root);
 	std::cout << std::endl;
-	tree.BinaryTree_Traversal_Inorder_AVL(tree.root);
+	tree.Tree_Traverse_InOrder(tree.root);
 }
 
 
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	BinarySearch_AVL();
+
+	return EXIT_SUCCESS;
 }

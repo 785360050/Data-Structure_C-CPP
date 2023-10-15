@@ -12,7 +12,8 @@
 
 #include "../../../../Test/Unit_Test/Test_Element.hpp"
 
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
+// g++ Sequential_Stack.cpp -g -o Sequential_Stack -lboost_unit_test_framework -std=c++20
+// valgrind --leak-check=full ./Sequential_Stack
 
 template <typename StackType>
 void test(const StackType &stack, size_t size = 0, bool empty = true)

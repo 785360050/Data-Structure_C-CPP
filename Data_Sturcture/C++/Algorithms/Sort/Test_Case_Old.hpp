@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <stdlib.hpp>
+#include <time.hpp>
 
 
 

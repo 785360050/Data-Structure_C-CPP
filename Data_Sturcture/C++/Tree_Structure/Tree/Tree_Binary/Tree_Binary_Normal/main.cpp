@@ -1,7 +1,8 @@
 
-#include "Tree_Binary_Normal.h"
+#include "Tree_Binary_Normal.hpp"
 
-#include <Windows.h>
+#ifdef _WIN32
+#include <Windows.hpp>
 static bool  SetEncode(int EncodeId = 936)
 {
 	/// <summary>
@@ -14,6 +15,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 void Test_Binary_Tree()
 {
@@ -78,9 +80,11 @@ void Test_Tree_Build()
 	tree.Tree_Show();
 }
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
-	//Test_Binary_Tree();
-	Test_Tree_Build();
+	// SetEncode(65001);//设置控制台为utf-8编码格式
+	Test_Binary_Tree();
+	// Test_Tree_Build();
+
+	return EXIT_SUCCESS;
 }

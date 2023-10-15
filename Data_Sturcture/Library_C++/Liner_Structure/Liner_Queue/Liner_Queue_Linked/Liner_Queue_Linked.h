@@ -25,7 +25,7 @@ public:
 		try
 		{
 			if (!front)
-				throw std::exception("Queue Destroy Faild: Queue is not exist");
+				throw std::runtime_error("Queue Destroy Faild: Queue is not exist");
 		}
 		catch (const std::exception& e)
 		{

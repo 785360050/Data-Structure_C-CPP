@@ -3,6 +3,7 @@
 
 #include "../API/Tree_Binary.h"
 
+#include <cstring>
 
 //复制顺序队列 maxsize=20
 struct TQueue

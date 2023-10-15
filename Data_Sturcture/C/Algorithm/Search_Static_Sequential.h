@@ -5,7 +5,7 @@
 #include "Sort_TestCase.h"
 
 
-extern struct Element;
+struct Element;
 
 struct SearchList
 {
@@ -58,9 +58,9 @@ int Search_Binary(const SearchList* const list, int key)
     try
     {
         if (list->length <= 0)
-            throw std::exception{ "Searh List is not exisit" };
+            throw std::runtime_error{ "Searh List is not exisit" };
     }
-    catch (const std::exception& ex)
+    catch (const std::runtime_error& ex)
     {
         std::cout << ex.what() << std::endl;
     }

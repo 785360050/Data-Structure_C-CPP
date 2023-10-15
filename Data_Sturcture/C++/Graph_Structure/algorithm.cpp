@@ -1,5 +1,5 @@
 //
-//#include <Windows.h>
+//#include <Windows.hpp>
 //static bool  SetEncode(int EncodeId = 936)
 //{
 //	/// <summary>

@@ -2,6 +2,8 @@
 
 #include "../API/Tree_Binary_Heap.h"
 
+#include <cstring>
+
 //交换堆中元素
 static void Element_Swap(BinaryHeap* heap, int index_x, int index_y)
 {

@@ -11,7 +11,8 @@
 
 #include "../../../../Test/Unit_Test/Test_Element.hpp"
 
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
+// g++ Sequential_Queue.cpp -g -o Sequential_Queue -lboost_unit_test_framework -std=c++20
+// valgrind --leak-check=full ./Sequential_Queue
 
 void test(const Sequential_Queue_Redundancy<int, 5> &queue, size_t size = 0, size_t capcity = 0, bool empty = true, bool full = false)
 {

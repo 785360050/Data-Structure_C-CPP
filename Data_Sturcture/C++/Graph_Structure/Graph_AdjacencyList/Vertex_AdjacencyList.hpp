@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Edge_AdjacencyList.h"
+#include "Edge_AdjacencyList.hpp"
 
 template <typename DataType>
 struct Vertex_AdjacencyList

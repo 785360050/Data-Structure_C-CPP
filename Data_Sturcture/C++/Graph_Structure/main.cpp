@@ -1,12 +1,12 @@
 
-#include "Graph_Structure.h"
+#include "Graph_Structure.hpp"
 
-#include "Graph_Matrix/Graph_Matrix.h"
-#include "Graph_Matrix/Vertex_Matrix.h"
-#include "Graph_AdjacencyList/Graph_AdjacencyList.h"
-#include "Graph_EdgeSetList/Graph_EdgeSetList.h"
+#include "Graph_Matrix/Graph_Matrix.hpp"
+#include "Graph_Matrix/Vertex_Matrix.hpp"
+#include "Graph_AdjacencyList/Graph_AdjacencyList.hpp"
+#include "Graph_EdgeSetList/Graph_EdgeSetList.hpp"
 
-#include <Windows.h>
+#include <Windows.hpp>
 static bool  SetEncode(int EncodeId = 936)
 {
 	/// <summary>

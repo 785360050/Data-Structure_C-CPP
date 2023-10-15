@@ -4,7 +4,7 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
-#include "../Linear_Structure/Linear_Stack/Linear_Stack_Sequential/Linear_Stack_Sequential.h"
+#include "../Linear_Structure/Linear_Stack/Linear_Stack_Sequential/Linear_Stack_Sequential.hpp"
 
 // g++ test.cpp -g -o test -lboost_unit_test_framework
 BOOST_AUTO_TEST_SUITE(Stack)

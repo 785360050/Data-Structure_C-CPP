@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../../TreeNode_HighOrder.h"
+#include "../../TreeNode_HighOrder.hpp"
 //单链节点
 template<typename DataType>
 class TreeNode_HighOrder_Child :public TreeNode_HighOrder<DataType>

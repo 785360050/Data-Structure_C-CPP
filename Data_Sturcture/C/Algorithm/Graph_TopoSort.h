@@ -4,6 +4,8 @@
 #include <stack>
 #include "../API/Graph_AdjacencyList.h"
 
+#include <cstring>
+
 static void show(const int* indegree)
 {
 	for (int i = 0; i < 6; i++)

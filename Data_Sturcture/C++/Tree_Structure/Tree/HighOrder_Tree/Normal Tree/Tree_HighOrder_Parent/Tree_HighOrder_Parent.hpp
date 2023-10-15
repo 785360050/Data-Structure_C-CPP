@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "../../TreeNode_HighOrder.h"
-#include "../Normal Tree.h"
+#include "../../TreeNode_HighOrder.hpp"
+#include "../Normal Tree.hpp"
 
 template <typename DataType,typename NodeType= TreeNode_HighOrder<DataType>>
 class Tree_HighOrder_Parent :public Tree_Normal<DataType,NodeType>

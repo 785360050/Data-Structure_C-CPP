@@ -4,6 +4,8 @@
 #include "../API/Graph_matrix.h"
 #include "../API/Tree_MergeFind_Set.h"
 
+#include <cstring>//memset
+
 
 //求最小生成树,返回总权值	Kruskal
 Graph_matrix* Graph_MininumSpanningTree_Kruskal(const Graph_matrix& graph)

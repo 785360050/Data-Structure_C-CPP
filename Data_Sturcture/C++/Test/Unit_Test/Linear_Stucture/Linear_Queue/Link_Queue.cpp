@@ -11,7 +11,8 @@
 
 #include "../../../../Test/Unit_Test/Test_Element.hpp"
 
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
+// g++ Link_Queue.cpp -g -o Link_Queue -lboost_unit_test_framework -std=c++20
+// valgrind --leak-check=full ./Link_Queue
 
 void test(const Link_Queue<int> &queue, size_t size = 0,  bool empty = true)
 {

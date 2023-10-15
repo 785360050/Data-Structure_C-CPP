@@ -78,6 +78,7 @@ public:
 	//新建节点(new 分配空间)
 	virtual NodeType* Node_Create(std::string name, DataType element = NULL)
 	{return new NodeType(name, element);}
+	
 
 public:
 	//前序遍历二叉树	DLR

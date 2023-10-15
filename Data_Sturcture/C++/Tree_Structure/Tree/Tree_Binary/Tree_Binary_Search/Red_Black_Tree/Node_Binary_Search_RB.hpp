@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../Node_Binary_Search.h"
+#include "../Node_Binary_Search.hpp"
 
 enum Colour { red = 0, black = 1 };
 

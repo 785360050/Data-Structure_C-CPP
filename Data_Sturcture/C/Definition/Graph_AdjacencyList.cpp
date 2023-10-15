@@ -2,6 +2,8 @@
 #include <queue>
 #include "../API/Liner_Queue.h"
 
+#include <cstring>
+
 void Graph_AdjacencyList_Init(AdjacencyList* graph, int num_vertex, bool directed)
 {
 	graph->directed = directed;

@@ -34,6 +34,7 @@ public:
 		return *this;
 	}
 
+public:
 	bool operator==(const Node &other) const { return element == other.element; }
 	auto operator<=>(const Node &other) const { return element <=> other.element; }
 };

@@ -2,14 +2,14 @@
 
 #include <queue>
 
-#include "TreeNode_HighOrder_Child.h"
-#include "../Normal Tree.h"
+#include "TreeNode_HighOrder_Child.hpp"
+#include "../Normal Tree.hpp"
 
 template <typename DataType, typename NodeType = TreeNode_HighOrder_Child<DataType>>
 class Tree_Advanced_Child:public Tree_Normal<DataType,NodeType>
 {///孩子表示法
 protected:
-	std::vector<NodeType*> vertex;
+	std::vector<NodeType*> vertex;//数组存每个树节点，每个节点以链表方式存所有对应的孩子
 
 private:
 	//重置子树所有元素为0

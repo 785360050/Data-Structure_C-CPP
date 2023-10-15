@@ -8,6 +8,8 @@
 #include "Graph_TopoSort.h"
 #include "../API/Graph_AdjacencyList.h"
 
+#include <cstring>
+
 // 适用于关键路径的拓扑排序，在基础拓扑排序的基础上做了部分改动，排序时更新顶点最早发生时间表
 static std::stack<int>* TopoSort_ForCriticalPath(AdjacencyList* graph,int* vertext_earliest,int num_array)
 {

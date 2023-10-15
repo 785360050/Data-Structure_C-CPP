@@ -3,7 +3,7 @@
 #include <string>
 using std::string;
 
-#include "../../Tree_Node.h"
+#include "../../Tree_Node.hpp"
 
 
 template <typename DataType, typename NodeType>
@@ -32,7 +32,7 @@ public:
 		Node_BinaryThreadTree<DataType>* left,
 		Node_BinaryThreadTree<DataType>* right
 	)
-		:Node_BinaryTree<DataType>(name, element)
+		:TreeNode<DataType>(name, element)
 	{
 		this->left = left;
 		this->right = right;

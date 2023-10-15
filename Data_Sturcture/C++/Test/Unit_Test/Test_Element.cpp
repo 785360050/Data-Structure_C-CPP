@@ -4,6 +4,9 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
+// g++ Test_Element.cpp -g -o Test_Element -lboost_unit_test_framework -std=c++20
+// valgrind --leak-check=full ./Test_Element
+
 template <typename DataType = int>
 void Check_ID(const Element<DataType> &element, int id, int id_copy, int id_move)
 {

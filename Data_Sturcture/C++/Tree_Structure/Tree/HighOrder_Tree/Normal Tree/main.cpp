@@ -1,11 +1,12 @@
 
 #include <iostream>
 
-#include "Tree_HighOrder_Child/Tree_HighOrder_Child.h"
-#include "Tree_HighOrder_ChildSibling/Tree_HighOrder_ChildSibling.h"
-#include "Tree_HighOrder_Parent/Tree_HighOrder_Parent.h"
-#include "Normal Tree.h"
+#include "Tree_HighOrder_Child/Tree_HighOrder_Child.hpp"
+#include "Tree_HighOrder_ChildSibling/Tree_HighOrder_ChildSibling.hpp"
+#include "Tree_HighOrder_Parent/Tree_HighOrder_Parent.hpp"
+#include "Normal Tree.hpp"
 
+#ifdef _WIN32
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -19,13 +20,16 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 
 void Test_Tree_Normal()
 {
-	//Tree_Normal<bool, TreeNode_HighOrder<bool>>* tree=new Tree_HighOrder_Parent<bool>(3);
-	//Tree_Normal<bool, TreeNode_HighOrder_Child<bool>>* tree=new Tree_Advanced_Child<bool>(3);
-	Tree_Normal<bool, TreeNode_HighOrder_ChildSibling<bool>>* tree=new Tree_HighOrder_ChildSibling<bool>(3);
+	Tree_Normal<bool, TreeNode_HighOrder<bool>>* tree=new Tree_HighOrder_Parent<bool>(3);
+
+	//Bugs↓
+	// Tree_Normal<bool, TreeNode_HighOrder_Child<bool>> *tree = new Tree_Advanced_Child<bool>(3);
+	// Tree_Normal<bool, TreeNode_HighOrder_ChildSibling<bool>> *tree = new Tree_HighOrder_ChildSibling<bool>(3);
 	
 
 	auto a = tree->Node_Create("A");
@@ -67,8 +71,8 @@ void Test_Tree_Normal()
 	tree->Tree_Show();
 }
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	Test_Tree_Normal();
 }

@@ -2,11 +2,12 @@
 
 #include <iostream>
 
-#include "Node_Binary_Search_Balance.h"
-
+#include "Node_Binary_Search_Balance.hpp"
+#include "../Tree_Binary_Search.hpp"
 
 
 template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_Balance<DataType, KeyType>>
+// class Tree_Binary_Search_AVL :public Tree_Binary_Search<DataType, KeyType, NodeType>
 class Tree_Binary_Search_AVL :public Tree_Binary_Search<DataType, KeyType, NodeType>
 {
 public:

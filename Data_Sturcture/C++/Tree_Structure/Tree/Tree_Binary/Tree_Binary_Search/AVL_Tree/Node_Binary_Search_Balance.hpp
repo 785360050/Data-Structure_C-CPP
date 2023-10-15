@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../Node_Binary_Search.h"
+#include "../Node_Binary_Search.hpp"
 
 template <typename DataType, typename KeyType>
 class Node_Binary_Search_Balance :public Node_Binary_Search<DataType, KeyType>

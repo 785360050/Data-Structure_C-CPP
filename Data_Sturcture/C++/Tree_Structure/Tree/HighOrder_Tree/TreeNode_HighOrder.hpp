@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Tree_Node.h"
+#include "../Tree_Node.hpp"
 
 template <typename DataType>
 class TreeNode_HighOrder :public TreeNode<DataType>

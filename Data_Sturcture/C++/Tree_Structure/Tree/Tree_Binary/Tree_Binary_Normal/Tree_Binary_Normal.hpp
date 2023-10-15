@@ -7,8 +7,8 @@
 #include <queue>
 #include <stack>
 #include "../Tree_Binary_ADT.hpp"
-//#include "Linear_Queue_Sequential.h"
-//#include "Linear_Stack_Sequential.h"
+//#include "Linear_Queue_Sequential.hpp"
+//#include "Linear_Stack_Sequential.hpp"
 
 #include "../Node_BinaryTree.hpp"
 #include "../Tree_Binary.hpp"

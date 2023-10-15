@@ -3,6 +3,7 @@
 #include <map>
 #include <boost/pending/disjoint_sets.hpp>
 
+//无法通过编译
 int main()
 {
     // 创建一组元素，例如：{0, 1, 2, 3, 4, 5}

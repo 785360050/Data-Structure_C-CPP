@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "TreeNode_HighOrder_ChildSibling.h"
-#include "../Normal Tree.h"
+#include "TreeNode_HighOrder_ChildSibling.hpp"
+#include "../Normal Tree.hpp"
 
 template <typename DataType,typename NodeType= TreeNode_HighOrder_ChildSibling<DataType>>
 class Tree_HighOrder_ChildSibling :public Tree_Normal<DataType,NodeType>

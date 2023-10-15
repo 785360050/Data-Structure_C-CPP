@@ -87,9 +87,9 @@ public:
 		try
 		{
 			if (this->element==nullptr)
-				throw std::exception("SeqQueue is not exist");
+				throw std::runtime_error("SeqQueue is not exist");
 			if (Queue_CheckFull())
-				throw std::exception("Enqueue Failed: Queue is Full");
+				throw std::runtime_error("Enqueue Failed: Queue is Full");
 		}
 		catch (const std::exception& e)
 		{
@@ -181,9 +181,9 @@ public:
 		try
 		{
 			if (this->element == nullptr)
-				throw std::exception("SeqQueue is not exist");
+				throw std::runtime_error("SeqQueue is not exist");
 			if (Queue_CheckFull())
-				throw std::exception("Enqueue Failed: Queue is Full");
+				throw std::runtime_error("Enqueue Failed: Queue is Full");
 		}
 		catch (const std::exception& e)
 		{

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Tree_Binary_Normal/Tree_Binary_Normal.h"
-#include "../Tree_Binary_Search.h"
-#include "Node_Binary_Search_Normal.h"
+#include "../../Tree_Binary_Normal/Tree_Binary_Normal.hpp"
+#include "../Tree_Binary_Search.hpp"
+#include "Node_Binary_Search_Normal.hpp"
 
 template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_Normal<DataType, KeyType>>
 class Tree_Binary_Search_Normal :public Tree_Binary_Search<DataType, KeyType, NodeType>

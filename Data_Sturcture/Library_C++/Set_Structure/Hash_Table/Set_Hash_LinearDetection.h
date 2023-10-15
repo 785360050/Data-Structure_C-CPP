@@ -41,7 +41,7 @@ public:
 		try
 		{
 			if (length >= maxsize)
-				throw std::exception("Insert Failed: Hash List is Full");
+				throw std::runtime_error("Insert Failed: Hash List is Full");
 		}
 		catch (const std::exception& e)
 		{

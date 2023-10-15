@@ -36,11 +36,11 @@ void Graph_EdgeSetList_Edge_Add(Graph_EdgeSet* graph, int no_origin, int no_dest
 	try
 	{
 		if (!graph)
-			throw std::exception("Graph Edge Add Failed: Graph is not exisit!");
+			throw std::runtime_error("Graph Edge Add Failed: Graph is not exisit!");
 		for (int i = 0; i < graph->num_edge; ++i)
 		{
 			if (graph->edge->no_source == no_origin && graph->edge->no_destination == no_destination)
-				throw std::exception("Graph Edge Add Failed : Edge already exisited!");
+				throw std::runtime_error("Graph Edge Add Failed : Edge already exisited!");
 		}
 	}
 	catch (const std::exception& e)
@@ -71,7 +71,7 @@ void Graph_EdgeSetList_Edge_Delete(Graph_EdgeSet* graph, int no_origin, int no_d
 	//	for (int i = 0; i < graph->num_edge; ++i)
 	//	{
 	//		if (graph->edge[i].no_source == no_origin && graph->edge[i].no_destination == no_destination)
-	//			throw std::exception("Edge Delete Failed: Edge is not exist!");
+	//			throw std::runtime_error("Edge Delete Failed: Edge is not exist!");
 	//	}
 	//}
 	//catch (const std::exception& e)

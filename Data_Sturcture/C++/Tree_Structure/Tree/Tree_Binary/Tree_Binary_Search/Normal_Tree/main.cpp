@@ -1,7 +1,7 @@
 
-#include "Binary_Tree_Search_Normal.h"
+#include "Binary_Tree_Search_Normal.hpp"
 
-
+#ifdef _WIN32
 #include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
@@ -15,6 +15,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 
 void BinarySearch()
@@ -55,8 +56,10 @@ void BinarySearch()
 
 }
 
-void main()
+int main()
 {
-	SetEncode(65001);//设置控制台为utf-8编码格式
+	// SetEncode(65001);//设置控制台为utf-8编码格式
 	BinarySearch();
+
+	return EXIT_SUCCESS;
 }

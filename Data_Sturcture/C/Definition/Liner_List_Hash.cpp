@@ -1,10 +1,6 @@
 #include "../API/Liner_List_Hash.h"
 
-
-
-
-
-
+#include <cstring>
 
 void HashList_Init(HashList* list, int maxsize)
 {
@@ -14,13 +10,13 @@ void HashList_Init(HashList* list, int maxsize)
 	memset(list->data, NULL, sizeof(int) * maxsize);
 }
 
-//¹þÏ£º¯Êý£º³ýÁôÓàÊý·¨
+//ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 int HashFunction_Remain(int size, int key)
 {
 	return key % size;
 }
 
-//³åÍ»º¯Êý£º¿ª·Å¶¨Ö··¨-ÏßÐÔÌ½²â·¨
+//ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½Ö·ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½Ì½ï¿½â·¨
 int CollisionFuction_OpenAddressing_LinerProbing(const HashList* list, int index, int key)
 {
 	return (index + 1) % list->maxsize;
@@ -93,7 +89,7 @@ void HashList_Show(const HashList* const list)
 
 
 
-//ÐÂ½¨¹þÏ£½Úµã£¬´æ·Å³åÍ»Êý¾Ý
+//ï¿½Â½ï¿½ï¿½ï¿½Ï£ï¿½Úµã£¬ï¿½ï¿½Å³ï¿½Í»ï¿½ï¿½ï¿½ï¿½
 static HashNode* HashNode_Create(int key)
 {
 	HashNode* n = new HashNode;
@@ -103,8 +99,8 @@ static HashNode* HashNode_Create(int key)
 	return n;
 }
 
-//Á´µØÖ··¨½â¾ö³åÍ»
-//±¾ÖÊÎªÍ·²å¹þÏ£½Úµã
+//ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»
+//ï¿½ï¿½ï¿½ï¿½ÎªÍ·ï¿½ï¿½ï¿½Ï£ï¿½Úµï¿½
 void CollisionFuction_OpenAddressing_LinkAddress(HashList_Link* list,int index, int key)
 {
 	HashNode* n = HashNode_Create(key);

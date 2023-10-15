@@ -11,7 +11,8 @@
 
 #include "../../../../Test/Unit_Test/Test_Element.hpp"
 
-// g++ unit_test.cpp -g -o unit_test -lboost_unit_test_framework -std=c++20
+// g++ Sequential_List.cpp -g -o Sequential_List -lboost_unit_test_framework -std=c++20
+// valgrind --leak-check=full ./Sequential_List
 
 void test(const Sequential_List_Static<int,5> &array, size_t size = 0, size_t capcity = 0, bool empty = true)
 {

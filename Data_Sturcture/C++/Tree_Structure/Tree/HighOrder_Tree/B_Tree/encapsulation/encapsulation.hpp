@@ -2,9 +2,9 @@
 
 
 
-#include "../B_Node.h"
-#include "../Tree_B.h"
-#include "../../../../../Linear_Structure/Linear_List/Linear_List_Link/Link_List.h"
+#include "../B_Node.hpp"
+#include "../Tree_B.hpp"
+#include "../../../../../Linear_Structure/Linear_List/Linear_List_Link/Link_List.hpp"
 
 template <typename DataType, typename NodeType = B_Node<DataType>>
 class B_Plus

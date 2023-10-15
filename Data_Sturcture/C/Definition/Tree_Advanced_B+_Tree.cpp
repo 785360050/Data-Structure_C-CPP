@@ -41,7 +41,7 @@ BPlus_Node* BPlus_Node_Create_Branch(int m)
 	node->next = nullptr;
 	node->count = 0;
 	node->keys = new int[m + 1] {};
-	node->data = nullptr;//Ë÷Òý½Úµã²»´æÊý¾Ý
+	node->data = nullptr;//ï¿½ï¿½ï¿½ï¿½ï¿½Úµã²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (node->keys == nullptr)
 	{
 		delete node->keys;
@@ -67,7 +67,7 @@ BPlus_Tree* BPlus_Tree_Init(int orders)
 
 #include <queue>
 void BPlus_Tree_Destroy(BPlus_Tree* tree)
-{///²ã´Î±éÀúÊÍ·Å½Úµã
+{///ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½Í·Å½Úµï¿½
 	std::queue<BPlus_Node*> queue;
 	int i = 0;
 	queue.push(tree->root);
@@ -87,8 +87,8 @@ void BPlus_Tree_Destroy(BPlus_Tree* tree)
 
 
 
-////¶þ·Ö²éÕÒ ÕÒµ½Êý×éÖÐÖ¸¶¨µÄkeyµÄÎ»ÖÃ Èç¹û´æÔÚ·µ»Ø1 ·ñÔò·µ»Ø0
-////Èç¹ûÕÒµ½Ë÷ÒýÎª¸ÃÖµµÄÎ»ÖÃ ·ñÔò·µ»ØÓÒÁÚµÄÖµµÄÎ»ÖÃ(childµÄÎ»ÖÃ)
+////ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½1 ï¿½ï¿½ï¿½ò·µ»ï¿½0
+////ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Öµï¿½ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Úµï¿½Öµï¿½ï¿½Î»ï¿½ï¿½(childï¿½ï¿½Î»ï¿½ï¿½)
 //static bool binary_search(int* keys, int key, int left, int right, int* index)
 //{
 //	int mid;
@@ -109,7 +109,7 @@ void BPlus_Tree_Destroy(BPlus_Tree* tree)
 //	return false;
 //}
 
-///·µ»ØÕÒÄ¿±êkeyÊ±ÏÂÒ»¸öÂ·¾¶º¢×Ó½Úµã
+///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½keyÊ±ï¿½ï¿½Ò»ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 static BPlus_Node* Locate_Child(BPlus_Node* node, int key)
 {
 	if (!node)
@@ -125,7 +125,7 @@ static BPlus_Node* Locate_Child(BPlus_Node* node, int key)
 	}
 	return node->child[node->count];
 }
-///·µ»ØkeyÔÚÒ¶×Ó½Úµã²åÈëµÄÎ»ÖÃË÷Òý£¬ÒÑ¾­´æÔÚÊ±·µ»Ø-1
+///ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½-1
 static int Locate_Key(BPlus_Node* node, int key)
 {
 	if (!node)
@@ -142,7 +142,7 @@ static int Locate_Key(BPlus_Node* node, int key)
 	}
 	return 0;
 }
-///·µ»ØkeyÔÚnodeÖÐµÄÏÂ±ê£¬²»´æÔÚ·µ»Ø-1
+///ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½nodeï¿½Ðµï¿½ï¿½Â±ê£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½-1
 static int Locate_Key_Delete(BPlus_Node* node, int key)
 {
 	if (!node)
@@ -156,7 +156,7 @@ static int Locate_Key_Delete(BPlus_Node* node, int key)
 	return -1;
 }
 
-//ÔªËØµÄ²åÈëÒÔ¼°·ÖÁÑ²Ù×÷
+//Ôªï¿½ØµÄ²ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½ï¿½
 static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int value)
 {
 	BPlus_Node* parent;
@@ -164,56 +164,56 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 	int temp;
 	int i;
 
-	///ÏÈ²åÈëµ½Ò¶×Ó½Úµã
-	//ÏòºóÒÆ¶¯ÔªËØ
+	///ï¿½È²ï¿½ï¿½ëµ½Ò¶ï¿½Ó½Úµï¿½
+	//ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ôªï¿½ï¿½
 	for (i = node->count; i > 0 && Element_Greater(node->keys[i - 1], key); i--)
 	{
 		node->keys[i] = node->keys[i - 1];
 		node->data[i] = node->data[i - 1];
 	}
-	//²åÈëÐÂÔªËØ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	node->keys[i] = key;
 	node->data[i] = value;
 	node->count++;
 
 
-	///½Úµã¹ýÔØÊ±·ÖÁÑ
+	///ï¿½Úµï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 	while (node->count >= tree->max)
 	{
 		BPlus_Node* sibling;
-		// ¿½±´Êý¾Ý
-		mid = node->count / 2;//ÖÐ¼äÎ»ÖÃË÷Òý
-		temp = node->keys[mid];//ÖÐ¼äÔªËØ
-		/*·ÖÁÑ½áµã*/
-		if (!node->child)// Ò¶×Ó½áµã·ÖÁÑ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		mid = node->count / 2;//ï¿½Ð¼ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		temp = node->keys[mid];//ï¿½Ð¼ï¿½Ôªï¿½ï¿½
+		/*ï¿½ï¿½ï¿½Ñ½ï¿½ï¿½*/
+		if (!node->child)// Ò¶ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			sibling = BPlus_Node_Create_Leaf(tree->max);
 			sibling->count = node->count - mid;
 
 			for (int i = 0; i < sibling->count; ++i)
-			{//¿½±´ÔªËØºÍÊý¾Ý
+			{//ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½
 				sibling->keys[i] = node->keys[mid + i];
 				sibling->data[i] = node->data[mid + i];
-				node->keys[mid + i] = node->data[mid + i] = 0;//ÖÃ¿Õ
+				node->keys[mid + i] = node->data[mid + i] = 0;//ï¿½Ã¿ï¿½
 			}
 
-			//²åÈëÒ¶×ÓµÄÁ´Ê½½Úµã
+			//ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Óµï¿½ï¿½ï¿½Ê½ï¿½Úµï¿½
 			sibling->next = node->next;
 			node->next = sibling;
 		}
-		else// Ë÷Òý½áµã·ÖÁÑ
-		{///×¢Òâ£ºË÷Òý½ÚµãµÄ·ÖÁÑ»á°Ñ·ÖÁÑ½ÚµãÏòÉÏÒÆ¶¯£¬¶ø²»ÊÇÏñ×Ó½ÚµãÒ»Ñù´æÓÒ×ÓÊ÷µÄµÚÒ»¸öÔªËØ
+		else// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		{///×¢ï¿½â£ºï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ä·ï¿½ï¿½Ñ»ï¿½Ñ·ï¿½ï¿½Ñ½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½Ôªï¿½ï¿½
 			sibling = BPlus_Node_Create_Branch(tree->max);
-			sibling->count = node->count - mid - 1;//·ÖÁÑÔªËØ²»¸øÐÖµÜ½Úµã
+			sibling->count = node->count - mid - 1;//ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½ï¿½ÖµÜ½Úµï¿½
 
-			/// ½«·Ö¸î³öÈ¥µÄº¢×Ó×ª½»¸øÐÂ·ÖÁÑµÄÐÖµÜ½Úµã
+			/// ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½È¥ï¿½Äºï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ñµï¿½ï¿½ÖµÜ½Úµï¿½
 			for (int i = 0; i < sibling->count; ++i)
-			{//¿½±´ÔªËØºÍÊý¾Ý
+			{//ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½
 				sibling->keys[i] = node->keys[mid + i + 1];
 				sibling->child[i] = node->child[mid + i + 1];
 				sibling->child[i]->parent = sibling;
 
-				node->keys[mid + i + 1] = 0;//ÖÃ¿Õ
+				node->keys[mid + i + 1] = 0;//ï¿½Ã¿ï¿½
 				node->child[mid + i + 1] = nullptr;
 			}
 			//sibling->child[sibling->count] = node->child[node->count];
@@ -223,9 +223,9 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 		}
 		node->count = mid;
 
-		///±»·ÖÁÑµÄÔªËØ²åÈë¸¸½Úµã
+		///ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½Ôªï¿½Ø²ï¿½ï¿½ë¸¸ï¿½Úµï¿½
 		parent = node->parent;
-		if (!parent)//¸¸½Úµã²»´æÔÚ£¬Éú³ÉÐÂË÷Òý½Úµã(¸ÃË÷Òý½ÚµãÎªÐÂ¸ù½Úµã)
+		if (!parent)//ï¿½ï¿½ï¿½Úµã²»ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Îªï¿½Â¸ï¿½ï¿½Úµï¿½)
 		{
 			parent = BPlus_Node_Create_Branch(tree->max);
 			if (!parent)
@@ -235,9 +235,9 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 			tree->root = parent;
 		}
 
-		///Ë÷ÒýÔªËØ²åÈë¸¸½Úµã
+		///ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ë¸¸ï¿½Úµï¿½
 
-		//ÏÈÒ»±ßÍùºóÒÆ¶¯ÔªËØ£¬Ò»±ß¶¨Î»²åÈëÎ»ÖÃ
+		//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ôªï¿½Ø£ï¿½Ò»ï¿½ß¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 		for (i = parent->count; i > 0 && Element_Greater(parent->keys[i - 1], temp); i--)
 		{
 			parent->keys[i] = parent->keys[i - 1];
@@ -245,14 +245,14 @@ static void _BPlus_Tree_Insert(BPlus_Tree* tree, BPlus_Node* node, int key, int 
 		}
 
 		parent->keys[i] = temp;
-		if (parent->child[0]->child)//Èô×Ó½ÚµãÎªË÷Òý½Úµã
+		if (parent->child[0]->child)//ï¿½ï¿½ï¿½Ó½Úµï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
 			node->keys[mid] = 0;
 		parent->child[i + 1] = sibling;
 		parent->count++;
 
 		sibling->parent = parent;
 
-		// ÏòÉÏ¼ÌÐøÅÐ¶ÏÊÇ·ñ¸¸½ÚµãÐèÒª·ÖÁÑ
+		// ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ñ¸¸½Úµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
 		node = parent;
 	}
 }
@@ -263,21 +263,21 @@ void BPlus_Tree_Insert(BPlus_Tree* tree, int key, int value)
 	BPlus_Node* node;
 	int index;
 
-	///¿ÕÊ÷´´½¨¸ù(Ò¶×Ó)½Úµã
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ò¶ï¿½ï¿½)ï¿½Úµï¿½
 	if (!tree->root)
 	{
 		node = BPlus_Node_Create_Leaf(tree->max);
 		if (node == nullptr)
-			throw std::exception("Node Create Failed");
+			throw std::runtime_error("Node Create Failed");
 		tree->root = node;
 	}
 
 	node = tree->root;
 
-	///¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-	/// ¶¨Î»²åÈëÔªËØµÄÎ»ÖÃ
-	/// ÏÈÕÒµ½²åÈëµÄÒ¶×Ó½Úµã£¬ÔÙÔÙÒ¶×Ó½ÚµãÖÐÕÒ²åÈëÎ»ÖÃË÷Òý
-	///¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	/// ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+	/// ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó½Úµã£¬ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	while (node->child)
 	{
@@ -288,15 +288,15 @@ void BPlus_Tree_Insert(BPlus_Tree* tree, int key, int value)
 
 	index = Locate_Key(node, key);
 	if (index == -1)
-		return;//ÒÑ¾­´æÔÚÔªËØÁË
+		return;//ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
 
 
-	///ÕÒµ½²åÈëÎ»ÖÃºó²åÈëÔªËØ
+	///ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	_BPlus_Tree_Insert(tree, node, key, value);
 }
 
 
-//Ò¶×Ó½áµãµÄ×óÐý×ª °ÑÓÒ½ÚµãµÄµÚÒ»¸öÖµÒÆµ½×ó½Úµã
+//Ò¶ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª ï¿½ï¿½ï¿½Ò½Úµï¿½Äµï¿½Ò»ï¿½ï¿½Öµï¿½Æµï¿½ï¿½ï¿½Úµï¿½
 void _bplus_leaf_left_rotate(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
@@ -306,21 +306,21 @@ void _bplus_leaf_left_rotate(BPlus_Node* node, int index)
 	left->data[left->count] = right->data[0];
 	left->count++;
 
-	// ¶ÔÓÒ½Úµã½øÐÐÒÆÎ»
+	// ï¿½ï¿½ï¿½Ò½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
 	for (int i = 0; i < right->count - 1; i++)
 	{
 		right->keys[i] = right->keys[i + 1];
 		right->data[i] = right->data[i + 1];
 	}
 
-	//¸²¸ÇÍê³Éºó²ÅÄÜÉèÖÃ¸¸½ÚµãÖµ£¬·ñÔòÊÇÔ­À´µÄÖµ£¬¿ÉÄÜ±ä³É×óÐÖµÜµÄÄ©Î²ÔªËØ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½Úµï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÜµï¿½Ä©Î²Ôªï¿½ï¿½
 	node->keys[index] = right->keys[0];
 
 	right->count--;
 
 }
 
-//ÄÚ²¿½áµãµÄ×óÐý×ª °ÑÓÒ½ÚµãµÄµÚÒ»¸öÖµÒÆµ½¸¸½Úµã ¸¸½Úµã¶ÔÓ¦µÄÖµÒÆµ½×ó½Úµã
+//ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª ï¿½ï¿½ï¿½Ò½Úµï¿½Äµï¿½Ò»ï¿½ï¿½Öµï¿½Æµï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ó¦ï¿½ï¿½Öµï¿½Æµï¿½ï¿½ï¿½Úµï¿½
 void _bplus_internal_left_rotate(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
@@ -334,7 +334,7 @@ void _bplus_internal_left_rotate(BPlus_Node* node, int index)
 
 	node->keys[index] = right->keys[0];
 
-	// ¶ÔÓÒ½Úµã½øÐÐÒÆÎ»
+	// ï¿½ï¿½ï¿½Ò½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
 	for (int i = 0; i < right->count - 1; i++)
 		right->keys[i] = right->keys[i + 1];
 
@@ -344,14 +344,14 @@ void _bplus_internal_left_rotate(BPlus_Node* node, int index)
 	right->count--;
 }
 
-//ºÏ²¢½áµãÔªËØµÄ×óÓÒÁ½¸ö×Ó½Úµã,index×óº¢×ÓµÄË÷ÒýÖµ
+//ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½,indexï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 void _BPlus_Node_merge(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
 	left = node->child[index];
 	right = node->child[index + 1];
-	if (!left->child)///ºÏ²¢Ò¶×Ó½Úµã
-	{//ºÏ²¢µ½×ó×Ó½Úµã
+	if (!left->child)///ï¿½Ï²ï¿½Ò¶ï¿½Ó½Úµï¿½
+	{//ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 
 		for (int i = 0; i < right->count; ++i)
 		{
@@ -361,12 +361,12 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 
 		left->count += right->count;
 
-		///ÐÞ¸ÄË÷ÒýÔªËØ
+		///ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 		for (int i = index; i < node->count - 1 ; i++)
 			node->keys[i] = node->keys[i + 1];
 		node->keys[node->count - 1] = 0;
-		//(ºÏ²¢µ½×ó½Úµã²»Ó¦¸ÃÉ¾ÓÒ±ßµÄË÷ÒýÂð£¿)
-		//É¾³ý×ó½ÚµãµÄË÷Òý(Ö±½Ó¸²¸Ç) (int i = indexÊÇ·ñ+1ÓÐbug)
+		//(ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½Úµã²»Ó¦ï¿½ï¿½É¾ï¿½Ò±ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+		//É¾ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ö±ï¿½Ó¸ï¿½ï¿½ï¿½) (int i = indexï¿½Ç·ï¿½+1ï¿½ï¿½bug)
 		for (int i = index + 1; i <= node->count-1; i++)
 			node->child[i] = node->child[i + 1];
 		node->child[node->count] = nullptr;
@@ -374,16 +374,16 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 
 		left->next = right->next;
 	}
-	else///ºÏ²¢Ë÷Òý½Úµã
+	else///ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
 	{
-		//´Ó¸¸½Úµã°Ñ·Ö¸îÔªËØÒÆÏÂÀ´(ÕâÀï²»ÐèÒª¿¼ÂÇº¢×ÓÖ¸ÕëÒÆ¶¯)
+		//ï¿½Ó¸ï¿½ï¿½Úµï¿½Ñ·Ö¸ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï²»ï¿½ï¿½Òªï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Æ¶ï¿½)
 		left->keys[left->count] = node->keys[index];
-		if (node->count == 1)//¹é»¹±»·Ö¸îË÷Òý½ÚµãÎªÒ¶×Ó½ÚµãµÄ¸¸½ÚµãÖ¸Ïò
+		if (node->count == 1)//ï¿½é»¹ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ÎªÒ¶ï¿½Ó½Úµï¿½Ä¸ï¿½ï¿½Úµï¿½Ö¸ï¿½ï¿½
 			right->child[0]->parent = left;
 		left->count++;
 
 
-		//°ÑÓÒ±ßÔªËØºÏ²¢µ½×ó±ß
+		//ï¿½ï¿½ï¿½Ò±ï¿½Ôªï¿½ØºÏ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < right->count; ++i)
 		{
 			left->keys[left->count + i] = right->keys[i];
@@ -400,13 +400,13 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 		left->count += right->count;
 		right->count = 0;
 
-		///ÐÞ¸Ä¸¸Ë÷Òý½Úµã
-		//É¾³ýÒÆ¶¯ÏÂÀ´µÄkey
+		///ï¿½Þ¸Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
+		//É¾ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½key
 		for (int i = index; i < node->count - 1; i++)
 			node->keys[i] = node->keys[i + 1];
 		node->keys[node->count - 1] = 0;
 
-		//ºÏ²¢Ë÷Òýºó£¬É¾³ý·ò½ÚµãµÄº¢×ÓË÷Òý(Ö±½Ó¸²¸Ç£¬Ã¿´Î¸²¸ÇÓÒº¢×Ó)
+		//ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Úµï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ö±ï¿½Ó¸ï¿½ï¿½Ç£ï¿½Ã¿ï¿½Î¸ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½)
 		for (int i = index + 1; i <= node->count; i++)
 			node->child[i] = node->child[i + 1];
 		node->child[node->count] = nullptr;
@@ -415,17 +415,17 @@ void _BPlus_Node_merge(BPlus_Node* node, int index)
 		left->next = right->next;
 	}
 
-	/*ÐÞ¸Ä¸¸½Úµã*/
+	/*ï¿½Þ¸Ä¸ï¿½ï¿½Úµï¿½*/
 
 
-	/*ÊÍ·ÅÓÒ½Úµã*/
+	/*ï¿½Í·ï¿½ï¿½Ò½Úµï¿½*/
 	free(right->keys);
 	free(right->data);
 	free(right->child);
 	free(right);
 }
 
-//Ò¶×Ó½áµãµÄÓÒÐý×ª
+//Ò¶ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
 void _bplus_leaf_right_rotate(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
@@ -433,7 +433,7 @@ void _bplus_leaf_right_rotate(BPlus_Node* node, int index)
 	right = node->child[index + 1];
 
 	for (int i = right->count; i > 0; i--)
-	{//ÏòºóÒÆ¶¯£¬Áô³ö²åÈëÎ»ÖÃ
+	{//ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 		right->keys[i] = right->keys[i - 1];
 		right->data[i] = right->data[i - 1];
 	}
@@ -443,10 +443,10 @@ void _bplus_leaf_right_rotate(BPlus_Node* node, int index)
 
 	left->count--;
 	//node->keys[index] = right->keys[0];
-	node->keys[index] = right->keys[0];///parentË÷Òý½Úµã¸ÄÎªÒÆ¶¯µÄÇ°Ò»¸öÔªËØ
+	node->keys[index] = right->keys[0];///parentï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Îªï¿½Æ¶ï¿½ï¿½ï¿½Ç°Ò»ï¿½ï¿½Ôªï¿½ï¿½
 }
 
-//ÄÚ²¿½áµãµÄÓÒÐý×ª ×ó½ÚµãµÄ×îºóÒ»¸öÖµµ½¸¸½Úµã ¸¸½Úµã¶ÔÓ¦µÄÖµµ½ÓÒ½Úµã
+//ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ó¦ï¿½ï¿½Öµï¿½ï¿½ï¿½Ò½Úµï¿½
 void _bplus_internal_right_rotate(BPlus_Node* node, int index)
 {
 	BPlus_Node* left, * right;
@@ -467,31 +467,31 @@ void _bplus_internal_right_rotate(BPlus_Node* node, int index)
 }
 
 
-///É¾³ýÒ¶×Ó½ÚµãnodeÉÏµÄµÚindex¸öÔªËØ
+///É¾ï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½nodeï¿½ÏµÄµï¿½indexï¿½ï¿½Ôªï¿½ï¿½
 static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 {
 	BPlus_Node* parent, * sibling;
 
 
 
-	///ÈôÒ¶×Ó½ÚµãÉ¾³ýµÚÒ»¸öÔªËØ£¬ÔòÐÞ¸Ä¶ÔÓ¦Ë÷Òý½ÚµãµÄË÷ÒýÖµ
+	///ï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½É¾ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½Þ¸Ä¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 	if (index == 0 && !node->child && node->parent)
 	{
 		BPlus_Node* node_index=node->parent;
 		int key_target = node->keys[index];
 		int i = Locate_Key_Delete(node_index, key_target);
 		while (i>=node_index->count||i==-1)
-		{//Ò»Ö±ÏòÉÏ²ãÕÒkeyËùÔÚµÄ½Úµã
+		{//Ò»Ö±ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½ÚµÄ½Úµï¿½
 			node_index = node_index->parent;
 			i= Locate_Key_Delete(node_index, key_target);
 		}
-		//ÕÒµ½ºó¸²¸ÇÊý¾Ý
+		//ï¿½Òµï¿½ï¿½ó¸²¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		node_index->keys[i] = node->keys[1];
 		
 	}
 
-	///É¾³ýÒ¶×Ó½áµãµÄÖ¸¶¨µÄÖµ
-	//´ÓºóÍùÇ°¸²¸Ç
+	///É¾ï¿½ï¿½Ò¶ï¿½Ó½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Öµ
+	//ï¿½Óºï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 	for (int i = index; i < node->count - 1; i++)
 	{
 		node->keys[i] = node->keys[i + 1];
@@ -501,45 +501,45 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 	node->keys[node->count] = 0;
 
 	parent = node->parent;
-	///Ò»²ãÒ»²ãÏòÉÏÎ¬»¤Ë÷Òý½ÚµãÔªËØÊýÁ¿
+	///Ò»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	while (node->count < tree->min && parent)
 	{
-		///¶¨Î»½áµãÔÚ¸¸½ÚµãÖÐµÄË÷ÒýÎ»ÖÃ
+		///ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Úµï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 		for (index = 0; index <= parent->count && parent->child[index] != node; index++)
 			;
-		if (index > parent->count)// ÔÚËûµÄ¸¸½ÚµãÖÐÃ»ÕÒµ½Õâ¸öº¢×Ó
+		if (index > parent->count)// ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Úµï¿½ï¿½ï¿½Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			throw std::logic_error("No Matching Node but Element Delete Found");
-		if (index == 0)///Ã»ÓÐ×óÐÖµÜ Ö»ÓÐÓÒÐÖµÜ
+		if (index == 0)///Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½
 		{
 
 			sibling = parent->child[1];
-			if (sibling->count > tree->min)///ÐÖµÜÓÐ¸»ÓàÔªËØ£¬½«¸»ÓàÔªËØÒÆ¹ýÀ´(×îÐ¡ÔªËØ)
+			if (sibling->count > tree->min)///ï¿½Öµï¿½ï¿½Ð¸ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½(ï¿½ï¿½Ð¡Ôªï¿½ï¿½)
 			{
-				// Ç¨ÒÆÊý¾Ý
+				// Ç¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (!node->child)
-					// Ò¶×Ó½áµãµÄÇ¨ÒÆ
+					// Ò¶ï¿½Ó½ï¿½ï¿½ï¿½Ç¨ï¿½ï¿½
 					_bplus_leaf_left_rotate(parent, 0);
 				else
 					_bplus_internal_left_rotate(parent, 0);
 			}
-			else///ÐÖµÜÁ©½Úµã¶¼Ã»ÓÐ¸»ÓàÔªËØÊ±£¬ºÏ²¢ÐÖµÜÎªÒ»¸ö
+			else///ï¿½Öµï¿½ï¿½ï¿½ï¿½Úµã¶¼Ã»ï¿½Ð¸ï¿½ï¿½ï¿½Ôªï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ï²ï¿½ï¿½Öµï¿½ÎªÒ»ï¿½ï¿½
 				_BPlus_Node_merge(parent, 0);
 
 		}
-		else///Ö»ÓÐ×óÐÖµÜ¡¢»òÁ½±ß¶¼ÓÐÐÖµÜ£¬Ïò×ó±ßÐÖµÜÄÃÔªËØ
+		else///Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÜ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ÖµÜ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Ôªï¿½ï¿½
 		{
 			sibling = parent->child[index - 1];
 			if (sibling->count > tree->min)
 			{
-				// ´Ó×óÐÖµÜÇ¨ÒÆÊý¾Ý
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Ç¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (!node->child)
-					// Ò¶×Ó½áµãµÄÓÒÐý×ª
+					// Ò¶ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
 					_bplus_leaf_right_rotate(parent, index - 1);
 				else
-					// ÄÚ²¿½áµãµÄÓÒÐý×ª
+					// ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
 					_bplus_internal_right_rotate(parent, index - 1);
 			}
-			else///ºÏ²¢ÐÖµÜ
+			else///ï¿½Ï²ï¿½ï¿½Öµï¿½
 				_BPlus_Node_merge(parent, index - 1);
 		}
 
@@ -550,13 +550,13 @@ static void _BPlus_Tree_delete(BPlus_Tree* tree, BPlus_Node* node, int index)
 
 		
 
-	///Èç¹û¸ù½ÚµãµÄÁ½¸öº¢×ÓºÏ²¢£¬½«ºÏ²¢ºóµÄº¢×Ó½Úµã×÷ÎªÐÂµÄ¸ù½Úµã
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÓºÏ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½Äºï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½Îªï¿½ÂµÄ¸ï¿½ï¿½Úµï¿½
 	if (tree->root->count == 0 && tree->root->child != nullptr)
 	{
 		node = tree->root;
 		tree->root = node->child[0];
 
-		///É¾³ýÍ·½ÚµãºóÇå¿Õº¢×ÓµÄ¸¸½Úµã
+		///É¾ï¿½ï¿½Í·ï¿½Úµï¿½ï¿½ï¿½ï¿½Õºï¿½ï¿½ÓµÄ¸ï¿½ï¿½Úµï¿½
 		node->child[0]->parent = nullptr;
 		free(node->keys);
 		free(node->data);
@@ -571,7 +571,7 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 	BPlus_Node* node = tree->root;
 	int index;
 
-	///ÏÈ²éË÷Òý½ÚµãÕÒµ½Ò¶×Ó£¬ÔÙÕÒÄ¿±êÔªËØÔÚ½ÚµãÖÐµÄindex
+	///ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Òµï¿½Ò¶ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ú½Úµï¿½ï¿½Ðµï¿½index
 	while (node->child)
 	{
 		node = Locate_Child(node, key);
@@ -581,9 +581,9 @@ void BPlus_Tree_Delete(BPlus_Tree* tree, int key)
 
 	index = Locate_Key_Delete(node, key);
 	if (index == -1)
-		return;//²»´æÔÚ¸ÃÔªËØ
+		return;//ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½Ôªï¿½ï¿½
 
-	///ÕÒµ½É¾³ýÎ»ÖÃºóÉ¾³ýÄ¿±êÔªËØ
+	///ï¿½Òµï¿½É¾ï¿½ï¿½Î»ï¿½Ãºï¿½É¾ï¿½ï¿½Ä¿ï¿½ï¿½Ôªï¿½ï¿½
 	_BPlus_Tree_delete(tree, node, index);
 
 	return;
@@ -595,7 +595,7 @@ static void Node_Print(BPlus_Node* node)
 {
 	std::vector<int> temp;
 	std::cout << '{';
-	///Éî¶È±éÀúÊä³öÔªËØ
+	///ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	for (int i = 0; i < node->count; i++)
 	{
 		if (i != 0)
@@ -612,7 +612,7 @@ static void Node_Print(BPlus_Node* node)
 //		std::cout << "Leaf";
 //		goto END;
 //	}
-//	///Éî¶È±éÀúÊä³öÔªËØ
+//	///ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 //	for (int i = 0; i < node->count; i++)
 //	{
 //		//if (!node->child)
@@ -634,7 +634,7 @@ static void Node_Print(BPlus_Node* node)
 	if (node->child)
 		return;
 	std::cout << '<';
-	///Éî¶È±éÀúÊä³öÔªËØ
+	///ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	for (int i = 0; i < node->count; i++)
 	{
 		if (i != 0)
@@ -648,7 +648,7 @@ static void Node_Print(BPlus_Node* node)
 static void Traver(BPlus_Node* node)
 {
 	std::cout << '{';
-	///Éî¶È±éÀúÊä³öÔªËØ
+	///ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	for (int i = 0; i < node->count; i++)
 	{
 		if (i != 0)
@@ -699,7 +699,7 @@ static void BPlus_Level_Show(BPlus_Node* node, int h)
 
 std::vector<std::vector<BPlus_Node*>> buffer;
 int level = 0;
-///»ØËÝÊµÏÖ±éÀúÉú³ÉËùÓÐÊ÷ÖÐµÄ½ÚµãÐÅÏ¢£¬´æÈëÊý×é
+///ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ½Úµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* node, int level)
 {
 	if (!node)
@@ -710,7 +710,7 @@ static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* no
 		return;
 
 	for (int i = 0; i <= node->count; ++i)
-	{//±éÀúËùÓÐº¢×Ó½Úµã£¬¼ÓÈë¶ÔÓ¦²ãµÄÊý×éÖÐ
+	{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½Ó½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		level++;
 		//if(i==node->count && !node->child[i])
 
@@ -723,14 +723,14 @@ static void BackTrace_Traverse(std::vector<BPlus_Node*>*& buffer, BPlus_Node* no
 void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 {
 
-	///ÒÔÐÐÎªµ¥Î»ÏÔÊ¾Ã¿Ò»²ãµÄ½Úµã
+	///ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½Ê¾Ã¿Ò»ï¿½ï¿½Ä½Úµï¿½
 	for (int i = 0; i < level - 1; ++i)
 	{
-		///Ë÷Òý½ÚµãÉÔÎ¢¾ÓÖÐÒ»Ð©ÏÔÊ¾
+		///ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½ï¿½Ê¾
 		for (int j = 0; j < (level - i); ++j)
 			std::cout << '\t';
 
-		for (const auto& node : buffer[i])//Ë÷Òý½Úµã¸ñÊ½»¯
+		for (const auto& node : buffer[i])//ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ê½ï¿½ï¿½
 		{
 			Node_Print(node);
 			std::cout << '\t';
@@ -738,7 +738,7 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 		std::cout << std::endl;
 	}
 
-	///ÏÔÊ¾×îµ×²ãµÄÒ¶×Ó½Úµã
+	///ï¿½ï¿½Ê¾ï¿½ï¿½×²ï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½
 	auto node = buffer[level - 1][0];
 	while (node)
 	{
@@ -761,7 +761,7 @@ void Print_Tree(std::vector<BPlus_Node*>*& buffer, int level)
 int BPlus_Tree_Search(BPlus_Tree* tree, int key)
 {
 	if (!tree)
-		throw std::exception("tree is nullptr");
+		throw std::runtime_error("tree is nullptr");
 
 	auto node = tree->root;
 	while (node->child)
@@ -771,7 +771,7 @@ int BPlus_Tree_Search(BPlus_Tree* tree, int key)
 			throw std::runtime_error("Node Unexists");
 	}
 
-	//Õâ¸öº¯ÊýÃüÃû²»ÓÑºÃ£¬Ííµã¸ÄÒ»ÏÂ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÑºÃ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	int index = Locate_Key_Delete(node, key);
 	if (index != -1)
 		return node->data[index];
@@ -786,7 +786,7 @@ void BPlus_Tree_Show(BPlus_Tree* tree)
 	auto node = tree->root;
 	int level = 1;
 	while (node->child)
-	{//ËùÓÐÒ¶×Ó½ÚµãÉî¶ÈÏàÍ¬
+	{//ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬
 		++level;
 		node = node->child[0];
 	}

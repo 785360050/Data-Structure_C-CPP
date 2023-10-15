@@ -10,8 +10,8 @@
 /// (任意n个节点的二叉树有n+1个空链域)
 /// </summary>
 
-#include "Node_BinaryThreadTree.h"
-#include "../Tree_Binary.h"
+#include "Node_BinaryThreadTree.hpp"
+#include "../Tree_Binary.hpp"
 
 template <typename DataType, typename NodeType = Node_BinaryThreadTree<DataType>>
 class BinaryTree_Thread:public Tree_Binary<DataType,NodeType>

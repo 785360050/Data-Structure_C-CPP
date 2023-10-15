@@ -1,5 +1,7 @@
 #include "../API/Liner_Queue.h"
 
+#include <cstring>
+
 ///顺序队列
 SeqQueue* SeqQueue_Init()
 {

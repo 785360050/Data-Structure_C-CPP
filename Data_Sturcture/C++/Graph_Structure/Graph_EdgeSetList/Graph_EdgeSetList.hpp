@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "../Graph_Structure.h"
+#include "../Graph_Structure.hpp"
 #include <set>
 #include <queue>
 #include <stack>

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "../API/Liner_List_Sequential.h"
 
+#include <cstring>
+
 SeqList* SeqList_Init(int maxsize)
 {
 	SeqList* L = new SeqList;

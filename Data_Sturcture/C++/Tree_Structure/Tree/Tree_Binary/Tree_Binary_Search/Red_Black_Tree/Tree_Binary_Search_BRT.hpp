@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "Node_Binary_Search_RB.h"
-#include "../Tree_Binary_Search.h"
+#include "Node_Binary_Search_RB.hpp"
+#include "../Tree_Binary_Search.hpp"
 
 template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_RB<DataType, KeyType>>
 class Tree_Binary_Search_RBT :public Tree_Binary_Search<DataType, KeyType, NodeType>

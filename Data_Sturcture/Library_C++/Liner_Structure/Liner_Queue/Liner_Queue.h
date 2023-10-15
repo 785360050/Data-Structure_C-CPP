@@ -44,7 +44,7 @@ public:
 		try
 		{
 			if (length > maxsize)
-				throw std::exception("Queue Overflowed");
+				throw std::runtime_error("Queue Overflowed");
 		}
 		catch (const std::exception& e)
 		{

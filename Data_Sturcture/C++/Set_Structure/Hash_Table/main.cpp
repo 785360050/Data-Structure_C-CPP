@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "Set_Hash_LinearDetection.h"
-#include "Set_Hash_LinkAddress.h"
+#include "Set_Hash_LinearDetection.hpp"
+#include "Set_Hash_LinkAddress.hpp"
 
 #include <Windows.h>
 ///修改cmd编码方式

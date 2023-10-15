@@ -1,4 +1,4 @@
 
 
-add_subdirectory(Linear_List_Sequential)
-# add_subdirectory(Linear_List_Link)
+add_subdirectory(Sequential_List)
+# add_subdirectory(Link_List)
