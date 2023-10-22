@@ -20,6 +20,7 @@ public:
 	{
 		other.element = ElementType{};
 	}
+	// copy element
 	Node &operator=(const Node &other)
 	{
 		if(this == &other)
@@ -27,6 +28,7 @@ public:
 		element = other.element;
 		return *this;
 	}
+	// move element
 	Node &operator=(Node &&other)
 	{
 		element = std::move(other.element);

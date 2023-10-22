@@ -4,8 +4,12 @@
 
 
 /// ============================================================================================================
-/// 		所有的节点拷贝和移动时，对节点指针都仅做浅拷贝。
+/// 关于链式节点的拷贝控制：
+/// 		1. 所有的节点拷贝和移动，仅对节点指针做浅拷贝。
 /// 		因为拷贝和移动，逻辑上都只针对当前节点本身而不是所有
+/// 		2. 对一个已经存在前驱或后继的节点做移动时，会导致当前节点所在的链前后断开
+/// 		在移动时，请确保被移动的节点已经从链中删除
+/// 		
 /// ============================================================================================================
 
 
@@ -131,6 +135,65 @@ public: // Copy Conrtol
 			delete pre;
 		pre = other.pre;
 		other.next = nullptr;
+		return *this;
+	}
+};
+
+/// @brief 静态链表的节点
+/// 	没有想到什么好名字，可能非常不直观，
+/// 	叫Record仅因为mysql的innodb也使用了静态链表实现
+template <typename ElementType>
+class List_Node_Record : public Node<ElementType>
+{
+public:
+	size_t pre{};//上个节点的下标
+	size_t next{};//下个节点的下标
+	
+
+public:
+	List_Node_Record() = default;
+	List_Node_Record(const ElementType &element, size_t index_pre = 0, size_t index_next = 0)
+		: Node<ElementType>(element), pre{index_pre}, next{index_next} {};
+	List_Node_Record(ElementType &&element, size_t index_pre=0, size_t index_next=0)
+		: Node<ElementType>(std::forward<ElementType>(element)), pre{index_pre}, next{index_next} {};
+
+public: // Copy Conrtol
+	List_Node_Record(const List_Node_Record<ElementType> &other)
+		: Node<ElementType>(other),pre{other.pre}, next{other.next}
+	{
+		if (this == &other)
+			throw std::logic_error("Self assignment");
+	}
+	List_Node_Record(List_Node_Record<ElementType> &&other)
+		: Node<ElementType>(std::move(other)), pre{other.pre}, next{other.next}
+	{
+		other.pre = size_t{};
+		other.next = size_t{};
+	}
+	List_Node_Record<ElementType> &operator=(const List_Node_Record<ElementType> &other)
+	{
+		if (this == &other)
+			throw std::logic_error("Self assignment");
+		Node<ElementType>::operator=(other);
+		pre = other.pre;
+		next = other.next;
+		return *this;
+	}
+
+	/// @brief 仅移动元素值，指针仅拷贝。会导致当前的前后继节点断开
+	/// @note 在移动时，请确保被移动的节点已经从链中删除。见当前文件的开头注释
+	List_Node_Record<ElementType> &operator=(List_Node_Record<ElementType> &&other)
+	{
+		Node<ElementType>::operator=(std::move(other));
+		// if (next)
+		// 	throw std::logic_error("Danger: Causing all next nodes to be destructed");
+		next = other.next;
+		other.next = size_t{};
+
+		// if (pre)
+		// 	throw std::logic_error("Danger: Causing all precursor nodes to be destructed");
+		pre = other.pre;
+		other.pre = size_t{};
 		return *this;
 	}
 };

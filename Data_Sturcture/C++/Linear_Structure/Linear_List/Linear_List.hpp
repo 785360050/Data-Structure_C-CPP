@@ -40,7 +40,7 @@ namespace Logic
 		// 删除元素
 		virtual void Element_Delete(size_t pos) = 0;
 		// 更新元素
-		virtual void Element_Update(size_t pos, ElementType elem) = 0;
+		virtual void Element_Update(size_t pos, ElementType &&elem) = 0;
 
 	public:
 		// 显示线性表所有信息

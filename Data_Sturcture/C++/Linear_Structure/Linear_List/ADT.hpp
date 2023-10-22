@@ -41,7 +41,7 @@ namespace ADT
 {
 	/// index从1开始，非数组下标从0开始
 	template <typename StructureType, typename ElementType>
-	concept Linear_List = requires(StructureType adt, ElementType element, std::size_t index) {
+	concept Linear_List = requires(StructureType adt, ElementType &&element, std::size_t index) {
 
 		// 判断是否为空
 		adt.Is_Empty();
@@ -54,13 +54,13 @@ namespace ADT
 		adt.List_Clear();
 
 		// 在index位置插入element
-		adt.Element_Insert(index, element);
+		adt.Element_Insert(index, std::forward<ElementType>(element));
 		// 删除index位置的元素
 		adt.Element_Delete(index);
 		// 获取index位置的元素
 		adt[index];
 		// 设置index位置的元素为element
-		adt.Element_Update(index, element);
+		adt.Element_Update(index, std::forward<ElementType>(element));
 	};
 };
 #endif
