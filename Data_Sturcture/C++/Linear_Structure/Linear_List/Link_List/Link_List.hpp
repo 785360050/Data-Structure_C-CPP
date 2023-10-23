@@ -132,7 +132,7 @@ namespace Storage
 	class Link_List_Static : public Logic::Linear_List<ElementType>
 	{
 	public:
-		static constexpr size_t npos = maxsize;//无效index，类似nullptr,std::string::npos
+		const size_t npos = maxsize;//无效index，类似nullptr,std::string::npos
 	protected:
 		// using Record = NodeType;
 		size_t front{npos}; // 首元素的下标,初始化为index_end+1,表示npos
@@ -283,18 +283,14 @@ namespace Storage
 		// 定位节点
 		virtual ElementType &operator[](size_t pos) override
 		{
-			if (pos > this->size)
+			if (pos > this->size || pos < 1)
 				throw std::out_of_range("Position is not exist");
 			size_t index{front};
-			for (size_t i = 0; i < pos; ++i)
+			for (size_t i = 1; i < pos; ++i)
 				index = storage[index].next;
 			return storage[index].element;
 		}
 
-		// virtual NodeType *Element_Prior(const NodeType *const node)
-		// {return storage[node.pre].element;}
-		// virtual NodeType *Element_Next(const NodeType *const node)
-		// {return storage[node.next].element;}
 		virtual void Element_Insert(size_t pos, const ElementType &element)
 		{
 			if (pos < 1 || pos > this->size + 1)
@@ -357,7 +353,7 @@ namespace Storage
 			free_list.Deallocate(index);
 			--this->size;
 		}
-		virtual void Element_Update(size_t pos, ElementType &&elem) { storage[_Element_Locate(pos)]= std::forward<ElementType>(elem); }
+		virtual void Element_Update(size_t pos, ElementType &&elem) { operator[](pos) = std::forward<ElementType>(elem); }
 	};
 
 	/// precursor node == prior node
@@ -714,6 +710,8 @@ public: /// 元素操作
 	}
 };
 
+/// @brief 双向节点的静态链表
+/// @tparam maxsize 最大元素个数
 template <typename ElementType, size_t maxsize>
 using Link_List_Static = Storage::Link_List_Static<List_Node_Record<ElementType>, ElementType, maxsize>;
 
