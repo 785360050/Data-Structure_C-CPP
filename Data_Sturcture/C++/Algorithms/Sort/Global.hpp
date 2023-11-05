@@ -3,6 +3,8 @@
 #include <concepts>
 #include <functional>
 
+
+// 所有的排序算法都是函数对象都是
 template <typename Method, typename Compare = std::less<>>
 concept Sort_Method = requires(Method method, std::vector<size_t> list) {
     // std::invocable<Method>;
@@ -23,6 +25,7 @@ concept Sort_Method = requires(Method method, std::vector<size_t> list) {
 //     x = std::move(y);
 //     y = std::move(temp);
 // }
+
 template <typename ElementType>
 void Swap(ElementType &x, ElementType &y)
 {

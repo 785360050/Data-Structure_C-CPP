@@ -150,7 +150,7 @@ void Sort_Quick_SingleWay(SortList* list)
 
 
 ///——————————————————————堆排序
-
+// TODO:堆排序是选择排序，不是交换排序，应该放另外的文件中
 void Sort_Heap(SortList* list)
 {///堆的第一个数组存储空间不使用
 	BinaryHeap* h = new BinaryHeap;

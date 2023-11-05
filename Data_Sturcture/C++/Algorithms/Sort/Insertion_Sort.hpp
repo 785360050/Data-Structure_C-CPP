@@ -4,19 +4,9 @@
 
 namespace Sort
 {
-    // //最终的排序结果要么升序要么降序
-    // enum struct Order : bool
-    // {
-    //     Ascending,
-    //     Descending,
-    // };
-    // struct Property
-    // {
-    //     Order order{};
-    //     Property(Order order) : order{order} {};
-    // };
 
-    /// @brief 在原有数组上修改元素次序O(n^2)
+    /// @brief 直接插入排序
+    /// 在原有数组上修改元素次序O(n^2)
     /// @tparam Compare 只能传入less或greater，equal的逻辑由算法稳定性决定
     /// 使用oprator!=对比为true后再调用comapre比较
     template <typename ElementType, typename Compare = std::less<>>
