@@ -55,13 +55,13 @@ namespace Sort
     /// @tparam Compare 
     template <typename ElementType, typename Compare = std::less<>>
     struct Insert_Shell
-    {
+    {//TODO:希尔排序写的很烂，再改一下
         std::vector<ElementType> operator()(std::vector<ElementType> &list)
         { 
             // reoder element per step of gap
             for (int gap = list.size() / 2; gap > 0; gap /= 2)
             { // 每组元素进行插入排序
-                for (int index_target = 0; index_target < list.size(); index_target++)
+                for (int index_target = gap; index_target < list.size(); index_target++)
                 {
                     ElementType target = list[index_target];
                     int i = index_target;
