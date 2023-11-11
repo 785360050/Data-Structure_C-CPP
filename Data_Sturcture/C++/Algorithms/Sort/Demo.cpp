@@ -35,10 +35,6 @@ int main(int argc, char const *argv[])
         res = list.Sort<Sort::Insert_Directly<size_t, std::greater_equal<>>>();
         list.Show_Result(res, "Insert Directly Sort");
 
-        static_assert(Sort_Method<Sort::Insert_Direct_Optimized<size_t>>);
-        res = list.Sort<Sort::Insert_Direct_Optimized<size_t, std::greater<>>>();
-        list.Show_Result(res, "Insert Directly Sort Optimized");
-
         static_assert(Sort_Method<Sort::Insert_Shell<size_t>>);
         res = list.Sort<Sort::Insert_Shell<size_t, std::greater<>>>();
         list.Show_Result(res, "Insert Shell");

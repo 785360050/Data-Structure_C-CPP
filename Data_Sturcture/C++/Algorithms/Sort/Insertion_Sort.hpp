@@ -14,32 +14,20 @@ namespace Sort
     {
         std::vector<ElementType> operator()(std::vector<ElementType> &list)
         {
-            for (int i = 1; i < list.size(); i++)
-                for (int n = i; n > 0; --n)
-                    if (list[n - 1] != list[n] && !Compare{}(list[n - 1], list[n]))
-                        Swap(list[n - 1], list[n]);
-            return list;
-        };
-        std::vector<ElementType> operator()(std::vector<ElementType> &&list_move)
-        {
-            auto list = list_move;
-            return this->operator()(list);
-        };
-    };
+            
+            if(list.size()<=1)//至少两个元素再排序
+                return list;
 
-    /// @brief O(n^2)
-    template <typename ElementType, typename Compare = std::less<>>
-    struct Insert_Direct_Optimized
-    {
-        std::vector<ElementType> operator()(std::vector<ElementType> &list)
-        {
-            for (int index_target = 0; index_target < list.size(); index_target++)
+            for (size_t index_target{1}; index_target < list.size(); index_target++)
             {
-                ElementType target = list[index_target];
-                int i = index_target;
-                for (i; i > 0 && !Compare{}(list[i - 1], target); i--)
+                ElementType target = std::move(list[index_target]);
+                size_t i{index_target};
+                while (i > 0 && !Compare{}(list[i - 1], target))
+                {
                     list[i] = std::move(list[i - 1]);
-                list[i] = target;
+                    --i;
+                }
+                list[i] = std::move(target);
             }
             return list;
         };
@@ -50,30 +38,63 @@ namespace Sort
         };
     };
 
-    /// @brief 默认的gap的缩减跨度为上一轮的1/2
-    /// @tparam ElementType 
-    /// @tparam Compare 
+    /// @brief 每轮分组的gap默认取质数，缩减跨度为上一轮的1/2
+    /// 默认使用直接插入排序对每组元素排序
     template <typename ElementType, typename Compare = std::less<>>
     struct Insert_Shell
-    {//TODO:希尔排序写的很烂，再改一下
+    { 
+    protected:
+        constexpr size_t _Index_Previous_Element(const size_t index, size_t gap) noexcept
+        {
+            return index - gap;
+        }
+        constexpr size_t _Index_Next_Element(const size_t index, size_t gap) noexcept
+        {
+            return index + gap;
+        }
+
+    public:
         std::vector<ElementType> operator()(std::vector<ElementType> &list)
-        { 
-            // reoder element per step of gap
-            for (int gap = list.size() / 2; gap > 0; gap /= 2)
-            { // 每组元素进行插入排序
-                for (int index_target = gap; index_target < list.size(); index_target++)
+        {
+            if(list.size()<1)
+                return list;
+
+            // 初始步长：Hibbard增量质数 2^n-1, 这里取log2(n+1)
+            size_t _gap = static_cast<size_t>(std::log2(list.size() + 1));
+
+            // 每轮按不同的步长分组，组内插入排序(可换排序方式)。下一轮步长减半(同为质数)
+            // gap表示当前元素位置往后数的第gap个元素，组内两个元素之间间隔gap-1个元素
+            for (size_t gap{_gap}; gap > 0; gap /= 2)
+            {
+                // 每一轮排序一组，每轮定位到组的开头元素
+                for (size_t index_group{0}; index_group < gap; index_group++)
                 {
-                    ElementType target = list[index_target];
-                    int i = index_target;
-                    for (i; i > 0 && !Compare{}(list[i - 1], target); i--)
-                        list[i] = std::move(list[i - 1]);
-                    list[i] = target;
+                    size_t index_target{_Index_Next_Element(index_group, gap)};
+                    if (index_target > list.size()) //组内只有一个元素,不需要排序
+                        continue;
+
+                    /// ============================================================================================================
+                    /// 		插入排序部分
+                    /// ============================================================================================================
+                    for (; index_target < list.size();index_target=_Index_Next_Element(index_target, gap))
+                    {
+                        ElementType target = std::move(list[index_target]); // 插入的元素
+
+                        size_t i{index_target}, index_previous{_Index_Previous_Element(i, gap)};
+                        while (i >= gap && !Compare{}(list[index_previous], target))
+                        { // 防止下溢出,溢出说明前面没有组内元素了
+                            list[i] = std::move(list[index_previous]);
+                            i = _Index_Previous_Element(i, gap);
+                            index_previous = _Index_Previous_Element(i, gap);
+                        }
+                        list[i] = std::move(target);//插入到有序子序列的最终位置
+                    }
                 }
             }
             return list;
         }
-        std::vector<ElementType> operator()(std::vector<ElementType> &&list_move)
-        { 
+        std::vector<ElementType> &operator()(std::vector<ElementType> &&list_move)
+        {
             auto list = list_move;
             return this->operator()(list);
         }
