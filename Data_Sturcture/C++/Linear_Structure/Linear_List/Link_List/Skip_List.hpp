@@ -23,7 +23,7 @@
 ///
 /// 实现细节
 /// - 如果使用首元节点，则使用单链节点实现的逻辑简单
-/// - 如果要支持动态扩展高度，则双链节点的逻辑简单
+/// - 如果要支持动态扩展高度，则双链节点的逻辑简单，而且可以优化掉搜素时的数组，用于缓存的每层节点路径
 /// ============================================================================================================
 // template <typename ElementType, size_t max_level=32,float probable=0.5f>
 using ElementType = int;
@@ -35,12 +35,6 @@ public:
     using Node = List_Node_Skiplist<ElementType>;
     constexpr size_t Get_Maxsize() const { return max_level * (1 / probable); }
 
-public:
-    // 属性
-    // const float cutOff{0.5}; // 确定插入层数上移的几率  0 < prob < 1
-    // const int max_level{32}; // 允许的最大链表层数
-    // ElementType tailKey{max_level * 1 / cutOff}; // 最大关键字
-    // 这些限制会使跳表性能更好。Redis也有类似的限制。
 private:
     // 数据成员
     size_t level{}; // 当前链表的层数。没有元素为0层，有元素时最少为1层
@@ -50,7 +44,6 @@ private:
     // Node *header; // 头结点指针
     Node *tail; // 尾结点指针
 public:
-    // 关键字小于largeKey 且数对个数size最多为maxPairs，
     Skip_List()
     {
         static_assert(probable > 0 && probable < 1, "probable must be in (0, 1)");
@@ -62,22 +55,21 @@ public:
         // 删除所有结点和数组
 
         Node *node{header[0]};
-        Node *node_delete;
         // 从headerNode开始，延数对链的方向删除
         while (node)
         {
-            node_delete = node;
+            Node *node_delete = node;
             node = node->next[0];
             delete node_delete;
         }
     }
 
 private:
-    // 随机一个元素所在的层级，用于绝对实际的层数
+    // 随机一个元素所在的层级，用于计算实际的索引层数
     int _Determine_Level() const
     {
         // 获取一个表示链表级且不大于max_level的随机数
-        static const auto threshold = RAND_MAX * probable;
+        static constexpr auto threshold = RAND_MAX * probable;
         int lev{}; // 0层作为最底层存放元素
 
         // lev限制在[0,level]中，防止lev远超过当前level过多，如当前skip_list3层，获取了一个60层的结果，则4-59层的链表都是空的
@@ -122,18 +114,18 @@ public:
     {
         // 从最高级链表开始查找，在每一级链表中，从左边尽可能逼近要查找的记录
 
-        for (size_t i{}; i <= level; ++i)
+        // 直接复用_Loacte_Previous_Node的返回值，获取每层的前驱节点，有部分额外的开销。
+        // 由于没有使用头结点，所以判断逻辑稍微复杂一些
+        std::vector<Node *> previous_node = _Loacte_Previous_Node(element);
+        if (!previous_node.empty())
         {
-            size_t current_level{level - i};//从上到下遍历每一层
-            if (header[current_level]->element > element)
-                continue;
-            auto node = header[current_level];
-            while (node->next[current_level] && node->element < element)
-                node = node->next[current_level];
-            if (node->element== element)
-                return node->element;
+            if (previous_node[0])
+                if (previous_node[0]->next[0])
+                    return previous_node[0]->next[0]->element;
+                else
+                    return std::nullopt;
             else
-                return std::nullopt;
+                return header[0]->element;
         }
         return std::nullopt;
     }
@@ -154,7 +146,7 @@ public:
         unsigned short decrease_level{};
         if (node_delete->level == this->level)
         {
-            for (auto level = node_delete->level; level > 0; --level)//最底层0层不用减
+            for (auto level = node_delete->level; level > 0; --level) // 最底层0层不用减
             {
                 if (header[level] == node_delete && node_delete->next[level] == nullptr)
                 {
@@ -166,7 +158,7 @@ public:
         }
 
         // 从跳表中删除结点
-        for (int i = 0; i <= node_delete->level ; ++i)
+        for (int i = 0; i <= node_delete->level; ++i)
         {
             if (previous_node[i] && previous_node[i]->next[i] == node_delete)
                 previous_node[i]->next[i] = node_delete->next[i];
@@ -218,7 +210,7 @@ public:
         {
             // 自下而上，插入i级链表
             // if (previous_node.size()>=level_target-1 && previous_node[i])
-            if (i<previous_node.size() && previous_node[i])
+            if (i < previous_node.size() && previous_node[i])
             { // 当前层非空
                 node->next[i] = previous_node[i]->next[i];
                 previous_node[i]->next[i] = node;
@@ -254,7 +246,7 @@ public:
             std::cout << info << " ============= Level " << level << " =========== Size " << size << " =============== " << std::endl;
             for (size_t i{}; i <= level; ++i)
             {
-                size_t current_level{level - i};//从上到下遍历每一层
+                size_t current_level{level - i}; // 从上到下遍历每一层
                 std::cout << "Level " << current_level << " : ";
                 for (Node *node = header[current_level]; node; node = node->next[current_level])
                     std::cout << "[" << node->element << "] ";

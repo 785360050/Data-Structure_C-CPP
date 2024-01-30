@@ -13,13 +13,13 @@ void Test()
     list.Show();
     list.Element_Insert(10);
     list.Show();
-    list.Element_Insert(6);
+    list.Element_Insert(12);
     list.Show();
     list.Element_Insert(8);
     list.Show();
     list.Element_Insert(1);
     list.Show();
-    list.Element_Insert(12);
+    list.Element_Insert(6);
     list.Show();
     // std::vector<char> v(1,'c');
     cout << "Its size is " << list.Size() << endl;
@@ -63,11 +63,26 @@ void Test2()
     }
 }
 
+/// ============================================================================================================
+/// Warn:
+/// 由于rand()是伪随机，所以多个Skip_List实例之间操作的前后顺序都会互相影响最终生成的跳表结构
+/// 如果要保持跳表的可重入性，则确保一次执行只有一个实例
+/// ============================================================================================================
 int main()
 {
-    // Test();
-    Test2();
+    
+    // cout << "最坏情况，几乎退化为单链表，索引的基本用不上。是由于确定节点层数的随机的几率导致的" << endl;
+    // Skip_List worst_list;
+    // worst_list.Element_Insert(2);
+    // worst_list.Element_Insert(10);
+    // worst_list.Element_Insert(6);
+    // worst_list.Element_Insert(8);
+    // worst_list.Element_Insert(1);
+    // worst_list.Element_Insert(12);
+    // worst_list.Show();
 
+    Test();
+    // Test2();
     return 0;
 }
 
