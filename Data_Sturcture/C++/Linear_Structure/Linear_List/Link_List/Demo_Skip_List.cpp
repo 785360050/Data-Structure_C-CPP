@@ -10,41 +10,39 @@ void Test()
 
     // test Element_Insert
     list.Element_Insert(2);
-    list.Show();
+    list.List_Show("插入2");
     list.Element_Insert(10);
-    list.Show();
+    list.List_Show("插入10");
     list.Element_Insert(12);
-    list.Show();
+    list.List_Show("插入12");
     list.Element_Insert(8);
-    list.Show();
+    list.List_Show("插入8");
     list.Element_Insert(1);
-    list.Show();
+    list.List_Show("插入1");
     list.Element_Insert(6);
-    list.Show();
-    // std::vector<char> v(1,'c');
-    cout << "Its size is " << list.Size() << endl;
+    list.List_Show("插入6");
+    cout << "插入6个元素后,size =  " << list.Get_Size() << endl;
 
     // test Search
-    cout << "Element associated with 1 is " << list.Search(1).value_or(-1) << endl;
-    cout << "Element associated with 2 is " << list.Search(2).value_or(-1) << endl;
-    cout << "Element associated with 6 is " << list.Search(6).value_or(-1) << endl;
-    cout << "Element associated with 10 is " << list.Search(10).value_or(-1) << endl;
-    cout << "Element associated with 12 is " << list.Search(12).value_or(-1) << endl;
+    cout << "Element Search 1 = " << list.Element_Search(1).value_or(-1) << endl;
+    cout << "Element Search 2 = " << list.Element_Search(2).value_or(-1) << endl;
+    cout << "Element Search 6 = " << list.Element_Search(6).value_or(-1) << endl;
+    cout << "Element Search 10 = " << list.Element_Search(10).value_or(-1) << endl;
+    cout << "Element Search 12 = " << list.Element_Search(12).value_or(-1) << endl;
 
-    cout << "Element associated with 111 is " << list.Search(111).value_or(-1) << endl;
-    cout << "Element associated with 0 is " << list.Search(0).value_or(-1) << endl;
+    cout << "Element Search 111 = " << list.Element_Search(111).value_or(-1) << endl;
+    cout << "Element Search 0 = " << list.Element_Search(0).value_or(-1) << endl;
 
     // test Element_Delete
     list.Element_Delete(1);
-    list.Show();
+    list.List_Show("删除1");
     list.Element_Delete(2);
-    list.Show();
+    list.List_Show("删除2");
     list.Element_Delete(6);
-    list.Show();
+    list.List_Show("删除6");
     list.Element_Delete(12);
-    cout << "Deleted 1, 2, 6, 12" << endl;
-    list.Show();
-    cout << "Its size is " << list.Size() << endl;
+    list.List_Show("删除12");
+    cout << "删除4个元素后,size =  " << list.Get_Size() << endl;
 }
 void Test2()
 {
@@ -53,13 +51,13 @@ void Test2()
     for (int i{}; i < num; ++i)
     {
         l.Element_Insert(i);
-        l.Show();
+        l.List_Show();
     }
     // for (int i{}; i < num; ++i)
     for (int i{num - 1}; i >= 0; --i)
     {
         l.Element_Delete(i);
-        l.Show();
+        l.List_Show();
     }
 }
 
@@ -79,7 +77,7 @@ int main()
     // worst_list.Element_Insert(8);
     // worst_list.Element_Insert(1);
     // worst_list.Element_Insert(12);
-    // worst_list.Show();
+    // worst_list.List_Show();
 
     Test();
     // Test2();

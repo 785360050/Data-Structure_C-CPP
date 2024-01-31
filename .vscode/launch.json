@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data Struct/Library_C++/Liner_Structure/Liner_List/Sequential_List/Demo",
+            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Linear_Structure/Linear_List/Link_List/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

@@ -47,6 +47,39 @@ namespace Logic
 		virtual void List_Show(const string &string = "") = 0;
 	};
 
+
+	template <typename ElementType>
+	class Skip_List
+	{
+	protected:
+		// 数据成员
+		size_t level{}; // 当前链表的层数。没有元素为0层，有元素时最少为1层
+		size_t size{};	// 当前元素个数
+
+	public:
+		Skip_List() = default;
+		virtual ~Skip_List(){};
+
+	public:
+		// 判断是否表空
+		bool Is_Empty() const { return size == 0; }
+		// 返回当前表长(元素个数)
+		size_t Get_Size() const { return size; }
+
+		// 搜索元素，
+		// 返回所在的节点
+		virtual std::optional<ElementType> Element_Search(const ElementType &element) const = 0;
+
+		// 插入元素
+		virtual void Element_Insert(const ElementType &element) = 0;
+		// virtual void Element_Insert(ElementType &&element) = 0;
+
+		// 删除元素
+		virtual void Element_Delete(const ElementType &element) = 0;
+
+	public:
+		virtual void List_Show(const std::string_view &info = "", bool only_elements = false) = 0;
+	};
 };
 
 #if __cplusplus >= 202002L

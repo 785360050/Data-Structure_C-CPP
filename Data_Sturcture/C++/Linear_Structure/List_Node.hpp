@@ -203,21 +203,20 @@ public: // Copy Conrtol
 /// @tparam size
 /// @note 由于一个节点在创建之后的高度不会变动，但是每个节点的高度不一定相同，所以只能在堆上申请指针数组
 template <typename ElementType>
-struct List_Node_Skiplist
+struct List_Node_Skiplist:public Node<ElementType>
 {
-	using Node = List_Node_Skiplist<ElementType> ;
-	ElementType element{};
-	Node** next{}; // 指针数组。node->next[level]
-	Node* prev{}; // 指针数组。node->next[level]
+	// ElementType element{};
+	List_Node_Skiplist<ElementType> **next{}; // 指针数组。node->next[level]
 	size_t level{}; // 当前节点的最高层数
 
 	// 构造函数
 	List_Node_Skiplist() = default;
-	// List_Node_Skiplist(const ElementType &element) : element(element) {}
 	List_Node_Skiplist(size_t level) 
 	: level{level}, next(new List_Node_Skiplist<ElementType> *[level] {}) {}
 	List_Node_Skiplist(const ElementType &element, size_t level)//0层的元素next为1个空间，不可能new Node[0]
-		: element(element),level{level}, next(new List_Node_Skiplist<ElementType>*[level+1]{}) {}
+		: Node<ElementType>{element},level{level}, next(new List_Node_Skiplist<ElementType>*[level+1]{}) {}
+	List_Node_Skiplist(ElementType &&element, size_t level)//0层的元素next为1个空间，不可能new Node[0]
+		: Node<ElementType>{std::forward<ElementType>(element)},level{level}, next(new List_Node_Skiplist<ElementType>*[level+1]{}) {}
 	~List_Node_Skiplist()
 	{
 		delete[] next;

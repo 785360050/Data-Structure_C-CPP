@@ -62,5 +62,26 @@ namespace ADT
 		// 设置index位置的元素为element
 		adt.Element_Update(index, std::forward<ElementType>(element));
 	};
+
+	template <typename StructureType, typename ElementType>
+	concept Skip_List = requires(StructureType adt, ElementType &&element) 
+	{
+		// 判断是否为空
+		adt.Is_Empty();
+
+		// 获取当前元素个数
+		adt.Get_Size();
+		// adt.Get_Capcity();//静态数组才有
+
+		adt.Element_Search(element);
+		// 在index位置插入element
+		adt.Element_Insert(std::forward<ElementType>(element));
+		// 删除index位置的元素
+		adt.Element_Delete(std::forward<ElementType>(element));
+		// // 获取index位置的元素
+		// adt[index];
+		// // 设置index位置的元素为element
+		// adt.Element_Update(std::forward<ElementType>(element));
+	};
 };
 #endif
