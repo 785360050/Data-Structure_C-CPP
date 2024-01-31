@@ -5,6 +5,7 @@
 #include "../../List_Node.hpp"
 #include <optional>
 #include <vector>
+#include <map>
 
 // 实现参考 redis zset、《数据结构、算法与应用 C++语言描述 》10.4 跳表表示
 
@@ -22,18 +23,19 @@
 /// 删除：定位O(logn) x 删除节点O(1) = O(logn)
 ///
 /// 实现细节
+/// - 支持动态扩展高度，使用vector作为头结点
+/// - 由于搜索时申请释放的数组用于保存每层节点的前驱开销极大，
 /// - 如果使用首元节点，则使用单链节点实现的逻辑简单
-/// - 如果要支持动态扩展高度，则双链节点的逻辑简单，而且可以优化掉搜素时的数组，用于缓存的每层节点路径
 /// ============================================================================================================
 // template <typename ElementType, size_t max_level=32,float probable=0.5f>
 using ElementType = int;
 static constexpr size_t max_level = 32;
 static constexpr float probable = 0.5;
+// constexpr size_t Get_Maxsize() const { return max_level * (1 / probable); }
 class Skip_List
 {
 public:
     using Node = List_Node_Skiplist<ElementType>;
-    constexpr size_t Get_Maxsize() const { return max_level * (1 / probable); }
 
 private:
     // 数据成员
@@ -41,14 +43,21 @@ private:
     size_t size{};  // 当前元素个数
     // header.size() == level   头结点的元素个数等于当前层数
     std::vector<Node *> header; // 头结点指针数组。支持层级扩展
-    // Node *header; // 头结点指针
     Node *tail; // 尾结点指针
+
+    /// @brief
+    /// 用于搜索目标节点时保存每层最后一个节点的搜索路径。
+    /// search,insert,delete都需要用到
+    /// 
+    /// 空间比当前level高一层因为可能新节点会使跳表的高度增加
+    /// - 需要操作跳表时由_Loacte_Previous_Node()更新维护
+    mutable std::map<size_t,Node *> search_path{};
+
 public:
     Skip_List()
     {
         static_assert(probable > 0 && probable < 1, "probable must be in (0, 1)");
-        // header = new Node(max_level + 1);//初始化头结点
-        header.reserve(32); // 预留32层的头结点
+        header.resize(32,{}); // 预留32层的头结点
     }
     ~Skip_List()
     {
@@ -78,27 +87,46 @@ private:
             ++lev;
         return lev; // 返回的结果∈[0,level+1] level+1表示向上增加一层
     }
-    // 搜索并把在每一级链表搜索时遇到的最后一个结点存储起来
+
+    // 更新last_node_at_level： 搜索目标元素并把在每一级链表搜索时遇到的最后一个结点存储起来
     // 返回插入节点的前一个节点，可能等值
-    std::vector<Node *> _Loacte_Previous_Node(const ElementType &element) const
+    void _Loacte_Previous_Node(const ElementType &element) const
     {
-        if (!size) // 没有一个元素的时候直接返回头节点
-            return {header};
+        search_path.clear(); // 清空上次操作的搜索路径
 
-        std::vector<Node *> last_node_at_level(level + 1, nullptr);
-
-        for (int i = level; i >= 0; --i)
+        // 从最高级链表开始查找，在每一级链表中，从左边尽可能逼近要查找的记录
+        // 和Search逻辑比较类型，但是多了更新search_path的操作
+        
+        if(size==0) //跳表空时后续逻辑处理不了
         {
-            // 自上而下遍历每一级节点
-            Node *previous_node = header[i];
-            if (header[i]->element >= element)
-                continue; // 没有比element小的元素，则跳过。默认为nullptr
-
-            while (previous_node->next[i] && previous_node->next[i]->element < element) // 同一层中定位到最接近key的上一个元素节点
-                previous_node = previous_node->next[i];
-            last_node_at_level[i] = previous_node; // 第i级插入位置的前驱节点,如果没有，或者前驱为header[level],则为nullptr
+            search_path[0] = nullptr;
+            return;
         }
-        return last_node_at_level;
+
+        int level_start{static_cast<int>(level)};;
+        // 处理element小于最高节点的情况
+        // 从第一个元素小于element的层开始向后遍历单链表
+        while (level_start >=0 && header[level_start]->element > element)
+        {
+            search_path[level_start] = nullptr;
+            --level_start;
+        }
+
+        for (int i = level_start; i >= 0; --i)
+        {
+            Node *node = header[i];
+            if(node->element==element)//第一个节点就是目标节点
+            {
+                search_path[i] = nullptr;
+                continue;//不用return是因为要把下层的previous_node也更新到search_path中
+            }
+            // 定位到当层最接近的前驱节点。
+            while (node->next[i] && node->next[i]->element < element)
+                node = node->next[i];
+            // if (node->next[i] && node->next[i]->element == element)
+            //     throw std::runtime_error("Key already exists");
+            search_path[i] = node;
+        }
     }
 
 public:
@@ -110,24 +138,74 @@ public:
 
     // 搜索元素，
     // 返回所在的节点
-    std::optional<ElementType> Search(const ElementType &element) const
+    std::optional<ElementType> Search(const ElementType &element) const //O(logn)
     {
         // 从最高级链表开始查找，在每一级链表中，从左边尽可能逼近要查找的记录
+        size_t level_start{level};
+        // 处理element小于最高节点的情况
+        // 从第一个元素小于element的层开始向后遍历单链表
+        while (level_start != 0 && header[level_start]->element > element)
+            --level_start;
+        Node *node = header[level_start];
 
-        // 直接复用_Loacte_Previous_Node的返回值，获取每层的前驱节点，有部分额外的开销。
-        // 由于没有使用头结点，所以判断逻辑稍微复杂一些
-        std::vector<Node *> previous_node = _Loacte_Previous_Node(element);
-        if (!previous_node.empty())
+        for (int i = level_start; i >= 0; --i)
         {
-            if (previous_node[0])
-                if (previous_node[0]->next[0])
-                    return previous_node[0]->next[0]->element;
-                else
-                    return std::nullopt;
-            else
-                return header[0]->element;
+            // 定位到当层最接近的节点。
+            while (node->next[i] && node->element < element)
+                node = node->next[i];
+            if(node->element==element)
+                return node->element;
         }
         return std::nullopt;
+    }
+
+    // 插入元素
+    void Element_Insert(const ElementType &element)
+    {
+
+        // 查看和插入数对相同关键字的数对是否已经存在
+        _Loacte_Previous_Node(element); // 定位到插入的节点位置
+        if (!search_path.empty() && !search_path.contains(0) && search_path[0] != header[0] && search_path[0] != tail && search_path[0]->next[0]->element == element)
+            throw std::runtime_error("Key already exists");
+
+        // 如果不存在，则确定新结点所在的级链表
+        int level_target = _Determine_Level(); // 新结点的级
+        // 保证级theLevel <= levels + 1
+        if (level_target > level) // 如果计算的层级结果大于当前的最大层级，则跳表增加一个层级
+        {
+            ++level; // 插入元素最多+1层，但是删除时可以一次减少多层
+            // previous_node.push_back(header); // 添加了一层，则最顶层的前驱必定为header。用于后续的顶层节点插入
+            if (header.size() < level + 1) // 头结点层数个数 < 需要的层数 ： size从1起始，level从0起始
+            {
+                header.emplace_back(nullptr);
+                search_path[level]= nullptr;
+            }
+            
+        }
+
+        // 在结点theNode之后插入新结点
+        Node *node = new Node(element, level_target);
+        for (int i = 0; i <= level_target; ++i)
+        {
+            // 自下而上，插入i级链表
+            if (i < search_path.size() && search_path.contains(i) && search_path[i] != nullptr)
+            { // 当前层非空
+                node->next[i] = search_path[i]->next[i];
+                search_path[i]->next[i] = node;
+            }
+            else
+            {
+                if (header.empty() || header.size() < i) // 在新层插入时先添加一个元素
+                    header.emplace_back(nullptr);
+                node->next[i] = header[i]; // header[i]就是刚刚emplace_back(nullptr)
+                header[i] = node;
+            }
+        }
+        if (!node->next[0])
+            tail = node;
+
+        ++size;
+        return;
     }
 
     // 删除元素
@@ -135,8 +213,11 @@ public:
     {
 
         // 查看是否存在关键字匹配的数对
-        const std::vector<Node *> previous_node = _Loacte_Previous_Node(element);
-        Node *node_delete = previous_node[0] ? previous_node[0]->next[0] : header[0];
+        _Loacte_Previous_Node(element);
+        Node *previous_node = search_path[0];
+        
+        // Node *node_delete = search_path.contains(0) ? search_path[0]->next[0] : header[0];
+        Node *node_delete = previous_node? previous_node->next[0] : header[0];
         if (!node_delete || node_delete->element != element)
             // 不存在
             throw std::runtime_error("No such element " + std::to_string(element));
@@ -160,75 +241,25 @@ public:
         // 从跳表中删除结点
         for (int i = 0; i <= node_delete->level; ++i)
         {
-            if (previous_node[i] && previous_node[i]->next[i] == node_delete)
-                previous_node[i]->next[i] = node_delete->next[i];
+            if (search_path[i] && search_path[i]->next[i] == node_delete)
+                search_path[i]->next[i] = node_delete->next[i];
             else
                 header[i] = node_delete->next[i];
         }
 
         if (node_delete->next[0] == nullptr) // 删除尾节点，更新tail
-            tail = previous_node[0];
+            tail = search_path[0];
 
         delete node_delete;
         --size;
 
         if (decrease_level && size) // size用于防止删除最后一个元素时，level减为-1
+        {
             level -= decrease_level;
+            // search_path.resize(level + 1);//缩容
+        }
     }
 
-    // 插入元素
-    void Element_Insert(const ElementType &element)
-    {
-
-        // 查看和插入数对相同关键字的数对是否已经存在
-        std::vector<Node *> previous_node = _Loacte_Previous_Node(element); // 定位到插入的节点位置
-        // Node *theNode = _Loacte_Previous_Node(key);
-        if (!previous_node.empty() && previous_node[0] && previous_node[0] != header[0] && previous_node[0] != tail && previous_node[0]->next[0]->element == element)
-        {
-            // // 已经存在，则更新数对的值
-            // node_insert->element = key;
-            // return;
-            throw std::runtime_error("Key already exists");
-        }
-
-        // 如果不存在，则确定新结点所在的级链表
-        int level_target = _Determine_Level(); // 新结点的级
-        // 保证级theLevel <= levels + 1
-        if (level_target > level) // 如果计算的层级结果大于当前的最大层级，则跳表增加一个层级
-        {
-            ++level; // 插入元素最多+1层，但是删除时可以一次减少多层
-            // previous_node.push_back(header); // 添加了一层，则最顶层的前驱必定为header。用于后续的顶层节点插入
-            if (header.size() < level + 1) // 头结点层数个数 < 需要的层数 ： size从1起始，level从0起始
-                header.emplace_back(nullptr);
-            // if(previous_node.size() < level_target + 1)
-            //     previous_node.emplace_back(nullptr);
-        }
-
-        // 在结点theNode之后插入新结点
-        Node *node = new Node(element, level_target);
-        for (int i = 0; i <= level_target; ++i)
-        {
-            // 自下而上，插入i级链表
-            // if (previous_node.size()>=level_target-1 && previous_node[i])
-            if (i < previous_node.size() && previous_node[i])
-            { // 当前层非空
-                node->next[i] = previous_node[i]->next[i];
-                previous_node[i]->next[i] = node;
-            }
-            else
-            {
-                if (header.empty() || header.size() < i) // 在新层插入时先添加一个元素
-                    header.emplace_back(nullptr);
-                node->next[i] = header[i]; // header[i]就是刚刚emplace_back(nullptr)
-                header[i] = node;
-            }
-        }
-        if (!node->next[0])
-            tail = node;
-
-        ++size;
-        return;
-    }
 
 public:
     void Show(const std::string_view &info = "", bool only_elements = false)

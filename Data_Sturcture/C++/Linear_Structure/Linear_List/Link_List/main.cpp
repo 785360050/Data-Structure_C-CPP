@@ -87,7 +87,7 @@ int main()
 }
 
 /// ============================================================================================================
-///
+/// 对比Test()中不同实现的堆开销
 /// ============================================================================================================
 /// # 使用单链表：_Loacte_Previous_Node中的std::vector堆空间开销极大
 // ==8489== HEAP SUMMARY:
@@ -98,4 +98,17 @@ int main()
 // ==8489==
 // ==8489== For lists of detected and suppressed errors, rerun with: -s
 // ==8489== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+/// ============================================================================================================
+
+/// ============================================================================================================
+// 使用std::map search_path 作为成员，_Loacte_Previous_Node时update search_path可以减少一部分heap 空间开销。
+// ==6180== HEAP SUMMARY:
+// ==6180==     in use at exit: 0 bytes in 0 blocks
+// ==6180==   total heap usage: 39 allocs, 39 frees, 75,352 bytes allocated
+// ==6180==
+// ==6180== All heap blocks were freed -- no leaks are possible
+// ==6180==
+// ==6180== Use --track-origins=yes to see where uninitialised values come from
+// ==6180== For lists of detected and suppressed errors, rerun with: -s
+// ==6180== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 /// ============================================================================================================
