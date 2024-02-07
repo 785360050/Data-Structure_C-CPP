@@ -22,7 +22,11 @@
 
 # 选择排序
 - 直接选择排序
-- 堆排序
+- 堆排序(仅STL实现的部分演示)
+
+# 其他
+- 归并排序
+
 
 推荐资料
 Wikipedia: https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95

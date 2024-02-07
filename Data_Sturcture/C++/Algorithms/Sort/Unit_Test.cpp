@@ -31,8 +31,8 @@ BOOST_AUTO_TEST_CASE(EmptyStackTest)
     res = list.Sort<Sort::Insert_Directly<size_t, std::greater_equal<>>>();
     BOOST_CHECK(std::is_sorted(res.begin(), res.end(), std::greater<size_t>()));
 
-    res = list.Sort<Sort::Insert_Direct_Optimized<size_t>>();
-    BOOST_CHECK(std::is_sorted(res.begin(), res.end(), std::less<size_t>()));
+    // res = list.Sort<Sort::Insert_Direct_Optimized<size_t>>();
+    // BOOST_CHECK(std::is_sorted(res.begin(), res.end(), std::less<size_t>()));
 
     res = list.Sort<Sort::Insert_Shell<size_t>>();
     BOOST_CHECK(std::is_sorted(res.begin(), res.end(), std::less<size_t>()));

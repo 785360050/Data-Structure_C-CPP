@@ -93,7 +93,7 @@ namespace Sort
             }
             return list;
         }
-        std::vector<ElementType> &operator()(std::vector<ElementType> &&list_move)
+        std::vector<ElementType> operator()(std::vector<ElementType> &&list_move)
         {
             auto list = list_move;
             return this->operator()(list);
