@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Structure</class>
+ <widget class="QWidget" name="Structure">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1278</width>
+    <height>747</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+   <item>
+    <widget class="View" name="view"/>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::TextElideMode::ElideNone</enum>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <property name="tabsClosable">
+      <bool>false</bool>
+     </property>
+     <property name="tabBarAutoHide">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Operations</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <widget class="QWidget" name="page">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>120</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>190</y>
+             <width>113</width>
+             <height>27</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>113</width>
+             <height>27</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>190</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Search</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>120</y>
+             <width>113</width>
+             <height>27</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>290</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>250</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Update</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="stack">
+          <widget class="QLineEdit" name="input_pop">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>120</y>
+             <width>113</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="input_push">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>113</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_get_top">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>250</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Get Top</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_pop">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>120</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Pop</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_push">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Push</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_is_empty">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>300</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Is Empty?</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_get_size">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>350</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Get Size</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_clear">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>400</y>
+             <width>102</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Monitor</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>View</class>
+   <extends>QGraphicsView</extends>
+   <header>View.hpp</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
