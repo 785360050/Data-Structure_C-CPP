@@ -35,12 +35,6 @@ public:
 	QLabel *labSceneCord;
 	QLabel *labItemCord;
 
-
-	// Stack* stack_view{new Stack};
-	// Binary_Tree* tree_view{new Binary_Tree};
-	// std::vector<Painter*> painters;
-
-	// std::variant<int,float> current_page;//Store Page Classes, and only show one in a time
 private:
 	Window(QWidget *parent = nullptr);
 	~Window();
@@ -64,13 +58,5 @@ public:
 	// Print a line of text on Window::console
 	void Console_Log(const QString &text);
 
-	// void Draw_Items_On_Scene();
 
-// public: // interactions
-// 	void Element_Push();
-// 	void Element_Pop();
-// 	void Element_Get_Top();
-// 	void Is_Empty();
-// 	void Get_Size();
-// 	void Clear()   ;
 };

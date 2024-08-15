@@ -13,7 +13,7 @@ void Stack::Element_Push()
 	{
 		painter.Element_Push(element);
 		std::cout<<"Push: "+std::to_string(element);
-		ui.view->viewport()->update();
+		Refresh_View();
 	}
 	catch(const std::exception& e)
 	{
@@ -26,7 +26,7 @@ void Stack::Element_Pop()
 	{
 		painter.Element_Pop();
 		std::cout<<"Pop";
-		ui.view->viewport()->update();
+		Refresh_View();
 	}
 	catch(const std::exception& e)
 	{
@@ -74,7 +74,7 @@ void Stack::Clear()
 	{
 		painter.Clear();
 		std::cout<<"Clear All Elements";
-		ui.view->viewport()->update();
+		Refresh_View();
 	}
 	catch(const std::exception& e)
 	{

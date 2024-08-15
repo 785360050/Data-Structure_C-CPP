@@ -33,13 +33,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         View/View.hpp
         QT_Stream_Buffer.hpp QT_Stream_Buffer.cpp
 
-        # Painter/Binary_Tree.hpp Painter/Binary_Tree.cpp
+        Painter/Binary_Tree.hpp Painter/Binary_Tree.cpp
         Painter/Stack.hpp Painter/Stack.cpp
         Painter/Painter.hpp Painter/Painter.cpp
         View/Structure.hpp View/Structure.cpp View/Structure.ui
 
         View/Stack.hpp View/Stack.cpp
         View/Stack.hpp View/Stack.cpp
+        View/Binary_Tree.hpp View/Binary_Tree.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

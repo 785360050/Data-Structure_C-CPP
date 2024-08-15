@@ -23,7 +23,6 @@ void Structure::do_mouseClicked(QPoint point)
 	}
 }
 
-#include "Stack.hpp"
 // Structure::Structure(Painter::Painter* painter,QWidget *parent)
 Structure::Structure(QWidget *parent)
 	:QWidget(parent)
@@ -51,9 +50,5 @@ Structure::Structure(QWidget *parent)
 
 
 }
-#include "../Painter/Stack.hpp"
-void Structure::Hook_Painter(Painter::Painter* painter)
-{
-	scene->addItem(painter);
-}
+
 

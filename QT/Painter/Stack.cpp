@@ -7,13 +7,13 @@
 
 Painter::Stack::Stack()
 {
-	// stack.Element_Push(1);
-	// stack.Element_Push(2);
-	// stack.Element_Push(3);
+	stack.Element_Push(1);
+	stack.Element_Push(2);
+	stack.Element_Push(3);
 
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
+	// stack.push(1);
+	// stack.push(2);
+	// stack.push(3);
 }
 
 
@@ -39,8 +39,8 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 	QPoint pos{-60,-200};
 	for(int i{5};i>0;--i)
 	{
-		// auto size{copy_stack.Get_Size()};
-		auto size{copy_stack.size()};
+		auto size{copy_stack.Get_Size()};
+		// auto size{copy_stack.size()};
 		if(size!=i)
 		{
 			painter->setPen({Qt::gray, 5});
@@ -49,10 +49,10 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 		else
 		{
 			painter->setPen({Qt::white, 5});
-			// Draw_Stack_Element(painter,pos,QString::fromStdString(std::to_string(copy_stack.Get_Top())));
-			Draw_Stack_Element(painter,pos,QString::fromStdString(std::to_string(copy_stack.top())));
-			// copy_stack.Element_Pop();
-			copy_stack.pop();
+			Draw_Stack_Element(painter,pos,QString::fromStdString(std::to_string(copy_stack.Get_Top())));
+			// Draw_Stack_Element(painter,pos,QString::fromStdString(std::to_string(copy_stack.top())));
+			copy_stack.Element_Pop();
+			// copy_stack.pop();
 		}
 		pos+=QPoint{0,60};
 	}

@@ -17,7 +17,7 @@ void CreateBTNode(BTNode * & root,QString binaryTreeBracketNotationString)
 
 	BTNode * currentNode{nullptr};//当前创建的结点
 	QStack<BTNode*> stack;
-	for(const auto & element : qAsConst(binaryTreeBracketNotationString))
+	for(const auto & element : binaryTreeBracketNotationString)
 	{
 		if(element == '(')//表示一棵左子树的开始,即将前面刚创建的结点作为双亲结点进栈
 		{
@@ -52,7 +52,7 @@ void CreateBTNode(BTNode * & root,QString binaryTreeBracketNotationString)
 	}
 }
 
-Binary_Tree::Binary_Tree()
+Painter::Binary_Tree::Binary_Tree()
 {
 	QString binaryTreeBracketNotationString = "A(B(D(M(N,),G(W(,H),))),C(E,F(P,Z(,K(Y,)))))";
 	CreateBTNode(root,binaryTreeBracketNotationString);
@@ -71,24 +71,16 @@ void DestroyBT(BTNode * & node)
 		node = nullptr;
 	}
 }
-Binary_Tree::~Binary_Tree(){DestroyBT(root);}
+Painter::Binary_Tree::~Binary_Tree(){DestroyBT(root);}
 
-QRectF Binary_Tree::boundingRect() const
-{
-	// qDebug() << "boundingRect";
-
-	// 返回项的边界矩形
-	// return QRectF(0, 0, 100, 100);
-	return QRectF(0,0, 100, 100);
-}
 
 
 #include <QPen>
 #include <QPainter>
-void Binary_Tree::drawNode(BTNode * node,QPainter & painter,QPoint dataCircleCenter)
+void Painter::Binary_Tree::drawNode(BTNode * node,QPainter & painter,QPoint dataCircleCenter)
 {
 	static QPoint offsetPoint{20,20};
-	static QPen whitePen{Qt::white,5};
+	// static QPen whitePen{Qt::white,5};
 	QRect rect = QRect(dataCircleCenter - offsetPoint,dataCircleCenter + offsetPoint);
 
 	if(node->lchild)
@@ -104,18 +96,19 @@ void Binary_Tree::drawNode(BTNode * node,QPainter & painter,QPoint dataCircleCen
 	}
 
 	painter.save();
-	painter.setBrush(getRandomColor());
-	painter.setPen(whitePen);
+	painter.setBrush(Qt::gray);
+	painter.setPen({Qt::white,5});
 	painter.drawEllipse(rect);
+	painter.setPen(QPen(Qt::black,5));
 	painter.drawText(rect,Qt::AlignCenter,node->data);
 	painter.restore();
 }
 
 
 
-void Binary_Tree::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Painter::Binary_Tree::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	static QFont font{"微软雅黑",18};
+	static QFont font{"Cascadia Code",18};
 	// QPaintDevice
 	// QPainter painter{view};
 	painter->setFont(font);

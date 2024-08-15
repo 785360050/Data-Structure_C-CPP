@@ -47,6 +47,11 @@
      <property name="text">
       <string>Tree_Structure</string>
      </property>
+     <item>
+      <property name="text">
+       <string>Binary_Tree</string>
+      </property>
+     </item>
     </item>
     <item>
      <property name="text">
@@ -54,7 +59,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -68,6 +73,12 @@
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
         <number>0</number>
+       </property>
+       <property name="tabsClosable">
+        <bool>true</bool>
+       </property>
+       <property name="movable">
+        <bool>true</bool>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">

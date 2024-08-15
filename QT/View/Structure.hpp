@@ -27,7 +27,7 @@ public:
 	explicit Structure(QWidget *parent = nullptr);
 public:
 	virtual void Config_Operations(){};
-	void Hook_Painter(Painter::Painter* painter);
+	void Hook_Painter(Painter::Painter* painter){scene->addItem(painter);}
 
 
 

@@ -10,11 +10,16 @@ struct BTNode
 	BTNode * rchild{nullptr};
 };
 
+namespace Painter
+{
+
+
+
 class Binary_Tree : public Painter::Painter
 {
 	BTNode* root{nullptr};
 protected:
-	QRectF boundingRect() const override;
+	// QRectF boundingRect() const override;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 public:
@@ -24,3 +29,4 @@ private:
 	void drawNode(BTNode * node,QPainter & painter,QPoint dataCircleCenter);
 };
 
+}

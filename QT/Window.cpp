@@ -5,6 +5,7 @@
 #include "Window.hpp"
 
 #include "View/Stack.hpp"
+#include "View/Binary_Tree.hpp"
 
 #include "QT_Stream_Buffer.hpp"
 static std::shared_ptr<QT_Stream_Buffer> buffer;
@@ -48,16 +49,30 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 			{
 				Stack* stack=new Stack();
 				stack->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-				int cur=ui.tabWidget->addTab(stack,
-											  QString::asprintf("Table %d",ui.tabWidget->count()));
+				int cur=ui.tabWidget->addTab(stack,QString::asprintf("Table %d",ui.tabWidget->count()));
 				ui.tabWidget->setCurrentIndex(cur);
-				ui.tabWidget->setVisible(true);
-
 			}
+			else if(item->text(0).toStdString()=="Binary_Tree")
+			{
+				Binary_Tree* tree=new Binary_Tree;
+				tree->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
+				int cur=ui.tabWidget->addTab(tree,QString::asprintf("Table %d",ui.tabWidget->count()));
+				ui.tabWidget->setCurrentIndex(cur);
+			}
+
 		};
 		// connect(ui.treeWidget,&QTreeWidget::itemSelectionChanged,this,select);
 		// connect(ui.treeWidget, &QTreeWidget::currentItemChanged, this, select);
 		connect(ui.treeWidget, &QTreeWidget::itemDoubleClicked, this, select);
+		auto Close_Tab=[&](int index)
+		{
+			if (index<0)
+				return;
+			ui.tabWidget->widget(index)->close();
+		};
+		// ui.tabWidget->setTabsClosable(true);
+		ui.tabWidget->setTabVisible(0,false);
+		connect(ui.tabWidget, &QTabWidget::tabCloseRequested, this, Close_Tab);
 	}
 
 	// Draw_Items_On_Scene();
@@ -75,16 +90,6 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 	ui.tabWidget->tabBar()->setDocumentMode(true); // tab zi dong shi ying kuan du
 	connect(ui.button_redo, &QPushButton::clicked, this, [&](){ std::cout << "button cout"; });
-
-	// {// init interact buttons
-	// 	// Stack
-	// 	connect(ui.button_push,&QPushButton::clicked,this,&Window::Element_Push);
-	// 	connect(ui.button_pop,&QPushButton::clicked,this,&Window::Element_Pop);
-	// 	connect(ui.button_get_top,&QPushButton::clicked,this,&Window::Element_Get_Top);
-	// 	connect(ui.button_get_size,&QPushButton::clicked,this,&Window::Get_Size);
-	// 	connect(ui.button_is_empty,&QPushButton::clicked,this,&Window::Is_Empty);
-	// 	connect(ui.button_clear,&QPushButton::clicked,this,&Window::Clear);
-	// }
 
 	// auto Export_Picture=[&]()
 	// {
@@ -110,10 +115,6 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 }
 
-Window::~Window()
-{
-}
-
 void Window::Console_Log(const QString& text)
 {
 	// static QString textbuf;
@@ -121,8 +122,13 @@ void Window::Console_Log(const QString& text)
 	// ui.console->append(textbuf);
 	// ui.console->setCursor(QCursor::setPos())
 
+
 	// ui.console->insertPlainText(text); // no \n
 	ui.console->append(text);
+}
+
+Window::~Window()
+{
 }
 
 
@@ -130,104 +136,4 @@ void Window::Console_Log(const QString& text)
 
 
 
-// void Window::Draw_Items_On_Scene()
-// {
-// 	// scene->addItem(stack_view);
-// 	// scene->addItem(tree_view);
 
-
-// 	Stack* stack_view{new Stack};
-// 	Binary_Tree* tree_view{new Binary_Tree};
-// 	painters.push_back(stack_view);
-// 	painters.push_back(tree_view);
-// 	// Switch_Display();
-
-// 	for(Painter* painter:painters)
-// 		scene->addItem(painter);
-// }
-
-
-
-// #include <QMessageBox>
-// void Window::Element_Push()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	int element{ui.input_push->text().toInt()};
-
-// 	try
-// 	{
-// 		stack_view->Element_Push(element);
-// 		std::cout<<"Push: "+std::to_string(element);
-// 		ui.view->viewport()->update();
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-// }
-// void Window::Element_Pop()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	try
-// 	{
-// 		stack_view->Element_Pop();
-// 		std::cout<<"Pop";
-// 		ui.view->viewport()->update();
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-// }
-// void Window::Element_Get_Top()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	try
-// 	{
-// 		auto element=stack_view->Get_Top();
-// 		std::cout<<"Top = "+std::to_string(element);
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-
-// }
-
-// void Window::Is_Empty()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	try{std::cout<<"Is Empty ? "<<std::boolalpha<<stack_view->Is_Empty();}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-// }
-
-// void Window::Get_Size()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	try
-// 	{
-// 		std::cout<<"Size = "+std::to_string(stack_view->Get_Size());
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-// }
-
-// void Window::Clear()
-// {
-// 	auto stack_view=dynamic_cast<Stack*>(painters[0]);
-// 	try
-// 	{
-// 		stack_view->Clear();
-// 		std::cout<<"Clear All Elements";
-// 		ui.view->viewport()->update();
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		QMessageBox::critical(this,{},e.what());
-// 	}
-// }
