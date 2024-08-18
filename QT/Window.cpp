@@ -6,6 +6,8 @@
 
 #include "View/Stack.hpp"
 #include "View/Binary_Tree.hpp"
+#include "View/Skip_List.hpp"
+#include "View/Tree.hpp"
 
 #include "QT_Stream_Buffer.hpp"
 static std::shared_ptr<QT_Stream_Buffer> buffer;
@@ -55,6 +57,20 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 			else if(item->text(0).toStdString()=="Binary_Tree")
 			{
 				Binary_Tree* tree=new Binary_Tree;
+				tree->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
+				int cur=ui.tabWidget->addTab(tree,QString::asprintf("Table %d",ui.tabWidget->count()));
+				ui.tabWidget->setCurrentIndex(cur);
+			}
+			else if(item->text(0).toStdString()=="Skip List")
+			{
+				class Skip_List* skip_list=new class Skip_List; // ?????
+				skip_list->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
+				int cur=ui.tabWidget->addTab(skip_list,QString::asprintf("Table %d",ui.tabWidget->count()));
+				ui.tabWidget->setCurrentIndex(cur);
+			}
+			else if(item->text(0).toStdString()=="Tree")
+			{
+				View::Tree* tree=new View::Tree;
 				tree->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
 				int cur=ui.tabWidget->addTab(tree,QString::asprintf("Table %d",ui.tabWidget->count()));
 				ui.tabWidget->setCurrentIndex(cur);

@@ -3,12 +3,16 @@
 #include <QGraphicsItem>
 #include <QRandomGenerator>
 
+#include <QPainter>
+#include <QBrush>
+#include <QPen>
+
 
 namespace Painter
 {
 class Painter: public QGraphicsItem
 {
-private:
+protected:
 	QRect size;
 protected:
 	QColor getRandomColor()

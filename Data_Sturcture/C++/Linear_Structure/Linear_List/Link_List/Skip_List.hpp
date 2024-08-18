@@ -142,7 +142,7 @@ namespace Storage
 
             for (int i = level_start; i >= 0; --i)
             {
-                // 定位到当层最接近的节点。
+                // 定位到当层最接近的节点。(小于目标的最大元素)
                 while (node->next[i] && node->element < element)
                     node = node->next[i];
                 if (node->element == element)

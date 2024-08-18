@@ -40,8 +40,8 @@ Structure::Structure(QWidget *parent)
 	// scene->setSceneRect(ui.view->rect());
 	ui.view->setScene(scene);				// 为视图设置场景
 
-	connect(ui.view, &View::mouseMovePoint, this, &Structure::do_mouseMovePoint);
-	connect(ui.view, &View::mouseClicked, this, &Structure::do_mouseClicked);
+	connect(ui.view, &GraphicsView::mouseMovePoint, this, &Structure::do_mouseMovePoint);
+	connect(ui.view, &GraphicsView::mouseClicked, this, &Structure::do_mouseClicked);
 
 	auto scene_edge = new QGraphicsRectItem(rect);
 	scene_edge->setPen(QPen{Qt::gray, 5});

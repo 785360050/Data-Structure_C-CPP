@@ -6,7 +6,10 @@
 
 
 
-class View : public QGraphicsView
+
+
+
+class GraphicsView : public QGraphicsView
 {
 	Q_OBJECT
 signals:
@@ -14,7 +17,7 @@ signals:
 	void mouseClicked(QPoint point);
 
 public:
-	View(QWidget *parent = nullptr) : QGraphicsView{parent} {}
+	GraphicsView(QWidget *parent = nullptr) : QGraphicsView{parent} {}
 
 protected:
 	void mouseMoveEvent(QMouseEvent *event) override
@@ -35,3 +38,4 @@ protected:
 	}
 
 };
+
