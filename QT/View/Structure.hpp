@@ -29,7 +29,7 @@ public:
 	virtual void Config_Operations(){};
 	void Hook_Painter(Painter::Painter* painter){scene->addItem(painter);}
 
-
+	QPixmap Grab_Picture()const{return ui.view->grab();}
 
 };
 

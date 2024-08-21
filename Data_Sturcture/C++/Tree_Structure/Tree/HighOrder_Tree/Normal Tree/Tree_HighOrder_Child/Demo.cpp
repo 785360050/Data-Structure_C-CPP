@@ -6,7 +6,8 @@
 int main()
 {
 
-	Storage::Tree_Normal_Child<bool, 3> tree;
+	// Storage::Tree_Normal_Child<bool, 3> tree;
+	Storage::Tree_Normal_Child_Ordered<bool,3> tree;
 
 	//Bugs↓
 	// Tree_Normal<bool, TreeNode_HighOrder_Child<bool>> *tree = new Tree_Advanced_Child<bool>(3);
@@ -39,14 +40,14 @@ int main()
 
 	//std::cout << "当前树深度为: " << tree->Tree_GetDepth() << std::endl;
 
-	std::cout << "LEVEL: \n";
-	tree.Traverse_LevelOrder(tree.Get_Root());
-	std::cout << std::endl << std::endl;
-	std::cout << "D[L->R]: \n";
-	tree.Traverse_PreOrder(tree.Get_Root());
-	std::cout << std::endl << std::endl << "[L->R]D: \n";
-	tree.Traverse_PostOrder(tree.Get_Root());
-	std::cout << std::endl;
+	// std::cout << "LEVEL: \n";
+	// tree.Traverse_LevelOrder(tree.Get_Root());
+	// std::cout << std::endl << std::endl;
+	// std::cout << "D[L->R]: \n";
+	// tree.Traverse_PreOrder(tree.Get_Root());
+	// std::cout << std::endl << std::endl << "[L->R]D: \n";
+	// tree.Traverse_PostOrder(tree.Get_Root());
+	// std::cout << std::endl;
 
 
 	tree.Show();

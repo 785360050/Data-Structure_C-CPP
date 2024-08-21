@@ -45,6 +45,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         View/Tree.hpp View/Tree.cpp
         Painter/Skip_List.hpp Painter/Skip_List.cpp
         Painter/Tree.hpp Painter/Tree.cpp
+        View/Search_Tree.hpp View/Search_Tree.cpp
+        Painter/Search_Tree.hpp Painter/Search_Tree.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

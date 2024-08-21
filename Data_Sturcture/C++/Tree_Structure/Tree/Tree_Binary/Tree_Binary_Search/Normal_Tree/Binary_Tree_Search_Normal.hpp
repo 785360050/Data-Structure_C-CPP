@@ -77,11 +77,11 @@ protected:
 		}
 	}
 public:
-	void Element_Insert(KeyType key, DataType element = NULL) override
+	void Element_Insert(KeyType key, DataType element = DataType{}) override
 	{
 		this->root = insertnode(this->root, key, element);
 	}
-	void Element_Insert_NonRecursive(KeyType key, DataType data = NULL)
+	void Element_Insert_NonRecursive(KeyType key, DataType data = DataType{})
 	{
 		NodeType* current = this->root, * precursor = nullptr;
 		while (current)

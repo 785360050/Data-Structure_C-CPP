@@ -60,12 +60,13 @@ namespace Logic
 	template <typename DataType, typename NodeType, int branch> // 分叉数量上限
 	class Tree_Normal
 	{
-	protected:
-		NodeType *root; /// 根节点指针
-		int count;		/// 节点总数
+	// protected:
+	public:
+		NodeType *root{nullptr}; /// 根节点指针
+		int count{};		/// 节点总数
 
 	public:
-		Tree_Normal() : count(0), root(nullptr) {};
+		Tree_Normal() = default;
 		virtual ~Tree_Normal() = default;
 
 	protected:
@@ -77,10 +78,11 @@ namespace Logic
 
 	public:
 		virtual NodeType *Get_Root() { return root; }
-		virtual void Set_Root(NodeType *root) { this->root = root; }
+		/// 只能在初始化的时候使用，后续使用count会出错
+		virtual void Set_Root(NodeType *root) { this->root = root; ++count;}
 		virtual NodeType *Node_Create(std::string name, DataType element = DataType{}) { return new NodeType(name, element); }
-		/// 只能在初始化的时候使用
 		virtual void Node_Insert(NodeType *node, NodeType *parent, int position) = 0;
+		// virtual void Node_Delete(NodeType *node) = 0;
 
 		/// ============================================================================================================
 		/// 高阶树的遍历算法同二叉树，可以递归也可以用栈

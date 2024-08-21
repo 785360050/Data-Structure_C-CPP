@@ -228,4 +228,184 @@ public:
 
 
 
+namespace Storage
+{
+	template <typename DataType, int branch, typename NodeType = TreeNode_HighOrder_ChildSibling<DataType>>
+	class Tree_HighOrder_ChildSibling : public Logic::Tree_Normal<DataType, NodeType, branch>
+	{ /// 孩子兄弟表示法
+	private:
+		// 重置子树所有元素为0
+		void Clear(NodeType *node) override
+		{
+			if (!node)
+				return;
+			while (node->child_first)
+			{
+				NodeType *del_child = node->child_first;
+				node->child_first = del_child->child_first;
+				while (del_child->sibling_next)
+				{
+					NodeType *del_sibling = del_child->sibling_next;
+					del_child->sibling_next = del_sibling->sibling_next;
+					delete del_sibling;
+				}
+				delete del_child;
+			}
+			delete node;
+		}
+		int Deep(NodeType *node)
+		{
+			return NULL;
+		}
+		// 返回节点名为name的父节点
+		NodeType *Parent(NodeType *node, std::string name)
+		{
+			NodeType *n = this->root;
+			NodeType *parent;
+			if (n->left->name == name || n->right->name == name)
+				return n;
+			if (n->left == NULL && n->right == NULL)
+				return NULL;
+			parent = Parent(n->left, name);
+			if (!parent)
+				parent = Parent(n->right, name);
+			if (parent == NULL)
+			{
+				std::cout << "Parent Not Found!" << std::endl;
+				return NULL;
+			}
+			return parent;
+		}
 
+	public:
+		Tree_HighOrder_ChildSibling() : Logic::Tree_Normal<DataType, NodeType, branch>() {};
+		~Tree_HighOrder_ChildSibling()
+		{
+			Clear(this->root);
+		}
+
+	public:
+		// 返回树深度
+		int Tree_GetDepth() override
+		{
+			return Deep(this->root);
+		}
+
+		// 显示树所有信息
+		virtual void Tree_Show() override
+		{
+			std::cout << "当前子树节点总数: " << this->count << std::endl
+					  << "分叉数: " << this->branch << std::endl;
+			std::cout << std::endl;
+		}
+		// 返回树中节点node的元素值
+		void Node_GetElement(NodeType *node)
+		{
+			try
+			{
+				if (!node)
+					throw 1;
+			}
+			catch (...)
+			{
+				std::cout << "Get Element Faild: Node is not exist" << std::endl;
+				return;
+			}
+			return node->element;
+		}
+		// 将树中节点node的元素值为element
+		void Node_SetElement(NodeType *node, DataType element)
+		{
+			try
+			{
+				if (!node)
+					throw 1;
+			}
+			catch (...)
+			{
+				std::cout << "Set Element Faild: Node is not exist" << std::endl;
+				return;
+			}
+			node->element = element;
+		}
+		// 将节点node作为第x个孩子插入到子树tree中
+		void Node_Insert(NodeType *node, NodeType *parent, int position)
+		{
+			try
+			{
+				if (!node)
+					throw std::runtime_error("Node_Insert Failed: node is not exsist");
+				if (!parent)
+					throw std::runtime_error("Node_Insert Failed: parent is not exsist");
+				if (position < 1 || position > this->branch)
+					throw std::runtime_error("Node_Insert Failed: position illegal");
+				if (parent->length == this->branch)
+					throw std::runtime_error("Node_Insert Failed: Parent's Child is full");
+			}
+			catch (const std::runtime_error &e)
+			{
+				std::cout << e.what() << std::endl;
+				return;
+			}
+			NodeType *child = parent->child_first;
+			if (!child && position == 1) /// 若parent为叶节点则新增孩子
+				parent->child_first = node;
+			else
+			{ /// 在非叶节点parent处插入孩子
+				for (int i = 1; i < position - 1; ++i)
+					child = child->sibling_next; /// 定位节点前驱
+				node->sibling_next = child->sibling_next;
+				child->sibling_next = node;
+			}
+			++parent->length;
+			this->count++;
+		}
+
+	public:
+		// 先根遍历
+		void Traverse_PreOrder(NodeType *node)
+		{
+			while (node)
+			{
+				this->Tree_Visit_Name(node);
+				Traverse_PreOrder(node->child_first);
+				node = node->sibling_next;
+			}
+		}
+		// 后根遍历
+		void Traverse_PostOrder(NodeType *node)
+		{
+			if (node->child_first)
+			{
+				for (NodeType *child = node->child_first; child; child = child->sibling_next)
+					Tree_Traverse_PostOrder(child);
+			}
+			this->Tree_Visit_Name(node);
+		}
+		// 层次遍历
+		void Traverse_LevelOrder(NodeType *node)
+		{
+			std::queue<NodeType *> queue;
+			queue.push(this->root);
+			while (!queue.empty())
+			{
+				NodeType *child = queue.front()->child_first;
+				while (child)
+				{ /// 所有下层节点入队
+					queue.push(child);
+					child = child->sibling_next;
+				}
+				this->Tree_Visit_Name(queue.front());
+				queue.pop();
+			}
+		}
+		// 访问节点名
+		// void Tree_Visit_Name(NodeType* node)
+		//{
+		//	if (node)
+		//	{
+		//		std::cout << node->name << ' ';
+		//	}
+		// }
+	};
+};

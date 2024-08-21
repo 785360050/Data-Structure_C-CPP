@@ -43,9 +43,9 @@ void BinarySearch()
 
 	auto node = tree.Node_Search(7);///查找测试
 	if (node)
-		std::cout << "Node Founded" << std::endl;
+		std::cout << "Node Founded (√)" << std::endl;
 	else
-		std::cout << "Node Not Found" << std::endl;
+		throw std::logic_error("Node 7 is not in tree");
 
 	tree.Element_Delete(2);
 	std::cout << "After Delete 2" << std::endl;

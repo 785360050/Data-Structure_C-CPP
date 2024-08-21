@@ -4,9 +4,17 @@
 
 #include "../Painter/Stack.hpp"
 
+#include <QPushButton>
+#include <QLineEdit>
+
+
+namespace View
+{
 class Stack : public Structure
 {
 	Painter::Stack painter;
+protected:
+	void Config_Operations() override;
 public:
 	Stack()
 	{
@@ -14,7 +22,16 @@ public:
 		Config_Operations();
 	}
 
+
+
 public: // interactions
+	QPushButton* button_push{new QPushButton("Push")};
+	QPushButton* button_pop{new QPushButton("Pop")};
+	QPushButton* button_get_top{new QPushButton("Get Top")};
+	QPushButton* button_get_size{new QPushButton("Get Size")};
+	QPushButton* button_is_empty{new QPushButton("Is Empty?")};
+	QPushButton* button_clear{new QPushButton("Clear")};
+	QLineEdit* input_push{new QLineEdit};
 	void Element_Push();
 	void Element_Pop();
 	void Element_Get_Top();
@@ -22,15 +39,6 @@ public: // interactions
 	void Get_Size();
 	void Clear()   ;
 
-	void Config_Operations() override
-	{// init interact buttons
-		// Stack
-		connect(ui.button_push,&QPushButton::clicked,this,&Stack::Element_Push);
-		connect(ui.button_pop,&QPushButton::clicked,this,&Stack::Element_Pop);
-		connect(ui.button_get_top,&QPushButton::clicked,this,&Stack::Element_Get_Top);
-		connect(ui.button_get_size,&QPushButton::clicked,this,&Stack::Get_Size);
-		connect(ui.button_is_empty,&QPushButton::clicked,this,&Stack::Is_Empty);
-		connect(ui.button_clear,&QPushButton::clicked,this,&Stack::Clear);
-	}
-};
 
+};
+}

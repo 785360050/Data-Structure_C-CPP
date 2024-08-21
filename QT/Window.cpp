@@ -4,10 +4,7 @@
 
 #include "Window.hpp"
 
-#include "View/Stack.hpp"
-#include "View/Binary_Tree.hpp"
-#include "View/Skip_List.hpp"
-#include "View/Tree.hpp"
+
 
 #include "QT_Stream_Buffer.hpp"
 static std::shared_ptr<QT_Stream_Buffer> buffer;
@@ -38,60 +35,20 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 		ui.treeWidget->expandAll();
 		// ui.treeWidget->collapseAll();
 
-		// auto select = [&](QTreeWidgetItem *current, QTreeWidgetItem *previous)
-		auto select = [&](QTreeWidgetItem *item,int column)
-		{
-			// auto selected_structure_name = current->text(0);
-			auto selected_structure_name = item->text(0);
-
-			ui.console->append(selected_structure_name); // auto enter
-			ui.label_selected->setText(selected_structure_name);
-
-			if(item->text(0).toStdString()=="Stack")
-			{
-				Stack* stack=new Stack();
-				stack->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-				int cur=ui.tabWidget->addTab(stack,QString::asprintf("Table %d",ui.tabWidget->count()));
-				ui.tabWidget->setCurrentIndex(cur);
-			}
-			else if(item->text(0).toStdString()=="Binary_Tree")
-			{
-				Binary_Tree* tree=new Binary_Tree;
-				tree->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-				int cur=ui.tabWidget->addTab(tree,QString::asprintf("Table %d",ui.tabWidget->count()));
-				ui.tabWidget->setCurrentIndex(cur);
-			}
-			else if(item->text(0).toStdString()=="Skip List")
-			{
-				class Skip_List* skip_list=new class Skip_List; // ?????
-				skip_list->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-				int cur=ui.tabWidget->addTab(skip_list,QString::asprintf("Table %d",ui.tabWidget->count()));
-				ui.tabWidget->setCurrentIndex(cur);
-			}
-			else if(item->text(0).toStdString()=="Tree")
-			{
-				View::Tree* tree=new View::Tree;
-				tree->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-				int cur=ui.tabWidget->addTab(tree,QString::asprintf("Table %d",ui.tabWidget->count()));
-				ui.tabWidget->setCurrentIndex(cur);
-			}
-
-		};
 		// connect(ui.treeWidget,&QTreeWidget::itemSelectionChanged,this,select);
 		// connect(ui.treeWidget, &QTreeWidget::currentItemChanged, this, select);
-		connect(ui.treeWidget, &QTreeWidget::itemDoubleClicked, this, select);
+		connect(ui.treeWidget, &QTreeWidget::itemDoubleClicked, this, &Window::Handle_Select_Structure);
+
+		// ui.tabWidget->setTabsClosable(true);
+		ui.tabWidget->setTabVisible(0,false);
 		auto Close_Tab=[&](int index)
 		{
 			if (index<0)
 				return;
 			ui.tabWidget->widget(index)->close();
 		};
-		// ui.tabWidget->setTabsClosable(true);
-		ui.tabWidget->setTabVisible(0,false);
 		connect(ui.tabWidget, &QTabWidget::tabCloseRequested, this, Close_Tab);
 	}
-
-	// Draw_Items_On_Scene();
 
 	{ // Config Console
 		connect(ui.button_clear_console, &QPushButton::clicked, this, [&](){ ui.console->clear(); });
@@ -107,28 +64,64 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 	ui.tabWidget->tabBar()->setDocumentMode(true); // tab zi dong shi ying kuan du
 	connect(ui.button_redo, &QPushButton::clicked, this, [&](){ std::cout << "button cout"; });
 
-	// auto Export_Picture=[&]()
-	// {
-	// 	auto pixmap=ui.view->grab();
-	// 	QDialog *dialog=new QDialog;
+	connect(ui.button_export, &QPushButton::clicked, this, &Window::Handle_Export_Picture);
 
-	// 	dialog->setWindowTitle("图片展示");
+}
 
-	// 	QHBoxLayout *layout=new QHBoxLayout;
-	// 	QLabel *label=new QLabel;
-	// 	label->resize(800,480);
-	// 	pixmap=pixmap.scaled(label->width(),label->height());
-	// 	label->setPixmap(pixmap);
-	// 	layout->addWidget(label);
+#include "View/Stack.hpp"
+#include "View/Binary_Tree.hpp"
+#include "View/Skip_List.hpp"
+#include "View/Tree.hpp"
+#include "View/Search_Tree.hpp"
+void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
+{
+	// auto selected_structure_name = current->text(0);
+	auto selected_structure_name = item->text(0);
 
-	// 	dialog->setLayout(layout);
-	// 	dialog->show();
-	// 	dialog->exec();
+	ui.console->append(selected_structure_name); // auto enter
+	ui.label_selected->setText(selected_structure_name);
+	std::string logic_structure_name{item->text(0).toStdString()};
 
-	// 	delete dialog;
-	// };
-	// connect(ui.button_export, &QPushButton::clicked, this, Export_Picture);
+	static auto Create_View=[&](Structure* structure,const std::string& name)
+	{
+		structure->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
+		int current_tab_index=ui.tabWidget->addTab(structure,QString::fromStdString(name));
+		ui.tabWidget->setCurrentIndex(current_tab_index);
+	};
 
+	if(logic_structure_name=="Stack")
+		Create_View(new View::Stack,"Stack");
+	else if(logic_structure_name=="Binary_Tree")
+		Create_View(new View::Binary_Tree,"Binary_Tree");
+	else if(logic_structure_name=="Skip_List")
+		Create_View(new View::Skip_List,"Skip_List");
+	else if(logic_structure_name=="Tree")
+		Create_View(new View::Tree,"Tree");
+	else if(logic_structure_name=="Search_Tree")
+		Create_View(new View::Search_Tree,"Search_Tree");
+}
+
+void Window::Handle_Export_Picture()
+{
+	// auto pixmap=ui.view->grab();
+	Structure* current=dynamic_cast<Structure*>(ui.tabWidget->currentWidget());
+	auto pixmap=current->Grab_Picture();
+	QDialog *dialog=new QDialog;
+
+	dialog->setWindowTitle("图片展示");
+
+	QHBoxLayout *layout=new QHBoxLayout;
+	QLabel *label=new QLabel;
+	label->resize(pixmap.size());
+	pixmap=pixmap.scaled(label->width(),label->height());
+	label->setPixmap(pixmap);
+	layout->addWidget(label);
+
+	dialog->setLayout(layout);
+	dialog->show();
+	dialog->exec();
+
+	delete dialog;
 }
 
 void Window::Console_Log(const QString& text)

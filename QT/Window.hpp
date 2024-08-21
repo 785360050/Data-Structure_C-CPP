@@ -21,6 +21,7 @@ enum Logic_Structure
 
 };
 
+class Structure;
 
 class Window : public QMainWindow
 {
@@ -53,6 +54,14 @@ public:
 		static Window instance;
 		return instance;
 	};
+
+
+
+private:
+	std::map<std::string,Structure*> structure;
+private:
+	void Handle_Select_Structure(QTreeWidgetItem *item,int column);
+	void Handle_Export_Picture();
 
 public:
 	// Print a line of text on Window::console

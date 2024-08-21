@@ -3,10 +3,8 @@
 #include <QPushButton>
 #include <QLineEdit>
 
-void Skip_List::Config_Operations()
+void View::Skip_List::Config_Operations()
 {// init interact buttons
-
-
 
 	QPushButton* button_insert=new QPushButton("Insert");
 	QLineEdit* input_insert=new QLineEdit();
@@ -31,11 +29,7 @@ void Skip_List::Config_Operations()
 	layout->addLayout(line_delete);
 	layout->addLayout(line_search);
 
-	QWidget* widget=new QWidget(ui.stackedWidget);
-	widget->setLayout(layout);
-
-	ui.stackedWidget->insertWidget(2,widget);
-	ui.stackedWidget->setCurrentIndex(2);
+	ui.tab_operations->setLayout(layout);
 
 	// connect(ui.button_push,&QPushButton::clicked,this,&Stack::Element_Push);
 	// connect(ui.button_pop,&QPushButton::clicked,this,&Stack::Element_Pop);

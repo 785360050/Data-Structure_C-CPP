@@ -94,4 +94,11 @@ public:
 };
 
 
-
+#include <cmath>
+namespace Formula
+{
+	// 第n层最多有branch^(level-1)个节点
+	explicit static int Node_Count_At_Level(size_t branch, size_t level) { return std::pow(branch, level - 1); }
+	// n层数最多有branch^level-1个节点
+	explicit static int Node_Max_Count(size_t branch, size_t level) { return std::pow(branch, level) - 1; }
+}

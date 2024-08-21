@@ -3,35 +3,7 @@
 
 Painter::Tree::Tree()
 {
-	// Tree_Advanced_Child<int> tree(2);
-
-	// auto a = tree.Node_Create("A");
-	// auto b = tree.Node_Create("B");
-	// auto c = tree.Node_Create("C");
-	// auto d = tree.Node_Create("D");
-	// auto e = tree.Node_Create("E");
-	// auto f = tree.Node_Create("F");
-	// auto g = tree.Node_Create("G");
-	// auto h = tree.Node_Create("H");
-	// auto i = tree.Node_Create("I");
-	// auto j = tree.Node_Create("J");
-	// auto k = tree.Node_Create("K");
-
-	// tree.Tree_Set_Root(a);
-
-	// tree.Node_Insert(b, a, 1);
-	// tree.Node_Insert(c, a, 2);
-	// tree.Node_Insert(d, a, 3);
-	// tree.Node_Insert(e, b, 1);
-	// tree.Node_Insert(f, b, 2);
-	// tree.Node_Insert(g, b, 3);
-	// tree.Node_Insert(h, c, 1);
-	// tree.Node_Insert(i, d, 1);
-	// tree.Node_Insert(j, d, 2);
-
-	// //std::cout << "当前树深度为: " << tree->Tree_GetDepth() << std::endl;
-
-	// tree.Show();
+	// Update_Cooridate();
 
 	auto a = tree.Node_Create("A");
 	auto b = tree.Node_Create("B");
@@ -41,12 +13,12 @@ Painter::Tree::Tree()
 	auto f = tree.Node_Create("F");
 	auto g = tree.Node_Create("G");
 	auto h = tree.Node_Create("H");
-	auto i = tree.Node_Create("I");
+	// auto i = tree.Node_Create("I");
 	auto j = tree.Node_Create("J");
-	auto k = tree.Node_Create("K");
+	// auto k = tree.Node_Create("K");
 	auto l = tree.Node_Create("L");
 	auto m = tree.Node_Create("M");
-	auto n = tree.Node_Create("N");
+	// auto n = tree.Node_Create("N");
 	auto o = tree.Node_Create("O");
 
 	tree.Tree_Set_Root(a);
@@ -55,15 +27,15 @@ Painter::Tree::Tree()
 	tree.Node_Insert(c,a,2);
 	tree.Node_Insert(d,b,1);
 	tree.Node_Insert(e,b,2);
-	tree.Node_Insert(f,c,2);
+	tree.Node_Insert(f,c,1);
 	tree.Node_Insert(g,c,2);
-	tree.Node_Insert(h,d,2);
-	tree.Node_Insert(i,d,2);
-	tree.Node_Insert(j,e,2);
-	tree.Node_Insert(k,e,2);
-	tree.Node_Insert(l,f,2);
+	tree.Node_Insert(h,d,1);
+	// tree.Node_Insert(i,d,2);
+	tree.Node_Insert(j,e,1);
+	// tree.Node_Insert(k,e,2);
+	tree.Node_Insert(l,f,1);
 	tree.Node_Insert(m,f,2);
-	tree.Node_Insert(n,g,2);
+	// tree.Node_Insert(n,g,1);
 	tree.Node_Insert(o,g,2);
 
 
@@ -101,30 +73,41 @@ void Draw_Line(QPainter& painter,const QPoint& begin,const QPoint& end)
 	painter.drawLine(begin,end);
 }
 
-void Painter::Tree::LevelOrder_Traverse(TreeNode_HighOrder_Child<int>* node,QPainter& painter)
+// static const int branch{2};
+void Painter::Tree::LevelOrder_Traverse(TreeNode_HighOrder_Child_Ordered<int,2>* node,QPainter& painter)
 {
-	std::queue<TreeNode_HighOrder_Child<int>*> queue;
+	std::queue<TreeNode_HighOrder_Child_Ordered<int,2>*> queue;
 	queue.push(node);
 
 	int level{1};
 	// draw Nodes per level
 	while(queue.size())
 	{
-		std::queue<TreeNode_HighOrder_Child<int>*> paint_buffer=std::move(queue);
+		std::queue<TreeNode_HighOrder_Child_Ordered<int,2>*> paint_buffer=std::move(queue);
 		int level_count=paint_buffer.size();
 		for(int index{0};index<level_count;++index)
 		{
 			auto node=paint_buffer.front();
 
-			// for(const auto& child_index:node->children)
-			for(int index_child{0};index_child<node->children.size();++index_child)
+			if(node)
 			{
-				Draw_Line(painter,coordinate.Locate_Center(level,index),coordinate.Locate_Center(level+1,index*branch+index_child));
-				auto child_index=node->children[index_child];// belone to Storage::Tree_Normals
-				queue.push(tree.vertex[child_index]);
-			}
+				for(int i{0};i<node->children.size();++i)
+				{
+					if(!node->Has_Child(i))
+					{
+						queue.push(nullptr);
+						continue;
+					}
+					auto index_child=node->children[i];// belone to Storage::Tree_Normals
+					queue.push(tree.vertex[index_child]);
 
-			Draw_Node(painter,node->name,coordinate.Locate_Rectangle(level,index));
+					QPoint node_position_current=coordinate.Locate_Center(level,index);
+					QPoint node_position_child=coordinate.Locate_Center(level+1,index*branch+i);
+					Draw_Line(painter,node_position_current,node_position_child);
+				}
+
+				Draw_Node(painter,node->name,coordinate.Locate_Rectangle(level,index));
+			}
 			paint_buffer.pop();
 		}
 		++level;

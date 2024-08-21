@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <utility>
 
 /// @brief 节点基类

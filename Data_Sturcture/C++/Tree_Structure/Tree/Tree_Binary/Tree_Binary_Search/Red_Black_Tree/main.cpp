@@ -21,15 +21,6 @@ void BinarySearch_RBT()
 {
 	Tree_Binary_Search_RBT<int> tree;
 
-	// Node_Binary_Search_RB<int>* a = tree.RBNode_Create(8);
-	// Node_Binary_Search_RB<int>* b = tree.RBNode_Create(5);
-	// Node_Binary_Search_RB<int>* c = tree.RBNode_Create(15);
-	// Node_Binary_Search_RB<int>* d = tree.RBNode_Create(12);
-	// Node_Binary_Search_RB<int>* e = tree.RBNode_Create(19);
-	// Node_Binary_Search_RB<int>* f = tree.RBNode_Create(9);
-	// Node_Binary_Search_RB<int>* g = tree.RBNode_Create(13);
-	// Node_Binary_Search_RB<int>* h = tree.RBNode_Create(23);
-
 	tree.Element_Insert(8);
 	tree.Element_Insert(5);
 	tree.Element_Insert(15);
@@ -56,7 +47,9 @@ void BinarySearch_RBT()
 	std::cout << "\nLDR:";
 	tree.Tree_Traverse_InOrder(tree.root);
 
-	std::cout << std::endl << "\n搜索节点9：目标节点值为" << tree.Node_Search(9)->element;
+	std::cout << std::endl << "\n搜索节点9：目标节点值为" << tree.Node_Search(9)->element<<std::endl;
+
+
 
 }
 

@@ -218,7 +218,7 @@ private:
 			std::cout << '[' << node->key << ':' << (node->colour == black ? 'B' : 'R') << "] ";
 	}
 public:
-	void Element_Insert(KeyType key, DataType element = NULL) override
+	void Element_Insert(KeyType key, DataType element = DataType{}) override
 	{
 		//try
 		//{///判断元素重复

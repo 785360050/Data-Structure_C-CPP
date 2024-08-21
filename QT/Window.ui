@@ -44,7 +44,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Skip List</string>
+       <string>Skip_List</string>
       </property>
      </item>
     </item>
@@ -61,6 +61,31 @@
       <property name="text">
        <string>Tree</string>
       </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Search_Tree</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>AVL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Red_Black_Tree</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>B_Tree</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>B+_Tree</string>
+       </property>
+      </item>
      </item>
     </item>
     <item>

@@ -5,7 +5,8 @@
 #include "../Painter/Skip_List.hpp"
 
 
-
+namespace View
+{
 class Skip_List : public Structure
 {
 	Painter::Skip_List painter;
@@ -26,4 +27,4 @@ public: // interactions
 
 	void Config_Operations() override;
 };
-
+}
