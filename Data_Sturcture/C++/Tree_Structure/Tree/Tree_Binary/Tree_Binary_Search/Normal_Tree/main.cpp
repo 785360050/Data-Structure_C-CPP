@@ -50,10 +50,14 @@ void BinarySearch()
 	tree.Element_Delete(2);
 	std::cout << "After Delete 2" << std::endl;
 	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
+
+	std::cout << std::endl;
 	tree.Element_Delete(4);
 	std::cout << "After Delete 4" << std::endl;
 	tree.Tree_Traverse_InOrder(tree.Tree_GetRoot());
 
+	std::cout << std::endl;
+	std::cout << "Depth = " + std::to_string(tree.Get_Depth(tree.root)) << std::endl;
 }
 
 int main()

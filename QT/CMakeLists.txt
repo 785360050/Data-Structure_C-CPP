@@ -42,9 +42,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         View/Stack.hpp View/Stack.cpp
         View/Binary_Tree.hpp View/Binary_Tree.cpp
         View/Skip_List.hpp View/Skip_List.cpp
-        View/Tree.hpp View/Tree.cpp
+        View/Tree.hpp
         Painter/Skip_List.hpp Painter/Skip_List.cpp
-        Painter/Tree.hpp Painter/Tree.cpp
+        Painter/Tree.hpp
         View/Search_Tree.hpp View/Search_Tree.cpp
         Painter/Search_Tree.hpp Painter/Search_Tree.cpp
     )

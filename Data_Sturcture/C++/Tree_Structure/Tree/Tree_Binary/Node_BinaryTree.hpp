@@ -27,3 +27,28 @@ public:
 		:TreeNode<DataType>(name, element), left(nullptr), right(nullptr) {};
 
 };
+
+
+// 另一种实现方式，不见得比直接访问成员变量好
+// 因为虽然不用每个子类重复定义left和right，但是需要override Child_Left和Child_Right
+namespace Refactor 
+{
+
+	template <typename DataType>
+	class Node_Binary : public TreeNode<DataType>
+	{
+		using NodeType = Node_Binary<DataType>;
+
+	private:
+		NodeType *left{nullptr};
+		NodeType *right{nullptr};
+
+	public:
+		Node_Binary(std::string name, DataType element = 0)
+			: TreeNode<DataType>(name, element) {};
+
+	public:
+		NodeType *Child_Left() const { return left; };
+		NodeType *Child_Right() const { return left; };
+	};
+}

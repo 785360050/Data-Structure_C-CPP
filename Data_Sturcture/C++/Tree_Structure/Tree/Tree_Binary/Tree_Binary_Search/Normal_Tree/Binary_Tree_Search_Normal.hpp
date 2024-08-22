@@ -5,7 +5,7 @@
 #include "Node_Binary_Search_Normal.hpp"
 
 template <typename DataType, typename KeyType = int, typename NodeType = Node_Binary_Search_Normal<DataType, KeyType>>
-class Tree_Binary_Search_Normal :public Tree_Binary_Search<DataType, KeyType, NodeType>
+class Tree_Binary_Search_Normal : public Tree_Binary_Search<DataType, KeyType, NodeType>
 {
 public:
 	Tree_Binary_Search_Normal() :Tree_Binary_Search<DataType, KeyType, NodeType>() {};
@@ -113,7 +113,26 @@ public:
 		deletenode(this->root, key);
 	}
 
-	
+	void DFS(NodeType *node, std::stack<NodeType *>& stack,size_t& level)
+	{
+		if (!node)
+		{
+			level = std::max(level, stack.size());
+			return;
+		}
+		stack.push(node);
+		DFS(node->left, stack, level);
+		DFS(node->right, stack, level);
+		stack.pop();
+	};
+	int Get_Depth(NodeType* node)
+	{
+		std::stack<NodeType *> stack;
+		size_t level{};
+
+		DFS(node, stack, level);
+		return level;
+	}
 };
 
 

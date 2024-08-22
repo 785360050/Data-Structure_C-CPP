@@ -96,7 +96,7 @@ void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 	else if(logic_structure_name=="Skip_List")
 		Create_View(new View::Skip_List,"Skip_List");
 	else if(logic_structure_name=="Tree")
-		Create_View(new View::Tree,"Tree");
+		Create_View(new View::Tree<int,2>,"Tree");
 	else if(logic_structure_name=="Search_Tree")
 		Create_View(new View::Search_Tree,"Search_Tree");
 }

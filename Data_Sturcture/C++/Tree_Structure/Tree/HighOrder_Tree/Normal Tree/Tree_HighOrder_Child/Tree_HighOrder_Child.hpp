@@ -535,7 +535,7 @@ namespace Storage
 		}
 
 		// 将节点node作为第x个孩子插入到子树tree中
-		void Node_Insert(NodeType *node, NodeType *parent, int position)
+		void Node_Insert(NodeType *node, NodeType *parent, int position) override
 		{
 			try
 			{
