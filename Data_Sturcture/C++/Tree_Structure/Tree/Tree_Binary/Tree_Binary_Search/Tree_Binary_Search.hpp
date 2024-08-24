@@ -172,12 +172,16 @@ public:
 
 
 
-
+#include <stack>
+#include "../ADT.hpp"
+#include "ADT.hpp"
+#include "Node_Binary_Search.hpp"
 namespace Logic
 {
+	
 
 	/// 根据key排序，插入，删除，搜索
-	template <typename DataType, typename KeyType, typename NodeType>
+	template <typename DataType, typename KeyType, typename NodeType = Node_Binary_Search<DataType, KeyType>>
 	class Tree_Binary_Search
 	{
 	public:
@@ -196,6 +200,20 @@ namespace Logic
 				--this->count;
 			}
 		}
+
+		template <ADT::Binary_Node Node>
+		static void _DFS(Node *node, std::stack<Node *> &stack, size_t &level)
+		{
+			if (!node)
+			{
+				level = std::max(level, stack.size());
+				return;
+			}
+			stack.push(node);
+			_DFS(node->left, stack, level);
+			_DFS(node->right, stack, level);
+			stack.pop();
+		};
 
 	public:
 		Tree_Binary_Search() = default;
@@ -324,6 +342,16 @@ namespace Logic
 				if (v->right)
 					q.push(v->right);
 			}
+		}
+
+		template <ADT::Binary_Node Node>
+		static int Get_Depth(Node *node)
+		{
+			std::stack<Node *> stack;
+			size_t level{};
+
+			_DFS(node, stack, level);
+			return level;
 		}
 	};
 }

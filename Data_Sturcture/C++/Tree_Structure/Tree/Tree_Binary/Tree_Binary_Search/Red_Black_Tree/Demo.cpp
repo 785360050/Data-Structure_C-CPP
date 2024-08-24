@@ -19,7 +19,6 @@ static bool  SetEncode(int EncodeId = 936)
 
 void BinarySearch_RBT()
 {
-	// Tree_Binary_Search_RBT<int> tree;
 	Storage::Tree_Binary_Search_RBT<int> tree;
 
 	tree.Element_Insert(8);
@@ -33,7 +32,7 @@ void BinarySearch_RBT()
 	///叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
 
 	std::cout << "\nDLR:";
-	tree.Tree_Traverse_PreOrder(tree.root);
+	tree.Traverse_PreOrder(tree.root);
 
 	tree.Element_Delete(15);
 	tree.Element_Delete(19);
@@ -44,9 +43,9 @@ void BinarySearch_RBT()
 
 	std::cout << std::endl << "After Delete 15 19 13 23" << std::endl;
 	std::cout << "\nDLR:";
-	tree.Tree_Traverse_PreOrder(tree.root);
+	tree.Traverse_PreOrder(tree.root);
 	std::cout << "\nLDR:";
-	tree.Tree_Traverse_InOrder(tree.root);
+	tree.Traverse_InOrder(tree.root);
 
 	std::cout << std::endl << "\n搜索节点9：目标节点值为" << tree.Node_Search(9)->element<<std::endl;
 

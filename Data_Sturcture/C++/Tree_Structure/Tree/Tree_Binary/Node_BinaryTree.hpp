@@ -7,6 +7,7 @@ using std::string;
 #include "Tree_Binary_Normal/Tree_Binary_Normal.hpp"
 
 
+
 ///友元模板类声明
 template <typename DataType, typename NodeType>
 class Binary_Tree;	
@@ -27,6 +28,9 @@ public:
 		:TreeNode<DataType>(name, element), left(nullptr), right(nullptr) {};
 
 };
+
+#include "ADT.hpp"
+static_assert(ADT::Binary_Node<Node_BinaryTree<int>>);
 
 
 // 另一种实现方式，不见得比直接访问成员变量好
@@ -51,4 +55,5 @@ namespace Refactor
 		NodeType *Child_Left() const { return left; };
 		NodeType *Child_Right() const { return left; };
 	};
-}
+
+};

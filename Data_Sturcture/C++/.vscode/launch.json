@@ -10,7 +10,7 @@
             "request": "launch",
             "program": 
             // "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Test/Unit_Test/Linear_Stucture/Linear_Queue/unit_test",
-            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Tree_Structure/Tree/HighOrder_Tree/Normal Tree/Tree_HighOrder_Child/main",
+            "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Tree_Structure/Tree/Tree_Binary/Tree_Binary_Search/AVL_Tree/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

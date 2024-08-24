@@ -30,5 +30,10 @@ public:
 	//平衡因子: 左右子树的高度差
 	// int Balance_Factor()
 	int Balance()
-	{return (this == nullptr) ? left->Height() - right->Height() : 0;}
+	{
+		if (this == nullptr)
+			return 0;
+		else
+			return left->Height() - right->Height();
+	}
 };

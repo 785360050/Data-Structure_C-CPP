@@ -2,8 +2,9 @@
 
 #include <streambuf>
 #include <iostream>
+#include <QString>
 
-#include "Window.hpp"
+#include "../Window.hpp"
 using _CharT = char;
 using _Traits = std::char_traits<_CharT>;
 
@@ -16,7 +17,11 @@ public:
 
 private:
 	Window *window;
-	int_type syncput(int_type c);
+	int_type syncput(int_type c)
+	{
+		window->Console_Log(QString(char(c)));
+		return c;
+	}
 
 public:
 	QT_Stream_Buffer(Window *window)
@@ -34,5 +39,10 @@ protected:
 			__ret = syncput(__c);
 		return __ret;
 	}
-	virtual std::streamsize xsputn(const char_type *__s, std::streamsize __n);
+	virtual std::streamsize xsputn(const char_type *__s, std::streamsize __n)
+	{
+		std::string s(__s, __n);
+		window->Console_Log(QString::fromStdString(s));
+		return __n;
+	}
 };

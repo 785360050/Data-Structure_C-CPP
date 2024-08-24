@@ -1,6 +1,0 @@
-#include "Painter.hpp"
-
-
-
-
-

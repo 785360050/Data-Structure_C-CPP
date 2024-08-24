@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/x86_64-linux-gnu/qt6/**",
+                "${workspaceFolder}/Build/QT_autogen/include/"
+            ],
+            "defines": [],
+            "compilerPath": "/home/jevon/Make_Install/GCC/bin/gcc",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

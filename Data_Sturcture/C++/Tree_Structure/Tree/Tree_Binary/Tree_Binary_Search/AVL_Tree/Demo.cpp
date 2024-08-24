@@ -43,6 +43,8 @@ void BinarySearch_AVL()
 	node=tree.Node_Search(3);
 	std::cout << "Node 3 has key: " + std::to_string(node->key)<<std::endl;
 
+	std::cout << std::endl;
+	std::cout << "Depth = " + std::to_string(tree.Get_Depth(tree.root)) << std::endl;
 }
 
 int main()

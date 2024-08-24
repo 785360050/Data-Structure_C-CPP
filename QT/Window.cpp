@@ -68,11 +68,15 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 }
 
-#include "View/Stack.hpp"
-#include "View/Binary_Tree.hpp"
-#include "View/Skip_List.hpp"
-#include "View/Tree.hpp"
-#include "View/Search_Tree.hpp"
+// #include "View/Stack.hpp"
+#include "Structure/Linear_Structure/Stack.hpp"
+#include "Demo/View_Binary_Tree.hpp"
+#include "Structure/Linear_Structure/Skip_List.hpp"
+// #include "View/Tree.hpp"
+#include "Demo/View_Tree.hpp"
+#include "Structure/Tree_Structure/Search_Tree.hpp"
+#include "Structure/Tree_Structure/AVL_Tree.hpp"
+#include "Structure/Tree_Structure/Red_Black_Tree.hpp"
 void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 {
 	// auto selected_structure_name = current->text(0);
@@ -99,6 +103,10 @@ void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 		Create_View(new View::Tree<int,2>,"Tree");
 	else if(logic_structure_name=="Search_Tree")
 		Create_View(new View::Search_Tree,"Search_Tree");
+	else if(logic_structure_name=="AVL_Tree")
+		Create_View(new View::AVL_Tree,"AVL_Tree");
+	else if(logic_structure_name=="Red_Black_Tree")
+		Create_View(new View::Tree_Binary_Search_RBT,"Red_Black_Tree");
 }
 
 void Window::Handle_Export_Picture()

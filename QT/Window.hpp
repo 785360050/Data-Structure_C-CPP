@@ -36,24 +36,15 @@ public:
 	QLabel *labSceneCord;
 	QLabel *labItemCord;
 
-private:
+public:
 	Window(QWidget *parent = nullptr);
 	~Window();
-public: // 单例阻止拷贝构造和拷贝赋值
-	Window(const Window &) = delete;
-	Window &operator= (const Window &) = delete;
 
-	void do_changeTabTitle(QString title)
-	{
-		int index=ui.tabWidget->currentIndex();
-		ui.tabWidget->setTabText(index,title);
-	}
-public:
-	static Window &Instance()
-	{ // 局部静态变量，线程安全
-		static Window instance;
-		return instance;
-	};
+	// void do_changeTabTitle(QString title)
+	// {
+	// 	int index=ui.tabWidget->currentIndex();
+	// 	ui.tabWidget->setTabText(index,title);
+	// }
 
 
 

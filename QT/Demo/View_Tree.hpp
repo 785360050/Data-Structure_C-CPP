@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Structure.hpp"
+#include "../Structure/Structure.hpp"
 
-#include "../Painter/Tree.hpp"
+
+#include "Painter_Tree.hpp"
 
 #include <QPushButton>
 #include <QLineEdit>
@@ -13,7 +14,7 @@ namespace View
 	template<typename DataType=int,int branch=2>
 	class Tree : public Structure
 	{
-		Painter::Tree<DataType,branch> painter;
+		Painter::Demo_Tree<DataType,branch> painter;
 	public:
 		Tree()
 		{

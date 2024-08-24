@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Painter.hpp"
+#include "../Painter/Painter.hpp"
 
 struct BTNode
 {

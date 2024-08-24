@@ -14,7 +14,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 # find View.hpp
 INCLUDE_DIRECTORIES(
-    ${PROJECT_SOURCE_DIR}/View/
+    ${PROJECT_SOURCE_DIR}/Utilities/
 )
 
 
@@ -30,23 +30,35 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QT
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        View/GraphicsView.hpp
-        QT_Stream_Buffer.hpp QT_Stream_Buffer.cpp
+        # View/GraphicsView.hpp
+        # QT_Stream_Buffer.hpp QT_Stream_Buffer.cpp
 
-        Painter/Binary_Tree.hpp Painter/Binary_Tree.cpp
-        Painter/Stack.hpp Painter/Stack.cpp
-        Painter/Painter.hpp Painter/Painter.cpp
-        View/Structure.hpp View/Structure.cpp View/Structure.ui
+        # Painter/Binary_Tree.hpp Painter/Binary_Tree.cpp
 
-        View/Stack.hpp View/Stack.cpp
-        View/Stack.hpp View/Stack.cpp
-        View/Binary_Tree.hpp View/Binary_Tree.cpp
-        View/Skip_List.hpp View/Skip_List.cpp
-        View/Tree.hpp
-        Painter/Skip_List.hpp Painter/Skip_List.cpp
-        Painter/Tree.hpp
-        View/Search_Tree.hpp View/Search_Tree.cpp
-        Painter/Search_Tree.hpp Painter/Search_Tree.cpp
+        # Painter/Painter.hpp
+        # View/Structure.hpp View/Structure.cpp View/Structure.ui
+
+        # View/Binary_Tree.hpp View/Binary_Tree.cpp
+        # View/Skip_List.hpp View/Skip_List.cpp
+
+        # Painter/Skip_List.hpp Painter/Skip_List.cpp
+        # Painter/Tree.hpp
+        # View/Search_Tree.hpp View/Search_Tree.cpp
+        # Painter/Search_Tree.hpp Painter/Search_Tree.cpp
+        # Demo/View_Tree.hpp
+        # Demo/Painter_Tree.hpp
+        # Structure/Stack.hpp Structure/Stack.cpp
+
+        Utilities/GraphicsView.hpp
+        Demo/Painter_Binary_Tree.cpp
+        Structure/Linear_Structure/Skip_List.cpp
+        Structure/Linear_Structure/Stack.cpp
+        Structure/Tree_Structure/Search_Tree.cpp
+        Structure/Structure.cpp
+        Structure/Tree_Structure/AVL_Tree.hpp Structure/Tree_Structure/AVL_Tree.cpp
+        Structure/Tree_Structure/Red_Black_Tree.hpp
+        Structure/Tree_Structure/Red_Black_Tree.cpp
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

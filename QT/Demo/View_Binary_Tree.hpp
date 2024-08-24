@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Structure.hpp"
+#include "../Structure/Structure.hpp"
 
-#include "../Painter/Binary_Tree.hpp"
 
 #include <QPushButton>
 #include <QLineEdit>
+
+#include "Painter_Binary_Tree.hpp"
 
 namespace View
 {

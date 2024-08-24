@@ -7,6 +7,7 @@
 #include "../Painter/Painter.hpp"
 
 
+#include <QWidget>
 
 
 class Structure : public QWidget

@@ -3,6 +3,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 
+#include "../Utilities/GraphicsView.hpp"
+
 // 鼠标移动，point是 GraphicsView的坐标,物理坐标
 void Structure::do_mouseMovePoint(QPoint point)
 {

@@ -1,4 +1,4 @@
-#include "Binary_Tree.hpp"
+#include "Painter_Binary_Tree.hpp"
 
 
 #include <QStack>
