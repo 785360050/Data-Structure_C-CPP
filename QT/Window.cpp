@@ -54,7 +54,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 		Register_Factory<Factory::Stack>("Stack");
 		Register_Factory<Factory::Queue>("Queue");
 		Register_Factory<Factory::Skip_List>("Skip_List");
-		Register_Factory<Factory::Search_Tree>("Search_Tree");
+		Register_Factory<Factory::Search_Tree>("Normal_Search_Tree");
 		Register_Factory<Factory::AVL_Tree>("AVL_Tree");
 		Register_Factory<Factory::Tree_Binary_Search_RBT>("Red_Black_Tree");
 		Register_Factory<Factory::Heap>("Heap");
@@ -87,7 +87,12 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 {
+	if(item->childCount()) // ignore folder item to display view
+		return;
+
+
 	auto selected_structure_name = item->text(0);
+
 
 	ui.console->append(selected_structure_name); // auto enter
 	ui.label_selected->setText(selected_structure_name);

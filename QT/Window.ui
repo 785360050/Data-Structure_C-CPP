@@ -72,6 +72,11 @@
        </property>
        <item>
         <property name="text">
+         <string>Normal_Search_Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>AVL_Tree</string>
         </property>
        </item>

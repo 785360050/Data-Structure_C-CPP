@@ -4,8 +4,8 @@
 
 void View::AVL_Tree::Handle_Element_Insert()
 {
-	int key = input_insert_key->text().toInt();
-	int element = input_insert_element->text().toInt();
+	int key = operation.input_insert_key->text().toInt();
+	int element = operation.input_insert_element->text().toInt();
 	painter.Element_Insert(key, element);
 	Refresh_View();
 }
@@ -13,14 +13,14 @@ void View::AVL_Tree::Handle_Element_Insert()
 void View::AVL_Tree::Handle_Element_Delete()
 {
 
-	int key = input_delete_key->text().toInt();
+	int key = operation.input_delete_key->text().toInt();
 	painter.Element_Delete(key);
 	Refresh_View();
 }
 
 void View::AVL_Tree::Handle_Node_Search()
 {
-	int key = input_search_key->text().toInt();
+	int key = operation.input_search_key->text().toInt();
 	auto node = painter.Node_Search(key);
 	if (node)
 		std::cout << "node = " + node->name + " key = " + std::to_string(node->key);
