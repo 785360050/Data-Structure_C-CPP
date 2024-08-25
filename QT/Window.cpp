@@ -10,7 +10,6 @@
 static std::shared_ptr<QT_Stream_Buffer> buffer;
 
 
-
 Window::Window(QWidget *parent) : QMainWindow(parent)
 {
 	ui.setupUi(this);
@@ -50,6 +49,20 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 		connect(ui.tabWidget, &QTabWidget::tabCloseRequested, this, Close_Tab);
 	}
 
+
+	{//Register_Factory
+		Register_Factory<Factory::Stack>("Stack");
+		Register_Factory<Factory::Queue>("Queue");
+		Register_Factory<Factory::Skip_List>("Skip_List");
+		Register_Factory<Factory::Search_Tree>("Search_Tree");
+		Register_Factory<Factory::AVL_Tree>("AVL_Tree");
+		Register_Factory<Factory::Tree_Binary_Search_RBT>("Red_Black_Tree");
+		Register_Factory<Factory::Heap>("Heap");
+
+		Register_Factory<Factory::Tree>("Tree");
+		Register_Factory<Factory::Binary_Tree>("Binary_Tree");
+	}
+
 	{ // Config Console
 		connect(ui.button_clear_console, &QPushButton::clicked, this, [&](){ ui.console->clear(); });
 
@@ -66,53 +79,33 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 	connect(ui.button_export, &QPushButton::clicked, this, &Window::Handle_Export_Picture);
 
+
+
+
 }
 
-// #include "View/Stack.hpp"
-#include "Structure/Linear_Structure/Stack.hpp"
-#include "Structure/Linear_Structure/Queue.hpp"
-#include "Demo/View_Binary_Tree.hpp"
-#include "Structure/Linear_Structure/Skip_List.hpp"
-// #include "View/Tree.hpp"
-#include "Demo/View_Tree.hpp"
-#include "Structure/Tree_Structure/Search_Tree.hpp"
-#include "Structure/Tree_Structure/AVL_Tree.hpp"
-#include "Structure/Tree_Structure/Red_Black_Tree.hpp"
-#include "Structure/Tree_Structure/Heap.hpp"
+
 void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 {
-	// auto selected_structure_name = current->text(0);
 	auto selected_structure_name = item->text(0);
 
 	ui.console->append(selected_structure_name); // auto enter
 	ui.label_selected->setText(selected_structure_name);
-	std::string logic_structure_name{item->text(0).toStdString()};
 
-	static auto Create_View=[&](Structure* structure,const std::string& name)
+	std::string logic_structure_name{selected_structure_name.toStdString()};
+	if(factory.contains(logic_structure_name))
 	{
+		auto structure=factory[logic_structure_name]->Produce();
+		// qDebug()<<structure;
 		structure->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
-		int current_tab_index=ui.tabWidget->addTab(structure,QString::fromStdString(name));
+		int current_tab_index=ui.tabWidget->addTab(structure,QString::fromStdString(logic_structure_name));
 		ui.tabWidget->setCurrentIndex(current_tab_index);
-	};
+	}
+	else
+		QMessageBox::information(this,{},QString("%1 Not Implemented Yet").arg(QString::fromStdString(logic_structure_name)));
 
-	if(logic_structure_name=="Stack")
-		Create_View(new View::Stack,"Stack");
-	else if(logic_structure_name=="Queue")
-		Create_View(new View::Queue,"Queue");
-	else if(logic_structure_name=="Binary_Tree")
-		Create_View(new View::Binary_Tree,"Binary_Tree");
-	else if(logic_structure_name=="Skip_List")
-		Create_View(new View::Skip_List,"Skip_List");
-	else if(logic_structure_name=="Tree")
-		Create_View(new View::Tree<int,2>,"Tree");
-	else if(logic_structure_name=="Search_Tree")
-		Create_View(new View::Search_Tree,"Search_Tree");
-	else if(logic_structure_name=="AVL_Tree")
-		Create_View(new View::AVL_Tree,"AVL_Tree");
-	else if(logic_structure_name=="Red_Black_Tree")
-		Create_View(new View::Tree_Binary_Search_RBT,"Red_Black_Tree");
-	else if(logic_structure_name=="Heap")
-		Create_View(new View::Heap,"Heap");
+
+
 }
 
 void Window::Handle_Export_Picture()
@@ -153,6 +146,7 @@ void Window::Console_Log(const QString& text)
 Window::~Window()
 {
 }
+
 
 
 

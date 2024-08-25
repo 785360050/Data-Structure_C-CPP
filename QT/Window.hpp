@@ -11,6 +11,7 @@
 // #include "Painter/Stack.hpp"
 // #include "Painter/Binary_Tree.hpp"
 
+#include "Structure/Factory.hpp"
 
 enum Logic_Structure
 {
@@ -40,16 +41,12 @@ public:
 	Window(QWidget *parent = nullptr);
 	~Window();
 
-	// void do_changeTabTitle(QString title)
-	// {
-	// 	int index=ui.tabWidget->currentIndex();
-	// 	ui.tabWidget->setTabText(index,title);
-	// }
-
-
-
 private:
 	std::map<std::string,Structure*> structure;
+	std::map<std::string,Factory::Factory*> factory;
+
+	template<typename StructureType>
+	void Register_Factory(const std::string& name){factory[name]=new StructureType;}
 private:
 	void Handle_Select_Structure(QTreeWidgetItem *item,int column);
 	void Handle_Export_Picture();

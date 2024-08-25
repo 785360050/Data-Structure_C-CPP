@@ -24,7 +24,8 @@ void Draw_Stack_Element(QPainter* painter,const QPoint& pos,const QString& text=
 
 void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	qDebug() << "paint";
+	// qDebug() << "paint";
+	qDebug() << &stack;
 	// // 绘制图形项
 	// painter->setBrush(Qt::green);
 	static QPen pen{Qt::gray, 5};
@@ -33,7 +34,6 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 	painter->setFont(font);
 
 	auto copy_stack=stack;
-	qDebug()<<&stack;
 	QPoint pos{-60,-200};
 	for(int i{5};i>0;--i)
 	{

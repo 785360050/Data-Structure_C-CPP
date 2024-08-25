@@ -62,6 +62,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Structure/Tree_Structure/Heap.hpp
         Structure/Linear_Structure/Queue.hpp
         Structure/Linear_Structure/Queue.cpp
+        Structure/Factory.hpp
 
     )
 # Define target properties for Android with Qt 6 as:
