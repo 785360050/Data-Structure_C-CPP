@@ -70,6 +70,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 // #include "View/Stack.hpp"
 #include "Structure/Linear_Structure/Stack.hpp"
+#include "Structure/Linear_Structure/Queue.hpp"
 #include "Demo/View_Binary_Tree.hpp"
 #include "Structure/Linear_Structure/Skip_List.hpp"
 // #include "View/Tree.hpp"
@@ -96,6 +97,8 @@ void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 
 	if(logic_structure_name=="Stack")
 		Create_View(new View::Stack,"Stack");
+	else if(logic_structure_name=="Queue")
+		Create_View(new View::Queue,"Queue");
 	else if(logic_structure_name=="Binary_Tree")
 		Create_View(new View::Binary_Tree,"Binary_Tree");
 	else if(logic_structure_name=="Skip_List")
