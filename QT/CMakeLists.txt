@@ -58,6 +58,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Structure/Tree_Structure/AVL_Tree.hpp Structure/Tree_Structure/AVL_Tree.cpp
         Structure/Tree_Structure/Red_Black_Tree.hpp
         Structure/Tree_Structure/Red_Black_Tree.cpp
+        Structure/Tree_Structure/Heap.cpp
+        Structure/Tree_Structure/Heap.hpp
 
     )
 # Define target properties for Android with Qt 6 as:

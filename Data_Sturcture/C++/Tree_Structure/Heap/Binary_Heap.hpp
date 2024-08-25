@@ -4,11 +4,11 @@
 
 #define Debug // IF Run Unit Test, Enable this
 
-enum Direction : bool
-{
-	Left,
-	Right
-};
+// enum Direction
+// {
+// 	Left,
+// 	Right
+// };
 
 /// ============================================================================================================
 /// https://www.cnblogs.com/sybil
@@ -23,6 +23,11 @@ template <typename ElementType, size_t maxsize, typename CompareMethod = std::le
 class Binary_Heap
 {
 public:
+	enum Direction
+	{
+		Left,
+		Right
+	};
 	ElementType storage[maxsize]{}; // 存放排序关键值的数组
 	size_t size{};
 
@@ -124,9 +129,9 @@ private:
 
 		if (index < 0 || index > size)
 			throw std::runtime_error("Element_Sink Failed: index illegal");
-		while (_Index_Child(index, Left) < size)
+		while (_Index_Child(index, Direction::Left) < size)
 		{
-			size_t index_child = _Index_Child(index, Left); /// 先假设索引设为左孩子
+			size_t index_child = _Index_Child(index, Direction::Left); /// 先假设索引设为左孩子
 
 			if (index_child + 1 < size && CompareMethod{}(storage[index_child + 1], storage[index_child]))
 				++index_child; /// 俩孩子中选出一个权重最高的与父节点比较

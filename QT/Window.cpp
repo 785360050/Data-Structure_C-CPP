@@ -77,6 +77,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 #include "Structure/Tree_Structure/Search_Tree.hpp"
 #include "Structure/Tree_Structure/AVL_Tree.hpp"
 #include "Structure/Tree_Structure/Red_Black_Tree.hpp"
+#include "Structure/Tree_Structure/Heap.hpp"
 void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 {
 	// auto selected_structure_name = current->text(0);
@@ -107,6 +108,8 @@ void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 		Create_View(new View::AVL_Tree,"AVL_Tree");
 	else if(logic_structure_name=="Red_Black_Tree")
 		Create_View(new View::Tree_Binary_Search_RBT,"Red_Black_Tree");
+	else if(logic_structure_name=="Heap")
+		Create_View(new View::Heap,"Heap");
 }
 
 void Window::Handle_Export_Picture()

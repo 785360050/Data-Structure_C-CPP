@@ -116,11 +116,11 @@ namespace Painter
 			void Set(NodeType* node,int level,int index){container[--level][index]=node;}
 		};
 
-		template<typename DataType,int branch>
+		template<typename DataType,int branch,typename NodeType=TreeNode<DataType>>
 		class Drawer
 		{
 			Coordinate<branch> coordinate{QPoint{-500, -250},4};
-			Serialized_Container<DataType,branch> container;
+			Serialized_Container<DataType,branch,NodeType> container;
 			int level{0};
 			QRect bound;
 			const QSize node_size{50,50};
@@ -179,7 +179,7 @@ namespace Painter
 				}
 			}
 		public:
-			void Update_Tree(const Serialized_Container<DataType,branch>& container)
+			void Update_Tree(const Serialized_Container<DataType,branch,NodeType>& container)
 			{
 				this->container=std::move(container);
 				level=container.Get_Level();
