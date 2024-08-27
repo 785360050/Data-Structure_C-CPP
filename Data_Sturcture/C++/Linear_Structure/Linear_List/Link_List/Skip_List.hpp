@@ -39,7 +39,7 @@ namespace Storage
     public:
         using Node = List_Node_Skiplist<ElementType>;
 
-    private:
+    protected:
         std::vector<Node *> header; // 头结点指针数组。支持层级扩展。header.size() == this->level   头结点的元素个数等于当前层数
         Node *tail;                 // 尾结点指针
 

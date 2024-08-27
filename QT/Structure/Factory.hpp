@@ -4,6 +4,7 @@
 #include "Structure.hpp"
 
 
+#include "Linear_Structure/Linear_List.hpp"
 #include "Linear_Structure/Stack.hpp"
 #include "Linear_Structure/Queue.hpp"
 #include "Linear_Structure/Skip_List.hpp"
@@ -22,6 +23,11 @@ namespace Factory
 		virtual Structure* Produce()=0;
 	};
 
+	class Linear_List:public Factory
+	{
+	public:
+		Structure* Produce() override final {return new View::Linear_List;}
+	};
 	class Stack:public Factory
 	{
 	public:

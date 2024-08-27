@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <optional>
 #include "ADT.hpp"
 
 /// @brief 逻辑结构。作为基类使用

@@ -82,7 +82,7 @@ namespace Storage
 		// 删除元素
 		virtual void Element_Delete(size_t pos) = 0;
 		// 修改顺序表List第pos个位置上的元素为elem
-		void Element_Update(size_t pos, ElementType elem) override
+		void Element_Update(size_t pos, ElementType&& elem) override
 		{
 			operator[](pos) = elem; // 有点丑
 									// this->storage[pos] = elem;//不能这么写，这样调不到operator[]，使用的是数组的老式迭代器

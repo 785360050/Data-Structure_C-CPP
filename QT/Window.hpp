@@ -13,15 +13,6 @@
 
 #include "Structure/Factory.hpp"
 
-enum Logic_Structure
-{
-	Linear_List=0,
-	Stack_,
-	Queue,
-	Skip_List,
-
-};
-
 class Structure;
 
 class Window : public QMainWindow

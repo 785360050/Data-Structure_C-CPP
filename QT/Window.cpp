@@ -51,6 +51,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 
 	{//Register_Factory
+		Register_Factory<Factory::Linear_List>("Linear_List");
 		Register_Factory<Factory::Stack>("Stack");
 		Register_Factory<Factory::Queue>("Queue");
 		Register_Factory<Factory::Skip_List>("Skip_List");

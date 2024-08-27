@@ -4,43 +4,18 @@
 
 Painter::Skip_List::Skip_List()
 {
-	Storage::Skip_List<int,0.5f> list;
-
 	// test Element_Insert
-	list.Element_Insert(2);
-	// list.List_Show("插入2");
-	list.Element_Insert(10);
-	// list.List_Show("插入10");
-	list.Element_Insert(12);
-	// list.List_Show("插入12");
-	list.Element_Insert(8);
-	// list.List_Show("插入8");
-	list.Element_Insert(1);
-	// list.List_Show("插入1");
-	list.Element_Insert(6);
-	// list.List_Show("插入6");
-	std::cout << "插入6个元素后,size =  " << list.Get_Size() ;
+	skip_list.Element_Insert(2);
+	skip_list.Element_Insert(10);
+	skip_list.Element_Insert(12);
+	skip_list.Element_Insert(8);
+	skip_list.Element_Insert(1);
+	skip_list.Element_Insert(6);
 
-	// test Search
-	std::cout << "Element Search 1 = " << list.Element_Search(1).value_or(-1) ;
-	std::cout << "Element Search 2 = " << list.Element_Search(2).value_or(-1) ;
-	std::cout << "Element Search 6 = " << list.Element_Search(6).value_or(-1) ;
-	std::cout << "Element Search 10 = " << list.Element_Search(10).value_or(-1) ;
-	std::cout << "Element Search 12 = " << list.Element_Search(12).value_or(-1) ;
-
-	std::cout << "Element Search 111 = " << list.Element_Search(111).value_or(-1) ;
-	std::cout << "Element Search 0 = " << list.Element_Search(0).value_or(-1) ;
-
-	// test Element_Delete
-	list.Element_Delete(1);
-	// list.List_Show("删除1");
-	list.Element_Delete(2);
-	// list.List_Show("删除2");
-	list.Element_Delete(6);
-	// list.List_Show("删除6");
-	list.Element_Delete(12);
-	// list.List_Show("删除12");
-	std::cout << "删除4个元素后,size =  " << list.Get_Size() ;
+	// skip_list.Element_Delete(1);
+	// skip_list.Element_Delete(2);
+	// skip_list.Element_Delete(6);
+	// skip_list.Element_Delete(12);
 }
 
 #include <QPainter>
@@ -73,13 +48,28 @@ void Draw_Arrow(QPainter& painter, QPoint start, QPoint end)
 
 }
 
+void Draw_Node(QPainter* painter,const std::string& name,QRect location)
+{
+	// painter.setBrush(Qt::gray);
+	// painter.setPen({Qt::white,5});
+	// // painter.drawEllipse(rect);
+	// painter.drawEllipse(location);
+	// painter.setPen(QPen(Qt::black,5));
+	// painter.drawText(location,Qt::AlignCenter,QString::fromStdString(name));
+
+	static const QBrush brush_header{Qt::red};
+	painter->setBrush(brush_header);
+	painter->drawRect(location);
+	painter->drawText(location,Qt::AlignCenter,QString::fromStdString(name));
+}
+
 void Painter::Skip_List::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	qDebug() << "paint";
 	static QFont font{"Cascadia Code",12};
 	static QPen pen{Qt::white, 5};
 	static QBrush brush_element{Qt::blue};
-	static QBrush brush_header{Qt::red};
+
 	painter->setPen(pen);
 	painter->setFont(font);
 
@@ -87,16 +77,51 @@ void Painter::Skip_List::paint(QPainter* painter, const QStyleOptionGraphicsItem
 	static QSize block(50,50);
 	static constexpr int half_size=25;
 
-	painter->drawText(0-half_size-2*block.width(),0,"Level 0");
 
-	painter->setBrush(brush_header);
-	painter->drawRect(0-1*block.width(),0-half_size,block.width(),block.height());
+	std::vector<Adapter::Skip_List::Node *> storage=skip_list.Get_Storage();
 
-	// painter->drawLine(0-half_size,0,0+half_size,0);
-	Draw_Arrow(*painter,{0-half_size,0},{0+block.width()/3*2,0});
 
-	painter->drawText(0+1*block.width(),0,"nullptr");
+	QPoint pos_left_top{-200,-60};
 
+	const int current_level{skip_list.Get_Current_Level()};
+	auto container=skip_list.Get_Container();
+
+	for(int level{current_level-1};level>=0;--level)
+	{
+		QPoint pos=pos_left_top-QPoint{0,level*50};
+		painter->drawText(pos-QPoint{100,-25},QString::fromStdString("Level "+std::to_string(level)));
+		for(const auto& node:container[level])
+		{
+			if(node)
+				Draw_Node(painter,std::to_string(node->element),QRect(pos.x(),pos.y(),50,50));
+			else
+			{
+
+			}
+			pos+=QPoint{50,0};
+		}
+	}
+
+
+	// for(int level{0};level<current_level;++level)
+	// {
+	// 	QPoint pos=pos_left_top+QPoint{0,level*50};
+	// 	painter->drawText(pos,QString::fromStdString("Level "+std::to_string(level)));
+
+	// 	auto node=storage[level];
+	// 	while(node)
+	// 	{
+	// 		// Draw_Arrow(*painter,{0-half_size,0},{0+block.width()/3*2,0});
+
+	// 		// QRect rect(0-1*block.width(),0-half_size,block.width(),block.height());
+	// 		auto element=node->element;
+	// 		Draw_Node(painter,std::to_string(element),QRect(pos.x(),pos.y(),50,50));
+	// 		node=node->next[level];
+	// 		pos+=QPoint{50,0};
+	// 	}
+	// 	painter->drawText(0+1*block.width(),0,"nullptr");
+
+	// }
 
 }
 
