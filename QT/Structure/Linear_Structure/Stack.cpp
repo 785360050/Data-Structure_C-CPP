@@ -25,7 +25,7 @@ void Draw_Stack_Element(QPainter* painter,const QPoint& pos,const QString& text=
 void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// qDebug() << "paint";
-	qDebug() << &stack;
+	// qDebug() << &stack;
 	// // 绘制图形项
 	// painter->setBrush(Qt::green);
 	static QPen pen{Qt::gray, 5};
@@ -54,6 +54,8 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 		}
 		pos+=QPoint{0,60};
 	}
+	painter->setPen(pen);
+	painter->drawText(QRect(pos.x(),pos.y(),120,60),Qt::AlignCenter,"Bottom");
 
 
 

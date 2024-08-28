@@ -34,8 +34,8 @@ Structure::Structure(QWidget *parent)
 
 	// Config Graphics View
 	ui.view->setCursor(Qt::CrossCursor);				 // 十字光标
-	ui.view->setMouseTracking(true);					 // 鼠标跟踪
-	ui.view->setDragMode(QGraphicsView::RubberBandDrag); // 矩形选择框
+	// ui.view->setMouseTracking(true);					 // 鼠标跟踪
+	// ui.view->setDragMode(QGraphicsView::RubberBandDrag); // 矩形选择框
 
 	QRectF rect(-500, -250, 1000, 500);
 	scene = new QGraphicsScene(rect, this); // scene逻辑坐标系定义

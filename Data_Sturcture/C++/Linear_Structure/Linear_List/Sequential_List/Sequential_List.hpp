@@ -177,7 +177,8 @@ public:
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
-			for (size_t index = this->Index(this->size); this->Index(pos) <= index; index--)
+			int count = this->size - pos;// size_t patch
+			for (int index = this->Index(this->size); count >= 0;--count,--index)
 				this->storage[index + 1] = this->storage[index];
 			this->storage[this->Index(pos)] = elem;
 		}
@@ -194,7 +195,8 @@ public:
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
-			for (size_t index = this->Index(this->size); this->Index(pos) <= index; index--)
+			int count = this->size - pos;// size_t patch
+			for (int index = this->Index(this->size); count >= 0; --count, --index)
 				this->storage[index + 1] = this->storage[index];
 			this->storage[this->Index(pos)] = elem;
 		}
@@ -203,7 +205,7 @@ public:
 	void Element_Delete(size_t pos) override
 	{
 		this->Index(pos); // Check pos is valid
-		for (size_t i = this->Index(pos); i <= this->Index(this->size) - 1; i++)
+		for (int i = this->Index(pos); i <= static_cast<int>(this->Index(this->size)) - 1; i++)// size_t patch
 			this->storage[i] = this->storage[i + 1];
 		this->storage[this->size - 1] = ElementType{}; /// 末尾补0
 		--this->size;

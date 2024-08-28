@@ -34,17 +34,19 @@ namespace Painter
 	protected:
 		void Draw_Element(QPainter* painter,const QPoint& pos,const QString& text={})
 		{
+			painter->setPen({Qt::white, 5});
 			painter->drawRect(pos.x(),pos.y(),50,50);
 			painter->drawText(QRect(pos.x(),pos.y(),50,50),Qt::AlignCenter,text);
 		}
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
 		{
-			painter->setPen({Qt::white, 5});
+			painter->setPen({Qt::gray, 5});
 			static QFont font{"Cascadia Code",16};
 			painter->setFont(font);
 
 			auto copy_queue=queue;
 			QPoint pos{-200,-60};
+			painter->drawText(QRect(pos.x()-100,pos.y(),100,50),Qt::AlignCenter,"Front");
 			while(!copy_queue.empty())
 			{
 				Draw_Element(painter,pos,QString::fromStdString(std::to_string(copy_queue.front())));
@@ -52,6 +54,7 @@ namespace Painter
 
 				pos+=QPoint{50,0};
 			}
+			painter->drawText(QRect(pos.x()+25,pos.y(),50,50),Qt::AlignCenter,"Back");
 		}
 
 	public: // Interactions

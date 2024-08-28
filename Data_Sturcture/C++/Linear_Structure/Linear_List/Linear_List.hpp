@@ -15,7 +15,7 @@ namespace Logic
 		// ElementType *storage{}; /// 指向存储结构.
 		// 由于该类是通用的线性表抽象类，所以取消了NodeType的模板参数类型
 		// 链表和数组的存储元素类型不同，所以不能提取到父类
-		size_t size{}; /// 当前元素个数
+		size_t size{}; /// 当前元素个数 (NOTE: Insert和Delete操作太容易下溢了，还是改为Int)
 
 	public:
 		Linear_List() = default;
