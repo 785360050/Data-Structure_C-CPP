@@ -25,28 +25,28 @@ static bool  SetEncode(int EncodeId = 936)
 // main: malloc.c:2617: sysmalloc: Assertion `(old_top == initial_top (av) && old_size == 0) || ((unsigned long) (old_size) >= MINSIZE && prev_inuse (old_top) && ((unsigned long) old_end & (pagesize - 1)) == 0)' failed.
 void Test_B_Tree()
 {
-	Tree_Advanced_B<int> tree(5);
+	Tree_Advanced_B<int,int,5> tree;
 
 	for (int i = 1; i < 21; ++i)
 	{
-		tree.B_Tree_Insert(i);
+		tree.Element_Insert(i);
 		//B_Tree_Show(tree, "");
 	}
 	tree.B_Tree_Show("After Insert 1-20");
 
-	tree.B_Tree_Delete(20);
+	tree.Element_Delete(20);
 	tree.B_Tree_Show("After Delete 20");
-	tree.B_Tree_Delete(14);
+	tree.Element_Delete(14);
 	tree.B_Tree_Show("After Delete 14");
-	tree.B_Tree_Delete(15);
+	tree.Element_Delete(15);
 	tree.B_Tree_Show("After Delete 15");
-	tree.B_Tree_Delete(17);
+	tree.Element_Delete(17);
 	tree.B_Tree_Show("After Delete 17");
-	tree.B_Tree_Delete(2);
+	tree.Element_Delete(2);
 	tree.B_Tree_Show("After Delete 2");
-	tree.B_Tree_Delete(7);
+	tree.Element_Delete(7);
 	tree.B_Tree_Show("After Delete 7");
-	tree.B_Tree_Delete(9);
+	tree.Element_Delete(9);
 	tree.B_Tree_Show("After Delete 9");
 
 	std::cout << std::endl;
