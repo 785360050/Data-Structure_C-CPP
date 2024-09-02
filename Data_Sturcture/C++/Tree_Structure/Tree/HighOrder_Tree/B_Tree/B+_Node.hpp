@@ -1,15 +1,14 @@
 #pragma once
 
-
-///δ���
-/// �����ڵ��Ҷ�ӽڵ㵽�����������ѣ�������
+/// 未完成
+///  索引节点和叶子节点到底如何区分最佳，待考虑
 template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node
 {
 private:
-	KeyType* keys{ nullptr };			  // ���� ���max�� ��Сmin��
-	BPlus_Node<DataType>* parent{ nullptr };
-	int count{ 0 };			  // ��ǰԪ�ظ���
+	KeyType *keys{nullptr}; // 主键 最大max个 最小min个
+	BPlus_Node<DataType> *parent{nullptr};
+	int count{0}; // 当前元素个数
 protected:
 	void Check_Order_Vaild(int orders)
 	{
@@ -22,9 +21,9 @@ public:
 	{
 		Check_Order_Vaild(orders);
 
-		keys = new KeyType[orders]{};///orders�׽ڵ���orders-1��Ԫ��
+		keys = new KeyType[orders]{}; /// orders阶节点有orders-1个元素
 		if (!keys)
-			throw std::runtime_error("Node Create Failed: keys allocated failed");
+			throw std::exception("Node Create Failed: keys allocated failed");
 	}
 	~BPlus_Node()
 	{
@@ -39,7 +38,7 @@ template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node_Branch :public BPlus_Node<KeyType, DataType>
 {
 private:
-	BPlus_Node_Branch** child{ nullptr }; // �ӽڵ� ���max+1�� ��Сmin+1��
+	BPlus_Node_Branch **child{nullptr}; // 子节点 最大max+1个 最小min+1个
 public:
 	bool Is_Branch() override final { return true; }
 public:
@@ -49,9 +48,9 @@ public:
 	{
 		this->Check_Order_Vaild(orders);
 
-		child = new BPlus_Node * [orders] {};///ΪʲôҪ+2,�ݸ�Ϊ0
+		child = new BPlus_Node *[orders] {}; /// 为什么要+2,暂改为0
 		if (!child)
-			throw std::runtime_error("Node Create Failed: keys allocated failed");
+			throw std::exception("Node Create Failed: keys allocated failed");
 	}
 	~BPlus_Node_Branch()
 	{
@@ -63,8 +62,8 @@ public:
 template <typename KeyType = int, typename DataType = int>
 struct BPlus_Node_Leaf :public BPlus_Node<KeyType, DataType>
 {
-	DataType* data{ nullptr };		  // ��ʵ����  ���max�� ��Сmin�� �����ڲ���� data��nullptr
-	BPlus_Node<DataType>* next{ nullptr };	  // ָ���ֵܽ�� ������Ҷ�ӽ���ʱ�����ֵ
+	DataType *data{nullptr};			 // 真实数据  最大max个 最小min个 对于内部结点 data是nullptr
+	BPlus_Node<DataType> *next{nullptr}; // 指向兄弟结点 仅仅是叶子结点的时候才有值
 public:
 	bool Is_Child() override final { return false; }
 public:
