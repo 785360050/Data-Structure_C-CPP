@@ -1,20 +1,20 @@
 #pragma once
 
 /// <summary>
-/// Ë÷Òı½ÚµãÖĞµÄÔªËØÎªÃ¿¸ö×Ó½ÚµãµÄÄ©Î²ÔªËØ
-/// ¶¨ÒåËã·¨µÈ½¨Òé¿´WikiPidia£¬ÏêÏ¸ÇÒÓĞ´æ´¢Í¼£¬ÊµÏÖÉÏºÍ½Ì²ÄÉÏÓĞĞ©²»Ò»Ñù
-/// ÔËĞĞĞ§¹û¼ûhttps://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+/// ç´¢å¼•èŠ‚ç‚¹ä¸­çš„å…ƒç´ ä¸ºæ¯ä¸ªå­èŠ‚ç‚¹çš„æœ«å°¾å…ƒç´ 
+/// å®šä¹‰ç®—æ³•ç­‰å»ºè®®çœ‹WikiPidiaï¼Œè¯¦ç»†ä¸”æœ‰å­˜å‚¨å›¾ï¼Œå®ç°ä¸Šå’Œæ•™æä¸Šæœ‰äº›ä¸ä¸€æ ·
+/// è¿è¡Œæ•ˆæœè§https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
 ///
-/// ×Ü½á£º
-/// B+Ê÷µÄÒ¶×ÓÊÇÒ»¸öÁ´±í
-/// Ë÷Òı½ÚµãºÍÒ¶×Ó½Úµã½á¹¹²»Í¬£¬µ«ÊÇ´Ë´¦¹«ÓÃÒ»ÖÖstruct
-/// Ë÷Òı½ÚµãÖ®¼äÀàËÆB¡ªÊ÷£¬
-/// µ«ÊÇË÷Òı½ÚµãÓë×îµ×²ãµÄÒ¶×Ó½ÚµãĞèÒª×¢Òâ£ºÃ¿Ò»¸öË÷ÒıÔªËØ´æÒ¶×Ó½ÚµãµÄ·Ö¸îÔªËØ(ÔÚÒ¶×ÓÉÏ³öÏÖµÄ)
-///		×îµ×²ãµÄË÷Òı½ÚµãÖ»´æÓÒº¢×ÓÊ×ÔªËØkey(×î×óº¢×ÓÔªËØkey²»´æ)
-///		·Ç×îµ×²ãµÄË÷Òı½Úµã·Ö¸îÔªËØÊ±£¬²»Í¬ÓÚ×îµ×²ãË÷Òı½Úµã£¬ĞèÒªÏñB-Ê÷Ò»Ñù½«·Ö¸îÔªËØÒÆµ½ÉÏ²ã
-///		(ÕâÑùĞ§¹ûÊÇ¸ß²ãË÷ÒıÔªËØÒ²Ò»Ò»¶ÔÓ¦Ò¶×ÓµÄÓÒº¢×ÓÊ×ÔªËØkey)
+/// æ€»ç»“ï¼š
+/// B+æ ‘çš„å¶å­æ˜¯ä¸€ä¸ªé“¾è¡¨
+/// ç´¢å¼•èŠ‚ç‚¹å’Œå¶å­èŠ‚ç‚¹ç»“æ„ä¸åŒï¼Œä½†æ˜¯æ­¤å¤„å…¬ç”¨ä¸€ç§struct
+/// ç´¢å¼•èŠ‚ç‚¹ä¹‹é—´ç±»ä¼¼Bâ€”æ ‘ï¼Œ
+/// ä½†æ˜¯ç´¢å¼•èŠ‚ç‚¹ä¸æœ€åº•å±‚çš„å¶å­èŠ‚ç‚¹éœ€è¦æ³¨æ„ï¼šæ¯ä¸€ä¸ªç´¢å¼•å…ƒç´ å­˜å¶å­èŠ‚ç‚¹çš„åˆ†å‰²å…ƒç´ (åœ¨å¶å­ä¸Šå‡ºç°çš„)
+///		æœ€åº•å±‚çš„ç´¢å¼•èŠ‚ç‚¹åªå­˜å³å­©å­é¦–å…ƒç´ key(æœ€å·¦å­©å­å…ƒç´ keyä¸å­˜)
+///		éæœ€åº•å±‚çš„ç´¢å¼•èŠ‚ç‚¹åˆ†å‰²å…ƒç´ æ—¶ï¼Œä¸åŒäºæœ€åº•å±‚ç´¢å¼•èŠ‚ç‚¹ï¼Œéœ€è¦åƒB-æ ‘ä¸€æ ·å°†åˆ†å‰²å…ƒç´ ç§»åˆ°ä¸Šå±‚
+///		(è¿™æ ·æ•ˆæœæ˜¯é«˜å±‚ç´¢å¼•å…ƒç´ ä¹Ÿä¸€ä¸€å¯¹åº”å¶å­çš„å³å­©å­é¦–å…ƒç´ key)
 ///
-/// ×¢£ºkeyÔÚÍ¬Ò»¸öÊµÀıµÄÒ¶×Ó½ÚµãÖĞÖĞÎ¨Ò»£¬²åÈëÒÑ´æÔÚµÄkeyÎŞĞ§
+/// æ³¨ï¼škeyåœ¨åŒä¸€ä¸ªå®ä¾‹çš„å¶å­èŠ‚ç‚¹ä¸­ä¸­å”¯ä¸€ï¼Œæ’å…¥å·²å­˜åœ¨çš„keyæ— æ•ˆ
 /// </summary>
 
 #include <vector>
@@ -23,262 +23,153 @@
 
 #include "B+_Node.hpp"
 
-/// Ë÷Òı½ÚµãÔªËØ£¬È¡¸ÃÔªËØÓÒ×ÓÊ÷µÄ×îĞ¡ÔªËØ(¼´·Ö¸îÔªËØ)
-template
-<
-	typename DataType,
-	typename KeyType = int,
-	int orders = 5
->
+/// ç´¢å¼•èŠ‚ç‚¹å…ƒç´ ï¼Œå–è¯¥å…ƒç´ å³å­æ ‘çš„æœ€å°å…ƒç´ (å³åˆ†å‰²å…ƒç´ )
+template <typename DataType, typename KeyType = int, int order = 5, typename NodeType = Node_BPlus<KeyType, DataType, order>>
 class BPlus_Tree
 {
 public:
-	using Node_Type = BPlus_Node<KeyType, DataType>;
-private:
-	Node_Type *root;				   /// ¸ù½Úµã
-	const int element_max{orders};	   /// ×î´óÔªËØ¸öÊı(Æ½ºâºóÎªorders-1£¬¶àÓàµÄÒ»¸öÓÃÓÚ²åÈëÊ±Ô¤Áô¸øÒÑ¾­ÂúµÄ½Úµã)
-	const int element_min{orders / 2}; /// ×îÉÙÔªËØ¸öÊı(Ä¬ÈÏĞ´ËÀÎª orders / 2)
+	NodeType *root{nullptr};		  /// æ ¹èŠ‚ç‚¹
+
+	// size_key âˆˆ [order/2, order-1] æ—¶B+æ ‘ç¨³å®š
+	const int element_max{order - 1}; /// æœ€å¤§å…ƒç´ ä¸ªæ•°(å¹³è¡¡åä¸ºorders-1ï¼Œå¤šä½™çš„ä¸€ä¸ªç”¨äºæ’å…¥æ—¶é¢„ç•™ç»™å·²ç»æ»¡çš„èŠ‚ç‚¹)
+	const int element_min{order / 2}; /// æœ€å°‘å…ƒç´ ä¸ªæ•°(é»˜è®¤å†™æ­»ä¸º orders / 2)
 public:
-	/// ³õÊ¼»¯orders½×µÄB+Ê÷£¬Ä¬ÈÏÃ¿¸ö½Úµã×îÉÙÎªorders/2 (n½×½Úµã×î¶àÓĞn-1¸öÔªËØ)
-	// BPlus_Tree()
-	//{
-	//	if(orders<=2)
-	//		throw std::logic_error("Invalid Tree Orders: orders <= 2")
-	// }
+	/// åˆå§‹åŒ–ordersé˜¶çš„B+æ ‘ï¼Œé»˜è®¤æ¯ä¸ªèŠ‚ç‚¹æœ€å°‘ä¸ºorders/2 (né˜¶èŠ‚ç‚¹æœ€å¤šæœ‰n-1ä¸ªå…ƒç´ )
+	BPlus_Tree() { static_assert(order > 2, "order must be greater than 2"); }
 	~BPlus_Tree()
-	{ /// ²ã´Î±éÀúÊÍ·Å½Úµã
-		std::queue<Node_Type*> queue;
-		int i = 0;
-		queue.push(root);
-		while (!queue.empty())
-		{
-			auto node = queue.front();
-			if (node->child)
-				for (int i = 0; i <= node->count; ++i)
-					queue.push(node->child[i]);
-			queue.pop();
-			delete node;
-			++i;
-		}
-		std::cout << "Node Deleted Count: " << i << std::endl;
+	{ /// å±‚æ¬¡éå†é‡Šæ”¾èŠ‚ç‚¹
+	  // std::queue<NodeType*> queue;
+	  // int i = 0;
+	  // queue.push(root);
+	  // while (!queue.empty())
+	  // {
+	  // 	auto node = queue.front();
+	  // 	if (node->child)
+	  // 		for (int i = 0; i <= node->size_data; ++i)
+	  // 			queue.push(node->child[i]);
+	  // 	queue.pop();
+	  // 	delete node;
+	  // 	++i;
+	  // }
+	  // std::cout << "Node Deleted Count: " << i << std::endl;
 	}
 
-private: ///Utilities
-	// ´´½¨ĞÂµÄÄÚ²¿½áµã
-	BPlus_Node_Branch<KeyType,DataType>* Create_Branch()
-	{
-		return new BPlus_Node_Branch(element_max);
-	}
-	// ´´½¨ĞÂµÄÒ¶×Ó½áµã
-	BPlus_Node_Leaf<KeyType, DataType>* Create_Leaf()
-	{
-		return new BPlus_Node_Leaf(element_max);
-	}
-	// ´´½¨ĞÂµÄÒ¶×Ó½áµã
-	bool Key_Greater(const KeyType a,const KeyType b)
-	{
-		return a > b;
-	}
+private: /// Utilities
+	NodeType *_Create_Branch() const { return new NodeType(true); }
+	NodeType *_Create_Leaf() const { return new NodeType(false); }
 
-	/// ÏòÏÂ²ãÕÒkeyËùÔÚµÄ½Úµã£¬·µ»ØkeyËùÔÚµÄÏÂ²ã½Úµã
-	Node_Type* Locate_Child(Node_Type* node, int key)
+private: /// å…ƒç´ æ’å…¥ç›¸å…³
+	// å…ƒç´ çš„æ’å…¥ä»¥åŠåˆ†è£‚æ“ä½œé€»è¾‘
+
+	/// å°†å…ƒç´ key-valueæ’å…¥åˆ°å¶å­èŠ‚ç‚¹nodeä¸­
+	/// <param name="node">ä¸€å®šæ˜¯å¶å­èŠ‚ç‚¹</param>
+	void _Insert(NodeType *node, KeyType key, DataType data)
 	{
-		if (!node)
-			throw std::runtime_error("Node Unexists");
-		for (int i = 0; i < node->count; i++)
+		/// å…ˆæ’å…¥åˆ°å¶å­èŠ‚ç‚¹
+		node->Leaf_Element_Insert(key, data);
+
+		/// èŠ‚ç‚¹è¿‡è½½æ—¶åˆ†è£‚
+		while (node->size_key > element_max)
 		{
-			if (node->keys[i] < key)
-				continue;
-			if (key < node->keys[i])
-				return node->child[i];
+			// æ‹·è´æ•°æ®
+			int mid = node->size_data / 2;		// ä¸­é—´ä½ç½®ç´¢å¼•
+			KeyType split_key = node->key[mid]; // ä¸­é—´å…ƒç´ 
+
+			NodeType *sibling; // åˆ†è£‚ç»“ç‚¹
+			if (!node->is_branch)
+				sibling = node->Overflow_Leaf(); // å¶å­ç»“ç‚¹åˆ†è£‚
 			else
-				return node->child[i + 1];
-		}
-		return node->child[node->count];
-	}
-	/// ÏòÏÂ²ãÕÒkeyËùÔÚµÄ½Úµã£¬·µ»ØkeyËùÔÚµÄÏÂ²ã½Úµã
-	std::optional<int> Locate_Index_KeyInsert(Node_Type* node, int key)
-	{
-		if (!node)
-			throw std::runtime_error("Node Unexists");
-
-		for (int i = 0; i < node->count; ++i)
-		{
-			if (node->keys[i] < key)
-				continue;
-			if (key == node->keys[i])
-				return -1;
-			if (key < node->keys[i])
-				return i - 1;
-		}
-		return 0;
-	}
-	/// ·µ»ØkeyÔÚnodeÖĞµÄÏÂ±ê£¬²»´æÔÚ·µ»Ø-1
-	std::optional<int> Locate_IndexOfKey(Node_Type* node, int key)
-	{
-		if (!node)
-			throw std::runtime_error("Node Unexists");
-
-		for (int i = 0; i < node->count; ++i)
-		{
-			if (key == node->keys[i])
-				return i;
-		}
-		return std::nullopt;
-	}
-
-private: /// ÔªËØ²åÈëÏà¹Ø
-	// ÔªËØµÄ²åÈëÒÔ¼°·ÖÁÑ²Ù×÷Âß¼­
-
-	/// <summary>
-	/// ½«ÔªËØkey-value²åÈëµ½Ò¶×Ó½ÚµãnodeÖĞ
-	/// </summary>
-	/// <param name="node">Ò»¶¨ÊÇÒ¶×Ó½Úµã</param>
-	void _BPlus_Tree_Insert(Node_Type* node, KeyType key, DataType value)
-	{
-		Node_Type* parent;
-		int mid;
-		int temp;
-		int i;
-
-		/// ÏÈ²åÈëµ½Ò¶×Ó½Úµã
-		// ÏòºóÒÆ¶¯ÔªËØ
-		for (i = node->count; i > 0 && Key_Greater(node->keys[i - 1], key); i--)
-		{
-			node->keys[i] = node->keys[i - 1];
-			node->data[i] = node->data[i - 1];
-		}
-		// ²åÈëĞÂÔªËØ
-		node->keys[i] = key;
-		node->data[i] = value;
-		node->count++;
-
-		/// ½Úµã¹ıÔØÊ±·ÖÁÑ
-		while (node->count >= element_max)
-		{
-			Node_Type* sibling;
-			// ¿½±´Êı¾İ
-			mid = node->count / 2;	// ÖĞ¼äÎ»ÖÃË÷Òı
-			temp = node->keys[mid]; // ÖĞ¼äÔªËØ
-			/*·ÖÁÑ½áµã*/
-			if (!node->child) // Ò¶×Ó½áµã·ÖÁÑ
 			{
-				sibling = Create_Leaf();
-				sibling->count = node->count - mid;
-
-				for (int i = 0; i < sibling->count; ++i)
-				{ // ¿½±´ÔªËØºÍÊı¾İ
-					sibling->keys[i] = node->keys[mid + i];
-					sibling->data[i] = node->data[mid + i];
-					node->keys[mid + i] = node->data[mid + i] = 0; // ÖÃ¿Õ
-				}
-
-				// ²åÈëÒ¶×ÓµÄÁ´Ê½½Úµã
-				sibling->next = node->next;
-				node->next = sibling;
+				sibling = node->Overflow_Branch(); // ç´¢å¼•ç»“ç‚¹åˆ†è£‚
+				split_key = node->key[node->size_key - 1];
+				node->key[node->size_key - 1] = KeyType{};
+				--node->size_key;
 			}
-			else // Ë÷Òı½áµã·ÖÁÑ
-			{	 /// ×¢Òâ£ºË÷Òı½ÚµãµÄ·ÖÁÑ»á°Ñ·ÖÁÑ½ÚµãÏòÉÏÒÆ¶¯£¬¶ø²»ÊÇÏñ×Ó½ÚµãÒ»Ñù´æÓÒ×ÓÊ÷µÄµÚÒ»¸öÔªËØ
-				sibling = Create_Branch();
-				sibling->count = node->count - mid - 1; // ·ÖÁÑÔªËØ²»¸øĞÖµÜ½Úµã
 
-				/// ½«·Ö¸î³öÈ¥µÄº¢×Ó×ª½»¸øĞÂ·ÖÁÑµÄĞÖµÜ½Úµã
-				for (int i = 0; i < sibling->count; ++i)
-				{ // ¿½±´ÔªËØºÍÊı¾İ
-					sibling->keys[i] = node->keys[mid + i + 1];
-					sibling->child[i] = node->child[mid + i + 1];
-					sibling->child[i]->parent = sibling;
-
-					node->keys[mid + i + 1] = 0; // ÖÃ¿Õ
-					node->child[mid + i + 1] = nullptr;
-				}
-				//sibling->child[sibling->count] = node->child[node->count];
-				sibling->child[sibling->count] = node->child[node->count];
-				sibling->child[sibling->count]->parent = sibling;
-			}
-			node->count = mid;
-
-			/// ±»·ÖÁÑµÄÔªËØ²åÈë¸¸½Úµã
-			parent = node->parent;
-			if (!parent) // ¸¸½Úµã²»´æÔÚ£¬Éú³ÉĞÂË÷Òı½Úµã(¸ÃË÷Òı½ÚµãÎªĞÂ¸ù½Úµã)
+			/// è¢«åˆ†è£‚çš„å…ƒç´ æ’å…¥çˆ¶èŠ‚ç‚¹
+			NodeType *parent = node->parent;
+			if (!parent) // çˆ¶èŠ‚ç‚¹ä¸å­˜åœ¨ï¼Œç”Ÿæˆæ–°ç´¢å¼•èŠ‚ç‚¹(è¯¥ç´¢å¼•èŠ‚ç‚¹ä¸ºæ–°æ ¹èŠ‚ç‚¹)
 			{
-				parent = Create_Branch(element_max);
+				parent = _Create_Branch();
 				if (!parent)
 					throw std::runtime_error("Parent Create Failed");
 				parent->child[0] = node;
+				parent->size_child++;
 				node->parent = parent;
+				sibling->parent = parent;
 				root = parent;
 			}
 
-			/// Ë÷ÒıÔªËØ²åÈë¸¸½Úµã
+			/// ç´¢å¼•å…ƒç´ æ’å…¥çˆ¶èŠ‚ç‚¹
+			parent->Insert_Overflow_Key(split_key, sibling);
 
-			// ÏÈÒ»±ßÍùºóÒÆ¶¯ÔªËØ£¬Ò»±ß¶¨Î»²åÈëÎ»ÖÃ
-			for (i = parent->count; i > 0 && Element_Greater(parent->keys[i - 1], temp); i--)
-			{
-				parent->keys[i] = parent->keys[i - 1];
-				parent->child[i + 1] = parent->child[i];
-			}
-
-			parent->keys[i] = temp;
-			if (parent->child[0]->child) // Èô×Ó½ÚµãÎªË÷Òı½Úµã
-				node->keys[mid] = 0;
-			parent->child[i + 1] = sibling;
-			parent->count++;
-
-			sibling->parent = parent;
-
-			// ÏòÉÏ¼ÌĞøÅĞ¶ÏÊÇ·ñ¸¸½ÚµãĞèÒª·ÖÁÑ
+			// å‘ä¸Šç»§ç»­åˆ¤æ–­æ˜¯å¦çˆ¶èŠ‚ç‚¹éœ€è¦åˆ†è£‚
 			node = parent;
 		}
 	}
 
-private: /// ¸¨ÖúÏÔÊ¾µÄ²Ù×÷
-	// std::vector<std::vector<BPlus_Node*>> buffer;
-	/// ¾­µä»ØËİÊµÏÖ±éÀúÉú³ÉËùÓĞÊ÷ÖĞµÄ½ÚµãĞÅÏ¢£¬´æÈëÊı×é
-	void _BackTrace_Traverse(std::vector<Node_Type*>*& buffer, Node_Type* node, int level)
+private: /// è¾…åŠ©æ˜¾ç¤ºçš„æ“ä½œ
+	/// ç»å…¸å›æº¯å®ç°éå†ç”Ÿæˆæ‰€æœ‰æ ‘ä¸­çš„èŠ‚ç‚¹ä¿¡æ¯ï¼Œå­˜å…¥æ•°ç»„
+	void _BackTrace_Traverse(std::vector<std::vector<NodeType *>> &buffer, NodeType *node)
 	{
 		static int level = 0;
 		if (!node)
 			return;
 
 		buffer[level].push_back(node);
-		if (!node->child)
+		if (!node->is_branch)
 			return;
 
-		for (int i = 0; i <= node->count; ++i)
-		{ // ±éÀúËùÓĞº¢×Ó½Úµã£¬¼ÓÈë¶ÔÓ¦²ãµÄÊı×éÖĞ
+		for (int i = 0; i < node->size_child; ++i)
+		{ // éå†æ‰€æœ‰å­©å­èŠ‚ç‚¹ï¼ŒåŠ å…¥å¯¹åº”å±‚çš„æ•°ç»„ä¸­
 			level++;
-			BackTrace_Traverse(buffer, node->child[i], level);
+			_BackTrace_Traverse(buffer, node->child[i]);
 			level--;
 		}
 	}
-	/// ½«BackTrace_TraverseÉú³ÉµÄbuffer¸ñÊ½»¯Êä³ö
-	void _Print_Tree(std::vector<Node_Type*>*& buffer, int level)
+	void _Node_Print(NodeType *node)
+	{
+		for (int i{}; i < node->size_key; i++)
+		{
+			std::cout << node->key[i] << " ";
+		}
+		if (node->is_branch)
+		{
+			std::cout << "[ ";
+			for (int i = 0; i < node->size_child; ++i)
+				std::cout << node->child[i]->key[0] << ' ';
+			std::cout << ']';
+		}
+		if (node->parent)
+			std::cout << '{' << std::to_string(node->parent->key[0]) << '}';
+	}
+	/// å°†BackTrace_Traverseç”Ÿæˆçš„bufferæ ¼å¼åŒ–è¾“å‡º
+	void _Print_Tree(std::vector<std::vector<NodeType *>> &buffer, int level)
 	{
 
-		/// ÒÔĞĞÎªµ¥Î»ÏÔÊ¾Ã¿Ò»²ãµÄ½Úµã
+		/// ä»¥è¡Œä¸ºå•ä½æ˜¾ç¤ºæ¯ä¸€å±‚çš„èŠ‚ç‚¹
 		for (int i = 0; i < level - 1; ++i)
 		{
-			/// Ë÷Òı½ÚµãÉÔÎ¢¾ÓÖĞÒ»Ğ©ÏÔÊ¾
+			/// ç´¢å¼•èŠ‚ç‚¹ç¨å¾®å±…ä¸­ä¸€äº›æ˜¾ç¤º
 			for (int j = 0; j < (level - i); ++j)
 				std::cout << '\t';
 
-			for (const auto &node : buffer[i]) // Ë÷Òı½Úµã¸ñÊ½»¯
+			for (const auto &node : buffer[i]) // ç´¢å¼•èŠ‚ç‚¹æ ¼å¼åŒ–
 			{
-				Node_Print(node);
+				_Node_Print(node);
 				std::cout << '\t';
 			}
 			std::cout << std::endl;
 		}
 
-		/// ÏÔÊ¾×îµ×²ãµÄÒ¶×Ó½Úµã
+		/// æ˜¾ç¤ºæœ€åº•å±‚çš„å¶å­èŠ‚ç‚¹
 		auto node = buffer[level - 1][0];
 		while (node)
 		{
-			Node_Print(node);
+			_Node_Print(node);
 			if (node->next)
 			{
-				std::cout << "->";
+				std::cout << "-> ";
 				node = node->next;
 			}
 			else
@@ -287,91 +178,176 @@ private: /// ¸¨ÖúÏÔÊ¾µÄ²Ù×÷
 				return;
 			}
 		}
-
-
 	}
 
 public:
-	// ²åÈëÔªËØ
+	// æ’å…¥å…ƒç´ 
 	void Element_Insert(KeyType key, DataType element)
 	{
-		/// ¿ÕÊ÷´´½¨¸ù(Ò¶×Ó)½Úµã
+		/// ç©ºæ ‘åˆ›å»ºæ ¹(å¶å­)èŠ‚ç‚¹
 		if (!root)
 		{
-			root = Create_Leaf(element_max);
-			if (root)
+			root = _Create_Leaf();
+			if (!root)
 				throw std::runtime_error("Root Create Failed");
 		}
 
-		Node_Type* node = root;
+		NodeType *node = root;
 		int index;
 
-		/// ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-		/// ¶¨Î»²åÈëÔªËØµÄÎ»ÖÃ
-		/// ÏÈÕÒµ½²åÈëµÄÒ¶×Ó½Úµã£¬ÔÙÔÙÒ¶×Ó½ÚµãÖĞÕÒ²åÈëÎ»ÖÃË÷Òı
-		/// ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-		while (node->child)
+		/// â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+		/// å®šä½æ’å…¥å…ƒç´ çš„ä½ç½®
+		/// å…ˆæ‰¾åˆ°æ’å…¥çš„å¶å­èŠ‚ç‚¹ï¼Œå†å†å¶å­èŠ‚ç‚¹ä¸­æ‰¾æ’å…¥ä½ç½®ç´¢å¼•
+		/// â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+		while (node->is_branch)
 		{
-			node = Locate_Child(node, key); /// ĞŞ¸Änodeµ½ÏÂ²ã½Úµã
+			node = node->Locate_Child(key); /// ä¿®æ”¹nodeåˆ°ä¸‹å±‚èŠ‚ç‚¹
 			if (!node)
 				throw std::runtime_error("Node Unexists");
 		}
 
-		
-		if (Locate_IndexOfKey(node, key))
-			return; // ÒÑ¾­´æÔÚÔªËØÁË£¬Ö±½ÓÈ¡Ïû²åÈë²Ù×÷
+		if (node->Index_Key(key))
+			return; // å·²ç»å­˜åœ¨å…ƒç´ äº†ï¼Œç›´æ¥å–æ¶ˆæ’å…¥æ“ä½œ
 
-		/// ÕÒµ½²åÈëÎ»ÖÃºó²åÈëÔªËØ
-		_BPlus_Tree_Insert(node, key, element);
+		/// æ‰¾åˆ°æ’å…¥ä½ç½®åæ’å…¥å…ƒç´ 
+		_Insert(node, key, element);
 	}
-	// É¾³ıÔªËØ
+
+	/// åˆ é™¤å¶å­èŠ‚ç‚¹nodeä¸Šçš„ç¬¬indexä¸ªå…ƒç´ 
+	void _Delete(NodeType *node, int index)
+	{
+		/// è‹¥å¶å­èŠ‚ç‚¹åˆ é™¤æœ€åä¸€ä¸ªå…ƒç´ ï¼Œåˆ™ä¿®æ”¹å¯¹åº”ç´¢å¼•èŠ‚ç‚¹çš„ç´¢å¼•å€¼
+		if (index == node->size_key - 1 && node->is_branch && node->parent)
+		{
+			NodeType *node_index = node->parent;
+			int key_target = node->key[index];
+			int i = node_index->Index_Key(key_target).value_or(-1);
+			while (i >= node_index->size_key || i == -1)
+			{ // ä¸€ç›´å‘ä¸Šå±‚æ‰¾keyæ‰€åœ¨çš„èŠ‚ç‚¹
+				node_index = node_index->parent;
+				i = node_index->Index_Key(key_target).value_or(-1);
+			}
+			// æ‰¾åˆ°åè¦†ç›–æ•°æ®
+			node_index->key[i] = node->key[1];
+		}
+
+		/// åˆ é™¤å¶å­ç»“ç‚¹çš„æŒ‡å®šçš„å€¼
+		node->Leaf_Element_Delete(index);
+
+		NodeType *parent = node->parent;
+
+		/// ä¸€å±‚ä¸€å±‚å‘ä¸Šç»´æŠ¤ç´¢å¼•èŠ‚ç‚¹å…ƒç´ æ•°é‡
+		while (node->size_key < element_min && parent)
+		{
+			/// å®šä½ç»“ç‚¹åœ¨çˆ¶èŠ‚ç‚¹ä¸­çš„ç´¢å¼•ä½ç½®
+			auto result = node->Locate_Child_Index();
+			if (!result) // åœ¨ä»–çš„çˆ¶èŠ‚ç‚¹ä¸­æ²¡æ‰¾åˆ°è¿™ä¸ªå­©å­
+				throw std::logic_error("No Matching Node but Element Delete Found");
+			index = result.value();
+			NodeType *sibling{};
+			if (index == 0) /// æ²¡æœ‰å·¦å…„å¼Ÿ åªæœ‰å³å…„å¼Ÿ
+			{
+				sibling = parent->child[1];
+				if (sibling->size_key > element_min) /// å…„å¼Ÿæœ‰å¯Œä½™å…ƒç´ ï¼Œå°†å¯Œä½™å…ƒç´ ç§»è¿‡æ¥(æœ€å°å…ƒç´ )
+				{
+					if (node->is_branch)
+						parent->Branch_Rotate_Left(0);
+					else
+						parent->Leaf_Rotate_Left(0);
+				}
+				else /// å…„å¼Ÿä¿©èŠ‚ç‚¹éƒ½æ²¡æœ‰å¯Œä½™å…ƒç´ æ—¶ï¼Œåˆå¹¶å…„å¼Ÿä¸ºä¸€ä¸ª
+					parent->Merge_Neighbour_Child(0);
+			}
+			else /// åªæœ‰å·¦å…„å¼Ÿã€æˆ–ä¸¤è¾¹éƒ½æœ‰å…„å¼Ÿï¼Œå‘å·¦è¾¹å…„å¼Ÿæ‹¿å…ƒç´ 
+			{
+				sibling = parent->child[index - 1];
+				if (sibling->size_key > element_min)
+				{
+					// ä»å·¦å…„å¼Ÿè¿ç§»æ•°æ®
+					if (node->is_branch)
+						parent->Branch_Rotate_Right(index - 1);
+					else
+						parent->Leaf_Rotate_Right(index - 1);
+				}
+				else /// åˆå¹¶å…„å¼Ÿ
+					parent->Merge_Neighbour_Child(index - 1);
+			}
+
+			// å‘ä¸Šå±‚æ›´æ–°
+			node = parent;
+			parent = node->parent;
+		}
+
+		/// å¦‚æœæ ¹èŠ‚ç‚¹çš„ä¸¤ä¸ªå­©å­åˆå¹¶ï¼Œå°†åˆå¹¶åçš„å­©å­èŠ‚ç‚¹ä½œä¸ºæ–°çš„æ ¹èŠ‚ç‚¹
+		if (root->is_branch and !root->size_key)
+		{
+			node = root;
+			root = node->child[0];
+
+			/// åˆ é™¤å¤´èŠ‚ç‚¹åæ¸…ç©ºå­©å­çš„çˆ¶èŠ‚ç‚¹
+			node->child[0]->parent = nullptr;
+			delete node;
+		}
+	}
+	// åˆ é™¤å…ƒç´ 
 	void Element_Delete(KeyType key)
 	{
+		NodeType *node = root;
 
+		/// å…ˆæŸ¥ç´¢å¼•èŠ‚ç‚¹æ‰¾åˆ°å¶å­ï¼Œå†æ‰¾ç›®æ ‡å…ƒç´ åœ¨èŠ‚ç‚¹ä¸­çš„index
+		while (node->is_branch)
+		{
+			node = node->Locate_Child(key);
+			if (!node)
+				throw std::runtime_error("Node Unexists");
+		}
+
+		// index = Locate_Key_Delete(node, key);
+		auto index = node->Index_Key(key);
+		if (!index)
+			return; // ä¸å­˜åœ¨è¯¥å…ƒç´ 
+
+		/// æ‰¾åˆ°åˆ é™¤ä½ç½®ååˆ é™¤ç›®æ ‡å…ƒç´ 
+		_Delete(node, index.value());
+
+		return;
 	}
 
-	// ËÑË÷Ò¶×ÓÖĞkeyËù¶ÔÓ¦µÄÔªËØÊı¾İ
+	// æœç´¢å¶å­ä¸­keyæ‰€å¯¹åº”çš„å…ƒç´ æ•°æ®
 	std::optional<DataType> Search(KeyType key)
 	{
 		auto node = root;
-		while (node->child)
+		while (node->is_branch)
 		{
-			node = Locate_Child(node, key);
+			node = node->Locate_Child(key);
 			if (!node)
 				throw std::runtime_error("Node Unexists");
 		}
 
-		auto index = Locate_IndexOfKey(node, key); // std::optionalÖ§³ÖÓëbool×ª»»,ÓĞÖµÊ±Îªtrue
-		if(index.has_value())
-			return node->data[index];
+		auto index = node->Index_Key(key); // std::optionalæ”¯æŒä¸boolè½¬æ¢,æœ‰å€¼æ—¶ä¸ºtrue
+		if (index.has_value())
+			return node->data[index.value()];
 		else
 			return std::nullopt;
 	}
-	// ÏÔÊ¾Õû¸öÊ÷
-	void Show(const std::string& info="")
+	// æ˜¾ç¤ºæ•´ä¸ªæ ‘
+	void Show(const std::string &info = "")
 	{
 		auto node = root;
 		int level = 1;
-		//while (node->child)
-		while (node->Is_Branch())
-		{ // ËùÓĞÒ¶×Ó½ÚµãÉî¶ÈÏàÍ¬
+		// while (node->child)
+		while (node->is_branch)
+		{ // æ‰€æœ‰å¶å­èŠ‚ç‚¹æ·±åº¦ç›¸åŒ
 			++level;
-			node = dynamic_cast<BPlus_Node_Branch*>(node)->child[0];
+			node = node->child[0];
 		}
 
-		std::vector<Node_Type*>* buffer = new std::vector<Node_Type*>[level];
-		_BackTrace_Traverse(buffer, node, 0);
+		std::vector<std::vector<NodeType *>> buffer;
+		buffer.resize(level);
+		_BackTrace_Traverse(buffer, root);
 
 		std::cout << "Tree=======================================" << std::endl;
 		_Print_Tree(buffer, level);
 		std::cout << "===========================================" << std::endl;
-		delete[] buffer;
 	}
-
 };
-
-
-
-
-
-

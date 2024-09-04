@@ -19,7 +19,7 @@ static bool  SetEncode(int EncodeId = 936)
 
 
 #include "Tree_B.hpp"
-// #include "Tree_B+.hpp"
+
 
 // 好像有bug，晚点再看
 // main: malloc.c:2617: sysmalloc: Assertion `(old_top == initial_top (av) && old_size == 0) || ((unsigned long) (old_size) >= MINSIZE && prev_inuse (old_top) && ((unsigned long) old_end & (pagesize - 1)) == 0)' failed.
@@ -27,7 +27,7 @@ void Test_B_Tree()
 {
 	Tree_Advanced_B<int,int,5> tree;
 
-	for (int i = 1; i < 21; ++i)
+	for (int i = 1; i < 23; ++i)
 	{
 		tree.Element_Insert(i);
 		//B_Tree_Show(tree, "");
@@ -52,92 +52,90 @@ void Test_B_Tree()
 	std::cout << std::endl;
 }
 
+/// 未完成
+#include "Tree_B+.hpp"
+void Test_BPlus_Tree()
+{
+	BPlus_Tree<int> tree;
+	for (int i = 1; i < 23; i++)
+	// for (int i = 1; i < 60; i++)
+	{
+		tree.Element_Insert(i, i);
+		std::cout << std::endl;
+		tree.Show();
+	}
+	tree.Show();
 
-// ///未完成
-// void Test_BPlus_Tree()
-// {
-// 	BPlus_Tree<int> tree;
-// 	//for (int i = 0; i < 30; i++)
-// 	for (int i = 0; i < 60; i++)
-// 	{
-// 		tree.Element_Insert(i, i);
-// 		std::cout << std::endl;
-// 		tree.Show();
-// 	}
+	printf("\n删除元素\n");
 
-// 	printf("\n删除元素\n");
+	// tree.Element_Delete(37);
+	// tree.Show();
 
-// 	tree.Element_Delete(37);
-// 	tree.Show();
+	tree.Element_Delete(2);
+	tree.Show();
+	tree.Element_Delete(3);
+	tree.Show();
+	// tree.Element_Delete(4);
+	// tree.Show();
+	// tree.Element_Delete(5);
+	// tree.Show();
+	// tree.Element_Delete(6);
+	// tree.Show();
+	// tree.Element_Delete(7);
+	// tree.Show();
+	// tree.Element_Delete(8);
+	// tree.Show();
+	// tree.Element_Delete(9);
+	// tree.Show();
+	// tree.Element_Delete(10);
+	// tree.Show();
+	// tree.Element_Delete(11);
+	// tree.Show();
+	// tree.Element_Delete(12);
+	// tree.Show();
+	// tree.Element_Delete(26);
+	// tree.Show();
+	// tree.Element_Delete(25);
+	// tree.Show();
+	// tree.Element_Delete(23);
+	// tree.Show();
+	// tree.Element_Delete(22);
+	// tree.Show();
+	// tree.Element_Delete(18);//没有修改根节点数据
+	// tree.Show();
+	// tree.Element_Delete(21);
+	// tree.Show();
 
-// 	tree.Element_Delete(1);
-// 	tree.Show();
-// 	tree.Element_Delete(2);
-// 	tree.Show();
-// 	tree.Element_Delete(3);
-// 	tree.Show();
-// 	tree.Element_Delete(4);
-// 	tree.Show();
-// 	tree.Element_Delete(5);
-// 	tree.Show();
-// 	tree.Element_Delete(6);
-// 	tree.Show();
-// 	tree.Element_Delete(7);
-// 	tree.Show();
-// 	tree.Element_Delete(8);
-// 	tree.Show();
-// 	tree.Element_Delete(9);
-// 	tree.Show();
-// 	tree.Element_Delete(10);
-// 	tree.Show();
-// 	tree.Element_Delete(11);
-// 	tree.Show();
-// 	tree.Element_Delete(12);
-// 	tree.Show();
-// 	tree.Element_Delete(26);
-// 	tree.Show();
-// 	tree.Element_Delete(25);
-// 	tree.Show();
-// 	tree.Element_Delete(23);
-// 	tree.Show();
-// 	tree.Element_Delete(22);
-// 	tree.Show();
-// 	tree.Element_Delete(18);//没有修改根节点数据
-// 	tree.Show();
-// 	tree.Element_Delete(21);
-// 	tree.Show();
+	//for (int i = 1; i < 30; i += 2)
+	//	BPlus_Tree_Insert(tree, i, i);
+	//tree.Show();
 
-// 	//for (int i = 1; i < 30; i += 2)
-// 	//	BPlus_Tree_Insert(tree, i, i);
-// 	//tree.Show();
+	//tree.Element_Delete(0);
+	//tree.Show();
+	//tree.Element_Delete(9);
+	//tree.Show();
+	//tree.Element_Delete(17);
+	//tree.Show();
+	//tree.Element_Delete(21);
+	//tree.Show();
 
-// 	//tree.Element_Delete(0);
-// 	//tree.Show();
-// 	//tree.Element_Delete(9);
-// 	//tree.Show();
-// 	//tree.Element_Delete(17);
-// 	//tree.Show();
-// 	//tree.Element_Delete(21);
-// 	//tree.Show();
+	// for (int i = 0; i < 60; ++i)
+	// {
+	// 	auto v = tree.Search(i);
+	// 	if (v.has_value())
+	// 		std::cout << "Key " << i << ':' << v.value() << std::endl;
+	// 	else
+	// 		std::cout << "Key " << i << "Not Found" << std::endl;
+	// }
 
-// 	for (int i = 0; i < 60; ++i)
-// 	{
-// 		auto v = tree.Search(i);
-// 		if (v.has_value())
-// 			std::cout << "Key " << i << ':' << v.value() << std::endl;
-// 		else
-// 			std::cout << "Key " << i << "Not Found" << std::endl;
-// 	}
-
-// 	//BPlus_Tree_Destroy(tree);
-// }
+}
 
 
 int main()
 {
 	// SetEncode(65001);//设置控制台为utf-8编码格式
-	Test_B_Tree();
-	// Test_BPlus_Tree();
+	// Test_B_Tree();
+	Test_BPlus_Tree();
 
 	return EXIT_SUCCESS;
 }
