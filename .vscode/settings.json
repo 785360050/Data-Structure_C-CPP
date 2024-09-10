@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "*.log.*": "log",
+        "*.json": "jsonc",
+        "*.h": "c",
         "string": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -65,6 +67,8 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "version": "cpp"
+        "version": "cpp",
+        "*.ipp": "cpp",
+        "future": "cpp"
     }
 }

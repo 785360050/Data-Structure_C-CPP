@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Linear_Structure/Linear_List/Link_List/main",
+            "program": "/mnt/WorkSpace/GitHub/Data-Structure_C-CPP/Data_Sturcture/C++/Tree_Structure/Tree/HighOrder_Tree/B_Tree/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

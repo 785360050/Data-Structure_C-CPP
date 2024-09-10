@@ -75,58 +75,27 @@ void Test_BPlus_Tree()
 	tree.Show();
 	tree.Element_Delete(3);
 	tree.Show();
-	// tree.Element_Delete(4);
-	// tree.Show();
-	// tree.Element_Delete(5);
-	// tree.Show();
-	// tree.Element_Delete(6);
-	// tree.Show();
-	// tree.Element_Delete(7);
-	// tree.Show();
-	// tree.Element_Delete(8);
-	// tree.Show();
-	// tree.Element_Delete(9);
-	// tree.Show();
-	// tree.Element_Delete(10);
-	// tree.Show();
-	// tree.Element_Delete(11);
-	// tree.Show();
-	// tree.Element_Delete(12);
-	// tree.Show();
-	// tree.Element_Delete(26);
-	// tree.Show();
-	// tree.Element_Delete(25);
-	// tree.Show();
-	// tree.Element_Delete(23);
-	// tree.Show();
-	// tree.Element_Delete(22);
-	// tree.Show();
-	// tree.Element_Delete(18);//没有修改根节点数据
-	// tree.Show();
-	// tree.Element_Delete(21);
-	// tree.Show();
+	tree.Element_Delete(4);
+	tree.Show();
+	tree.Element_Delete(5);
+	tree.Show();
+	tree.Element_Delete(6);
+	tree.Show();
+	tree.Element_Delete(7);
+	tree.Show();
+	tree.Element_Delete(26);
+	tree.Show();
+	tree.Element_Delete(25);
+	tree.Show();
+	tree.Element_Delete(23);
+	tree.Show();
+	tree.Element_Delete(22);
+	tree.Show();
+	tree.Element_Delete(18);//没有修改根节点数据
+	tree.Show();
+	tree.Element_Delete(21);
+	tree.Show();
 
-	//for (int i = 1; i < 30; i += 2)
-	//	BPlus_Tree_Insert(tree, i, i);
-	//tree.Show();
-
-	//tree.Element_Delete(0);
-	//tree.Show();
-	//tree.Element_Delete(9);
-	//tree.Show();
-	//tree.Element_Delete(17);
-	//tree.Show();
-	//tree.Element_Delete(21);
-	//tree.Show();
-
-	// for (int i = 0; i < 60; ++i)
-	// {
-	// 	auto v = tree.Search(i);
-	// 	if (v.has_value())
-	// 		std::cout << "Key " << i << ':' << v.value() << std::endl;
-	// 	else
-	// 		std::cout << "Key " << i << "Not Found" << std::endl;
-	// }
 
 }
 

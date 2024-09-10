@@ -149,6 +149,25 @@ private:
         }
     }
 
+    void Delete(Node_BPlus<KeyType, DataType> *node, int position)
+    { /// 删除node节点中下标为Position的元素
+        node->key.erase(node->key.begin() + position);
+        node->data.erase(node->data.begin() + position);
+
+        if (node->key.size() < order / 2) /// 阈值可自定义
+            RestoreBTree(node);           /// 调整B树
+
+        if (position == node->key.size())
+        { /// 删除末尾元素时，更新上层索引节点key
+            // Update_Index();
+            for (int i = 0; i < node->parent->key.size(); ++i)
+            {
+                if (node->parent->index_ptr[i] == node)
+                    node->parent->key[i] = node->key[node->key.size() - 1];
+            }
+        }
+    }
+
 public:
     void insert(KeyType key, DataType data)
     {
@@ -319,25 +338,7 @@ public:
         }
     }
     
-    void Delete(Node_BPlus<KeyType, DataType>* node, int position)
-    {///删除node节点中下标为Position的元素
-        node->key.erase(node->key.begin() + position);
-        node->data.erase(node->data.begin() + position);
-
-        if (node->key.size() < order / 2)	///阈值可自定义
-            RestoreBTree(node);///调整B树
-
-        if (position == node->key.size())
-        {///删除末尾元素时，更新上层索引节点key
-            //Update_Index();
-            for (int i = 0; i < node->parent->key.size(); ++i)
-            {
-                if (node->parent->index_ptr[i] == node)
-                    node->parent->key[i] = node->key[node->key.size() - 1];
-            }
-        }
-
-    }
+    
 
     void erase(KeyType _key)
     {

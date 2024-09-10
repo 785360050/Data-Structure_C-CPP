@@ -14,8 +14,8 @@ public:
 	/// ============================================================================================================
 	/// 		Index Node
 	/// ============================================================================================================
-	Node_BPlus *child[order+1]; /// 索引指针。(要不要多留一个？)
-	int size_child;			  /// 当前索引指针个数
+	Node_BPlus *child[order + 1]; /// 索引指针。(末尾冗余一个，缓存待调整的元素。注：算法基于该特性)
+	int size_child;				  /// 当前索引指针个数
 public:
 	/// ============================================================================================================
 	/// 		Leaf
@@ -47,7 +47,6 @@ public:
 	void Child_Append(Node_BPlus *child) { this->child[size_child++] = child; }
 	void Data_Append(DataType data) { this->data[size_data++] = data; }
 
-	
 	void Leaf_Element_Insert(KeyType key, DataType data)
 	{ /// 先插入到叶子节点
 		// 向后移动元素
@@ -96,9 +95,9 @@ public:
 	{
 		/// 定位结点在父节点中的索引位置
 		int index = 0;
-		while ( index <= parent->size_key )
+		while (index <= parent->size_key)
 		{
-			if (parent->child[index] != this)
+			if (parent->child[index] == this)
 				return index;
 			index++;
 		}
@@ -112,7 +111,7 @@ public:
 		for (int i = 0; i < mid; ++i) // 拷贝元素和数据
 		{
 			sibling->key[i] = this->key[mid + i + 1]; // 分割元素的后一个元素开始
-			this->key[mid + i + 1] = KeyType{}; // 置空
+			this->key[mid + i + 1] = KeyType{};		  // 置空
 			--size_key;
 			++sibling->size_key;
 
@@ -150,8 +149,8 @@ public:
 		}
 
 		// 移动末尾的叶子结点到兄弟节点
-		sibling->child[sibling->size_child] = this->child[this->size_child+1];
-		this->child[this->size_child+1] = nullptr;
+		sibling->child[sibling->size_child] = this->child[this->size_child + 1];
+		this->child[this->size_child + 1] = nullptr;
 		--this->size_child;
 		sibling->child[sibling->size_child]->parent = sibling;
 		++sibling->size_child;
@@ -159,7 +158,7 @@ public:
 		return sibling;
 	}
 
-	void Insert_Overflow_Key(KeyType split_key,Node_BPlus *sibling)
+	void Insert_Overflow_Key(KeyType split_key, Node_BPlus *sibling)
 	{
 		auto mid = this->size_data / 2;
 		// 先一边往后移动元素，一边定位插入位置
@@ -183,7 +182,7 @@ public:
 	// 内部结点的左旋转 把右节点的第一个值移到父节点 父节点对应的值移到左节点
 	void Branch_Rotate_Left(int left_child_index)
 	{
-		auto parent = this;//当前节点作为父节点，控制左右孩子旋转
+		auto parent = this; // 当前节点作为父节点，控制左右孩子旋转
 
 		Node_BPlus *left = parent->child[left_child_index];
 		Node_BPlus *right = parent->child[left_child_index + 1];
@@ -191,23 +190,26 @@ public:
 		left->child[left->size_key + 1] = right->child[0];
 		left->child[left->size_key + 1]->parent = left;
 		left->size_key++;
+		left->size_child++;
 
 		parent->key[left_child_index] = right->key[0];
 
 		// 对右节点进行移位
 		for (int i = 0; i < right->size_key - 1; i++)
 			right->key[i] = right->key[i + 1];
-
-		for (int i = 0; i < right->size_key; i++)
-			right->child[i] = right->child[i + 1];
-
 		right->size_key--;
+		right->key[right->size_key] = KeyType{};
+
+		for (int i = 0; i < right->size_child; i++)
+			right->child[i] = right->child[i + 1];
+		right->size_child--;
+		// 此处无需置空，移动的时候多遍历一次，利用末尾冗余的空指针覆盖
 	}
 
 	// 叶子结点的左旋转 把右节点的第一个值移到左节点
 	void Leaf_Rotate_Left(int left_child_index)
 	{
-		auto parent=this;//当前节点作为父节点，控制左右孩子旋转
+		auto parent = this; // 当前节点作为父节点，控制左右孩子旋转
 
 		Node_BPlus *left = parent->child[left_child_index];
 		Node_BPlus *right = parent->child[left_child_index + 1];
@@ -215,16 +217,15 @@ public:
 		left->data[left->size_key] = right->data[0];
 		left->size_key++;
 
+		// 右兄弟的收个元素被移动到左兄弟的最后一个位置，所以更新父节点索引key
+		parent->key[left_child_index] = right->key[0];
+
 		// 对右节点进行移位
 		for (int i = 0; i < right->size_key - 1; i++)
 		{
 			right->key[i] = right->key[i + 1];
 			right->data[i] = right->data[i + 1];
 		}
-
-		// 覆盖完成后才能设置父节点值，否则是原来的值，可能变成左兄弟的末尾元素
-		parent->key[left_child_index] = right->key[0];
-
 		right->size_key--;
 	}
 
@@ -243,19 +244,19 @@ public:
 				left->key[left->size_key + i] = right->key[i];
 				left->data[left->size_key + i] = right->data[i];
 			}
-
 			left->size_key += right->size_key;
 
 			/// 修改索引元素
 			for (int i = left_child_index; i < parent->size_key - 1; i++)
 				parent->key[i] = parent->key[i + 1];
-			parent->key[parent->size_key - 1] = 0;
+			parent->key[parent->size_key - 1] = KeyType{};
+			--parent->size_key;
+
 			//(合并到左节点不应该删右边的索引吗？)
 			// 删除左节点的索引(直接覆盖) (int i = index是否+1有bug)
-			for (int i = left_child_index + 1; i <= parent->size_key - 1; i++)
+			for (int i = left_child_index + 1; i < parent->size_child; i++)
 				parent->child[i] = parent->child[i + 1];
-			parent->child[parent->size_key] = nullptr;
-			parent->size_key--;
+			parent->size_child--;
 
 			left->next = right->next;
 		}
@@ -268,40 +269,43 @@ public:
 			left->size_key++;
 
 			// 把右边元素合并到左边
-			for (int i = 0; i < right->size_key; ++i)
+			for (int i{}, right_key_size{right->size_key}; i < right_key_size; ++i)
 			{
-				left->key[left->size_key + i] = right->key[i];
-				right->key[i] = 0;
+				left->key[left->size_key] = right->key[i];
+				++left->size_key;
+				right->key[i] = KeyType{};
+				--right->size_key;
 			}
-
-			for (int i = 0; i <= right->size_key; ++i)
+			for (int i{}, right_child_size{right->size_child}; i < right_child_size; ++i)
 			{
-				left->child[left->size_key + i] = right->child[i];
+				left->child[left->size_child] = right->child[i];
+				++left->size_child;
 				right->child[i]->parent = left;
 				right->child[i] = nullptr;
+				--right->size_child;
 			}
-
-			left->size_key += right->size_key;
-			right->size_key = 0;
 
 			/// 修改父索引节点
 			// 删除移动下来的key
-			for (int i = left_child_index; i < parent->size_key - 1; i++)
+			for (int i{left_child_index}; i < parent->size_key - 1; i++)
+			{
 				parent->key[i] = parent->key[i + 1];
-			parent->key[parent->size_key - 1] = 0;
+				--parent->size_key;
+			}
+			parent->size_key--;
+			parent->key[parent->size_key] = KeyType{}; // 末尾置空
 
 			// 合并索引后，删除夫节点的孩子索引(直接覆盖，每次覆盖右孩子)
-			for (int i = left_child_index + 1; i <= parent->size_key; i++)
+			for (int i{left_child_index + 1}, child_size{parent->size_child}; i < child_size; i++)
 				parent->child[i] = parent->child[i + 1];
-			parent->child[parent->size_key] = nullptr;
-			parent->size_key--;
+			--parent->size_child;
+			parent->child[parent->size_child] = nullptr;
 
-			left->next = right->next;
+			/// ============================================================================================================
+			/// 		此处不要处理删除父节点，移动后会统一处理删除
+			/// ============================================================================================================
 		}
-
-		/*修改父节点*/
-
-		/*释放右节点*/
+		// 删除多余的右节点
 		delete right;
 	}
 
