@@ -28,6 +28,7 @@ namespace Painter
 		{
 			for (int i = 10; i < 15; i++)
 				queue.push(i);
+			Update_Area_Size();
 
 		}
 
@@ -40,13 +41,16 @@ namespace Painter
 		}
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
 		{
+			// QGraphicsItem::paint(painter,option,widget);
+
 			painter->setPen({Qt::gray, 5});
 			static QFont font{"Cascadia Code",16};
 			painter->setFont(font);
 
 			auto copy_queue=queue;
-			QPoint pos{-200,-60};
-			painter->drawText(QRect(pos.x()-100,pos.y(),100,50),Qt::AlignCenter,"Front");
+			QPoint pos{-area.width()/2,-25};
+			painter->drawText(QRect(pos.x(),pos.y(),100,50),Qt::AlignCenter,"Front");
+			pos+=QPoint{100,0};
 			while(!copy_queue.empty())
 			{
 				Draw_Element(painter,pos,QString::fromStdString(std::to_string(copy_queue.front())));
@@ -54,16 +58,24 @@ namespace Painter
 
 				pos+=QPoint{50,0};
 			}
-			painter->drawText(QRect(pos.x()+25,pos.y(),50,50),Qt::AlignCenter,"Back");
+			painter->setPen({Qt::gray, 5});
+			painter->drawText(QRect(pos.x(),pos.y(),100,50),Qt::AlignCenter,"Back");
+
+
 		}
 
+		void Update_Area_Size()
+		{
+			int width=queue.size()*50+200;
+			this->area.setRect(-width/2,-25,width,50);
+		}
 	public: // Interactions
-		void Element_Push(const DataType &element) { queue.push(element);}
-		void Element_Pop() { queue.pop();}
+		void Element_Push(const DataType &element) { queue.push(element);Update_Area_Size();}
+		void Element_Pop() { queue.pop();Update_Area_Size();}
 		int Get_Front() { return queue.front();}
 		bool Is_Empty() { return queue.empty();}
 		int Get_Size() { return queue.size(); }
-		void Clear() { while(!queue.empty())queue.pop(); };
+		void Clear() { while(!queue.empty())queue.pop(); Update_Area_Size();};
 	};
 }
 

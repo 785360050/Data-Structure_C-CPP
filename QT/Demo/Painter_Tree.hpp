@@ -66,7 +66,7 @@ public:
 		bound.setHeight((2*level-1)*node_size.height());
 		int leaves_count=std::pow(branch,level-1);
 		bound.setWidth(leaves_count*node_size.width());
-		this->size=bound;
+		this->area=bound;
 
 	}
 	~Demo_Tree(){}

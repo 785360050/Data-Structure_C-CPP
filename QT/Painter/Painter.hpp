@@ -13,7 +13,7 @@ namespace Painter
 class Painter: public QGraphicsItem
 {
 protected:
-	QRect size;
+	QRect area;
 protected:
 	QColor getRandomColor()
 	{
@@ -31,8 +31,10 @@ public:
 
 	}
 
-	QRectF boundingRect() const override { return size; };
+	QRectF boundingRect() const override { return area; };
 	// void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+
 };
 
 }

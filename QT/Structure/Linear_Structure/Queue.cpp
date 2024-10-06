@@ -39,7 +39,8 @@ void View::Queue::Element_Push()
 	{
 		painter.Element_Push(element);
 		std::cout<<"Push: "+std::to_string(element);
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
+		// painter.boundingRect().size();
 	}
 	catch(const std::exception& e)
 	{
@@ -52,7 +53,7 @@ void View::Queue::Element_Pop()
 	{
 		painter.Element_Pop();
 		std::cout<<"Pop";
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{

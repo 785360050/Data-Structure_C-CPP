@@ -14,270 +14,258 @@
    <string>Window</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTreeWidget" name="treeWidget">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>301</width>
-      <height>851</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>Logic Structure</string>
-     </property>
-    </column>
+   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,4">
     <item>
-     <property name="text">
-      <string>Linear_Structure</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Linear_List</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Stack</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Queue</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Skip_List</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>String</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tree_Structure</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Tree</string>
-      </property>
+     <widget class="QTreeWidget" name="treeWidget">
+      <column>
+       <property name="text">
+        <string>Logic Structure</string>
+       </property>
+      </column>
       <item>
        <property name="text">
-        <string>Search_Tree</string>
+        <string>Linear_Structure</string>
        </property>
        <item>
         <property name="text">
-         <string>Normal_Search_Tree</string>
+         <string>Linear_List</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>AVL_Tree</string>
+         <string>Stack</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Red_Black_Tree</string>
+         <string>Queue</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>B_Tree</string>
+         <string>Skip_List</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>B+_Tree</string>
+         <string>String</string>
         </property>
        </item>
       </item>
       <item>
        <property name="text">
-        <string>Thread_Tree</string>
+        <string>Tree_Structure</string>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Normal_Tree</string>
-       </property>
-      </item>
-     </item>
-     <item>
-      <property name="text">
-       <string>MergeFindSet</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Heap</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Graph_Structure</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Graph</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Set_Structure</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Set</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Demo</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Tree</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Binary_Tree</string>
-      </property>
-     </item>
-    </item>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>20</y>
-      <width>1411</width>
-      <height>841</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <property name="tabsClosable">
-        <bool>true</bool>
-       </property>
-       <property name="movable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="tab">
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-        <widget class="QLabel" name="label_2">
-         <property name="geometry">
-          <rect>
-           <x>350</x>
-           <y>90</y>
-           <width>601</width>
-           <height>201</height>
-          </rect>
-         </property>
+       <item>
+        <property name="text">
+         <string>Tree</string>
+        </property>
+        <item>
          <property name="text">
-          <string>Welcome</string>
+          <string>Search_Tree</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+         <item>
+          <property name="text">
+           <string>Normal_Search_Tree</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>AVL_Tree</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Red_Black_Tree</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>B_Tree</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>B+_Tree</string>
+          </property>
+         </item>
+        </item>
+        <item>
+         <property name="text">
+          <string>Thread_Tree</string>
          </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Normal_Tree</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>MergeFindSet</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Heap</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>Graph_Structure</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Graph</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>Set_Structure</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Set</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>Demo</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Binary_Tree</string>
+        </property>
+       </item>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,1">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="tabsClosable">
+         <bool>true</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Tab 1</string>
+         </attribute>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>350</x>
+            <y>90</y>
+            <width>601</width>
+            <height>201</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Welcome</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
         </widget>
        </widget>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>{Selected Structure}</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_selected">
-             <property name="text">
-              <string>{Structure Class Name}</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="button_clear_console">
-             <property name="text">
-              <string>Clear Console</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QTextBrowser" name="console">
-           <property name="focusPolicy">
-            <enum>Qt::FocusPolicy::NoFocus</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1">
-         <item>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="button_back">
-             <property name="text">
-              <string>Back</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="button_redo">
-             <property name="text">
-              <string>Redo</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QTextBrowser" name="textBrowser_2"/>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QPushButton" name="button_export">
-             <property name="text">
-              <string>Export</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>{Selected Structure}</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_selected">
+              <property name="text">
+               <string>{Structure Class Name}</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_clear_console">
+              <property name="text">
+               <string>Clear Console</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="console">
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1">
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="button_back">
+              <property name="text">
+               <string>Back</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="button_redo">
+              <property name="text">
+               <string>Redo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QTextBrowser" name="textBrowser_2"/>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QPushButton" name="button_export">
+              <property name="text">
+               <string>Export</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

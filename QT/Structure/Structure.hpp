@@ -13,15 +13,28 @@
 class Structure : public QWidget
 {
 	Q_OBJECT
+signals:
+	void Size_Update(QSize size);
+	void Mouse_Move_Point(QPoint point_view,QPointF point_scene);
 private slots:
 	void do_mouseMovePoint(QPoint point); // 鼠标移动时处理
 	void do_mouseClicked(QPoint point);	  // 鼠标左键单击时处理
+	void Resize_View(QSizeF size);
+	void Resize_Scene(QSizeF size);
+
 protected:
 	Ui::Structure ui;
 	QGraphicsScene *scene;
 
+	// used to update scene size
+	double scene_x_offset;
+	double scene_y_offset;
+	QGraphicsRectItem* view_edge{new QGraphicsRectItem(QRect{-500, -250, 1000, 500})};//for debug
+	QGraphicsRectItem* scene_edge{new QGraphicsRectItem(QRect{-500, -250, 1000, 500})};//for debug
+
 	// Painter::Painter* painter{nullptr};
-	void Refresh_View(){ui.view->viewport()->update();}
+	void Refresh_View(QSizeF size=QSizeF{}){Resize_Scene(size);ui.view->viewport()->update();}
+
 
 public:
 	// explicit Structure(Painter::Painter* painter,QWidget *parent = nullptr);

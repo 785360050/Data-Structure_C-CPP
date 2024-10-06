@@ -46,5 +46,26 @@ public:
 	// Print a line of text on Window::console
 	void Console_Log(const QString &text);
 
+private slots:
+	// 鼠标移动，point是 GraphicsView的坐标,物理坐标
+	void do_mouseMovePoint(QPoint point_view,QPointF point_scene)
+	{
+		labViewCord->setText(QString::asprintf("View 坐标 [%d,%d]", point_view.x(), point_view.y()));
+		// QPointF pointScene = ui.view->mapToScene(point); // 转换到Scene坐标
+		labSceneCord->setText(QString::asprintf("Scene 坐标 [%.0f,%.0f]", point_scene.x(), point_scene.y()));
+	}
+	// // 鼠标单击
+	// void do_mouseClicked(QPoint point)
+	// {
+	// 	QPointF pointScene = ui.view->mapToScene(point); // 转换到Scene坐标
+	// 	QGraphicsItem *item = NULL;
+	// 	item = scene->itemAt(pointScene, ui.view->transform()); // 获取光标下的绘图项
+	// 	if (item != NULL)										// 有绘图项
+	// 	{
+	// 		QPointF pointItem = item->mapFromScene(pointScene); // 转换为绘图项的局部坐标
+	// 		// labItemCord->setText(QString::asprintf("Item 坐标：%.0f,%.0f", pointItem.x(), pointItem.y()));
+	// 	}
+	// }
+
 
 };

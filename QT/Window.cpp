@@ -20,13 +20,13 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 		labViewCord->setMinimumWidth(150);
 		ui.statusbar->addWidget(labViewCord);
 
-		labSceneCord = new QLabel("Scene 坐标：", this);
+		labSceneCord = new QLabel("\tScene 坐标：", this);
 		labSceneCord->setMinimumWidth(150);
 		ui.statusbar->addWidget(labSceneCord);
 
-		labItemCord = new QLabel("Item 坐标：", this);
-		labItemCord->setMinimumWidth(150);
-		ui.statusbar->addWidget(labItemCord);
+		// labItemCord = new QLabel("Item 坐标：", this);
+		// labItemCord->setMinimumWidth(150);
+		// ui.statusbar->addWidget(labItemCord);
 
 	}
 
@@ -45,6 +45,8 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 			if (index<0)
 				return;
 			ui.tabWidget->widget(index)->close();
+			Structure* current_structure=dynamic_cast<Structure*>(ui.tabWidget->currentWidget());
+			disconnect(current_structure, &Structure::Mouse_Move_Point, this, &Window::do_mouseMovePoint);
 		};
 		connect(ui.tabWidget, &QTabWidget::tabCloseRequested, this, Close_Tab);
 	}
@@ -83,7 +85,11 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
 
 
+
+
 }
+
+
 
 
 void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
@@ -106,6 +112,8 @@ void Window::Handle_Select_Structure(QTreeWidgetItem *item,int column)
 		structure->setAttribute(Qt::WA_DeleteOnClose); //关闭时自动删除
 		int current_tab_index=ui.tabWidget->addTab(structure,QString::fromStdString(logic_structure_name));
 		ui.tabWidget->setCurrentIndex(current_tab_index);
+
+		connect(structure, &Structure::Mouse_Move_Point, this, &Window::do_mouseMovePoint);
 	}
 	else
 		QMessageBox::information(this,{},QString("%1 Not Implemented Yet").arg(QString::fromStdString(logic_structure_name)));

@@ -15,6 +15,7 @@ class GraphicsView : public QGraphicsView
 signals:
 	void mouseMovePoint(QPoint point);
 	void mouseClicked(QPoint point);
+	void Resize(QSize size);
 
 public:
 	GraphicsView(QWidget *parent = nullptr) : QGraphicsView{parent} {}
@@ -36,6 +37,21 @@ protected:
 		}
 		QGraphicsView::mousePressEvent(event);
 	}
+protected:
+	void resizeEvent(QResizeEvent *event) override
+	{
 
+		QGraphicsView::resizeEvent(event); // 调用基类的 resizeEvent 保持默认行为
+
+		auto size=this->size();
+		emit Resize(this->size());
+
+		QRect rect={{-size.width()/2,-size.height()/2},size};
+		fitInView(rect, Qt::KeepAspectRatio);  // 保持宽高比自适应视图
+
+
+
+
+	}
 };
 
