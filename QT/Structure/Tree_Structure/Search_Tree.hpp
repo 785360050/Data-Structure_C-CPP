@@ -7,14 +7,13 @@
 
 #include "../../Painter/Tree.hpp"
 
-
 namespace Adapter
 {
-	template <typename DataType, typename KeyType, typename NodeType=Node_Binary_Search_Normal<DataType,KeyType>>
-	class Tree_Binary_Search:public Tree_Binary_Search_Normal<DataType,KeyType,NodeType>
+	template <typename DataType, typename KeyType, typename NodeType = Node_Binary_Search_Normal<DataType, KeyType>>
+	class Tree_Binary_Search : public Tree_Binary_Search_Normal<DataType, KeyType, NodeType>
 	{
 	public:
-		Painter::Tree::Serialized_Container<DataType,2> Capture_Snapshot()
+		Painter::Tree::Serialized_Container<DataType, 2> Capture_Snapshot()
 		{
 			Painter::Tree::Serialized_Container<DataType,2> container;
 			// container.Set_Level(5);
@@ -48,58 +47,32 @@ namespace Adapter
 			return container;
 
 		}
-
 	};
 };
 
 namespace Painter
 {
-class Search_Tree : public Painter::Painter
-{
-	Adapter::Tree_Binary_Search<int,int> tree;
-	// Storage::Tree_Normal_Child_Ordered<int,2> tree;
-	// Tree<int,2> painter;
-	Tree::Serialized_Container<int,2> container;
-	Tree::Drawer<int,2> drawer;
 
-protected:
-	// QRectF boundingRect() const override;
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+	class Search_Tree : public Tree::Base<int, 2>
 	{
-		drawer.Update_Tree(container);
-		drawer.Draw(painter,option,widget);
-	}
+		Adapter::Tree_Binary_Search<int, int> tree;
 
-public:
-	Search_Tree();
-	// ~Search_Tree(){};
-public:
-	void Element_Delete(int key)
-	{
-		tree.Element_Delete(key);
-		container=tree.Capture_Snapshot();
-		drawer.Update_Tree(container);
-	}
-	void Element_Insert(int key,int element)
-	{
-		tree.Element_Insert(key,element);
-		container=tree.Capture_Snapshot();
-		drawer.Update_Tree(container);
-	}
-	Node_Binary_Search_Normal<int,int>* Node_Search(int key)
-	{
-		return tree.Node_Search(key);
-	}
-};
+	public:
+		Search_Tree();
+		// ~Search_Tree(){};
+	public:
+		void Element_Delete(int key);
+		void Element_Insert(int key, int element);
+		Node_Binary_Search_Normal<int, int> *Node_Search(int key)
+		{
+			return tree.Node_Search(key);
+		}
+	};
 }
-
 
 #include "../Structure.hpp"
 
 #include "Operation.hpp"
-
-
-
 
 namespace View
 {
@@ -117,16 +90,7 @@ namespace View
 		~Search_Tree() {};
 
 	public: // interactions
-		void Config_Operations() override
-		{
-			auto layout=operation.Generate();
-
-			ui.tab_operations->setLayout(layout);
-
-			connect(operation.button_insert, &QPushButton::clicked, this, &Search_Tree::Handle_Element_Insert);
-			connect(operation.button_delete, &QPushButton::clicked, this, &Search_Tree::Handle_Element_Delete);
-			connect(operation.button_search, &QPushButton::clicked, this, &Search_Tree::Handle_Node_Search);
-		}
+		void Config_Operations() override;
 
 		void Handle_Element_Insert();
 		void Handle_Element_Delete();

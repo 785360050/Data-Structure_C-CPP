@@ -1,19 +1,17 @@
 #pragma once
 
-
 #include "../../Painter/Painter.hpp"
 #include "../../Painter/Tree.hpp"
-
 
 #include "../../Data_Sturcture/C++/Tree_Structure/Tree/Tree_Binary/Tree_Binary_Search/Red_Black_Tree/Tree_Binary_Search_BRT.hpp"
 
 namespace Adapter
 {
-	template <typename DataType, typename KeyType, typename NodeType=Node_Binary_Search_RB<DataType,KeyType>>
-	class RB_Tree:public Storage::Tree_Binary_Search_RBT<DataType,KeyType,NodeType>
+	template <typename DataType, typename KeyType, typename NodeType = Node_Binary_Search_RB<DataType, KeyType>>
+	class RB_Tree : public Storage::Tree_Binary_Search_RBT<DataType, KeyType, NodeType>
 	{
 	public:
-		Painter::Tree::Serialized_Container<DataType,2> Capture_Snapshot()
+		Painter::Tree::Serialized_Container<DataType, 2> Capture_Snapshot()
 		{
 			Painter::Tree::Serialized_Container<DataType,2> container;
 			// container.Set_Level(5);
@@ -47,69 +45,26 @@ namespace Adapter
 			return container;
 
 		}
-
 	};
 };
 
 namespace Painter
 {
-	class Tree_Binary_Search_RBT : public Painter::Painter
+	class Tree_Binary_Search_RBT : public Tree::Base<int,2>
 	{
-		Adapter::RB_Tree<int,int> tree;
-		Tree::Serialized_Container<int,2> container;
-		Tree::Drawer<int,2> drawer;
-
-	protected:
-		// QRectF boundingRect() const override;
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
-		{
-			drawer.Update_Tree(container);
-			drawer.Draw(painter,option,widget);
-		}
-
+		Adapter::RB_Tree<int, int> tree;
 	public:
-		Tree_Binary_Search_RBT()
-		{
-			tree.Element_Insert(8);
-			tree.Element_Insert(5);
-			tree.Element_Insert(15);
-			tree.Element_Insert(12);///叔红 变色父、祖父、叔节点
-			tree.Element_Insert(19);
-			tree.Element_Insert(9);///叔红 变色父、祖父、叔节点
-			tree.Element_Insert(13);
-			tree.Element_Insert(23);
-			///叔红->变色;切换视角为12节点 RL->右旋父节点+左旋祖父节点+变色父、祖父
-
-
-			// tree.Element_Delete(15);
-			// tree.Element_Delete(19);
-			// tree.Element_Delete(13);
-			// tree.Element_Delete(23);
-
-			container=tree.Capture_Snapshot();
-			drawer.Update_Tree(container);
-		}
+		Tree_Binary_Search_RBT();
 		// ~Search_Tree(){};
 	public:
-		void Element_Delete(int key)
-		{
-			tree.Element_Delete(key);
-			container=tree.Capture_Snapshot();
-			drawer.Update_Tree(container);
-		}
-		void Element_Insert(int key,int element)
-		{
-			tree.Element_Insert(key,element);
-			container=tree.Capture_Snapshot();
-			drawer.Update_Tree(container);
-		}
-		Node_Binary_Search_RB<int,int>* Node_Search(int key)
+		void Element_Delete(int key);
+		void Element_Insert(int key, int element);
+		Node_Binary_Search_RB<int, int> *Node_Search(int key)
 		{
 			return tree.Node_Search(key);
 		}
 	};
 }
-
 
 #include "../Structure.hpp"
 #include "Operation.hpp"
@@ -120,6 +75,7 @@ namespace View
 	{
 		Painter::Tree_Binary_Search_RBT painter;
 		Operation::Search_Tree operation;
+
 	public:
 		Tree_Binary_Search_RBT()
 		{
@@ -129,21 +85,11 @@ namespace View
 		~Tree_Binary_Search_RBT() {};
 
 	public: // interactions
-		void Config_Operations() override
-		{
-			auto layout=operation.Generate();
-
-			ui.tab_operations->setLayout(layout);
-
-			connect(operation.button_insert, &QPushButton::clicked, this, &Tree_Binary_Search_RBT::Handle_Element_Insert);
-			connect(operation.button_delete, &QPushButton::clicked, this, &Tree_Binary_Search_RBT::Handle_Element_Delete);
-			connect(operation.button_search, &QPushButton::clicked, this, &Tree_Binary_Search_RBT::Handle_Node_Search);
-		}
+		void Config_Operations() override;
 
 		void Handle_Element_Insert();
 		void Handle_Element_Delete();
 		void Handle_Node_Search();
 	};
-
 
 }

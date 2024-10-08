@@ -14,6 +14,10 @@ class Painter: public QGraphicsItem
 {
 protected:
 	QRect area;
+	void Update_Area_Size(const QRectF& rect)
+	{
+		area.setRect(rect.topLeft().x(),rect.topLeft().y(),rect.width(),rect.height());
+	}
 protected:
 	QColor getRandomColor()
 	{

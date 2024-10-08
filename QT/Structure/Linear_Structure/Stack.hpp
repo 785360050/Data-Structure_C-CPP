@@ -31,13 +31,14 @@ namespace Painter
 	protected:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
+		void Update_Area_Size();
 	public: // Interactions
-		void Element_Push(const DataType &element) { stack.Element_Push(element); }
-		void Element_Pop() { stack.Element_Pop(); }
+		void Element_Push(const DataType &element) { stack.Element_Push(element); Update_Area_Size();}
+		void Element_Pop() { stack.Element_Pop(); Update_Area_Size();}
 		int Get_Top() { return stack.Get_Top(); }
 		bool Is_Empty() { return stack.Is_Empty(); }
 		int Get_Size() { return stack.Get_Size(); }
-		void Clear() { stack.Clear(); };
+		void Clear() { stack.Clear(); Update_Area_Size();};
 	};
 }
 

@@ -33,36 +33,8 @@ namespace Painter
 		}
 
 	protected:
-		void Draw_Element(QPainter* painter,const QPoint& pos,const QString& text={})
-		{
-			painter->setPen({Qt::white, 5});
-			painter->drawRect(pos.x(),pos.y(),50,50);
-			painter->drawText(QRect(pos.x(),pos.y(),50,50),Qt::AlignCenter,text);
-		}
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
-		{
-			// QGraphicsItem::paint(painter,option,widget);
-
-			painter->setPen({Qt::gray, 5});
-			static QFont font{"Cascadia Code",16};
-			painter->setFont(font);
-
-			auto copy_queue=queue;
-			QPoint pos{-area.width()/2,-25};
-			painter->drawText(QRect(pos.x(),pos.y(),100,50),Qt::AlignCenter,"Front");
-			pos+=QPoint{100,0};
-			while(!copy_queue.empty())
-			{
-				Draw_Element(painter,pos,QString::fromStdString(std::to_string(copy_queue.front())));
-				copy_queue.pop();
-
-				pos+=QPoint{50,0};
-			}
-			painter->setPen({Qt::gray, 5});
-			painter->drawText(QRect(pos.x(),pos.y(),100,50),Qt::AlignCenter,"Back");
-
-
-		}
+		void Draw_Element(QPainter* painter,const QPoint& pos,const QString& text={});
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 		void Update_Area_Size()
 		{

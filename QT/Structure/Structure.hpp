@@ -33,7 +33,11 @@ protected:
 	QGraphicsRectItem* scene_edge{new QGraphicsRectItem(QRect{-500, -250, 1000, 500})};//for debug
 
 	// Painter::Painter* painter{nullptr};
-	void Refresh_View(QSizeF size=QSizeF{}){Resize_Scene(size);ui.view->viewport()->update();}
+	void Refresh_View(QSizeF size=QSizeF{})
+	{
+		Resize_Scene(size);
+		ui.view->viewport()->update();
+	}
 
 
 public:

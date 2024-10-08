@@ -49,7 +49,7 @@ namespace Painter
 			static QFont font{"Cascadia Code",16};
 			painter->setFont(font);
 
-			QPoint pos{200,-60};
+			QPoint pos{(500/2)-50,-50};
 			int count{};
 			int size=list.Get_Size();
 			// for(int i{1};i<=capcity;++i)
@@ -69,14 +69,20 @@ namespace Painter
 			}
 		}
 
+		void Update_Area_Size()
+		{
+			static const int width=10*50;
+			static const int height=2*50;
+			this->area.setRect(-width/2,-height/2,width,height);
+		}
 	public: // Interactions
 		bool Is_Empty() { return list.Is_Empty();}
 		int Get_Size() { return list.Get_Size();}
 		void Clear() { list.List_Clear();};
 		// 在index位置插入element
-		void Element_Insert(int index,const DataType& element){list.Element_Insert(index,element);}
+		void Element_Insert(int index,const DataType& element){list.Element_Insert(index,element);Update_Area_Size();}
 		// 删除index位置的元素
-		void Element_Delete(int index){list.Element_Delete(index);}
+		void Element_Delete(int index){list.Element_Delete(index);Update_Area_Size();}
 		// 获取index位置的元素
 		DataType operator[](int index){return list[index];}
 		// 设置index位置的元素为element

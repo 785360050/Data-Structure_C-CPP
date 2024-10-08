@@ -46,7 +46,7 @@ void View::Linear_List::Is_Empty()
 		bool result=painter.Is_Empty();
 		std::cout<<"Is Empty?";
 		std::cout<<std::boolalpha<<result;
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{
@@ -64,7 +64,7 @@ void View::Linear_List::Element_Insert()
 	try
 	{
 		painter.Element_Insert(position,element);
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{
@@ -77,7 +77,7 @@ void View::Linear_List::Element_Delete()
 	try
 	{
 		painter.Element_Delete(index);
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{

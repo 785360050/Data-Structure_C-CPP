@@ -34,7 +34,7 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 	painter->setFont(font);
 
 	auto copy_stack=stack;
-	QPoint pos{-60,-200};
+	QPoint pos{-60,-150};
 	for(int i{5};i>0;--i)
 	{
 		auto size{copy_stack.Get_Size()};
@@ -59,6 +59,13 @@ void Painter::Stack::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 
 
 
+}
+
+void Painter::Stack::Update_Area_Size()
+{
+	static const int width=120;
+	static const int height=60*5+60;
+	this->area.setRect(-width/2,-height/2,width,height);
 }
 
 
@@ -103,7 +110,7 @@ void View::Stack::Element_Push()
 	{
 		painter.Element_Push(element);
 		std::cout<<"Push: "+std::to_string(element);
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{
@@ -116,7 +123,7 @@ void View::Stack::Element_Pop()
 	{
 		painter.Element_Pop();
 		std::cout<<"Pop";
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{
@@ -164,7 +171,7 @@ void View::Stack::Clear()
 	{
 		painter.Clear();
 		std::cout<<"Clear All Elements";
-		Refresh_View();
+		Refresh_View(painter.boundingRect().size());
 	}
 	catch(const std::exception& e)
 	{
