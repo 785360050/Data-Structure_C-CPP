@@ -2,6 +2,8 @@
 
 #include "Global.hpp"
 
+#include <stdexcept>
+
 namespace Sort
 {
 
@@ -44,7 +46,7 @@ namespace Sort
 
     /// @brief 经典快速排序
     ///     每轮找基准值划分左右两个子序列，且每轮可以确定基准值的最终位置，
-    ///     递归实现
+    ///     递归+单向遍历实现
     template <typename ElementType, typename Compare = std::less<>>
     struct Quick_Sort
     {
@@ -54,12 +56,13 @@ namespace Sort
         ///     默认以第一个元素作为基准值
         ///     1. 先将基准值与最后一个元素交换
         ///     2. 在除了最后一个基准值外的元素中，将满足条件的元素移动到左边集合
-        ///         移动的过程类似插入排序，视左边一部分的集合为有序集合，然后遍历的时候不断扩充，
-        ///         区别在于非有序集合而已
-        ///     3. 划分完成后将基准值与左子序列的插入位置元素(也是右子序列的第一个元素)交换位置
-        ///         此时基准值落在的最终的位置上，在后续的递归中不会再改变
-        ///         
-        /// 
+        ///         基准值的左右分割的实现方式有多种，此处采用[单边划分]：
+        ///         从左往右遍历到末尾基准值的前一个位置，以升序为例，
+        ///         找到第一个大于基准值的元素，标记为待交换的位置，继续向后遍历，
+        ///         如果后续找到小于基准值的元素，与该待交换位置的元素交换，继续向后找下一个更大的元素，重复操作
+        ///     3. 遍历完成后，将基准值与最终待交换位置的元素交换，此时基准值落在的最终的位置上
+        ///         此时待交换位置的元素，实际上就是大于基准值的首个元素
+        ///
         /// @param list 待排序集合
         /// @param index_start 指向收个元素的下标索引
         /// @param index_end 指向最后一个元素的下标索引
@@ -82,7 +85,8 @@ namespace Sort
                 // if (list[i] < datum)
                 if (Compare{}(list[i], list[index_end])) // 将所有<基准值元素移动到基准值左边，
                 {
-                    Swap(list[index_swap_to], list[i]);
+                    if (i != index_swap_to)
+                        Swap(list[index_swap_to], list[i]);
                     index_swap_to++;
                 }
             }
