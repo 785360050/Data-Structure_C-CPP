@@ -8,10 +8,12 @@ struct Vertex_Matrix
 public:
 	//int no;//顶点编号
 	std::string name;		///顶点名
-	DataType data;			///顶点存放的数据元素
+	DataType data{};			///顶点存放的数据元素
 public:
-	Vertex_Matrix()
-		:name(), data(NULL) {};
+	Vertex_Matrix()=default;
 	Vertex_Matrix(std::string name, DataType data)
-		:name(name), data(data) {};
+		: name(name), data(data) {};
 };
+
+
+

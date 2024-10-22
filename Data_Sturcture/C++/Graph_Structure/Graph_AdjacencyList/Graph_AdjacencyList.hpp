@@ -147,7 +147,139 @@ public:
 };
 
 
+#include <map>
+namespace Storage
+{
+	//邻接表
+	template <typename DataType, bool directed, typename VertexType = Refactor::Vertex_AdjacencyList<DataType>>
+	struct Graph_AdjacencyList : Logic::Graph_Structure<DataType,VertexType, directed>
+	{
+	private:
+		// bool *state_visited{new bool[num_vertex](false)}; // 访问状态
+		std::map<std::string, VertexType> vertex_set; /// 顶点集合 <name,vertex>
 
+	public:
+		Graph_AdjacencyList() : Logic::Graph_Structure<DataType,VertexType, directed>() {}
+		~Graph_AdjacencyList() {}
+
+	// private:
+	// 	void Reset_VistedState()
+	// 	{
+	// 		for (int i = 0; i < this->num_vertex; i++)
+	// 			state_visited[i] = false;
+	// 	}
+
+	public:
+		// 添加图graph中，从x到y的边，权值为weight
+		void Vertex_Add(const std::string& name, DataType data) override
+		{
+			// vertex_set.insert({vertex.name, std::forward<VertexType>(vertex)});
+			vertex_set.insert({name,{name, data}});
+			++this->num_vertex;
+		}
+		void Vertex_Delete(const std::string &name) override
+		{
+			vertex_set.erase(name);
+			--this->num_vertex;
+		}
+		void Edge_Add(const std::string &vertex_origin, const std::string &vertex_destination, int weight) override
+		{
+			if (!vertex_set.contains(vertex_origin))
+				throw std::runtime_error("Vertex_origin not in the graph!");
+			if (!vertex_set.contains(vertex_destination))
+				throw std::runtime_error("Vertex_origin not in the graph!");
+
+			// this->vertex[vertex_origin.name].Add_Edge(no_destination, weight);
+			vertex_set[vertex_origin].Edge_Add(vertex_destination, weight);
+			++this->num_edge;
+			if (vertex_origin != vertex_destination && directed == false) /// 无向图新建插入两个节点
+				vertex_set[vertex_destination].Edge_Add(vertex_origin, weight);
+		}
+		void Edge_Delete(const std::string &vertex_origin, const std::string &vertex_destination) override
+		{
+			if (!vertex_set.contains(vertex_origin))
+				throw std::runtime_error("Vertex_origin is not in the graph!");
+			if (!vertex_set.contains(vertex_destination))
+				throw std::runtime_error("vertex_destination is not in the graph!");
+
+			vertex_set[vertex_origin].Edge_Delete(vertex_destination);
+			--this->num_edge;
+			if (vertex_origin != vertex_destination && directed == false) /// 无向图新建插入两个节点
+				vertex_set[vertex_destination].Edge_Delete(vertex_origin);
+		}
+
+		// void Traverse_DFS(int no_vertex) override
+		// {
+		// 	Edge_AdjacencyList* e;
+		// 	std::cout << this->vertex[no_vertex].no << ' ';
+		// 	state_visited[no_vertex] = true;
+		// 	e = this->vertex[no_vertex].head_edge;
+		// 	while (e)
+		// 	{
+		// 		if (state_visited[e->index_vertex] == false)
+		// 			Graph_Traverse_DFS(this->vertex[e->index_vertex].no);
+		// 		e = e->next;
+		// 	}
+
+		// }
+		// void Traverse_BFS(int no_vertex) override
+		// {
+
+		// 	Reset_VistedState();
+		// 	std::queue<int> q;
+		// 	q.push(no_vertex);
+		// 	while (!q.empty())
+		// 	{
+
+		// 		int x = q.front();
+		// 		std::cout << x << ' ';
+		// 		q.pop();
+		// 		state_visited[x] = true;
+		// 		Edge_AdjacencyList* e = this->vertex[x].head_edge;
+		// 		while (e)
+		// 		{///下一层全入队
+		// 			if (state_visited[e->index_vertex] == false)
+		// 			{
+		// 				q.push(e->index_vertex);
+		// 				state_visited[e->index_vertex] = true;
+		// 			}
+		// 			e = e->next;
+		// 		}
+		// 	}
+
+		// }
+
+		void Show() override
+		{
+			using namespace std;
+			string d = (directed == true) ? "有向图" : "无向图";
+			cout << "顶点数：" << this->num_vertex << endl
+				 << "边数：" << this->num_edge << endl
+				 << d << endl;
+			// for (int i = 0; i < this->num_vertex; i++)
+			// {
+			// 	VertexType v = vertex_set[std::to_string(i)];
+			// 	// Refactor::Vertex_AdjacencyList<DataType>::Edge e = v.head_edge;
+			// 	// cout << v.no << "->";
+			// 	// while (!e.empty())
+			// 	// {
+			// 	// 	cout << vertex_set[e.index_vertex].no << "->";
+			// 	// 	e = e.next;
+			// 	// }
+			// 	cout << "NULL\n";
+			// }
+			
+			for (const auto& vertex: vertex_set) 
+			{
+				cout << '[' << vertex.first<<']' << "->";
+				for (const auto& edge: vertex.second.head_edge)
+					cout << edge.first << "->";
+				cout << "NULL\n";
+			}
+		}
+
+};
+}
 
 
 
