@@ -22,7 +22,7 @@ in book without typing them in IDE to verify them.
 
 Files in Github 
 > Non Visual Studio Users can take Source 
-> Build by cmake(Still Processing)
+> Build by cmake(Default mainline available for `Data_Sturcture/C++`)
 Files in C or C++ Folder
 
 |File/Folder name | describtion|Path|
@@ -35,18 +35,38 @@ Files in C or C++ Folder
 |main.cpp|**Test Codes for C Only** |Data_Structure/main.cpp|
 |Structure.drawio|Structure Diagram for Test Cases|/res
 |Data Struct.sln| **VS Enterance**(deprecated) |/|
-|Test| still working, only for c++ | Data_Structure/C++/Test |
+|Test| `Boost.Test` + `CTest` mainline, only for c++ | Data_Structure/C++/Test |
 > - C Project is aim to be able to run while CPP Project is aim at refactoring all these  Structures.   
 > - C Project can be considered a draft.
 It's a normalized coding style project that might be mied by c++ grammer in C programe 
 > - CPP Projecet is design to to implement data structures with different storage structures while facilitating future extensions, hence the use of inheritance. Because it is primarily for learning, it does not rely on the STL (Standard Template Library), nor is it intended to be another STL library. It can be understood as having two separate parts: containers and algorithms. If used as a library, it may not be very convenient(i've tried once) because the interfaces are designed for ease of understanding rather than ease of use. The goal is to have full control over homemade containers.
-## Under constructions(TODO)
-2023.9.30
-- Switch VS_Build to cmake_Build
-- Adapt gcc
-- Add Unit_Test  
-Black-box testing as majority, with a small portion of critical APIs being white-box.
-- Considering the standard of c++,now prefering c++20
+## Project Status
+2026.4.4
+- Default `CMake` mainline for `Data_Sturcture/C++` is available on Linux/gcc
+- Default workflow:
+  `cmake -S . -B Build`
+  `cmake --build Build`
+  `ctest --test-dir Build --output-on-failure`
+- Current default mainline has passed `11` registered `CTest` tests
+- Current default enabled areas:
+  - `Linear_Structure`
+  - `Algorithms`
+  - `Set_Structure`
+  - `Test`
+- `Graph_Structure` and `Tree_Structure` are already connected to `CMake`,
+  but remain disabled by default until their source-level issues are cleaned up
+- `Data_Sturcture/C` is kept as a reference implementation and can be built separately
+
+## Current Focus
+- Keep improving the `CMake + CTest` engineering baseline
+- Add more regression tests for basic containers
+- Clean compiler warnings and copy/move/resource-management issues
+- Stabilize `Graph_Structure` and `Tree_Structure` before enabling them by default
+
+## Documentation
+- Project overview remains in the root [README.md](README.md)
+- Planning and engineering documents are centralized in [`./Document`](./Document)
+- Codex-related local notes are centralized in [`./Document/Codex`](./Document/Codex)
 
 ##  `Details`
 - [Test Case](#test-case)
@@ -254,6 +274,3 @@ void TestPolymorphic()
 
 
 # [Top](#executable-data-structure-code-for-cc)
-
-
-

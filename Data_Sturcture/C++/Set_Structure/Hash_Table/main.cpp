@@ -4,6 +4,7 @@
 #include "Set_Hash_LinearDetection.hpp"
 #include "Set_Hash_LinkAddress.hpp"
 
+#ifdef _WIN32
 #include <Windows.h>
 ///修改cmd编码方式
 static bool  SetEncode(int EncodeId = 936)
@@ -18,6 +19,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 void TestHashList_LinearDetection()
 {
@@ -59,10 +61,14 @@ void TestHashList_LinkAddress()
 	std::cout << "key为23的下标索引为:" << h.HashList_Locate(23) << std::endl;
 }
 
-void main()
+int main()
 {
+#ifdef _WIN32
 	SetEncode(65001);//设置控制台为utf-8编码格式
+#endif
 	
 	//TestHashList_LinearDetection();
 	//TestHashList_LinkAddress();
+
+	return 0;
 }

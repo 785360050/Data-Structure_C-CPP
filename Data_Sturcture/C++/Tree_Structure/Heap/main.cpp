@@ -3,9 +3,9 @@
 #include "Binary_Heap.hpp"
 
 
-#ifdef _Win32 // ARM32/64, x86/x64
+#ifdef _WIN32 // ARM32/64, x86/x64
 // 详见 https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
-#include <Windows.hpp>
+#include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
 	/// <summary>

@@ -1,0 +1,5 @@
+if(BUILD_DEMOS)
+    ds_add_cpp_demo(Graph_Structure_Main_Demo "Graph_Structure" main.cpp)
+    ds_add_cpp_demo(Graph_AdjacencyList_Demo "Graph_AdjacencyList" Graph_AdjacencyList/Demo.cpp)
+    ds_add_cpp_demo(Graph_Matrix_Demo "Graph_Matrix" Graph_Matrix/Demo.cpp)
+endif()

@@ -6,7 +6,8 @@
 #include "Graph_AdjacencyList/Graph_AdjacencyList.hpp"
 #include "Graph_EdgeSetList/Graph_EdgeSetList.hpp"
 
-#include <Windows.hpp>
+#ifdef _WIN32
+#include <Windows.h>
 static bool  SetEncode(int EncodeId = 936)
 {
 	/// <summary>
@@ -19,6 +20,7 @@ static bool  SetEncode(int EncodeId = 936)
 	/// <returns></returns>
 	return SetConsoleCP(EncodeId) && SetConsoleOutputCP(EncodeId);
 }
+#endif
 
 
 void TestMatrixGraph()
@@ -158,4 +160,3 @@ void main()
 	//TestEdgeSetListGraph();
 	TestPolymorphic();
 }
-
