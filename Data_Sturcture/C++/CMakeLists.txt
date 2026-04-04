@@ -8,6 +8,8 @@ option(BUILD_ALGORITHMS "Build C++ algorithms targets" ON)
 option(BUILD_GRAPH_STRUCTURE "Build C++ graph structure targets" OFF)
 option(BUILD_SET_STRUCTURE "Build C++ set structure targets" ON)
 option(BUILD_TREE_STRUCTURE "Build C++ tree structure targets" OFF)
+option(BUILD_GRAPH_STRUCTURE_EXPERIMENTAL "Build experimental graph structure demo targets" OFF)
+option(BUILD_TREE_STRUCTURE_EXPERIMENTAL "Build experimental tree structure demo targets" OFF)
 
 if(BUILD_TESTING)
     find_package(Boost REQUIRED COMPONENTS unit_test_framework)

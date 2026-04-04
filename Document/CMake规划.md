@@ -340,9 +340,9 @@ cmake -S . -B Build
 当前默认主线验证已完成，验证命令为：
 
 ```bash
-cmake -S . -B BuildVerify2
-cmake --build BuildVerify2
-ctest --test-dir BuildVerify2 --output-on-failure
+cmake -S . -B Build
+cmake --build Build
+ctest --test-dir Build --output-on-failure
 ```
 
 验证结果：
