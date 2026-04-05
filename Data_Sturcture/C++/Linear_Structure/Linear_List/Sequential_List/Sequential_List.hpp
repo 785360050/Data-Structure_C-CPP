@@ -2,8 +2,10 @@
 
 // #include "Object.h"
 #include "../Linear_List.hpp"
+#include "../../../Trace/Linear_List_Trace.hpp"
 #include <iostream>
 #include <cstring> //memcpy
+#include <utility>
 
 namespace Storage
 {
@@ -64,6 +66,7 @@ namespace Storage
 				_Destroy_NonPointerElements();
 
 			this->size = 0;
+			Trace::Clear(this->storage, this->size, capcity);
 		}
 		// 返回当前最大容量
 		size_t Get_Capcity() const { return capcity; }
@@ -173,16 +176,22 @@ public:
 		if (this->size >= this->capcity)
 			throw std::runtime_error("List insert failed: List is full");
 
+		Trace::Insert_Begin(this->storage, this->size, this->capcity, pos, elem);
 		if (this->size == 0)
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
 			int count = this->size - pos;// size_t patch
 			for (int index = this->Index(this->size); count >= 0;--count,--index)
+			{
 				this->storage[index + 1] = this->storage[index];
+					Trace::Shift_Right(this->storage, this->size + 1, this->capcity, index + 1, index + 2);
+			}
 			this->storage[this->Index(pos)] = elem;
 		}
 		++this->size;
+		Trace::Insert_Write(this->storage, this->size, this->capcity, pos);
+		Trace::Insert_End(this->storage, this->size, this->capcity);
 	}
 	void Element_Insert(size_t pos, ElementType &&elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时不扩展并报错，位置pos非法时候抛出异常并终止插入元素
@@ -191,24 +200,38 @@ public:
 		if (this->size >= this->capcity)
 			throw std::runtime_error("List insert failed: List is full");
 
+		Trace::Insert_Begin(this->storage, this->size, this->capcity, pos, elem);
 		if (this->size == 0)
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
 			int count = this->size - pos;// size_t patch
 			for (int index = this->Index(this->size); count >= 0; --count, --index)
+			{
 				this->storage[index + 1] = this->storage[index];
+					Trace::Shift_Right(this->storage, this->size + 1, this->capcity, index + 1, index + 2);
+			}
 			this->storage[this->Index(pos)] = elem;
 		}
 		++this->size;
+		Trace::Insert_Write(this->storage, this->size, this->capcity, pos);
+		Trace::Insert_End(this->storage, this->size, this->capcity);
 	}
 	void Element_Delete(size_t pos) override
 	{
+		if (pos < 1 || pos > this->size)
+			throw std::out_of_range("List delete failed: Position out of range");
+
+		Trace::Delete_Begin(this->storage, this->size, this->capcity, pos);
 		this->Index(pos); // Check pos is valid
 		for (int i = this->Index(pos); i <= static_cast<int>(this->Index(this->size)) - 1; i++)// size_t patch
+		{
 			this->storage[i] = this->storage[i + 1];
+				Trace::Shift_Left(this->storage, this->size, this->capcity, i + 2, i + 1);
+		}
 		this->storage[this->size - 1] = ElementType{}; /// 末尾补0
 		--this->size;
+		Trace::Delete_End(this->storage, this->size, this->capcity);
 	}
 };
 
@@ -219,7 +242,7 @@ class Sequential_List_Dynamic : public Storage::Sequential_List<ElementType>
 public:
 	// Sequential_List_Dynamic()
 	// 	: Storage::Sequential_List<ElementType>(){};
-	Sequential_List_Dynamic(size_t capcity = 5)
+	explicit Sequential_List_Dynamic(size_t capcity = 5)
 		: Storage::Sequential_List<ElementType>(0, new ElementType[capcity]{}, capcity)
 	{ // capcity必须>0
 		if (capcity < 1)
@@ -228,7 +251,7 @@ public:
 			throw std::bad_alloc();
 	}
 
-	Sequential_List_Dynamic(const Sequential_List_Dynamic &other)
+		Sequential_List_Dynamic(const Sequential_List_Dynamic &other)
 		: Storage::Sequential_List<ElementType>(other.size, new ElementType[other.capcity]{}, other.capcity)
 	{
 		if (this == &other)
@@ -249,7 +272,7 @@ public:
 		return *this;
 	}
 
-	Sequential_List_Dynamic(Sequential_List_Dynamic &&other)
+		Sequential_List_Dynamic(Sequential_List_Dynamic &&other)
 		: Storage::Sequential_List<ElementType>(other.size, other.storage, other.capcity)
 	{
 		other.size = 0;
@@ -292,6 +315,7 @@ protected:
 	{ /// 重新申请2倍的空间，移动原有数据至该空间
 		if (!this->storage)
 			throw std::runtime_error("storage space missing");
+		Trace::Expand_Begin(this->storage, this->size, this->capcity, this->capcity * 2);
 		auto expand = new ElementType[this->capcity * 2]{};
 		// 把所有元素移动过去
 		for (size_t i = 0; i < this->size; i++)
@@ -300,12 +324,14 @@ protected:
 		delete[] this->storage;
 		this->storage = expand;
 		this->capcity *= 2;
+		Trace::Expand_End(this->storage, this->size, this->capcity);
 	}
 	void Shrink()
 	{
 		if (!this->storage)
 			throw std::runtime_error("storage space missing");
 
+		Trace::Shrink_Begin(this->storage, this->size, this->capcity, this->capcity / 2);
 		auto shrink = new ElementType[this->capcity / 2]{};
 		// 把所有元素移动过去
 		for (size_t i = 0; i < this->size; i++)
@@ -313,6 +339,7 @@ protected:
 		delete[] this->storage;
 		this->storage = shrink;
 		this->capcity /= 2;
+		Trace::Shrink_End(this->storage, this->size, this->capcity);
 	}
 
 public: /// 元素操作
@@ -323,16 +350,22 @@ public: /// 元素操作
 
 		if (this->size >= this->capcity)
 			Expand(); /// 空间扩展为2倍
+		Trace::Insert_Begin(this->storage, this->size, this->capcity, pos, elem);
 		// this->List_Show(" ");
 		if (this->size == 0)
 			this->storage[0] = elem;
 		else
 		{ /// 从后往前，把当前索引向后搬
-			for (size_t index = this->Index(this->size); this->Index(pos) < index; index--)
-				this->storage[index + 1] = this->storage[index];
+			for (size_t index = this->size; index > this->Index(pos); --index)
+			{
+				this->storage[index] = this->storage[index - 1];
+					Trace::Shift_Right(this->storage, this->size + 1, this->capcity, index, index + 1);
+			}
 			this->storage[this->Index(pos)] = elem;
 		}
 		++this->size;
+		Trace::Insert_Write(this->storage, this->size, this->capcity, pos);
+		Trace::Insert_End(this->storage, this->size, this->capcity);
 	}
 	void Element_Insert(size_t pos, ElementType &&elem) override
 	{ /// n个元素有n+1个可插入位置,存储空间不足时扩展为两倍，位置pos非法时候抛出异常并终止插入元素
@@ -341,28 +374,41 @@ public: /// 元素操作
 
 		if (this->size >= this->capcity)
 			Expand(); /// 空间扩展为2倍
+		Trace::Insert_Begin(this->storage, this->size, this->capcity, pos, elem);
 		// this->List_Show(" ");
 		if (this->size == 0)
 			this->storage[0] = std::move(elem);
 		else
 		{ /// 从后往前，把当前索引向后搬
-			for (size_t index = this->Index(this->size); this->Index(pos) < index; index--)
-				this->storage[index + 1] = this->storage[index];
+			for (size_t index = this->size; index > this->Index(pos); --index)
+			{
+				this->storage[index] = this->storage[index - 1];
+					Trace::Shift_Right(this->storage, this->size + 1, this->capcity, index, index + 1);
+			}
 			this->storage[this->Index(pos)] = std::move(elem);
 		}
 		++this->size;
+		Trace::Insert_Write(this->storage, this->size, this->capcity, pos);
+		Trace::Insert_End(this->storage, this->size, this->capcity);
 	}
 	void Element_Delete(size_t pos)
 	{
+		if (pos < 1 || pos > this->size)
+			throw std::out_of_range("List delete failed: Position out of range");
+		Trace::Delete_Begin(this->storage, this->size, this->capcity, pos);
 		this->Index(pos); // check pos valid
-		for (size_t i = this->Index(pos); i <= this->Index(this->size) - 1; i++)
+		for (size_t i = this->Index(pos); i + 1 < this->size; ++i)
+		{
 			// this->storage[i] = this->storage[i + 1];
 			this->storage[i] = std::move(this->storage[i + 1]);
+				Trace::Shift_Left(this->storage, this->size, this->capcity, i + 2, i + 1);
+		}
 		this->storage[this->size - 1] = ElementType{};
 		--this->size;
 		/// 元素个数<=1/2最大容量 时收缩空间
 		if (this->size <= this->capcity / 2)
 			Shrink();
+		Trace::Delete_End(this->storage, this->size, this->capcity);
 	}
 };
 

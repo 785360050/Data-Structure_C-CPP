@@ -18,51 +18,10 @@
 #include "../Painter/Painter.hpp"
 
 #include "../../Data_Sturcture/C++/Linear_Structure/Linear_List/Sequential_List/Sequential_List.hpp"
+#include "../../Data_Sturcture/C++/Trace/Linear_List_Trace.hpp"
 
 using DataType = int;
 static const int capcity=10;
-
-namespace Trace
-{
-	struct Linear_List_Slot
-	{
-		bool occupied{};
-		DataType value{};
-	};
-
-	struct Linear_List_Frame
-	{
-		QString title;
-		QString adt_message;
-		QString impl_message;
-		std::vector<Linear_List_Slot> slot_states;
-		std::vector<int> highlight_indices;
-	};
-
-	// The builder derives frames from the public list semantics instead of
-	// instrumenting the container internals, which keeps the MVP low-invasive.
-	class Sequential_List_Static_TraceBuilder
-	{
-	public:
-		static std::vector<Linear_List_Frame> Build_State(
-			const std::vector<Linear_List_Slot>& slot_states,
-			const QString& title,
-			const QString& adt_message,
-			const QString& impl_message);
-
-		static std::vector<Linear_List_Frame> Build_Insert(
-			const std::vector<Linear_List_Slot>& before,
-			int size,
-			int capacity,
-			int position,
-			DataType value);
-
-		static std::vector<Linear_List_Frame> Build_Delete(
-			const std::vector<Linear_List_Slot>& before,
-			int size,
-			int position);
-	};
-}
 
 namespace Painter
 {
@@ -70,27 +29,23 @@ namespace Painter
 	// template<typename DataType>
 	class Linear_List : public Painter
 	{
+		Trace::Recorder<DataType> trace_recorder;
 		Sequential_List_Static<DataType,10> list;
-		std::vector<Trace::Linear_List_Frame> trace_frames;
+		std::vector<Trace::Linear_List_Frame<DataType>> trace_frames;
 		int current_frame_index{};
 
 	public:
 		Linear_List();
 
 	protected:
-		void Draw_Element(
-			QPainter* painter,
-			const QPoint& pos,
-			int index,
-			const Trace::Linear_List_Slot& slot,
-			bool highlighted) const;
+		void Draw_Element(QPainter* painter, const QPoint& pos, int index, const Trace::Linear_List_Slot<DataType>& slot, bool highlighted) const;
 		void Update_Area_Size();
-		void Show_Current_State(
-			const QString& title,
-			const QString& adt_message,
-			const QString& impl_message);
-		std::vector<Trace::Linear_List_Slot> Capture_Slots();
-		void Set_Trace_Frames(std::vector<Trace::Linear_List_Frame>&& frames);
+		Trace::Linear_List_Snapshot<DataType> Capture_Snapshot();
+		void Record_Current_State(const std::string& title, const std::string& adt_message, const std::string& impl_message);
+		void Record_Insert_Trace(int index, const DataType& element);
+		void Record_Delete_Trace(int index);
+		void Record_Clear_Trace();
+		void Sync_Trace_Frames();
 
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -112,7 +67,7 @@ namespace Painter
 		void Reset_Trace_Playback();
 		int Get_Current_Frame_Index() const;
 		int Get_Total_Frame_Count() const;
-		const Trace::Linear_List_Frame& Get_Current_Frame() const;
+		const Trace::Linear_List_Frame<DataType>& Get_Current_Frame() const;
 	};
 }
 

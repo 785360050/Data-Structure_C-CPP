@@ -10,6 +10,27 @@ ds_configure_runtime_target(Sequential_List_UnitTest "UnitTest" "Sequential_List
 
 add_test(NAME Sequential_List COMMAND Sequential_List_UnitTest)
 
+add_executable(Sequential_List_Behaviour_UnitTest
+    Linear_List/Sequential_List.cpp
+)
+target_link_libraries(Sequential_List_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_sequential_list
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Sequential_List_Behaviour_UnitTest "UnitTest" "Sequential_List_Behaviour")
+
+add_test(NAME Sequential_List_Behaviour COMMAND Sequential_List_Behaviour_UnitTest)
+
+add_executable(Sequential_List_Trace_Debug_Demo
+    Linear_List/Sequential_List_Trace_Debug.cpp
+)
+target_link_libraries(Sequential_List_Trace_Debug_Demo
+    PRIVATE
+        ds_cpp_sequential_list
+)
+ds_configure_runtime_target(Sequential_List_Trace_Debug_Demo "Demo" "Sequential_List_Trace_Debug")
+
 add_executable(Link_List_UnitTest
     Unit_Test/Linear_Stucture/Linear_List/Link_List.cpp
 )
