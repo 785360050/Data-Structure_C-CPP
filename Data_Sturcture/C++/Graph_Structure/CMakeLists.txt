@@ -1,3 +1,6 @@
+add_library(ds_cpp_graph INTERFACE)
+target_link_libraries(ds_cpp_graph INTERFACE ds_cpp_headers)
+
 if(BUILD_DEMOS)
     if(BUILD_GRAPH_STRUCTURE_EXPERIMENTAL)
         ds_add_cpp_demo(Graph_Structure_Main_Demo "Graph_Structure" main.cpp)

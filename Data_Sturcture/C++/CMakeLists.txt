@@ -21,7 +21,7 @@ if(BUILD_ALGORITHMS)
     add_subdirectory(Algorithms)
 endif()
 
-if(BUILD_GRAPH_STRUCTURE)
+if(BUILD_GRAPH_STRUCTURE OR BUILD_TESTING)
     add_subdirectory(Graph_Structure)
 endif()
 
@@ -29,7 +29,7 @@ if(BUILD_SET_STRUCTURE)
     add_subdirectory(Set_Structure)
 endif()
 
-if(BUILD_TREE_STRUCTURE)
+if(BUILD_TREE_STRUCTURE OR BUILD_TESTING)
     add_subdirectory(Tree_Structure)
 endif()
 

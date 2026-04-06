@@ -199,6 +199,102 @@ ds_configure_runtime_target(Binary_Heap_UnitTest "UnitTest" "Binary_Heap")
 
 add_test(NAME Binary_Heap COMMAND Binary_Heap_UnitTest)
 
+add_executable(MergeFindSet_QuickFind_Behaviour_UnitTest
+    ADT/Tree_Structure/MergeFindSet/QuickFind.cpp
+)
+target_link_libraries(MergeFindSet_QuickFind_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_merge_find_set
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(MergeFindSet_QuickFind_Behaviour_UnitTest "UnitTest" "MergeFindSet_QuickFind_Behaviour")
+
+add_test(NAME MergeFindSet_QuickFind_Behaviour COMMAND MergeFindSet_QuickFind_Behaviour_UnitTest)
+
+add_executable(MergeFindSet_QuickMerge_Behaviour_UnitTest
+    ADT/Tree_Structure/MergeFindSet/QuickMerge.cpp
+)
+target_link_libraries(MergeFindSet_QuickMerge_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_merge_find_set
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(MergeFindSet_QuickMerge_Behaviour_UnitTest "UnitTest" "MergeFindSet_QuickMerge_Behaviour")
+
+add_test(NAME MergeFindSet_QuickMerge_Behaviour COMMAND MergeFindSet_QuickMerge_Behaviour_UnitTest)
+
+add_executable(Tree_Binary_Search_Normal_Behaviour_UnitTest
+    ADT/Tree_Structure/Tree_Binary_Search/Normal.cpp
+)
+target_link_libraries(Tree_Binary_Search_Normal_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_tree_binary_search
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Tree_Binary_Search_Normal_Behaviour_UnitTest "UnitTest" "Tree_Binary_Search_Normal_Behaviour")
+
+add_test(NAME Tree_Binary_Search_Normal_Behaviour COMMAND Tree_Binary_Search_Normal_Behaviour_UnitTest)
+
+add_executable(Tree_Binary_Search_AVL_Behaviour_UnitTest
+    ADT/Tree_Structure/Tree_Binary_Search/AVL.cpp
+)
+target_link_libraries(Tree_Binary_Search_AVL_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_tree_binary_search
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Tree_Binary_Search_AVL_Behaviour_UnitTest "UnitTest" "Tree_Binary_Search_AVL_Behaviour")
+
+add_test(NAME Tree_Binary_Search_AVL_Behaviour COMMAND Tree_Binary_Search_AVL_Behaviour_UnitTest)
+
+add_executable(Tree_Binary_Search_Red_Black_Behaviour_UnitTest
+    ADT/Tree_Structure/Tree_Binary_Search/Red_Black.cpp
+)
+target_link_libraries(Tree_Binary_Search_Red_Black_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_tree_binary_search
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Tree_Binary_Search_Red_Black_Behaviour_UnitTest "UnitTest" "Tree_Binary_Search_Red_Black_Behaviour")
+
+add_test(NAME Tree_Binary_Search_Red_Black_Behaviour COMMAND Tree_Binary_Search_Red_Black_Behaviour_UnitTest)
+
+add_executable(Tree_Binary_Normal_Behaviour_UnitTest
+    ADT/Tree_Structure/Tree_Binary/Normal.cpp
+)
+target_link_libraries(Tree_Binary_Normal_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_tree_binary
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Tree_Binary_Normal_Behaviour_UnitTest "UnitTest" "Tree_Binary_Normal_Behaviour")
+
+add_test(NAME Tree_Binary_Normal_Behaviour COMMAND Tree_Binary_Normal_Behaviour_UnitTest)
+
+add_executable(Tree_Behaviour_UnitTest
+    ADT/Tree_Structure/Tree/Tree.cpp
+)
+target_link_libraries(Tree_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_tree
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Tree_Behaviour_UnitTest "UnitTest" "Tree_Behaviour")
+
+add_test(NAME Tree_Behaviour COMMAND Tree_Behaviour_UnitTest)
+
+add_executable(Graph_AdjacencyList_Behaviour_UnitTest
+    ADT/Graph_Structure/Graph_AdjacencyList.cpp
+)
+target_link_libraries(Graph_AdjacencyList_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_graph
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Graph_AdjacencyList_Behaviour_UnitTest "UnitTest" "Graph_AdjacencyList_Behaviour")
+
+add_test(NAME Graph_AdjacencyList_Behaviour COMMAND Graph_AdjacencyList_Behaviour_UnitTest)
+
 if(BUILD_DEMOS)
     ds_add_cpp_demo(Perfect_Forwarding_Demo "Perfect_Forwarding" "Unit_Test/完美转发案例.cpp")
 endif()

@@ -48,3 +48,11 @@ add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/execution-charset:utf-8>")
 
  
 add_subdirectory(Data_Sturcture)
+
+if(BUILD_TESTING)
+    add_custom_target(run_all_ctest
+        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --test-dir ${PROJECT_BINARY_DIR}
+        USES_TERMINAL
+        COMMENT "Run all ctest cases"
+    )
+endif()

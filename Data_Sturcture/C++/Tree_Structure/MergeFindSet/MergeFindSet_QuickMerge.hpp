@@ -1,9 +1,10 @@
 #pragma once
 
+#include <cstring>
 #include <iostream>
 #include <stack>
-#include "../../Linear_Structure/Linear_Stack/Linear_Stack.hpp"
-#include "../../Linear_Structure/Linear_Stack/Linear_Stack_Linked/Linear_Stack_Linked.hpp"
+
+#include "../../Linear_Structure/Linear_Stack/Linear_Stack_Linked/Link_Stack.hpp"
 
 #include "MergeFindSet.hpp"
 
@@ -12,18 +13,18 @@
 
 
 template <typename DataType>
-class MergeFindSet_QuickMerge :public MergeFindSet<DataType>
+class MergeFindSet_QuickMerge : public Logic::MergeFindSet<DataType>
 {
 private:
 	int* parents;	//存放双亲的ID
 	int* size;		//记录所在集合的元素总数(包含的子节点个数，仅在根节点合并时使用)
 public:
 	MergeFindSet_QuickMerge(int maxsize)
-		:MergeFindSet<DataType>(maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} } {};
+		: Logic::MergeFindSet<DataType>(maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} } {};
 	//元素对应双亲的索引存放在parents数组中
 	//(初始双亲为自己，即根ID=双亲ID=元素数组下标)
 	MergeFindSet_QuickMerge(int* element_array, int maxsize)	
-		:MergeFindSet<DataType>(element_array, maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} }
+		: Logic::MergeFindSet<DataType>(element_array, maxsize), parents{ new int[maxsize] {} }, size{ new int[maxsize] {} }
 	{
 		memcpy(parents, element_array, sizeof(int) * maxsize);
 		memcpy(size, element_array, sizeof(int) * maxsize);
@@ -69,15 +70,16 @@ private:
 		}
 #endif // Standard_Stack
 #ifdef Individual_Stack
-		Link_Stack<int> path(10);
+		Link_Stack<int> path;
 		while (parents[temp] != temp)
 		{
 			path.Element_Push(temp);//将路径的下标索引入栈
 			temp = parents[temp];
 		}
-		while (!path.Stack_CheckEmpty())
+		while (!path.Is_Empty())
 		{
-			int pos = path.Stack_GetTop(); path.Element_Pop();
+			int pos = path.Get_Top();
+			path.Element_Pop();
 			parents[pos] = temp;
 		}
 #endif // Individual_Stack
@@ -147,7 +149,6 @@ public:
 	}
 
 };
-
 
 
 

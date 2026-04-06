@@ -17,6 +17,10 @@ private:
 	{
 		return (a > b) ? a : b;
 	}
+	int Height_Of(NodeType *node) const
+	{
+		return node ? node->Height() : 0;
+	}
 	// 左旋(以当前节点为子树根)
 	NodeType *Rotate_Left(NodeType *node)
 	{
@@ -29,8 +33,8 @@ private:
 		NodeType *temp = node->right;
 		node->right = temp->left;
 		temp->left = node;
-		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
-		temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
+		node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
+		temp->height = 1 + MaxHeight(Height_Of(temp->left), Height_Of(temp->right));
 		return temp;
 	}
 	// 右旋(以当前节点为子树根)
@@ -39,8 +43,8 @@ private:
 		NodeType *temp = node->left;
 		node->left = temp->right;
 		temp->right = node;
-		temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
-		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+		temp->height = 1 + MaxHeight(Height_Of(temp->left), Height_Of(temp->right));
+		node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 		return temp;
 	}
 	NodeType *node_insert(NodeType *node, KeyType key, DataType data = NULL)
@@ -59,7 +63,7 @@ private:
 		}
 
 		/// 回归时同步更新子树根高度(上一层的节点高度)
-		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+		node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 		///	根据平衡因子旋转
 		/// 从上到下[第一个失衡节点][第二个失衡节点]
 		///	LL->R
@@ -83,7 +87,7 @@ private:
 				return Rotate_Left(node);				// RR左旋
 			if (key < node->right->key)					// L重
 			{											// RL
-				node->right = Rotate_Right(node->left); // 先右旋子树
+				node->right = Rotate_Right(node->right); // 先右旋子树
 				return Rotate_Left(node);				// 再整体左旋
 			}
 		}
@@ -141,7 +145,7 @@ private:
 			return node;
 
 		///
-		node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+		node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 		int balance = node->Balance(); /// 计算平衡因子，调整子树(递归实现从下至上)
 		if (balance > 1)
 		{								   /// L重
@@ -168,7 +172,7 @@ public:
 	// 删除平衡二叉树tree中元素值为data的节点，同步平衡
 	void Element_Delete(KeyType key)
 	{
-		node_delete(this->root, key);
+		this->root = node_delete(this->root, key);
 	}
 };
 
@@ -184,14 +188,15 @@ namespace Storage
 
 	private:
 		int MaxHeight(int a, int b) const { return (a > b) ? a : b; }
+		int Height_Of(NodeType *node) const { return node ? node->Height() : 0; }
 		// 左旋(以当前节点为子树根)
 		NodeType *Rotate_Left(NodeType *node)
 		{
 			NodeType *temp = node->right;
 			node->right = temp->left;
 			temp->left = node;
-			node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
-			temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
+			node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
+			temp->height = 1 + MaxHeight(Height_Of(temp->left), Height_Of(temp->right));
 			return temp;
 		}
 		// 右旋(以当前节点为子树根)
@@ -200,8 +205,8 @@ namespace Storage
 			NodeType *temp = node->left;
 			node->left = temp->right;
 			temp->right = node;
-			temp->height = 1 + MaxHeight(temp->left->Height(), temp->right->Height());
-			node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+			temp->height = 1 + MaxHeight(Height_Of(temp->left), Height_Of(temp->right));
+			node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 			return temp;
 		}
 		// 以node为子树根，插入元素节点
@@ -221,7 +226,7 @@ namespace Storage
 			}
 
 			/// 回归时同步更新子树根高度(上一层的节点高度)
-			node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+			node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 			///	根据平衡因子旋转
 			/// 从上到下[第一个失衡节点][第二个失衡节点]
 			///	LL->R
@@ -245,7 +250,7 @@ namespace Storage
 					return Rotate_Left(node);				// RR左旋
 				if (key < node->right->key)					// L重
 				{											// RL
-					node->right = Rotate_Right(node->left); // 先右旋子树
+					node->right = Rotate_Right(node->right); // 先右旋子树
 					return Rotate_Left(node);				// 再整体左旋
 				}
 			}
@@ -304,7 +309,7 @@ namespace Storage
 				return node;
 
 			///
-			node->height = 1 + MaxHeight(node->left->Height(), node->right->Height());
+			node->height = 1 + MaxHeight(Height_Of(node->left), Height_Of(node->right));
 			int balance = node->Balance(); /// 计算平衡因子，调整子树(递归实现从下至上)
 			if (balance > 1)
 			{								   /// L重
@@ -331,7 +336,7 @@ namespace Storage
 		// 删除平衡二叉树tree中元素值为data的节点，同步平衡
 		void Element_Delete(KeyType key)
 		{
-			Node_Delete(this->root, key);
+			this->root = Node_Delete(this->root, key);
 		}
 	};
 }

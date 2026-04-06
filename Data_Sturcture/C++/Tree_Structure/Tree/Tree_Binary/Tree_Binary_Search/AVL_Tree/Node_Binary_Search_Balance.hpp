@@ -25,15 +25,14 @@ public:
 		this->key = other->key;
 		//this->height = other->height;
 	}
-	int Height()
-	{return (this == nullptr) ? 0 : height;}
+	int Height() const
+	{
+		return height;
+	}
 	//平衡因子: 左右子树的高度差
 	// int Balance_Factor()
-	int Balance()
+	int Balance() const
 	{
-		if (this == nullptr)
-			return 0;
-		else
-			return left->Height() - right->Height();
+		return (left ? left->Height() : 0) - (right ? right->Height() : 0);
 	}
 };

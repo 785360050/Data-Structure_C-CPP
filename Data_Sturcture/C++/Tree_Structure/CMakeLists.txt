@@ -1,3 +1,15 @@
+add_library(ds_cpp_merge_find_set INTERFACE)
+target_link_libraries(ds_cpp_merge_find_set INTERFACE ds_cpp_headers)
+
+add_library(ds_cpp_tree_binary_search INTERFACE)
+target_link_libraries(ds_cpp_tree_binary_search INTERFACE ds_cpp_headers)
+
+add_library(ds_cpp_tree_binary INTERFACE)
+target_link_libraries(ds_cpp_tree_binary INTERFACE ds_cpp_headers)
+
+add_library(ds_cpp_tree INTERFACE)
+target_link_libraries(ds_cpp_tree INTERFACE ds_cpp_headers)
+
 if(BUILD_DEMOS)
     ds_add_cpp_demo(Binary_Heap_Demo "Binary_Heap" Heap/main.cpp)
     ds_add_cpp_demo(Binary_Heap_STL_Demo "Binary_Heap_STL" Heap/ETC_Heap_With_STL/main.cpp)
