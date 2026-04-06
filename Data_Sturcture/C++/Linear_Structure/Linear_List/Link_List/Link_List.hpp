@@ -163,6 +163,11 @@ namespace Storage
 					std::logic_error("Insert Failed:Already Free before Insert");
 				free_list.reset(pos);
 			}
+			void Reset()
+			{
+				free_list.reset();
+				index = 0;
+			}
 		};
 		Free_List free_list{};
 
@@ -240,10 +245,9 @@ namespace Storage
 			if (pos > this->size)
 				throw std::out_of_range("LocateNode Faild: Position > List size");
 
-			NodeType &node = storage[front];
 			size_t index = front;
-			for (size_t i{}; i < pos; ++i, index = node.next)
-				;
+			for (size_t i = 1; i < pos; ++i)
+				index = storage[index].next;
 			return index;
 		}
 
@@ -253,6 +257,7 @@ namespace Storage
 		{
 			for (size_t i = 0; i < maxsize; i++)
 				storage[i]=NodeType{};
+			free_list.Reset();
 			this->size = 0;
 			_Reset_Front();
 		}
@@ -298,18 +303,28 @@ namespace Storage
 			if (this->size >= maxsize)
 				throw std::runtime_error("List insert failed: List is full");
 
+			size_t index_allocated{free_list.Allocate()};
 			if (front == npos)
 			{
-				front = free_list.Allocate();
-				this->storage[front] = NodeType(element,npos,npos);
+				front = index_allocated;
+				this->storage[front] = NodeType(element, npos, npos);
+			}
+			else if (pos == 1)
+			{
+				storage[index_allocated] = NodeType(element, npos, front);
+				storage[front].pre = index_allocated;
+				front = index_allocated;
+			}
+			else if (pos == this->size + 1)
+			{
+				size_t index_left = _Element_Locate(this->size);
+				storage[index_allocated] = NodeType(element, index_left, npos);
+				storage[index_left].next = index_allocated;
 			}
 			else
 			{
-				size_t index_left{front}, index_right{npos}, index_allocated{free_list.Allocate()};
-				// 找到pos插入位置附近的两个节点
-				for (size_t i = 1; i < pos - 1; i++)
-					index_left = storage[index_left].next;
-				index_right = storage[index_left].next;
+				size_t index_right = _Element_Locate(pos);
+				size_t index_left = storage[index_right].pre;
 				storage[index_allocated] = NodeType(element, index_left, index_right);
 				storage[index_left].next = index_allocated;
 				if(index_right!= npos)
@@ -324,18 +339,28 @@ namespace Storage
 			if (this->size >= maxsize)
 				throw std::runtime_error("List insert failed: List is full");
 
+			size_t index_allocated{free_list.Allocate()};
 			if (front == npos)
 			{
-				front = free_list.Allocate();
+				front = index_allocated;
 				this->storage[front] = NodeType(std::forward<ElementType>(element), npos, npos);
+			}
+			else if (pos == 1)
+			{
+				storage[index_allocated] = NodeType(std::forward<ElementType>(element), npos, front);
+				storage[front].pre = index_allocated;
+				front = index_allocated;
+			}
+			else if (pos == this->size + 1)
+			{
+				size_t index_left = _Element_Locate(this->size);
+				storage[index_allocated] = NodeType(std::forward<ElementType>(element), index_left, npos);
+				storage[index_left].next = index_allocated;
 			}
 			else
 			{
-				size_t index_left{front}, index_right{npos}, index_allocated{free_list.Allocate()};
-				// 找到pos插入位置附近的两个节点
-				for (size_t i = 1; i < pos - 1; i++)
-					index_left = storage[index_left].next;
-				index_right = storage[index_left].next;
+				size_t index_right = _Element_Locate(pos);
+				size_t index_left = storage[index_right].pre;
 				storage[index_allocated] = NodeType(std::forward<ElementType>(element), index_left, index_right);
 				storage[index_left].next = index_allocated;
 				if (index_right != npos)
@@ -347,11 +372,19 @@ namespace Storage
 		{
 			size_t index = _Element_Locate(pos);
 			NodeType node = storage[index];
-			storage[node.pre].next = node.next;
-			storage[node.next].pre = node.pre;
+			if (node.pre != npos)
+				storage[node.pre].next = node.next;
+			else
+				front = node.next;
+
+			if (node.next != npos)
+				storage[node.next].pre = node.pre;
+
 			storage[index]=NodeType{};//delete node
 			free_list.Deallocate(index);
 			--this->size;
+			if (this->size == 0)
+				_Reset_Front();
 		}
 		virtual void Element_Update(size_t pos, ElementType &&elem) { operator[](pos) = std::forward<ElementType>(elem); }
 	};

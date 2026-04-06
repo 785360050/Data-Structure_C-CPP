@@ -11,7 +11,7 @@ ds_configure_runtime_target(Sequential_List_UnitTest "UnitTest" "Sequential_List
 add_test(NAME Sequential_List COMMAND Sequential_List_UnitTest)
 
 add_executable(Sequential_List_Behaviour_UnitTest
-    Linear_List/Sequential_List.cpp
+    ADT/Linear_Structure/Linear_List/Sequential_List.cpp
 )
 target_link_libraries(Sequential_List_Behaviour_UnitTest
     PRIVATE
@@ -21,6 +21,18 @@ target_link_libraries(Sequential_List_Behaviour_UnitTest
 ds_configure_runtime_target(Sequential_List_Behaviour_UnitTest "UnitTest" "Sequential_List_Behaviour")
 
 add_test(NAME Sequential_List_Behaviour COMMAND Sequential_List_Behaviour_UnitTest)
+
+add_executable(Link_List_Behaviour_UnitTest
+    ADT/Linear_Structure/Linear_List/Link_List.cpp
+)
+target_link_libraries(Link_List_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_link_list
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Link_List_Behaviour_UnitTest "UnitTest" "Link_List_Behaviour")
+
+add_test(NAME Link_List_Behaviour COMMAND Link_List_Behaviour_UnitTest)
 
 add_executable(Sequential_List_Trace_Debug_Demo
     Linear_List/Sequential_List_Trace_Debug.cpp
@@ -55,6 +67,18 @@ ds_configure_runtime_target(Sequential_Stack_UnitTest "UnitTest" "Sequential_Sta
 
 add_test(NAME Sequential_Stack COMMAND Sequential_Stack_UnitTest)
 
+add_executable(Sequential_Stack_Behaviour_UnitTest
+    ADT/Linear_Structure/Linear_Stack/Sequential_Stack.cpp
+)
+target_link_libraries(Sequential_Stack_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_sequential_stack
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Sequential_Stack_Behaviour_UnitTest "UnitTest" "Sequential_Stack_Behaviour")
+
+add_test(NAME Sequential_Stack_Behaviour COMMAND Sequential_Stack_Behaviour_UnitTest)
+
 add_executable(Sequential_Queue_UnitTest
     Unit_Test/Linear_Stucture/Linear_Queue/Sequential_Queue.cpp
 )
@@ -66,6 +90,18 @@ target_link_libraries(Sequential_Queue_UnitTest
 ds_configure_runtime_target(Sequential_Queue_UnitTest "UnitTest" "Sequential_Queue")
 
 add_test(NAME Sequential_Queue COMMAND Sequential_Queue_UnitTest)
+
+add_executable(Sequential_Queue_Behaviour_UnitTest
+    ADT/Linear_Structure/Linear_Queue/Sequential_Queue.cpp
+)
+target_link_libraries(Sequential_Queue_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_sequential_queue
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Sequential_Queue_Behaviour_UnitTest "UnitTest" "Sequential_Queue_Behaviour")
+
+add_test(NAME Sequential_Queue_Behaviour COMMAND Sequential_Queue_Behaviour_UnitTest)
 
 add_executable(Link_Queue_UnitTest
     Unit_Test/Linear_Stucture/Linear_Queue/Link_Queue.cpp
@@ -79,6 +115,18 @@ ds_configure_runtime_target(Link_Queue_UnitTest "UnitTest" "Link_Queue")
 
 add_test(NAME Link_Queue COMMAND Link_Queue_UnitTest)
 
+add_executable(Link_Queue_Behaviour_UnitTest
+    ADT/Linear_Structure/Linear_Queue/Link_Queue.cpp
+)
+target_link_libraries(Link_Queue_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_link_queue
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Link_Queue_Behaviour_UnitTest "UnitTest" "Link_Queue_Behaviour")
+
+add_test(NAME Link_Queue_Behaviour COMMAND Link_Queue_Behaviour_UnitTest)
+
 add_executable(Link_Stack_UnitTest
     Unit_Test/Linear_Stucture/Linear_Stack/Link_Stack.cpp
 )
@@ -90,6 +138,18 @@ target_link_libraries(Link_Stack_UnitTest
 ds_configure_runtime_target(Link_Stack_UnitTest "UnitTest" "Link_Stack")
 
 add_test(NAME Link_Stack COMMAND Link_Stack_UnitTest)
+
+add_executable(Link_Stack_Behaviour_UnitTest
+    ADT/Linear_Structure/Linear_Stack/Link_Stack.cpp
+)
+target_link_libraries(Link_Stack_Behaviour_UnitTest
+    PRIVATE
+        ds_cpp_link_stack
+        Boost::unit_test_framework
+)
+ds_configure_runtime_target(Link_Stack_Behaviour_UnitTest "UnitTest" "Link_Stack_Behaviour")
+
+add_test(NAME Link_Stack_Behaviour COMMAND Link_Stack_Behaviour_UnitTest)
 
 add_executable(Stack_Compatibility_UnitTest
     Unit_Test/Linear_Stucture/Stack.cpp

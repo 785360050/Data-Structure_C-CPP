@@ -1,5 +1,13 @@
 #pragma once
 
+// Graph 的完整 ADT 定义见：
+// Document/ADT/Graph_Structure/Graph.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义顶点、边和方向语义
+// 2. 顶点唯一标识和边关系属于共享契约主体
+// 3. 邻接表、邻接矩阵等存储方式不属于共享契约主体
+
 
 
 template <typename ElementType,typename DataType>

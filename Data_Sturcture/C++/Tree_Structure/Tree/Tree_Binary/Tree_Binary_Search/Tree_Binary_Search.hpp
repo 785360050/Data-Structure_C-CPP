@@ -1,5 +1,13 @@
 #pragma once
 
+// Tree_Binary_Search 的完整 ADT 定义见：
+// Document/ADT/Tree_Structure/Tree_Binary_Search.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义关键字有序关系、查找、插入和删除语义
+// 2. 关键字唯一性和 BST 有序性属于共享契约主体
+// 3. 平衡策略和输出方式不属于共享契约主体
+
 
 #include <queue>
 #include <string>

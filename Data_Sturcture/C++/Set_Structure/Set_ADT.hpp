@@ -1,5 +1,13 @@
 #pragma once
 
+// Set 的完整 ADT 定义见：
+// Document/ADT/Set_Structure/Set.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义集合成员关系和集合运算语义
+// 2. 元素唯一性属于共享契约主体
+// 3. 具体存储方式不属于共享契约主体
+
 
 
 

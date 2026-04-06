@@ -1,5 +1,12 @@
 #pragma once
 
+// Tree 的完整 ADT 定义见：
+// Document/ADT/Tree_Structure/Tree.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义一般树的层次关系与遍历语义
+// 2. 当前 Tree 抽象采用孩子兄弟表示法
+// 3. 结点创建和输出方式不属于共享契约主体
 
 
 #include <iostream>

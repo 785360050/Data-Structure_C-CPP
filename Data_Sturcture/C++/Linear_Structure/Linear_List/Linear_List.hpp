@@ -4,6 +4,14 @@
 #include <optional>
 #include "ADT.hpp"
 
+// Linear_List 的完整 ADT 定义见：
+// Document/ADT/Linear_Structure/Linear_List.md
+//
+// 当前项目约定：
+// 1. 位置参数使用 1-based 位序，不是 0-based 数组下标
+// 2. 非法位序访问应视为错误
+// 3. 公共 ADT 只定义线性表逻辑语义；容量、trace、show 等能力不属于共享契约主体
+
 /// @brief 逻辑结构。作为基类使用
 namespace Logic
 {

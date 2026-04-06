@@ -2,6 +2,14 @@
 
 #include "ADT.hpp"
 
+// Stack 的完整 ADT 定义见：
+// Document/ADT/Linear_Structure/Stack.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义栈的逻辑 LIFO 语义
+// 2. 非法空栈访问和空栈出栈应视为错误
+// 3. 容量上限、存储方向、show 等能力不属于共享契约主体
+
 namespace Logic
 {
 

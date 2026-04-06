@@ -1,5 +1,13 @@
 #pragma once
 
+// Tree_Binary 的完整 ADT 定义见：
+// Document/ADT/Tree_Structure/Tree_Binary.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义二叉树的左右孩子关系与遍历语义
+// 2. 左右孩子位置语义属于共享契约主体
+// 3. 结点创建和输出方式不属于共享契约主体
+
 //#include "../Tree.h"
 #include <vector>
 
@@ -209,4 +217,3 @@ public:
 		
 	}
 };
-

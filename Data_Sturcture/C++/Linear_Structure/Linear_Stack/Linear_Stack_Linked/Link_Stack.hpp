@@ -34,10 +34,13 @@ namespace Storage
 				top = top->next;
 				delete del;
 			}
-		}
+            this->size = 0;
+        }
 		// 返回栈顶元素
 		ElementType &Get_Top() override
 		{
+			if (this->Is_Empty())
+				throw std::runtime_error("Stack is empty");
 			return top->element;
 		}
 		// 输出栈所有信息

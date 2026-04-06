@@ -4,6 +4,14 @@
 #include <string>
 #include <cstring>
 
+// String 的完整 ADT 定义见：
+// Document/ADT/Linear_Structure/String.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义字符串的字符序列与匹配语义
+// 2. 非法位置访问应视为错误
+// 3. 具体匹配算法不属于共享契约主体
+
 
 /// 从1开始存储，第一个空间不使用
 class String
@@ -123,7 +131,6 @@ public:
         return -1;
     }
 };
-
 
 
 

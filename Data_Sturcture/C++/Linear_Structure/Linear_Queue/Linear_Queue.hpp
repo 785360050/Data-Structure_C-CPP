@@ -2,6 +2,14 @@
 
 #include "ADT.hpp"
 
+// Queue 的完整 ADT 定义见：
+// Document/ADT/Linear_Structure/Queue.md
+//
+// 当前项目约定：
+// 1. 公共 ADT 只定义队列的逻辑 FIFO 语义
+// 2. 非法空队访问和空队出队应视为错误
+// 3. 容量上限、循环数组细节、show 等能力不属于共享契约主体
+
 namespace Logic
 {
 // =std::numeric_limits<size_t>::max()
