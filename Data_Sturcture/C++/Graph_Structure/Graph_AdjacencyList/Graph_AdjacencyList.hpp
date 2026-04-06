@@ -173,13 +173,45 @@ namespace Storage
 		// 添加图graph中，从x到y的边，权值为weight
 		void Vertex_Add(const std::string& name, DataType data) override
 		{
-			// vertex_set.insert({vertex.name, std::forward<VertexType>(vertex)});
-			vertex_set.insert({name,{name, data}});
+			auto [iter, inserted] = vertex_set.insert({name,{name, data}});
+			if (!inserted)
+				throw std::runtime_error("Vertex already exists!");
 			++this->num_vertex;
 		}
 		void Vertex_Delete(const std::string &name) override
 		{
+			if (!vertex_set.contains(name))
+				throw std::runtime_error("Vertex is not in the graph!");
+
+			int removed_edges = 0;
+			if constexpr (directed)
+			{
+				removed_edges += static_cast<int>(vertex_set.at(name).head_edge.size());
+				for (auto &[vertex_name, vertex] : vertex_set)
+				{
+					if (vertex_name == name)
+						continue;
+					auto edge = vertex.head_edge.find(name);
+					if (edge != vertex.head_edge.end())
+					{
+						vertex.head_edge.erase(edge);
+						++removed_edges;
+					}
+				}
+			}
+			else
+			{
+				removed_edges = static_cast<int>(vertex_set.at(name).head_edge.size());
+				for (auto &[vertex_name, vertex] : vertex_set)
+				{
+					if (vertex_name == name)
+						continue;
+					vertex.head_edge.erase(name);
+				}
+			}
+
 			vertex_set.erase(name);
+			this->num_edge -= removed_edges;
 			--this->num_vertex;
 		}
 		void Edge_Add(const std::string &vertex_origin, const std::string &vertex_destination, int weight) override
@@ -188,6 +220,8 @@ namespace Storage
 				throw std::runtime_error("Vertex_origin not in the graph!");
 			if (!vertex_set.contains(vertex_destination))
 				throw std::runtime_error("Vertex_origin not in the graph!");
+			if (vertex_set[vertex_origin].head_edge.contains(vertex_destination))
+				throw std::runtime_error("Edge already exists!");
 
 			// this->vertex[vertex_origin.name].Add_Edge(no_destination, weight);
 			vertex_set[vertex_origin].Edge_Add(vertex_destination, weight);
@@ -201,6 +235,8 @@ namespace Storage
 				throw std::runtime_error("Vertex_origin is not in the graph!");
 			if (!vertex_set.contains(vertex_destination))
 				throw std::runtime_error("vertex_destination is not in the graph!");
+			if (!vertex_set[vertex_origin].head_edge.contains(vertex_destination))
+				throw std::runtime_error("Edge is not in the graph!");
 
 			vertex_set[vertex_origin].Edge_Delete(vertex_destination);
 			--this->num_edge;
@@ -280,7 +316,6 @@ namespace Storage
 
 };
 }
-
 
 
 

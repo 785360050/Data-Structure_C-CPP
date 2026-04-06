@@ -10,6 +10,7 @@
 
 
 #include <queue>
+#include <stack>
 #include <string>
 #include <iostream>
 
@@ -21,6 +22,18 @@ public:
 	NodeType* root;
 	int count;
 private:
+	void DFS(NodeType* node, std::stack<NodeType*>& stack, size_t& level)
+	{
+		if (!node)
+		{
+			level = std::max(level, stack.size());
+			return;
+		}
+		stack.push(node);
+		DFS(node->left, stack, level);
+		DFS(node->right, stack, level);
+		stack.pop();
+	}
 	void Destroy_SubTree(NodeType* node)
 	{
 		if (node)
@@ -176,11 +189,15 @@ public:
 				q.push(v->right);
 		}
 	}
+	int Get_Depth(NodeType* node)
+	{
+		std::stack<NodeType*> stack;
+		size_t level{};
+
+		DFS(node, stack, level);
+		return level;
+	}
 };
-
-
-
-#include <stack>
 #include "../ADT.hpp"
 #include "ADT.hpp"
 #include "Node_Binary_Search.hpp"

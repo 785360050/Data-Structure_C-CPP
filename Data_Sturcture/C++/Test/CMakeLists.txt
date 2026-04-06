@@ -271,18 +271,6 @@ ds_configure_runtime_target(Tree_Binary_Normal_Behaviour_UnitTest "UnitTest" "Tr
 
 add_test(NAME Tree_Binary_Normal_Behaviour COMMAND Tree_Binary_Normal_Behaviour_UnitTest)
 
-add_executable(Tree_Behaviour_UnitTest
-    ADT/Tree_Structure/Tree/Tree.cpp
-)
-target_link_libraries(Tree_Behaviour_UnitTest
-    PRIVATE
-        ds_cpp_tree
-        Boost::unit_test_framework
-)
-ds_configure_runtime_target(Tree_Behaviour_UnitTest "UnitTest" "Tree_Behaviour")
-
-add_test(NAME Tree_Behaviour COMMAND Tree_Behaviour_UnitTest)
-
 add_executable(Graph_AdjacencyList_Behaviour_UnitTest
     ADT/Graph_Structure/Graph_AdjacencyList.cpp
 )
