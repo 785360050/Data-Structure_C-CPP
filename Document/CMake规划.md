@@ -1,6 +1,6 @@
 # CMake 规划
 
-更新时间：2026-04-04
+更新时间：2026-04-06
 
 ## 一、定位
 
@@ -117,7 +117,8 @@
 - `BUILD_GRAPH_STRUCTURE=OFF`
 - `BUILD_TREE_STRUCTURE=OFF`
 
-目前这两个开关默认关闭，用来避免未收敛模块阻塞默认主线。
+目前这两个开关默认关闭，用来避免未收敛模块以“显式模块启用”的方式拖垮默认主线。
+但当前 `BUILD_TESTING=ON` 时，图和树目录仍会为了测试接入而被加入构建图。
 
 后续如果线性结构也需要单独开关，再考虑加入：
 
@@ -279,12 +280,14 @@ cmake -S . -B Build
 - `Link_List`
 - `Sequential_Stack`
 - `Sequential_Queue`
+- `Link_Queue`
+- `Link_Stack`
 
 后续建议优先接入：
 
-1. `Link_Queue`
-2. `Link_Stack`
-3. 其他线性结构模块
+1. `MergeFindSet`
+2. `Tree_Binary_Search`
+3. `Graph_AdjacencyList`
 
 ## 十二、推进顺序
 
@@ -323,17 +326,20 @@ cmake -S . -B Build
 2. `Link_List` 已完成 Demo / UnitTest / `CTest` 接入
 3. `Sequential_Stack` 已完成 Demo / UnitTest / `CTest` 接入
 4. `Sequential_Queue` 已完成 Demo / UnitTest / `CTest` 接入
-5. 已引入最小公共辅助模块 [DataStructureTargets.cmake](Cmake/DataStructureTargets.cmake)
-6. 已启用用途级开关 `BUILD_DEMOS`
-7. `Algorithms / Graph_Structure / Set_Structure / Tree_Structure` 已进入 `CMake` 组织范围
-8. 剩余 demo 与 unit test 入口已批量接入，但暂未逐个验证
+5. `Link_Queue` 与 `Link_Stack` 已完成 Demo / UnitTest / `CTest` 接入
+6. `MergeFindSet`、`Tree_Binary_Search`、`Tree_Binary`、`Graph_AdjacencyList` 已接入行为测试
+7. 已引入最小公共辅助模块 [DataStructureTargets.cmake](Cmake/DataStructureTargets.cmake)
+8. 已启用用途级开关 `BUILD_DEMOS`
+9. `Algorithms / Graph_Structure / Set_Structure / Tree_Structure` 已进入 `CMake` 组织范围
+10. 当前默认 `ctest` 已稳定执行 `24` 个测试
+11. 剩余 demo 与 unit test 入口已批量接入，但仍需继续按模块验证和收敛
 
 当前说明：
 
-- 样板数量已经达到 4 个
+- 样板数量已经超过早期 4 个基础模块阶段
 - 当前模式已经证明可以复制
-- 当前已从“样板阶段”进入“批量接入阶段”
-- 后续重点会转向收敛未验证模块、整理分层和增强公共 CMake 抽象
+- 当前已从“样板阶段”进入“批量接入 + 回归扩面阶段”
+- 后续重点会转向收敛未验证模块、整理分层、同步文档与增强公共 CMake 抽象
 
 ## 十六、默认主线验证状态
 
@@ -349,7 +355,7 @@ ctest --test-dir Build --output-on-failure
 
 - `configure` 通过
 - `build` 通过
-- `ctest` 执行 11 项测试，全部通过
+- `ctest` 执行 24 项测试，全部通过
 
 当前默认开关状态为：
 
@@ -360,11 +366,13 @@ ctest --test-dir Build --output-on-failure
 
 这样设置的原因是：
 
-- `Graph_Structure` 已完成 `CMake` 接入，但手动开启时暴露出源码级编译错误
-- `Tree_Structure` 已完成 `CMake` 接入，但手动开启时部分未完成实现会阻塞默认全量构建
+- `BUILD_GRAPH_STRUCTURE` 与 `BUILD_TREE_STRUCTURE` 仍用于控制显式模块启用范围
+- 图结构 demo 仍处于 experimental 路线，不适合直接视为默认稳定 demo 集合
+- 树结构中已有一部分稳定 demo 和行为测试能在当前默认主线中构建
+- 当前图/树测试是通过 `BUILD_TESTING=ON` 接入默认回归，而不是通过把模块开关全部打开来实现
 
 因此，当前采用的策略是：
 
 1. 先保证默认主线构建稳定可用
-2. 将 `Graph_Structure` 和 `Tree_Structure` 保留为已接入但默认关闭
-3. 后续再单独逐步收敛这两部分的构建问题
+2. 将 `Graph_Structure` 和 `Tree_Structure` 保留为“显式模块开关默认关闭，但允许测试路径先纳入主线”的状态
+3. 后续再单独逐步收敛图/树剩余 demo 和未完成实现的构建问题

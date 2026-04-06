@@ -41,27 +41,32 @@ Files in C or C++ Folder
 It's a normalized coding style project that might be mied by c++ grammer in C programe 
 > - CPP Projecet is design to to implement data structures with different storage structures while facilitating future extensions, hence the use of inheritance. Because it is primarily for learning, it does not rely on the STL (Standard Template Library), nor is it intended to be another STL library. It can be understood as having two separate parts: containers and algorithms. If used as a library, it may not be very convenient(i've tried once) because the interfaces are designed for ease of understanding rather than ease of use. The goal is to have full control over homemade containers.
 ## Project Status
-2026.4.4
+2026.4.6
 - Default `CMake` mainline for `Data_Sturcture/C++` is available on Linux/gcc
 - Default workflow:
   `cmake -S . -B Build`
   `cmake --build Build`
   `ctest --test-dir Build --output-on-failure`
-- Current default mainline has passed `11` registered `CTest` tests
+- Current default mainline has passed `24` registered `CTest` tests
 - Current default enabled areas:
   - `Linear_Structure`
   - `Algorithms`
   - `Set_Structure`
   - `Test`
-- `Graph_Structure` and `Tree_Structure` are already connected to `CMake`,
-  but remain disabled by default until their source-level issues are cleaned up
+  - ADT behaviour tests for parts of `Tree_Structure` and `Graph_Structure`
+- `BUILD_GRAPH_STRUCTURE` and `BUILD_TREE_STRUCTURE` remain `OFF` by default
+  for explicit standalone module enablement
+- With `BUILD_TESTING=ON`, current default regression flow already covers part of
+  `Tree_Structure` and `Graph_Structure`
+- Graph demos remain experimental; part of the tree demo set is already buildable
+  on the current default mainline
 - `Data_Sturcture/C` is kept as a reference implementation and can be built separately
 
 ## Current Focus
 - Keep improving the `CMake + CTest` engineering baseline
-- Add more regression tests for basic containers
+- Continue expanding boundary and regression tests for core containers and ADT behaviour
 - Clean compiler warnings and copy/move/resource-management issues
-- Stabilize `Graph_Structure` and `Tree_Structure` before enabling them by default
+- Keep stabilizing `Graph_Structure` and `Tree_Structure`, especially beyond the currently covered behaviour tests
 
 ## Documentation
 - Project overview remains in the root [README.md](README.md)
